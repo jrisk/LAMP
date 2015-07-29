@@ -35,35 +35,41 @@ $activity_array = array();
 	array_push($activity_array, $row['Activity']);
 } */
 
-foreach($result as $key => $value) {
-	if ($result[1]['Plan'] == $value['Plan']) {
-	echo $value['Activity'];
-}
-	echo "<br>";
-}
+$new_activity = array();
+$plan = array();
+$new_array = array();
 
-//loop to get an associative array
+//Inserting an array of values into another array iteratively to create an associative array
 
 for ($i=0; $i <= ((count($result)) - 1); $i++) {
-		if (in_array(($result[$i]['Plan']), $single_plan_array)) {
+	//check if plan has already been pushed into array
+	if (!(in_array(($result[$i]['Plan']), $plan))) {
+	$plan[$i] = $result[$i]['Plan'];
 
-			$activity_array[$i] = $result[$i]['Activity'];
-			$single_plan_array[$result[$i]['Plan']] = $activity_array;
+	//save state of plan index for next check of similar plan names and inserting of activities
+	$saved = $plan[$i];
+	//reset activity array for new association with new plan key
+	$new_activity = [];
+
+	//take the plan name and array position and check for other instances of plan name in result
+
+		for ($n=0; $n <= ((count($result)) - 1); $n++) {
+
+			if ($result[$n]['Plan'] == $saved) {
+
+			$new_activity[$n] = $result[$n]['Activity'];
+
+			$new_array[$saved] = $new_activity;
+
+			}
+		
 		}
-		else {
-		array_push($single_plan_array, $result[$i]['Plan']);
-		$activity_array[$i] = $result[$i]['Activity'];
 	}
-}
+// I worked all day on this one measly function, like 8 hours of time
+} 
 
-echo "<br>";
-var_dump($single_plan_array);
 echo "<br><br>";
-var_dump($activity_array);
-
-// iterate through lesson plan results to find plans of same name
-// put activities for several lesson plans with same name under only 1 lesson plan
-
+var_dump($new_array);
 echo "<br><br>";
 
 
