@@ -1,0 +1,107 @@
+Max Friberg
+2013-14  -  Season Statistics 
+Analytic Player Rating
+16.39
+GPs
+Total 
+TOI
+Percent of 
+Game Played
+Total 
+Shifts
+Av. Shift 
+Length
+5-5 
+TOI
+PP 
+TOI
+PK 
+TOI
+GOIF
+GOIA
+12
+3:32:04
+29.1%
+314
+0:41
+2:32:49
+0:33:21
+0:25:54
+10
+6
+G
+A
+P
++/-
+SOG
+Shooting 
+Percentage
+PIM
+Faceoff Percentage
+Statistical 
+Rating
+Team Value 
+Rating
+3
+5
+8
+2
+21
+14.29%
+7
+
+1.00
+2.17
+PP 
+GOIF
+PP 
+GOIA
+PPG
+PPA
+PP 
+Efficiency
+PK 
+GOIF
+PK 
+GOIA
+SHG
+SHA
+PK 
+Efficiency
+3
+1
+0
+1
+0.09
+0
+1
+0
+0
+0.82
+Points 
+Per Min
+SA 
+Per Min
+Good/Smart 
+Passes Per Min
+Hits 
+Per Min
+Positive Plays Per Min
+Negative Plays Per Min
+BS 
+Per Game
+Takeaways 
+to Turnovers
+Positive to Negative Plays
+SOG 
+to SA
+0.04
+0.21
+0.20
+0.08
+0.28
+0.07
+1.00
+1.73
+4.29
+0.66

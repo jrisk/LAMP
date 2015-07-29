@@ -1,0 +1,24 @@
+
+    Software engineer: $98,074
+    Database administrator: $97,835
+    Product manager: $113,363
+    Data scientist: $121,657
+    Solutions architect: $121,657
+    QA engineer: $77,499
+    Network engineer: $87,518
+    IT project manager: $103,710
+    Mobile developer: $79,810
+    Sales engineer: $91,318
+
+And here are the 10 IT occupations that grew the fastest last year, according to the Department of Labor:
+
+    Web developer: Up 4 percent
+    Information security analyst: Up 3.6 percent
+    Computer systems analyst: Up 3.2 percent
+    Software applications developer: Up 3.1 percent
+    Software systems developer: Up 2.8 percent
+    Computer user support specialist: Up 2.7 percent
+    Computer and information systems manager: Up 2.5 percent
+    Database administrator: Up 2.4 percent (the tech jobs' average)
+    Computer hardware engineer: Up 2.2 percent
+    Network and computer systems administrator: Up 1.8 percent

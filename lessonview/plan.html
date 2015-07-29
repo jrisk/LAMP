@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="plannerApp">
+<head><base href="/"></base>
+<title>Lesson Plan</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.7.0/jquery.timepicker.min.js"</script>
+<script src="./javascripts/controller.js"></script>
+<link rel="stylesheet" href="./stylesheets/LP4.css">
+
+</head>
+<body ng-controller="AppCtrl">
+<a href="/">Lesson Planner</a>
+
+<div class="overflow">
+<div class="container-fluid">
+<div class="table-responsive">
+<table class="table table-bordered">
+
+<thead>
+<tr class="success">
+<th class="col-sm-1" ng-repeat="weekday in weekdayData">
+<a href="/weekdata"><button id="one_day" class="btn btn-large" data-toggle="modal" 
+data-target="#planModal" ng-click="dayView2(weekday._id, weekday.data)">{{weekday.weekday}}</button></a>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-warning" id="table-scrolling" ng-repeat="i in [0,1,2,3,4,5,6]">
+<!-- HARDCODE THIS TOO initial monday test changing the view from full week to single day and back -->
+<td class="col-sm-1" ng-repeat="day in weekdayData | limitTo: quantity">
+<a href="/weekdata/{{day._id}}" ng-click="dayView(day._id, day.data)">{{day.plans[i]}}</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<p>working...</p>
+<div ng-include src="'dayview.html'"></div>
+
+</body>
+</html>

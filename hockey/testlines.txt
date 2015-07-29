@@ -1,0 +1,108 @@
+Shea Theodore
+2014-15 Season Statistics
+Analytic Player Rating
+15.20
+GPs
+Total 
+TOI
+Percent of 
+Game Played
+Total 
+Shifts
+Av. Shift 
+Length
+5-5 
+TOI
+PP 
+TOI
+PK 
+TOI
+GOIF
+GOIA
+1
+0:18:39
+31.1%
+29
+0:39
+0:15:14
+0:01:55
+0:01:30
+2
+1
+G
+A
+P
++/-
+SOG
+Shooting 
+Percentage
+PIM
+DZOs 
+Per Game
+Statistical 
+Rating
+Team Value 
+Rating
+1
+1
+2
+-1
+6
+17.00%
+0
+11.0
+2.65
+2.33
+PP 
+GOIF
+PP 
+GOIA
+PPG
+PPA
+PP 
+Efficiency
+PK 
+GOIF
+PK 
+GOIA
+SHG
+SHA
+PK 
+Efficiency
+2
+0
+1
+1
+2.09
+0
+0
+0
+0
+0.05
+Points 
+Per Min
+SA 
+Per Min
+Good/Smart 
+Passes Per Min
+Hits 
+Per Min
+Positive Plays Per Min
+Negative Plays Per Min
+BS 
+Per Game
+Takeaways 
+to Turnovers
+Positive to Negative Plays
+DZOs to 
+Turnovers
+0.11
+0.48
+0.54
+0.00
+0.64
+0.11
+1.00
+0.33
+6.00
+3.67

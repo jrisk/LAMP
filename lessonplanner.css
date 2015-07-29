@@ -1,0 +1,41 @@
+div.page-header {
+	background-color: #06f;
+	font-family: "Montserrat Alternates",sans-serif;
+    box-shadow: 0 0.2em 0.4em #999;
+    margin-top: 0;
+}
+div.page-header>*>* {
+	color: white;
+	margin-top: 0
+
+}
+
+.well-watch {
+	background-color: #E0FFFF;
+}
+
+.well-inside {
+	background-color: #FFDEAD;
+}
+
+.well-edit {
+	background-color: #FFA07A;
+}
+
+}
+
+.btn-lg {
+	color: #06f;
+	font-family: "Montserrat Alternates", sans-serif
+}
+
+.otext {
+	color: #F90;
+}
+
+/*@media screen and (max-width: 500px) {
+	.well {
+	background-color: green;
+	font-size: 20pt;	
+	}
+}/*

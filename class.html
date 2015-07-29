@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>PHP Classes</title>
+<?php 
+
+include("class_lib.php");
+
+?>
+</head>
+
+<body>
+<b>Hello</b>
+<p>Friend</p>
+
+
+<?php
+$joe = new Person();
+
+$jim = new Person();
+
+$joe->set_name("Joe Risk");
+
+$jim->set_name("Jim Slim");
+
+echo "joe's full name is " . $joe->get_name();
+echo "<br><br>";
+echo "jim's full name is " . $jim->get_name();
+
+?>
+
+</body>
+
+
+</html>
