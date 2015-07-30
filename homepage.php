@@ -32,6 +32,7 @@ if (!(isset($_SESSION['myusername']))) {
     <li role="presentation"><a href="weekboot.php" role="tab">View Weekly Schedule</a></li>
     <li role="presentation"><a href="shortweek.php" aria-controls="messages" role="tab">View 5-day</a></li>
     <li role="presentation"><a href="topdowndays.php" role="tab">View Activities</a></li>
+    <li role="presentation"><a href="planview.php" role="tab>">View Plans</a></li>
     <hr>
     <li role="seperator"><a href="logout.php" aria-controls="settings" role="tab">Skoolia Home</a></li>
   </ul>
@@ -65,6 +66,7 @@ if (!(isset($_SESSION['myusername']))) {
     </div>
   </div>
 
+<div id='outputdata'>this is output</div>
 
 </body>
 </html>

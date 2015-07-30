@@ -47,6 +47,32 @@ $('#datetimepickerplan').datetimepicker({
 
 var dateobject = $('#dateplan').val();
 
+// php variables into javascript
 
+var momento = moment().hour();
+
+// ajax example 
+
+$('#formsubmit').submit( function () {
+$.ajax({
+type: 'POST',
+url: 'formaction.php',
+data: 'show=content',
+dataType: 'html',
+success: function (data) {
+$('#outputdata').html(data);
+},
+error: function(jqXHR, textStatus, errorThrown) { // could cause double entries in database in future
+this.retryCount++;
+	if (this.retryCount <= this.retryLimit) {
+	//try again
+	$.ajax(this);
+	return;
+	};
+return;
+}
+});
+event.preventDefault(); // need this to prevent double mysql entries
+});
 
 });

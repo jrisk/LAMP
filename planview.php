@@ -15,6 +15,20 @@
 </head>
 
 <body>
+
+	<?php
+session_start();
+
+if (!(isset($_SESSION['myusername']))) {
+  header("location:main.php");
+}
+
+?>
+
+<div class="page-header">
+    <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
+</div>
+
 <div class="container">
 	<div class="row">
 <div class="col-xs-12">
@@ -23,13 +37,6 @@
 	include("pdo.php");
 
 //$result variable comes from pdo.php
-
-$single_plan_array = array();
-
-$activity_array = array();
-
-
-// activity array maker, activities are not guaranteed to be unique in the future
 
 /*foreach($result as $row) {
 	array_push($activity_array, $row['Activity']);
@@ -81,45 +88,7 @@ echo "<br><br>";
 		echo "</div>";
 		}
 
-	/*if(count($result)) {
-		foreach($new_array as $row) {
-			echo "<div class='well well-watch'>";
-			echo "<div class='row'>" . $row . "<br>";
-			echo "<div class='co"
-
-
-
-		}
-
-
-
-	}*/
-
-
-
-	if (count($result)) {
-		foreach($result as $row) {
-			echo "<div class='well well-watch'>";
-			echo "<div class='row'>" . $row['Day'] . "<br>";
-			echo "<div class='col-xs-6'><b>Plan Name: " . $row['Plan'] . "</b></div></div><br>";
-			echo "<p>Class: " . $row['Class'] . "</p><br>";
-			echo "<div class='well well-inside'>Activity: " . $row['Activity'] . "<br>";
-			echo "<b>Start Time: " . $row['Start'] . "</b><br>";
-			echo "<b>End Time: " . $row['End'] . "</b></div><br>";
-			echo "Comments: " . $row['comment'] . "<br>";
-			echo "Duration: " . $row['Duration'] . "<br>";
-			echo "<br>";
-			echo "<a href='editplan.php'><div class='well text-center well-edit'>
-			<button class='btn btn-lg'>EDIT</button></div></a>";
-			echo "</div>";
-		}
-
-	}
-
-	?>
-
-</div>
-</div>
+?>
 
 </body>
 </html>

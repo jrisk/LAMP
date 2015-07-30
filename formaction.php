@@ -81,6 +81,6 @@ catch (PDOException $e) {
 echo "<html><head><title>Plan Posted
 </title></head><body><h1>Plan has been saved.</h1></body></html>";
 
-header("location: homepage.php");
+header("homepage.php");
 
 ?>

@@ -97,6 +97,10 @@ if (!(isset($_SESSION['myusername']))) {
     <button type="submit" class="btn btn-lg" id="save" onclick="Save()">Save
         <span class="glyphicon glyphicon-saved"></span>
     </button>
+    <button class="btn btn-lg" id="formsubmit" onclick="Save()">Use jQuery
+        <span class="glyphicon glyphicon-saved"></span>
+    </button>
+
 </div>
 </div>
 </div>
