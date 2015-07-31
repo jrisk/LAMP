@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Lesson Plan V1</title>
+	<title>Lesson Plan V3</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -16,7 +16,16 @@
 
 <body>
 	   <?php
-session_start();
+include("pdo.php");
+
+$plan = $_POST['lesson-name'];
+
+$class = $_POST['user-group'];
+
+$day = $_POST['date-plan'];
+
+$day_db = strstr($day, ",", true);
+
 
 if (!(isset($_SESSION['myusername']))) {
   header("location:main.php");
@@ -31,7 +40,7 @@ if (!(isset($_SESSION['myusername']))) {
 <p><a href="homepage.php">Back to Control Panel</a></p>
 	
     <!--start lesson planner form -->
-<form onsubmit="savePlan()" method="post" action="addact.php">
+<form onsubmit="savePlan()" method="post" action="formaction.php">
     <!--lesson plan in well -->
 <div class="well well-watch">
 <div class="container-fluid text-center">
@@ -53,7 +62,7 @@ if (!(isset($_SESSION['myusername']))) {
 <h2>Class
 	<span class="glyphicon glyphicon-education"></span>
 </h2>
-<input name="user-group" type="text" class="form-control" placeholder="Class or Student Name">
+<div class='well' name="user-group">
 </div>
 </div>
 </div>
@@ -158,4 +167,4 @@ if (!(isset($_SESSION['myusername']))) {
 </form>
 
 </body>
-</html> 
+</html>

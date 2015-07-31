@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <!--<script src="extrajs.js"></script> -->
 
+<link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="./lessonplanner.css">
@@ -31,22 +32,22 @@ if (!(isset($_SESSION['myusername']))) {
 //jquery overflow table data-role and ui NOT bootstrap
 <table data-role="table" class="helldod">
     <tr class="active">
-        <td class="col-md-2" id="head-subject">
+        <td class="col-xs-2" id="head-subject">
             Subject
         </td>
-        <td class="col-md-2" id="head-monday">
+        <td class="col-xs-2" id="head-monday">
             Monday
         </td>
-        <td class="col-md-2" id="head-tuesday">
+        <td class="col-xs-2" id="head-tuesday">
             Tuesday
         </td>
-        <td class="col-md-2" id="head-wednesday">
+        <td class="col-xs-2" id="head-wednesday">
             Wednesday
         </td>
-        <td class="col-md-2" id="head-thursday">
+        <td class="col-xs-2" id="head-thursday">
             Thursday
         </td>
-        <td class="col-md-2" id="head-friday">
+        <td class="col-xs-2" id="head-friday">
             Friday
         </td>
 

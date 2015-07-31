@@ -20,7 +20,6 @@ if(isset($_SESSION['myusername'])) {
 	header("location:homepage.php");
 }
 
-
 ?>
 
 

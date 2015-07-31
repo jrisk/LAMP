@@ -29,27 +29,30 @@ $stmt->execute();
 
 // put database column items into an array
 
-$result = $stmt->fetch();
+$resultfetch = $stmt->fetch();
 
 $rowtrue = $stmt->fetchAll();
 
+$fetchbool = count($stmt->fetch());
+
 // if user exists, create session variable and go to login success redirect page
 
-if (count($stmt->fetch())) {
+if ($resultfetch) {
 
 	session_start();
 	$_SESSION['myusername'] = $username;
 	$_SESSION['mypassword'] = $userpass;
 
 	// user ID in users table is foreign key to owner column in lessonplan table
-	$_SESSION['user_ID'] = $result["user_ID"];
+	$_SESSION['user_ID'] = $resultfetch["user_ID"];
 
 	header("location:homepage.php");
 }
 
 else {
 	echo "Username or Password was Incorrect. Try again.";
-	header("location:login_success.php");
+
+	header("location:main.php");
 }
 
 //end try

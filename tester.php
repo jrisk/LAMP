@@ -24,13 +24,6 @@
 
 //$result variable comes from pdo.php
 
-$single_plan_array = array();
-
-$activity_array = array();
-
-
-// activity array maker, activities are not guaranteed to be unique in the future
-
 /*foreach($result as $row) {
 	array_push($activity_array, $row['Activity']);
 } */

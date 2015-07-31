@@ -1,21 +1,22 @@
 <html>
 <head>
-	<title>Lesson Plan V1</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+    <title>Lesson Plan V3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./extrajs.js"></script>
 
+<link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="./lessonplanner.css">
 </head>
 
 <body>
-	   <?php
+       <?php
 session_start();
 
 if (!(isset($_SESSION['myusername']))) {
@@ -29,16 +30,18 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 
 <p><a href="homepage.php">Back to Control Panel</a></p>
-	
+    
     <!--start lesson planner form -->
-<form onsubmit="savePlan()" method="post" action="addact.php">
+
+<form onsubmit="savePlan()" method="post" action="formaction.php">
+
     <!--lesson plan in well -->
 <div class="well well-watch">
 <div class="container-fluid text-center">
-	<div class="row">
-		<div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
 <h2>Lesson
-	<span class="glyphicon glyphicon-paperclip"></span>
+    <span class="glyphicon glyphicon-paperclip"></span>
 </h2>
 
 <input name="lesson-name" type="text" class="form-control" placeholder="Lesson Name">
@@ -48,10 +51,10 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 
 <div class="container-fluid text-center">
-	<div class="row">
-		<div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
 <h2>Class
-	<span class="glyphicon glyphicon-education"></span>
+    <span class="glyphicon glyphicon-education"></span>
 </h2>
 <input name="user-group" type="text" class="form-control" placeholder="Class or Student Name">
 </div>
@@ -72,12 +75,44 @@ if (!(isset($_SESSION['myusername']))) {
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </div>
 </div>
 
-<!-- Activity part of form start. In nested well -->
-<div class="well well-inside">
+<!-- Activity part of form start. In modal -->
+
+<div class="container text-center">
+<button data-toggle="modal" data-target="#form-content" type="button"
+class="btn btn-primary btn-large">Add Activity</button>
+</div>
+
+<!--Activity modal button end, modal form start -->
+</div>
+
+<div class="jumbotron well-inside">
+<div class="container-fluid">
+    <div class="col-xs-12 text-center">
+    <button type="submit" class="btn btn-lg" id="save" onclick="Save()">Save
+        <span class="glyphicon glyphicon-saved"></span>
+    </button>
+</div>
+</div>
+</div>
+
+<hr>
+
+</div>
+
+<div id="form-content" class="modal fade in" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">X</a>
+        <h3>Add an Activity to your lesson plan</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="modal-activity" method="post" action="formaction.php">
+            <div class="well well-inside">
 <div class="container-fluid text-center">
         <div class="col-xs-12">
             <h2>Activity</h2>
@@ -104,7 +139,7 @@ if (!(isset($_SESSION['myusername']))) {
                 </div>
             </div>
         </div>
-	</div>
+    </div>
 </div>
 
 <br>
@@ -138,24 +173,21 @@ if (!(isset($_SESSION['myusername']))) {
         <textarea class="form-control" rows="2" id="comment" name="comment-note" placeholder="Comments and Notes"></textarea>
     </div>
 </div>
-
-<!--Activity form end -->
-</div>
-
-<div class="jumbotron">
-<div class="container-fluid">
-    <div class="col-xs-12 text-center">
+    </div>
+    <div class="modal-footer">
+        <div class="col-xs-6 text-center">
     <button type="submit" class="btn btn-lg" id="save" onclick="Save()">Save
-        <span class="glyphicon glyphicon-saved"></span>
-    </button>
-</div>
-</div>
-</div>
+        </button>
+        </div>
+        <div class="col-xs-6 text-center">
+        <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+        </div>
 
-<hr>
-
-</div>
+    </div> <!-- modal footer end -->
+    </div> <!-- modal content end -->
+</div> <!-- modal dialog end -->
+</div> <!-- modal div end -->
 </form>
 
 </body>
-</html> 
+</html>

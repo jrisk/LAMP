@@ -27,6 +27,7 @@ if (!(isset($_SESSION['myusername']))) {
   <!-- Nav tabs -->
   <div class="container-fluid">
   <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li role="presentation"><a href="testmodal.php">Make New Plan</a></li>
     <li role="presentation"><a href="mobileplan.php">Add Activity</a></li>
     <li role="presentation"><a href="baseplan.php" role="tab">Add Lesson Plan</a></li>
     <li role="presentation"><a href="weekboot.php" role="tab">View Weekly Schedule</a></li>

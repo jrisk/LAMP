@@ -38,7 +38,7 @@
 <h3>Class</h3>
 	<span class="glyphicon glyphicon-education"></span>
 </h3>
-<input name="usergroup" type="text" class="form-control" placeholder="Class or Student Name">
+<input name="user-group" type="text" class="form-control" placeholder="Class or Student Name">
 </div>
 </div>
 </div>
@@ -62,15 +62,21 @@
 </div>
 <hr>
 
-<button type="submit" class="btn btn-lg" id="addplan">Start Plan</button>
-
 <div class="container-fluid">
 <div class="row">
-<div class="col-sm-4">Activity <span class="glyphicon glyphicon-flag"></span><input name="activity" type="text" class="form-control span4" placeholder="describe an activity"></div>
-<div class="col-sm-4">Duration <span class="glyphicon glyphicon-hourglass"></span><input name="duration"type="text" class="form-control" placeholder="minutes/hours it will last"></div>
-<div class="col-sm-4">Time <span class=" glyphicon glyphicon-time"></span><input type="text" class="form-control" placeholder="start time"></div>
+<div class="col-sm-4">Activity <span class="glyphicon glyphicon-flag"></span>
+	<input name="activity" type="text" class="form-control span4" placeholder="describe an activity">
+</div>
+
+<div class="col-sm-4">Duration <span class="glyphicon glyphicon-hourglass"></span>
+	<input name="duration"type="text" class="form-control" placeholder="minutes/hours it will last">
+</div>
+<div class="col-sm-4">Time <span class=" glyphicon glyphicon-time"></span>
+	<input type="text" class="form-control" placeholder="start time">
 </div>
 </div>
+</div>
+<button type="submit" class="btn btn-lg" id="addplan">Start Plan</button>
 </form>
 
 

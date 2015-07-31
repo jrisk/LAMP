@@ -16,35 +16,20 @@
 
 <body>
 
-	<?php
-session_start();
+<?php
+
+include("pdo.php");
 
 if (!(isset($_SESSION['myusername']))) {
   header("location:main.php");
 }
-
-?>
-
-<div class="page-header">
-    <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
-</div>
-
-<div class="container">
-	<div class="row">
-<div class="col-xs-12">
-
-<?php
-	include("pdo.php");
-
 //$result variable comes from pdo.php
-
-/*foreach($result as $row) {
-	array_push($activity_array, $row['Activity']);
-} */
 
 $new_activity = array();
 $plan = array();
 $new_array = array();
+
+$new_start = array();
 
 //Inserting an array of values into another array iteratively to create an associative array
 
@@ -57,36 +42,41 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
 	$saved = $plan[$i];
 	//reset activity array for new association with new plan key
 	$new_activity = [];
-
 	//take the plan name and array position and check for other instances of plan name in result
 
 		for ($n=0; $n <= ((count($result)) - 1); $n++) {
 
+			//iterate through every instance of the saved plan in the original result array
+
 			if ($result[$n]['Plan'] == $saved) {
 
 			$new_activity[$n] = $result[$n]['Activity'];
-			//making the new associative array with the plan key and giving the key a value 
+			//make the new associative array with the plan key and pair it with the activity array 
 			$new_array[$saved] = $new_activity;
-
 			}
 		
 		}
 	}
 // I worked all day on this one measly function, like 8 hours of time
-} 
+};
 
 echo "<br><br>";
 var_dump($new_array);
 echo "<br><br>";
 
-
 	foreach($new_array as $key => $value) {
-		echo "<div class='well well-watch'><h2>" . $key . "</h2><hr>";
+		echo "<div class='well well-watch'><h2>" . $key . "</h2>";
 		foreach($value as $activities) {
-			echo "<div class='well well-inside'><b>" . $activities . "</b><br></div>";
-			}
-		echo "</div>";
+			echo "<div class='well well-inside'><b>Activity|| " . $activities . "</b><br></div>";
+			foreach($result as $row) {
+					if (($row['Plan'] == $key) && ($row['Activity'] == $activities)) {
+						echo "<div class='well well-edit'>Time: " . $row['Start'] . "</div>";
+						echo "<b>Duration: </b><div class='well' id='duration'>duration of activity</div>";
+					}
+				} 
+			} echo "</div>";
 		}
+		
 
 ?>
 
