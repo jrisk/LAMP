@@ -42,7 +42,7 @@ var theDuration = function() {
 
 	duration = durfrom.replace(/^in\s/, ' ');
 
-	return $('#duration').html(duration);
+	return duration;
 };
 
 var inputDuration = function() {
@@ -50,22 +50,49 @@ var inputDuration = function() {
 
 	var durend = $('#end').val();
 
-	var dur1 = moment(durstart, 'HH:mm A');
-	var dur2 = moment(durend, 'HH:mm A');
+	var dur1 = moment(durstart, 'HH:mm:ss');
+	var dur2 = moment(durend, 'HH:mm:ss');
 
 	var dur3 = dur1.subtract(dur2);
 
-	var dur4 = moment('04/09/2013 23:59:59', 'HH:mm A')
+	var dur3sub = dur3.subtract(60, 'seconds', true);
 
-	durate = dur4.subtract(dur3);
+	var dur4 = moment('23:59:00', 'HH:mm:ss');
 
-	//durdur = durate.replace(':', '');
+	var during = dur4.subtract(dur3sub);
 
-	alert(durate);
+	var during2 = moment.duration(during).asSeconds();
+
+	$('#durationtime').val(during2);
+	$('#durationtime2').html(during2);
 };
 
-$('#testyclick').click(function() {
-	inputDuration();
+//save button on first activity modal
+
+ $("#savedurate").click(function(e) {
+ 	inputDuration();
+ 	var durstartview = $('#start').val();
+ 	$('#startview').html(durstartview);
+ 	$('#durationtime2').html(theDuration());
+ 	$('#firstact').hide();
+ 	$('#secondact').show();
+ 	var textareafix = $('#comment-note').val();
+ 	$('#commentnote').val(textareafix);
+ 	var formdata = $('#planform input').serialize();
+ 	//$("#planform").submit();
+	$.ajax({
+		type: 'POST',
+		url: 'formaction.php',
+		data: formdata,
+		dataType: 'html',
+		success: function (data) {
+		$('#successdiv').html(data);
+		},
+		error: function(jqXHR, textStatus, errorThrown) { // could cause double entries
+			$('#err1').html(errorThrown);
+		}
+	});
+	e.preventDefault();
 });
 
 
@@ -83,7 +110,7 @@ $('#buttest').click(function() {
 
 //$('#durationtime').html(moment.duration(duration1));
 
-$('#save').click(function() {
+$('#save').click(function(event) {
 	var start = $('#start').val();
 	var end = $('#end').val();
 	var duration = start - end;
@@ -94,36 +121,5 @@ $('#save').click(function() {
 });
 
 var dateobject = $('#dateplan').val();
-
-//getting time objects, getting duration, inserting again into page
-
-
-
-// php variables into javascript
-
-/*var momento = moment($.ajax({
-	type: 'GET';
-	url: 'testmoment.php'
-	data:
-}) */
-
-// ajax example 
-
-$('#formsubmit').submit( function () {
-$.ajax({
-type: 'POST',
-url: 'formaction.php',
-data: 'show=content',
-dataType: 'html',
-success: function (data) {
-var formdata = data;
-alert(data);
-},
-error: function(jqXHR, textStatus, errorThrown) { // could cause double entries
-	$('#err1').html(errorThrown);
-}
-});
-event.preventDefault(); // need this to prevent double mysql entries
-})
 
 });

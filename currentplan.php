@@ -23,10 +23,21 @@ if (!(isset($_SESSION['myusername']))) {
   header("location:main.php");
 }
 
-
+$_SESSION['currentplan'] = 
 
 
 ?>
+
+<div class="dropdown">
+  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    View Lesson Plan
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dLabel">
+   <li>Hello, I am the Lesson Plan</li>
+   <li>Howdy, I be duh lesson plan bix nood hi diddly ho</li>
+  </ul>
+</div>
 
 
 

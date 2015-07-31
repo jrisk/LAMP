@@ -17,6 +17,7 @@
 
 <body>
        <?php
+include("pdo.php");
 session_start();
 
 if (!(isset($_SESSION['myusername']))) {
@@ -30,10 +31,13 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 
 <p><a href="homepage.php">Back to Control Panel</a></p>
+
+<div class="well"><div><b><id="successdiv"></div></b></div>
+<div id="err1"></div>
     
     <!--start lesson planner form -->
 
-<form onsubmit="savePlan()" method="post" action="formaction.php">
+<form id="planform" method="post" action="formaction.php">
 
     <!--lesson plan in well -->
 <div class="well well-watch">
@@ -79,11 +83,43 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 </div>
 
-<!-- Activity part of form start. In modal -->
+<!-- Activity part of form start. outside of modal -->
 
 <div class="container text-center">
 <button data-toggle="modal" data-target="#form-content" type="button"
-class="btn btn-primary btn-large">Add Activity</button>
+class="btn btn-primary btn-large" id='firstact'>Add Activity</button>
+</div>
+
+<!-- row of activities before the modal code -->
+<div class="hidden-xs">
+<div class="container" id="activated">
+    <div class="well">
+    <div class="row well-edit">
+        <div class="col-sm-6">
+            <h2>Activity</h2>
+        </div>
+        <div class="col-sm-3">
+            <h2>Duration</h2>
+        </div>
+        <div class="col-sm-3">
+            <h2>Start</h2>
+        </div>
+    </div> <!--1st Activity Row -->
+    <hr>
+
+    <div class='row'>
+        <div class="col-sm-6">
+            the act
+        </div>
+        <div class="col-sm-3" id="durationtime2">
+            8 hours
+        </div>
+        <div class="col-sm-3" id ="startview">
+            10 PM
+        </div>
+    </div>
+</div>
+</div>
 </div>
 
 <!--Activity modal button end, modal form start -->
@@ -92,7 +128,7 @@ class="btn btn-primary btn-large">Add Activity</button>
 <div class="jumbotron well-inside">
 <div class="container-fluid">
     <div class="col-xs-12 text-center">
-    <button type="submit" class="btn btn-lg" id="save" onclick="Save()">Save
+    <button type="submit" class="btn btn-lg" id="save">Save Plan
         <span class="glyphicon glyphicon-saved"></span>
     </button>
 </div>
@@ -111,7 +147,7 @@ class="btn btn-primary btn-large">Add Activity</button>
         <h3>Add an Activity to your lesson plan</h3>
     </div>
     <div class="modal-body">
-        <form role="form" name="modal-activity" method="post" action="formaction.php">
+        <form role="form" name="modal-activity" method="post" action="#">
             <div class="well well-inside">
 <div class="container-fluid text-center">
         <div class="col-xs-12">
@@ -172,7 +208,6 @@ class="btn btn-primary btn-large">Add Activity</button>
         <b><span class="glyphicon glyphicon-hourglass"></span>
             Duration
             <h5 id="duration"></h5>
-            <b id="testyclick">clicky for duration test</b>
         </b>
     </div>
 </div>
@@ -181,13 +216,14 @@ class="btn btn-primary btn-large">Add Activity</button>
 
 <div class="container-fluid">
     <div class="col-xs-12">
-        <textarea class="form-control" rows="2" id="comment" name="comment-note" placeholder="Comments and Notes"></textarea>
+        <input type="hidden" class="form-control" id="commentnote" name="commentnote">
+        <textarea class="form-control" rows="2" id="comment-note" name="comment-note" placeholder="Comments and Notes"></textarea>
     </div>
 </div>
     </div>
     <div class="modal-footer">
         <div class="col-xs-6 text-center">
-    <button type="submit" class="btn btn-lg" id="save" onclick="Save()">Save
+<!--button type='submit' for php--><button type="button" class="btn btn-lg" id="savedurate" data-dismiss="modal">Save
         </button>
         </div>
         <div class="col-xs-6 text-center">
@@ -198,6 +234,7 @@ class="btn btn-primary btn-large">Add Activity</button>
     </div> <!-- modal content end -->
 </div> <!-- modal dialog end -->
 </div> <!-- modal div end -->
+
 </form>
 
 </body>

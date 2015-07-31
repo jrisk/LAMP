@@ -4,6 +4,15 @@ session_start();
 
 include("credentials.php");
 
+//register the current plan as the default session plan
+// if its the last plan to be uploaded during a session
+
+//deserialize the jquery string back to PHP Post variables
+
+//parse_str($_POST["data"], $_POST);
+
+$_SESSION['currentplan'] = $_POST['lesson-name'];
+
 $id = "NULL";
 
 $plan = $_POST['lesson-name'];
@@ -24,9 +33,9 @@ $end_time = $_POST['end-time'];
 
 $end_time_db = substr($end_time, 0, -3);
 
-$comment_note = $_POST['comment-note'];
+$comment_note = $_POST['commentnote'];
 
-$duration = "NULL";
+$duration = $_POST['duration-time'];
 
 $entry_time = NULL;
 
@@ -79,8 +88,6 @@ catch (PDOException $e) {
 }
 
 echo "<html><head><title>Plan Posted
-</title></head><body><h1>Plan has been saved.</h1></body></html>";
-
-header("location:homepage.php");
+</title></head><body><h1>Plan and Activity have been saved</h1></body></html>";
 
 ?>

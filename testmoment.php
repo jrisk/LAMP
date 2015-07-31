@@ -21,33 +21,61 @@
 <?php
 include("pdo.php");
 
-for ($i=0;$i<=(count($result) - 1); $i++) {
+$new_activity = array();
+$plan = array();
+$new_array = array();
 
-	$startobj[$i] = $result[$i]['Start'];
-	$endobj[$i] = $result[$i]['End'];
-	$dayobj[$i] = $result[$i]['Day'];
+$new_start = array();
+
+//Inserting an array of values into another array iteratively to create an associative array
+
+for ($i=0; $i <= ((count($result)) - 1); $i++) {
+	//check if plan has already been pushed into array
+	if (!(in_array(($result[$i]['Plan']), $plan))) {
+	$plan[$i] = $result[$i]['Plan'];
+
+	//save state of plan index for next check of similar plan names and inserting of activities
+	$saved = $plan[$i];
+	//reset activity array for new association with new plan key
+	$new_activity = [];
+	//take the plan name and array position and check for other instances of plan name in result
+
+		for ($n=0; $n <= ((count($result)) - 1); $n++) {
+
+			//iterate through every instance of the saved plan in the original result array
+
+			if ($result[$n]['Plan'] == $saved) {
+
+			$new_activity[$n] = $result[$n]['Activity'];
+			//make the new associative array with the plan key and pair it with the activity array 
+			$new_array[$saved] = $new_activity;
+			}
+		
 		}
+	}
+// I worked all day on this one measly function, like 8 hours of time
+};
 
-for ($i=0; $i<=3; $i++) {
-echo $startobj[$i];
-echo "<br>";
-echo $endobj[$i];
-echo "<br>";
-echo $dayobj[$i];
 echo "<br><br>";
-}
+var_dump($new_array);
+echo "<br><br>";
+
+	foreach($new_array as $key => $value) {
+		echo "<div class='well well-watch'><h2>" . $key . "</h2>";
+		foreach($value as $activities) {
+			echo "<div class='well well-inside'><b>Activity|| " . $activities . "</b><br></div>";
+			foreach($result as $row) {
+					if (($row['Plan'] == $key) && ($row['Activity'] == $activities)) {
+						echo "<div class='well well-edit' id='timeview'>Time: " . $row['Start'] . "</div>";
+						echo "<b>Duration: </b><div class='well' id='durationview'>" . $row['Duration'] . "</div>";
+						echo "<p id='fromnow'></p><b>from now</b>";
+					}
+				} 
+			} echo "</div>";
+		}
+		
 
 ?>
-
-<div class="well">Time is: <div id="dater"></div></div>
-
-<div class="well well-inside">Moment object: <p id="timer"></p></div>
-
-<script>
-
-var start_array = <?php echo json_encode($startobj); ?>;
-
-alert(start_array);
 
 </script>
 </body>
