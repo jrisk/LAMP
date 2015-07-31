@@ -8,4 +8,4 @@ $db = new PDO($dsn, $username, $password;
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $db->prepare("DELETE FROM lessonplanner VALUES ")
+$stmt = $db->prepare("UPDATE lessonplanner VALUES ")

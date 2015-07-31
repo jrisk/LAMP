@@ -6,7 +6,7 @@
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./extrajs.js"></script>
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
@@ -132,7 +132,7 @@ class="btn btn-primary btn-large">Add Activity</button>
         <div class="col-xs-12">
             <div class="form-group">
                 <div class="input-group date" id="starttime">
-                    <input type="text" class="form-control input-lg" name="start-time" id="start"/>
+                    <input type="text" class="form-control input-lg" name="start-time" id="start">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
@@ -164,6 +164,17 @@ class="btn btn-primary btn-large">Add Activity</button>
     </div>
 </div>
 </div>
+</div>
+
+<div class="col-xs-12 text-center">
+    <div class="form-group">
+        <input type="hidden" class="form-control" name="duration-time" id="durationtime">
+        <b><span class="glyphicon glyphicon-hourglass"></span>
+            Duration
+            <h5 id="duration"></h5>
+            <b id="testyclick">clicky for duration test</b>
+        </b>
+    </div>
 </div>
 
 <br>

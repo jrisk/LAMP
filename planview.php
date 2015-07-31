@@ -70,8 +70,9 @@ echo "<br><br>";
 			echo "<div class='well well-inside'><b>Activity|| " . $activities . "</b><br></div>";
 			foreach($result as $row) {
 					if (($row['Plan'] == $key) && ($row['Activity'] == $activities)) {
-						echo "<div class='well well-edit'>Time: " . $row['Start'] . "</div>";
-						echo "<b>Duration: </b><div class='well' id='duration'>duration of activity</div>";
+						echo "<div class='well well-edit' id='timeview'>Time: " . $row['Start'] . "</div>";
+						echo "<b>Duration: </b><div class='well' id='durationview'>" . $row['Duration'] . "</div>";
+						echo "<p id='fromnow'></p><b>from now</b>";
 					}
 				} 
 			} echo "</div>";
