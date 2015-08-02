@@ -30,7 +30,7 @@ $('#endtime').datetimepicker({
 
 //get duration between start and end time
 
-var theDuration = function() {
+var activityDuration = function() {
 	var durstart = $('#start').val();
 
 	var durend = $('#end').val();
@@ -38,12 +38,14 @@ var theDuration = function() {
 	dur1 = moment(durstart, 'HH:mm A');
 	dur2 = moment(durend, 'HH:mm A');
 
-	durfrom = dur2.from(dur1);
+	durfrom = dur2.from(dur1, true);
 
-	duration = durfrom.replace(/^in\s/, ' ');
+	$('#durationmodal').html(durfrom);
 
-	return duration;
+	return durfrom;
 };
+
+//
 
 var inputDuration = function() {
 	var durstart = $('#start').val();
@@ -63,22 +65,24 @@ var inputDuration = function() {
 
 	var during2 = moment.duration(during).asSeconds();
 
-	$('#durationtime').val(during2);
-	$('#durationtime2').html(during2);
+	return during2;
 };
 
-//save button on first activity modal
+//save button on first activity modal, starts ajax
 
  $("#savedurate").click(function(e) {
- 	inputDuration();
+
+ 	$('#durationtime').val(inputDuration());
+
  	var durstartview = $('#start').val();
  	$('#startview').html(durstartview);
- 	$('#durationtime2').html(theDuration());
- 	$('#firstact').hide();
+ 	//$('#firstact').hide();
  	$('#secondact').show();
+
  	var textareafix = $('#comment-note').val();
  	$('#commentnote').val(textareafix);
  	var formdata = $('#planform input').serialize();
+
  	//$("#planform").submit();
 	$.ajax({
 		type: 'POST',
@@ -87,11 +91,25 @@ var inputDuration = function() {
 		dataType: 'html',
 		success: function (data) {
 		$('#successdiv').html(data);
-		},
+		// call another ajax request to GET php file to update activities row
+		$.ajax({
+			type: 'GET',
+			url: 'actrow.php',
+			cache: false,
+			dataType: 'html',
+			success: function(datas) {
+				$('#actphp').html(datas);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$('#err1').html(errorThrow);
+			}
+		}); // end 2nd ajax requrest
+		}, //end original upon success function
 		error: function(jqXHR, textStatus, errorThrown) { // could cause double entries
 			$('#err1').html(errorThrown);
 		}
 	});
+	
 	e.preventDefault();
 });
 
@@ -101,7 +119,7 @@ var fromNow = function() {
 	var now = moment();
 };
 
-setInterval(theDuration, 2000);
+setInterval(activityDuration, 2000);
 
 $('#buttest').click(function() {
 	var duration1 = $('#start').val();
@@ -121,5 +139,37 @@ $('#save').click(function(event) {
 });
 
 var dateobject = $('#dateplan').val();
+
+// currentplan.php code dropdown stuff
+
+$('.planlist').click(function(event) {
+	var plantitle = $(this).html();
+	$.ajax({
+			type: 'POST',
+			url: 'totalview.php',
+			data: {planning: plantitle},
+			dataType: 'html',
+			success: function(datam) {
+				$('#planentry').html(datam);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$('#err1').html(errorThrow);
+			}
+		});
+}) 
+
+
+
+
+/***sorting function for a time array with : ********
+sortTimes: function (array) {
+    return array.sort(function (a, b) {
+        if (parseInt(a.split(":")[0]) - parseInt(b.split(":")[0]) === 0) {
+            return parseInt(a.split(":")[1]) - parseInt(b.split(":")[1]);
+        } else {
+            return parseInt(a.split(":")[0]) - parseInt(b.split(":")[0]);
+        }
+    })
+} */
 
 });

@@ -61,8 +61,27 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
 };
 
 echo "<br><br>";
-var_dump($new_array);
-echo "<br><br>";
+
+$cplan = $_SESSION['currentplan'];
+
+var_dump($cplan);
+
+foreach($result as $key) {
+	if ($key['Plan'] == $cplan) {
+
+		echo "<div class='row'>
+        <div class='col-sm-6'>Activity: " . $key['Activity'] .
+        "</div>
+        <div class='col-sm-3' id='durationtime2'>" . $key['Duration'] .
+        "</div>
+        <div class='col-sm-3' id ='startview'>" . $key['Start'] . 
+        "</div>
+    </div>
+</div>";
+
+	}
+
+}
 
 	foreach($new_array as $key => $value) {
 		echo "<div class='well well-watch'><h2>" . $key . "</h2>";

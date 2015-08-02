@@ -22,6 +22,11 @@ div.page-header>*>* {
 	background-color: #FFA07A;
 }
 
+.well-blue {
+	background-color: #06f;
+	color: white;
+}
+
 }
 
 .btn-lg {

@@ -1,3 +1,12 @@
+<?php
+include("pdo.php");
+
+if (!(isset($_SESSION['myusername']))) {
+  header("location:main.php");
+}
+
+?>
+
 <html>
 <head>
     <title>Lesson Plan V3</title>
@@ -16,15 +25,6 @@
 </head>
 
 <body>
-       <?php
-include("pdo.php");
-session_start();
-
-if (!(isset($_SESSION['myusername']))) {
-  header("location:main.php");
-}
-
-?>
 
 <div class="page-header">
     <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
@@ -32,7 +32,12 @@ if (!(isset($_SESSION['myusername']))) {
 
 <p><a href="homepage.php">Back to Control Panel</a></p>
 
-<div class="well"><div><b><id="successdiv"></div></b></div>
+<div class="well well-sm"><div>
+    <b>
+        <div id="successdiv"></div>
+    </b>
+</div>
+
 <div id="err1"></div>
     
     <!--start lesson planner form -->
@@ -83,54 +88,54 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 </div>
 
-<!-- Activity part of form start. outside of modal -->
-
-<div class="container text-center">
-<button data-toggle="modal" data-target="#form-content" type="button"
-class="btn btn-primary btn-large" id='firstact'>Add Activity</button>
-</div>
-
 <!-- row of activities before the modal code -->
 <div class="hidden-xs">
 <div class="container" id="activated">
     <div class="well">
     <div class="row well-edit">
         <div class="col-sm-6">
-            <h2>Activity</h2>
+            <h3>Activity</h3>
         </div>
         <div class="col-sm-3">
-            <h2>Duration</h2>
+            <h3>Duration</h3>
         </div>
         <div class="col-sm-3">
-            <h2>Start</h2>
+            <h3>Start</h3>
         </div>
     </div> <!--1st Activity Row -->
     <hr>
 
-    <div class='row'>
-        <div class="col-sm-6">
-            the act
-        </div>
-        <div class="col-sm-3" id="durationtime2">
-            8 hours
-        </div>
-        <div class="col-sm-3" id ="startview">
-            10 PM
-        </div>
+    <div id="actphp">
+
+    <!-- inserts actrow.php loop code, from nested ajax request on click event for id savedurate-->
+
     </div>
-</div>
-</div>
-</div>
 
 <!--Activity modal button end, modal form start -->
 </div>
+</div> <!-- end activites list code -->
 
+<!-- Activity part of form start. outside of modal -->
+
+<div class="container text-center">
+<button data-toggle="modal" data-target="#form-content" type="button"
+class="btn btn-primary btn-lg" id='firstact'>Add Activity</button>
+</div>
+<hr>
 <div class="jumbotron well-inside">
 <div class="container-fluid">
     <div class="col-xs-12 text-center">
-    <button type="submit" class="btn btn-lg" id="save">Save Plan
+    <button type="submit" class="btn-primary tn bbtn-lg" id="save">Save Plan (non-auto)
         <span class="glyphicon glyphicon-saved"></span>
     </button>
+</div>
+<hr>
+    <div class="col-xs-12 text-center">
+    <a href="editplan.php">
+        <button type="button" class="btn btn-primary btn-lg" id="save">View Plan
+        <span class="glyphicon glyphicon-saved"></span>
+    </button>
+    </a>
 </div>
 </div>
 </div>
@@ -207,7 +212,7 @@ class="btn btn-primary btn-large" id='firstact'>Add Activity</button>
         <input type="hidden" class="form-control" name="duration-time" id="durationtime">
         <b><span class="glyphicon glyphicon-hourglass"></span>
             Duration
-            <h5 id="duration"></h5>
+            <h5 id="durationmodal"></h5>
         </b>
     </div>
 </div>

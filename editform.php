@@ -15,7 +15,7 @@ $_SESSION['currentplan'] = $_POST['lesson-name'];
 
 // Post variables
 
-$id = "NULL";
+$id = $_POST['identify'];
 
 $plan = $_POST['lesson-name'];
 
@@ -51,8 +51,9 @@ $db = new PDO($dsn, $user, $password);
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $db->prepare("INSERT INTO lessonplan VALUES (:id, :plan, :class, :activity, :day, :start_time, :end_time,
-:comment_note, :duration, :entry_time, :owner)");
+$stmt = $db->prepare("UPDATE lessonplan SET ID=:id, Plan=:plan, Class=:class, Activity=:activity,
+Day=:day, Start=:start_time, End=:end_time, Comment=:comment_note, Duration=:duration,
+EntryTime=:entry_time, Owner=:owner WHERE ID=:id");
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
@@ -90,5 +91,4 @@ catch (PDOException $e) {
 }
 
 echo "Plan and Activity have been saved";
-
-?>
+header("location:homepage.php");
