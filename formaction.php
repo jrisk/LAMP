@@ -23,9 +23,9 @@ $class = $_POST['user-group'];
 
 $activity = $_POST['activity'];
 
-$day = $_POST['date-plan'];
+$date = $_POST['date-planfix'];
 
-$day_db = strstr($day, ",", true);
+// for specific day of week $day_db = strstr($day, ",", true);
 
 $start_time = $_POST['start-time'];
 
@@ -51,7 +51,7 @@ $db = new PDO($dsn, $user, $password);
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $db->prepare("INSERT INTO lessonplan VALUES (:id, :plan, :class, :activity, :day, :start_time, :end_time,
+$stmt = $db->prepare("INSERT INTO lessonplan VALUES (:id, :plan, :class, :activity, :adate, :start_time, :end_time,
 :comment_note, :duration, :entry_time, :owner)");
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
@@ -62,7 +62,7 @@ $stmt->bindParam(":class", $class, PDO::PARAM_STR);
 
 $stmt->bindParam(":activity", $activity, PDO::PARAM_STR);
 
-$stmt->bindParam(":day", $day_db, PDO::PARAM_STR);
+$stmt->bindParam(":adate", $date, PDO::PARAM_STR);
 
 $stmt->bindParam(":start_time", $start_time_db, PDO::PARAM_INT);
 

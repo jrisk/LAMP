@@ -42,11 +42,12 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
 		
 		}
 	}
-// I worked all day on this one measly function, like 8 hours of time
+// I worked all day on this one measly function
 };
 
 foreach($new_array as $key => $value) {
-	echo "<li><a id='" . $key . "' class='planlist' name='plan' href='#'>" . $key . "</a></li>";
+	echo "<li><a id='" . $key . "' class='planlist' name='plan' 
+	<a href='#' onClick='return false;'>" . $key . "</a></li>";
 }
 
 ?>

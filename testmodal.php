@@ -87,7 +87,11 @@ if (!(isset($_SESSION['myusername']))) {
     </div>
 </div>
 </div>
-
+<div id="testday">
+    Test the day moment object transferance
+</div>
+<!-- fix time from readable to database date type and post to form -->
+    <input type='hidden' id='datefix' name='date-planfix' class='form-control' placeholder='hello'>
 <!-- row of activities before the modal code -->
 <div class="hidden-xs">
 <div class="container" id="activated">
@@ -131,7 +135,7 @@ class="btn btn-primary btn-lg" id='firstact'>Add Activity</button>
 </div>
 <hr>
     <div class="col-xs-12 text-center">
-    <a href="editplan.php">
+    <a href="viewplan.php">
         <button type="button" class="btn btn-primary btn-lg" id="save">View Plan
         <span class="glyphicon glyphicon-saved"></span>
     </button>

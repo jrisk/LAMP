@@ -23,7 +23,7 @@ $class = $_POST['user-group'];
 
 $activity = $_POST['activity'];
 
-$day = $_POST['date-plan'];
+$date = $_POST['date-planfix'];
 
 $day_db = strstr($day, ",", true);
 
@@ -52,7 +52,7 @@ $db = new PDO($dsn, $user, $password);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $stmt = $db->prepare("UPDATE lessonplan SET ID=:id, Plan=:plan, Class=:class, Activity=:activity,
-Day=:day, Start=:start_time, End=:end_time, Comment=:comment_note, Duration=:duration,
+Adate=:adate, Start=:start_time, End=:end_time, Comment=:comment_note, Duration=:duration,
 EntryTime=:entry_time, Owner=:owner WHERE ID=:id");
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
@@ -63,7 +63,7 @@ $stmt->bindParam(":class", $class, PDO::PARAM_STR);
 
 $stmt->bindParam(":activity", $activity, PDO::PARAM_STR);
 
-$stmt->bindParam(":day", $day_db, PDO::PARAM_STR);
+$stmt->bindParam(":adate", $date, PDO::PARAM_STR);
 
 $stmt->bindParam(":start_time", $start_time_db, PDO::PARAM_INT);
 
@@ -91,4 +91,5 @@ catch (PDOException $e) {
 }
 
 echo "Plan and Activity have been saved";
-header("location:homepage.php");
+
+?>

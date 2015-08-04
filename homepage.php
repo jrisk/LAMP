@@ -28,7 +28,7 @@ if (!(isset($_SESSION['myusername']))) {
   <div class="container-fluid">
   <ul class="nav nav-pills nav-stacked" role="tablist">
     <li role="presentation"><a href="testmodal.php">Make New Plan</a></li>
-    <li role="presentation"><a href="planner.php">View Lesson Plans</a></li>
+    <li role="presentation"><a href="viewplan.php">View Lesson Plans</a></li>
     <li role="presentation"><a href="weekboot.php" role="tab">View Weekly Schedule</a></li>
     <li role="presentation"><a href="shortweek.php" aria-controls="messages" role="tab">View 5-day</a></li>
     <li role="presentation"><a href="topdowndays.php" role="tab">View Activities</a></li>
