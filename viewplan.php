@@ -26,24 +26,35 @@ if (!(isset($_SESSION['myusername']))) {
 </head>
 
 <body>
+<div class="page-header">
+    <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
+</div>
 
+<div class="well well-sm"><div>
+    <b>
+        <div id="successdiv"></div>
+    </b>
+</div>
+
+<div id="err1"></div>
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
-<div class="dropdown">
+    <div class="col-sm-6">
+<div class="dropdown" id="dropdownplans">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownplan" 
   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Choose Plan
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownplan">
-    <?php
-    include("planlist.php");
-    ?>
+  <ul class="dropdown-menu" aria-labelledby="dropdownplan" id="planlistload">
   </ul>
 </div>
 </div>
+<div class="col-sm-3">
+  <button class="btn btn-primary btn-md" type="button" id="makeplan">
+    Make New Plan
+  </button>
 </div> <!-- end row -->
 
 <div class="container">
@@ -53,6 +64,12 @@ if (!(isset($_SESSION['myusername']))) {
 </div>
 </div>
 
+<hr>
+
+<div class='not-hidden-xs'>
+  <div class="container" id="maker"> <!-- where plan making php file is inserted -->
+  </div>
+</div>
 
 <hr>
 
@@ -66,10 +83,6 @@ if (!(isset($_SESSION['myusername']))) {
 <div class="container" id="activated">
   <div class="well">
       <div class="row">
-      <div class="col-sm-2">
-        <!-- edit column -->
-        <h2><div class='label label-default'>Options</div></h2>
-      </div>
         <div class="col-sm-4">
             <h2><div class='label label-success'>Activity</div></h2>
         </div>
@@ -79,6 +92,10 @@ if (!(isset($_SESSION['myusername']))) {
         <div class="col-sm-3">
             <h2><div class='label label-primary'>Start Time</div></h2>
         </div>
+        <div class="col-sm-2">
+        <!-- edit/delete options column -->
+        <h2><div class='label label-default'>Options</div></h2>
+      </div>
     </div> <!-- well end -->
     </div> <!-- first row end -->
   <h3><div class="row well" id="planentry">
@@ -141,7 +158,7 @@ data-target="#form-content" type="button" id="addactivity">Add Activity
         <div class="col-xs-12">
             <div class="form-group">
                 <div class="input-group date" id="starttime">
-                    <input type="text" class="form-control input-lg" name="start-time" id="start">
+                    <input type="text" class="form-control input-lg" name="start-time" id="start2">
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
@@ -165,7 +182,7 @@ data-target="#form-content" type="button" id="addactivity">Add Activity
         <div class="col-xs-12">
             <div class="form-group">
                 <div class="input-group date" id="endtime">
-            <input type="text" class="form-control input-lg" name="end-time" id="end">
+            <input type="text" class="form-control input-lg" name="end-time" id="end2">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
@@ -189,8 +206,8 @@ data-target="#form-content" type="button" id="addactivity">Add Activity
 
 <div class="container-fluid">
     <div class="col-xs-12">
-        <input type="hidden" class="form-control" id="commentnote" name="commentnote">
-        <textarea class="form-control" rows="2" id="comment-note" name="comment-note" placeholder="Comments and Notes"></textarea>
+        <input type="hidden" class="form-control" id="commentnote2" name="commentnote">
+        <textarea class="form-control" rows="2" id="comment-note2" name="comment-note" placeholder="Comments and Notes"></textarea>
     </div>
 </div>
     </div>

@@ -10,6 +10,14 @@ div.page-header>*>* {
 
 }
 
+#enteractivity {
+	color: #99FF66;
+}
+
+.durater {
+	color: #FFCC33;
+}
+
 .well-watch {
 	background-color: #E0FFFF;
 }

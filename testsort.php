@@ -36,10 +36,6 @@ array_push($fuck_array, $fuck);
 
 }
 
-var_dump($fuck_array);
-
-echo "<br><br>";
-
 /*function durationfix() {
 
 	if($key['Duration'])

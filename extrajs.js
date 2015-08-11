@@ -1,5 +1,23 @@
 $(function () {
 
+function datetimefunc3() {
+$('#datetimepickerplan3').datetimepicker({
+	format: 'dddd, MMMM Do',
+	allowInputToggle: true
+});
+
+$('#starttime3').datetimepicker({
+	format: 'HH:mm A',
+    allowInputToggle: true
+});
+
+$('#endtime3').datetimepicker({
+	format: 'HH:mm A',
+	allowInputToggle: true
+});
+
+}
+
 function datetimefunc() {
 $('#datetimepickerplan2').datetimepicker({
 	format: 'dddd, MMMM Do',
@@ -35,14 +53,28 @@ $('#endtime').datetimepicker({
 
 // TURN THE START TIME INTO READABLE AM/PM IN VIEW MODE
 
-$('#tester').on('click tap', function(e) {
-var startproto = moment($('#enterstart'));
+var startHuman = function(enterstart) {
 
-alert(startproto);
+	var starting = $(enterstart).html();
 
-});
+	var startproto = moment(starting, 'HH:mm:ss');
+
+	var starthuman = moment(startproto).format('hh:mm A');
+
+	return starthuman;
+};
 
 //get date picker format into database DATE format
+
+var dayDuration3 = function() {
+	var dayinput = $('#dateplan3').val();
+
+	var daybase = moment(dayinput, 'dddd, MMMM Do');
+
+	var daybaseval = moment(daybase).format('YYYY-MM-DD');
+
+	return daybaseval;
+}
 
 var dayDuration = function() {
 	var dayinput = $('#dateplan').val();
@@ -66,12 +98,22 @@ var convertBackDay = function() {
 	return dayinputhuman;
 };
 
+var convertBackDay2 = function() {
+	var dayfromdb = $('#enterend').html();
+
+	var daybaseread = moment(dayfromdb);
+
+	var dayinputhuman = moment(daybaseread).format('dddd, MMMM Do');
+
+	return dayinputhuman;
+};
+
 //get duration between start and end time for duration read field
 
 var activityDuration = function() {
-	var durstart = $('#start').val();
+	var durstart = $('#start2').val();
 
-	var durend = $('#end').val();
+	var durend = $('#end2').val();
 
 	dur1 = moment(durstart, 'HH:mm A');
 	dur2 = moment(durend, 'HH:mm A');
@@ -110,52 +152,28 @@ var inputDuration = function() {
 	return during2;
 };
 
-//save button on first activity modal, starts ajax
+var inputDuration2 = function() {
+	var durstart = $('#start2').val();
 
- $("#savedurate").click(function(e) {
+	var durend = $('#end2').val();
 
- 	$('#durationtime').val(inputDuration());
+	var dur1 = moment(durstart, 'HH:mm:ss');
+	var dur2 = moment(durend, 'HH:mm:ss');
 
- 	var durstartview = $('#start').val();
- 	$('#startview').html(durstartview);
- 	//$('#firstact').hide();
- 	$('#secondact').show();
+	var dur3 = dur1.subtract(dur2);
 
- 	$('#datefix').val(dayDuration()); /* change date from human readable to database readable */
+	var dur3sub = dur3.subtract(60, 'seconds', true);
 
- 	var textareafix = $('#comment-note').val();
- 	$('#commentnote').val(textareafix);
- 	var formdata = $('#planform input').serialize();
+	var dur4 = moment('23:59:00', 'HH:mm:ss');
 
- 	//$("#planform").submit();
-	$.ajax({
-		type: 'POST',
-		url: 'formaction.php',
-		data: formdata,
-		dataType: 'html',
-		success: function (data) {
-		$('#successdiv').html(data);
-		// call another ajax request to GET php file to update activities row
-		$.ajax({
-			type: 'GET',
-			url: 'actrow.php',
-			cache: false,
-			dataType: 'html',
-			success: function(datas) {
-				$('#actphp').html(datas);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				$('#err1').html(errorThrow);
-			}
-		}); // end 2nd ajax requrest
-		}, //end original upon success function
-		error: function(jqXHR, textStatus, errorThrown) { // could cause double entries
-			$('#err1').html(errorThrown);
-		}
-	});
-	
-	e.preventDefault();
-});
+	var during = dur4.subtract(dur3sub);
+
+	var during2 = moment.duration(during).asSeconds(); // returns total seconds for database
+
+	return during2;
+};
+
+//save button on first activity modal, starts ajax, DELETED
 
 
 setInterval(activityDuration, 2000); //run continously to update duration field
@@ -181,7 +199,9 @@ $('#addoptions').hide();
 
 // currentplan.php code dropdown stuff
 
-$('.planlist').click(function(event) {
+$('#planlistload').load('planlist.php');
+
+$('#dropdownplans').delegate('.planlist', 'click', function(event) {
 	var plantitle = $(this).html();
 	$.ajax({
 			type: 'POST',
@@ -195,6 +215,15 @@ $('.planlist').click(function(event) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#editor').hide();
+				$('#maker').hide();
+				// put this in a function !!!!!!!!!!!!!
+				var startlen = $('.starter').length;
+				var startarray = [];
+				for (i=0; i <= startlen; i++) {
+				var startparam = $('#enterstart' + i);
+				var startread = startHuman(startparam);
+					startparam.html(startread);
+					};
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				$('#err1').html(errorThrown);
@@ -217,9 +246,10 @@ $('#planentry').delegate( '#editact', 'click', function(event) {
 		success: function(data) {
 			$('#editor').html(data);
 			$('#activated').hide();
+			$('#dateplan').val(convertBackDay());
 			datetimefunc();
 			$('#editor').show();
-			$('#dateplan').val(convertBackDay());
+			$('#addoptions').hide();
 		},
 		error: function(jqXHR, textStatus, errorThrow) {
 			$('#err1').html(errorThrown);
@@ -240,6 +270,8 @@ $('#editor').delegate( '#updater', 'click', function(e) {
  	//serialize into POST data string url-encoding
  	var editdata = $('#editform input').serialize();
 
+ 	var plantitle = $('#lessonname').val();
+
  	$.ajax({
  		type: 'POST',
  		url: 'editform.php',
@@ -247,8 +279,33 @@ $('#editor').delegate( '#updater', 'click', function(e) {
  		dataType: 'html',
  		success: function(data) {
  			alert("Plan has been edited");
- 			$('#activated').show();
- 			$('#editor').hide();
+ 			$.ajax({
+			type: 'POST',
+			url: 'totalview.php',
+			data: {planning: plantitle},
+			dataType: 'html',
+			success: function(data) {
+				$('#planentry').html(data);
+				$('#sessionplan').html("<h2>" + $('#enterplan').html() + "</h2>");
+				$('#activated').show();
+				$('#planentry').show();
+				$('#addoptions').show();
+				$('#editor').hide();
+				// PUT THIS IN A FUNCTION !!!!!!!!!!!!!!!!!!!!!
+				var startlen = $('.starter').length;
+				var startarray = [];
+	
+				for (i=0; i <= startlen; i++) {
+				var startparam = $('#enterstart' + i);
+				var startread = startHuman(startparam);
+				startparam.html(startread);
+				};
+				$('#planlistload').load('planlist.php');
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$('#err1').html(errorThrown);
+			}
+		});
  		},
  		error: function(jqXHR, textStatus, errorThrown) {
  			$('#err1').html(errorThrown);
@@ -258,19 +315,30 @@ $('#editor').delegate( '#updater', 'click', function(e) {
 
 });
 
-$('#addnewact').on('click tap', function(e) {
+$('#addactivity').on('click', function(e) {
+
+	var lastend = $('#enteracts #enterend').last().html();
+
+	$('#start2').val(lastend);
+
+});
+
+$('#addnewact').on('click', function(e) {
 	$('#addlesson').val($('#enterplan').html());
 	$('#addclass').val($('#enterclass').html());
+
 	$('#datefix').val($('#enterday').html());
 
-	$('#durationtime').val(inputDuration());
+	$('#durationtime').val(inputDuration2());
 
-	var textareafix = $('#comment-note').val();
- 	$('#commentnote').val(textareafix);
+	var textareafix = $('#comment-note2').val();
+ 	$('#commentnote2').val(textareafix);
 
  	var plantitle = $('#addlesson').val();
 
  	var formdata = $('#planform input').serialize();
+
+ 	alert(formdata);
 
  	$.ajax({
 		type: 'POST',
@@ -291,12 +359,19 @@ $('#addnewact').on('click tap', function(e) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#editor').hide();
+				var startlen = $('.starter').length;
+				var startarray = [];
+				for (i=0; i <= startlen; i++) {
+				var startparam = $('#enterstart' + i);
+				var startread = startHuman(startparam);
+					startparam.html(startread);
+					};
+				$('#planform')[0].reset();
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				$('#err1').html(errorThrown);
 			}
 		});
-
 		},
 
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -306,17 +381,130 @@ $('#addnewact').on('click tap', function(e) {
 
 });
 
+$('#makeplan').on('click', function(e) {
+	$('#addoptions').hide();
+	$.ajax({
+		type: 'GET',
+		url: 'makeplan.php',
+		dataType: 'html',
+		success: function(data) {
+			$('#maker').html(data);
+			$('#activated').hide();
+			$('#editor').hide();
+			$('#addoptions').hide();
+			$('#sessionplan').html("<h2>" + "Make a New Lesson Plan" + "</h2>");
+			datetimefunc3();
+			$('#maker').show();
+		},
+		error: function(jqXHR, textStatus, errorThrow) {
+			$('#err1').html(errorThrown);
+		}
+	});
+});
+
+$('#maker').delegate('#updater2', 'click', function(e) {
+ 	
+ 	$('#durationtime3').val(inputDuration());
+
+ 	var durstartview = $('#start3').val();
+ 	$('#startview3').html(durstartview);
+
+ 	$('#datefix3').val(dayDuration3());
+
+ 	var textareafix = $('#comment-note3').val();
+ 	$('#commentnote3').val(textareafix);
+
+ 	var formdata = $('#makeform input').serialize();
+
+ 	var plantitle = $('#lessonname3').val();
+
+ 	//$("#planform").submit();
+	$.ajax({
+		type: 'POST',
+		url: 'formaction.php',
+		data: formdata,
+		dataType: 'html',
+		success: function (data) {
+		$('#successdiv').html(data);
+		//reload the plan list to reflect changes
+		//$.load('planlist.php', function(res) {
+				// no response, just reloading hopefully
+			//}); 
+		// call another ajax request to GET php file to update activities row
+		$.ajax({
+			type: 'POST',
+			url: 'totalview.php',
+			data: {planning: plantitle},
+			dataType: 'html',
+			success: function(datam) {
+				$('#planentry').html(datam);
+				$('#sessionplan').html("<h2>" + $('#enterplan').html() + "</h2>");
+				$('#activated').show();
+				$('#planentry').show();
+				$('#addoptions').show();
+				$('#maker').hide();
+				var startlen = $('.starter').length;
+				var startarray = [];
+				for (i=0; i <= startlen; i++) {
+				var startparam = $('#enterstart' + i);
+				var startread = startHuman(startparam);
+					startparam.html(startread);
+					};
+				$('#planlistload').load('planlist.php');
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				$('#err1').html(errorThrown);
+				}
+		}); /// end 2nd ajax requrest
+		}, //end original upon success function
+		error: function(jqXHR, textStatus, errorThrown) {
+				$('#err1').html(errorThrown);
+	}
+});
+
+});
+
+// delete an activity 
+
+$('#planentry').delegate( '#delact', 'click', function(event) {
+	var specificID = $(this).parent().siblings('#enterID').text();
+	//on update the plantitle is the same as the current activity's plan
+	var plantitle = $(this).parent().siblings('#enterplan').text();
+	$.ajax({
+		type: 'POST',
+		url: 'deleteform.php',
+		data: {deleteid: specificID},
+		dataType: 'html',
+		success: function(result) {
+			alert("Activity has been deleted");
+			$.ajax({
+			type: 'POST',
+			url: 'totalview.php',
+			data: {planning: plantitle},
+			dataType: 'html',
+			success: function(newresult) {
+				$('#planentry').html(newresult);
+				$('#activated').show();
+				$('#planentry').show();
+				$('#addoptions').show();
+				$('#maker').hide();
+
+			},
+
+			error: function(jqXHR, textStatus, errorThrown) {
+			$('#err1').html(errorThrown);
+			}
+		});
+
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+			$('#err1').html(errorThrown);
+		}
+	});
+});
 
 
-/***sorting function for a time array with : ********
-sortTimes: function (array) {
-    return array.sort(function (a, b) {
-        if (parseInt(a.split(":")[0]) - parseInt(b.split(":")[0]) === 0) {
-            return parseInt(a.split(":")[1]) - parseInt(b.split(":")[1]);
-        } else {
-            return parseInt(a.split(":")[0]) - parseInt(b.split(":")[0]);
-        }
-    })
-} */
+
 
 });

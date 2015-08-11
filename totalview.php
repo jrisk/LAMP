@@ -13,12 +13,14 @@ $sorted_array = array();
 $date_array = array();
 
         foreach ($result as $key) {
+            if ($key['Plan'] == $dplan) {
                 $fix = str_replace(":", "", $key["Start"]);
         
                 array_push($date_array, $fix);
 
                 sort($date_array);
         }
+    }
 
 for ($i=0; $i<=(count($date_array) - 1); $i++) {
 
@@ -34,6 +36,9 @@ array_push($sorted_array, $sorted);
 //changing database seconds into readable minutes/hours and start time into
 //readable PM/AM time can be done in jquery now
 
+// *** there is a bug where if the start time is the same, the loop will post the same activity
+// *** twice because of the start=array i clause in the if statement not accounting for that**//
+
 
 for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
 
@@ -42,15 +47,18 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
                if ($key["Plan"] == $dplan && $key["Start"] == $sorted_array[$i]) {
 
 		echo "<div class='well well-sm well-blue'><div class='row' id='enteracts'>
-                <div class='col-sm-2'>
-                <button class='btn btn-primary btn-lg' type='button' id='editact'>Edit</button>
-                </div>
         <div class='col-sm-4' id='enteractivity'>" . $key['Activity'] .
         "</div>
-        <div class='col-sm-3' id='enterduration'>" . $key['Duration'] .
+        <div class='col-sm-3 durater' id='enterduration" . $i . "'>" . $key['Duration'] / 60 .
+        " minutes</div>
+        <div class='col-sm-3 starter' id='enterstart" . $i . "'>" . $key['Start'] .
         "</div>
-        <div class='col-sm-3' id='enterstart'>" . $key['Start'] . 
-        "</div>
+        <div class='col-sm-1'>
+            <button class='btn btn-primary btn-md' type='button' id='editact'>Edit</button>
+        </div>
+        <div class='col-sm-1'>
+            <button class='btn btn-danger btn-md' type='button' id='delact'>Delete</button>
+        </div>
         <div hidden id='enterID'>" . $key['ID'] .
         "</div>
         <div hidden id='enterplan'>" . $dplan .
@@ -58,6 +66,8 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         <div hidden id='enterclass'>" . $key['Class'] .
         "</div>
         <div hidden id='enterday'>" . $key['Adate'] .
+        "</div>
+        <div hidden id='enterend'>" . $key['End'] .
         "</div>
         </div>
         </div>";

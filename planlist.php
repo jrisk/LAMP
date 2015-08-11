@@ -1,8 +1,5 @@
 <?php
-
-//Activities list for dropdown in php, returns list of plans
-//include("pdo.php");
-
+include('pdo.php');
 //$cplan = $_SESSION['currentplan'];
 
 /*function durationfix() {

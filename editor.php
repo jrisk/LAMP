@@ -23,7 +23,7 @@ foreach($result as $key) {
 <h2><div class='glyphicon glyphicon-paperclip'></div>Lesson</h2>
 </div>
 <div class='col-sm-6'>
-<h2><input name='lesson-name' type='text' class='form-control' 
+<h2><input name='lesson-name' id='lessonname' type='text' class='form-control' 
 placeholder='" . $key['Plan'] . "' value='" . $key['Plan'] . "'></h2>
 </div>
 </div>
