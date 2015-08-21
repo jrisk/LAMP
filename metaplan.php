@@ -2,9 +2,41 @@
 include("pdo.php");
 //Activities row in php, returns list of activities under a specific lesson plan name
 
-$_SESSION["currentplan"] = $_POST["planning"];
+// get the total number of plans and iterate through each one in the subsequent loops
+// for total calendar view, getting all the plans on page load 
 
-$dplan = $_SESSION["currentplan"];
+$new_activity = array();
+$plan = array();
+$new_array = array();
+
+for ($i=0; $i <= ((count($result)) - 1); $i++) {
+    //check if plan has already been pushed into array
+    if (!(in_array(($result[$i]['Plan']), $plan))) {
+    $plan[$i] = $result[$i]['Plan'];
+
+    //save state of plan index for next check of similar plan names and inserting of activities
+    $saved = $plan[$i];
+    //reset activity array for new association with new plan key
+    $new_activity = [];
+    //take the plan name and array position and check for other instances of plan name in result
+
+        for ($n=0; $n <= ((count($result)) - 1); $n++) {
+
+            //iterate through every instance of the saved plan in the original result array
+
+            if ($result[$n]['Plan'] == $saved) {
+
+            $new_activity[$n] = $result[$n]['Activity'];
+            //make the new associative array with the plan key and pair it with the activity array 
+            $new_array[$saved] = $new_activity;
+            }
+        
+        }
+    }
+// I worked all day on this one measly function
+};
+
+var_dump($plan);
 
 //sort the returning rows in order or start time !!!
 
@@ -13,15 +45,26 @@ $sorted_array = array();
 $date_array = array();
 
         foreach ($result as $key) {
-            if ($key['Plan'] == $dplan) {
-                $fix = str_replace(":", "", $key["Start"]);
-        
-                array_push($date_array, $fix);
+            for ($k = 0; $k < count($plan); $k++) {
+                // this is where i stopped for the night //////////////////////////////// .....
 
-                sort($date_array);
+
+                    ///...........................///////////STOPPED HERE, NEED TO MAKE MORE ARRAY 
+                //HOLDERS FOR DATE ARRAY AND FOR NEXT ITERATION PROBLEM AT BOTTOM
+
+                //ALSO HAVE TO NORMALIZE KEYS to 0-5 INSTEAD OF 0, 5 , 10, 11, rand
+                //random numbers of keys from database map count
+                $dplan = $plan[$k];
+
+                if ($key['Plan'] == $dplan) {
+                    $fix = str_replace(":", "", $key["Start"]);
+        
+                    array_push($date_array, $fix);
+
+                    sort($date_array);
         }
     }
-
+}
 for ($i=0; $i<=(count($date_array) - 1); $i++) {
 
 
@@ -78,5 +121,3 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
 }
 
 }
-
-?>

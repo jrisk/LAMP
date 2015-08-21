@@ -2,7 +2,7 @@
 include("pdo.php");
 //Activities row in php, returns list of activities under a specific lesson plan name
 
-$_SESSION["currentplan"] = $_POST["planning"];
+$_SESSION["currentplan"] = $_POST["specplan"];
 
 $dplan = $_SESSION["currentplan"];
 

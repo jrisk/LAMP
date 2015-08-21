@@ -1,10 +1,17 @@
-<form onsubmit="savePlan()" id="makeform" method="post" action="formaction.php">
+<form onsubmit="savePlan()" id="editform" method="post" action="editform.php">
 
 
-<div class="container-fluid" id="makeplanspace">
+<div class="container-fluid">
 <!-- insert fore each for activity and stuff here -->
 <?php
 include("pdo.php");
+
+$_SESSION['currentplan'] = $_POST['specplan'];
+
+$theplan = $_SESSION['currentplan'];
+
+foreach($result as $key) {
+    if ($key['Plan'] == $theplan) {
 
 		echo "<div class='container'>
 	<div class='row'>
@@ -12,7 +19,8 @@ include("pdo.php");
 <h2><div class='glyphicon glyphicon-paperclip'></div>Lesson</h2>
 </div>
 <div class='col-sm-6'>
-<h2><input name='lesson-name' id='lessonname3' type='text' class='form-control' placeholder='Your Lesson Plan Name Here'></h2>
+<h2><input name='lesson-name' id='lessonname' type='text' class='form-control' 
+placeholder='" . $key['Plan'] . "' value='" . $key['Plan'] . "'></h2>
 </div>
 </div>
 </div>
@@ -23,7 +31,8 @@ include("pdo.php");
 <h3><span class='glyphicon glyphicon-education'></span>Class</h3>
 </div>
 <div class='col-sm-6'>
-<h3><input name='user-group' type='text' class='form-control' placeholder='Class/Student Name Here'></h3>
+<h3><input name='user-group' type='text' class='form-control' 
+placeholder='" . $key['Class'] . "' value='" . $key['Class'] . "'></h3>
 </div>
 </div>
 </div>
@@ -35,8 +44,8 @@ include("pdo.php");
 </div>
 <div class='col-sm-6'>
             <h3><div class='form-group'>
-                <div class='input-group date' id='datetimepickerplan3'>
-                    <input type='text' id='dateplan3' name='date-plan' class='form-control'>
+                <div class='input-group date' id='datetimepickerplan2'>
+                    <input type='text' id='dateplan' name='date-plan' class='form-control'>
                     <span class='input-group-addon'>
                         <span class='glyphicon glyphicon-calendar'></span>
                     </span>
@@ -45,7 +54,8 @@ include("pdo.php");
 	</div>
 </div>
 </div>
-<input type='hidden' id='datefix3' name='date-planfix' class='form-control'>
+<input type='hidden' id='datefix' name='date-planfix' class='form-control' 
+placeholder='" . $key['Adate'] . "' value='" . $key['Adate'] . "'>
 
 
 <hr>
@@ -73,12 +83,14 @@ include("pdo.php");
 
 <div class='well well-sm well-blue'><div class='row'>
         <div class='col-sm-4'>
-            <input name='activity' type='text' class='form-control input-lg'>
+            <input name='activity' type='text' class='form-control input-lg' 
+            value='" . $key['Activity'] . "' placeholder='" . $key['Activity'] .  "'>
             </div>
         <div class='col-sm-2'>
             <div class='form-group'>
-                <div class='input-group date' id='starttime3'>
-                    <input type='text' class='form-control input-lg' name='start-time' id='start3'>
+                <div class='input-group date' id='starttime2'>
+                    <input type='text' class='form-control input-lg' name='start-time' id='start'
+                    value='" . $key['Start'] . "' placeholder='" . $key['Start'] . "'>
                     <span class='input-group-addon'>
                         <span class='glyphicon glyphicon-time'></span>
                     </span>
@@ -87,8 +99,9 @@ include("pdo.php");
         </div>
         <div class='col-sm-2'>
             <div class='form-group'>
-                <div class='input-group date' id='endtime3'>
-            <input type='text' class='form-control input-lg' name='end-time' id='end3'>
+                <div class='input-group date' id='endtime2'>
+            <input type='text' class='form-control input-lg' name='end-time' id='end'
+            value='" . $key['End'] . "' placeholder='" . $key['End'] . "'>
             <span class='input-group-addon'>
                 <span class='glyphicon glyphicon-time'></span>
             </span>
@@ -96,27 +109,25 @@ include("pdo.php");
     </div>
 </div>
     <div class='col-sm-4'>
-        <textarea class='form-control' rows='2' id='comment-note3' name='comment-note'></textarea>
+        <textarea class='form-control' rows='2' id='comment-note' name='comment-note'
+        value='" . $key['Comment'] . "' placeholder='" .$key['Comment'] . "'></textarea>
     </div>
-    <input type='hidden' class=' form-control' id='commentnote3' name='commentnote'>
+    <input type='hidden' class=' form-control' id='commentnote' name='commentnote'>
     <div class='form-group'>
-        <input type='hidden' class='form-control' name='duration-time' id='durationtime3'>
+        <input type='hidden' class='form-control' name='duration-time' id='durationtime2'>
     </div>
+    <input type='hidden' class='form-control' name='identify' id='identifier'
+    value='" . $key['ID'] . "'>
 </div>
 </div>";
 
+	}
+
+}
+
 ?>
 </div>
-<script>
-$(function () {
-$('#starttime3').on("dp.change", function (e) {
-$('#endtime3').data("DateTimePicker").minDate(e.date);
-});
 
-});
-</script>
 
-<div class="container" id="makedelegate">
-<button type="button" class="btn btn-primary btn-lg" id="updater2">Save</button>
-</div>
+<button type="button" class="btn btn-primary btn-lg" id="updater">Update</button>
 </form>

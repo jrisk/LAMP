@@ -17,7 +17,7 @@ include("pdo.php");
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
-<script src="./extrajs.js"></script>
+<script src="./testing.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <script src="//www.modernizr.com/downloads/modernizr-
@@ -29,97 +29,6 @@ latest.js" type ="text/javascript"></script>
 <link rel="stylesheet" href="./lessonplanner.css">
 </head>
 
-<body>
-<div class="page-header">
-    <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
-</div>
-
-<div class="well well-sm"><div>
-    <b>
-        <div id="successdiv"></div>
-    </b>
-</div>
-
-<div id="err1"></div>
-
-<div id="dayinsert">Test</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8">
-<div class="dropdown" id="dropdownplans">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownplan" 
-  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Choose Plan
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownplan" id="planlistload">
-  </ul>
-</div>
-</div>
-<div class="col-sm-2">
-  <a href="week.php" id="calendarpage"><button class="btn btn-danger btn-md" type="button" id="calendarview">
-    View Calendar
-  </button></a>
-</div>
-<div class="col-sm-2">
-  <button class="btn btn-primary btn-md" type="button" id="makeplan">
-    Make New Plan
-  </button>
-</div> <!-- end row -->
-
-<div class="container">
-<div class="row">
-  <div class="col-sm-12 text-center" id='sessionplan'>
-</div>
-</div>
-</div>
-
-<div class='not-hidden-xs'>
-  <div class="container" id="maker"> <!-- where plan making php file is inserted -->
-  </div>
-</div>
-
-<div class='not-hidden-xs'>
-  <div class="container" id="editor"> <!-- where editing php file is inserted -->
-  </div>
-</div>
-
-<div class='not-hidden-xs'>
-  <div class="container" id="metaeditor"> <!-- big editing php file is inserted -->
-  </div>
-</div>
-
-
-<div class="not-hidden-xs">
-<div class="container" id="activated">
-  <div class="well">
-      <div class="row">
-        <div class="col-sm-4">
-            <h2><div class='label label-success'>Activity</div></h2>
-        </div>
-        <div class="col-sm-2">
-            <h2><div class='label label-warning'>Duration</div></h2>
-        </div>
-        <div class="col-sm-2">
-            <h2><div class='label label-primary'>Start Time</div></h2>
-        </div>
-        <div class="col-sm-2">
-            <h2><div class='label label-primary'>End Time</div></h2>
-        </div>
-        <div class="col-sm-2">
-        <!-- edit/delete options column -->
-        <h2><div class='label label-default'>Options</div></h2>
-      </div>
-    </div> <!-- well end -->
-    </div> <!-- first row end -->
-  <h3><div class="row well" id="planentry">
-    <!--where activities are entered on dropbox selection -->
-    <!--where the editing view div is entered when edit is pressed on specific activity -->
-  </div></h3> <!-- goes around whole row of posted activities -->
-</div> <!-- end container of activity-row -->
-</div> <!-- hidden mobile response div -->
-
 <div class="container" id='addoptions'> <!-- outer container for row of buttons -->
   <div class="row">
 <button class="btn btn-primary btn-lg" data-toggle="modal" 
@@ -127,23 +36,6 @@ data-target="#form-content" type="button" id="addactivity">Add Activity
   </button>
 </div>
 </div>
-
-<div class="container" id="addmodal"> <!--entry point for modal adding activity -->
-
-  <form id="planform" method="post" action="formaction.php"> <!-- form start -->
-
-<!-- need lesson plan name, date, and class -->
-<!--Lesson Plan Name -->
-<input name="lesson-name" id="addlesson" type="hidden" class="form-control">
-
-<!-- Class -->
-<input name="user-group" id="addclass" type="hidden" class="form-control">
-
-
-<!-- Date and Datefix input area -->
-<input name="dateplan" id="date-plan" type="hidden" class="form-control">
-<input name="date-planfix" id="datefix" type="hidden" class="form-control">
-
 
 <div id="form-content" class="modal fade in" role="dialog">
     <div class="modal-dialog">
@@ -235,14 +127,10 @@ data-target="#form-content" type="button" id="addactivity">Add Activity
         <a href="#" class="btn" data-dismiss="modal">Cancel</a>
         </div>
 
-    </div> <!-- modal footer end -->
+</div> <!-- modal footer end -->
     </div> <!-- modal content end -->
 </div> <!-- modal dialog end -->
 </div> <!-- modal div end -->
-</div> <!-- end of addactivity div -->
-
-</form>
 
 
-</body>
-</html>
+

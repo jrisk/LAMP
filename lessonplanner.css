@@ -10,6 +10,11 @@ div.page-header>*>* {
 
 }
 
+.calendar-table {
+	max-height: 300px;
+	overflow: auto;
+}
+
 #enteractivity {
 	color: #99FF66;
 }

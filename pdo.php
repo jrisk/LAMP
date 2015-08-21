@@ -2,7 +2,13 @@
 
 session_start();
 
+$_SESSION['myusername'] = "test";
+$_SESSION['mypassword'] = "testpass";
+
 include("credentials.php");
+
+// auto-login for site i guess
+$_SESSION['user_ID'] = 1;
 
 $id = $_SESSION['user_ID'];
 
