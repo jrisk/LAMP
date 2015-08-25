@@ -20,8 +20,53 @@ $('#endtime2').datetimepicker({
 
 };
 
-$('.calendar-table').scrollTop(310);
+$('.calendar-table').scrollTop(300);
 $('#plan-namehold').append('<h2>All Plans</h2>');
+
+$('#today-button').on('click tap', function(e) {
+
+	var theDate = moment();
+
+	var today = moment(theDate).format('dddd, MMMM Do');
+
+	$('#today').show();
+
+	$('#day-table').hide();
+
+	$('#plan-namehold').hide();
+
+	$('#today').html("<h2>" + today + "</h2><hr>");
+
+});
+
+$('#week-button').on('click tap', function(e) {
+
+	$('#plan-namehold').show()
+
+	$('#day-table').show();
+
+	$('#today').hide();
+
+});
+
+
+
+/*$.ajax({
+		type: 'POST',
+		url: 'metaview.php',
+		data: {specplan: aplan},
+		success: function(data) {
+
+			$('#planinfo').html(data);
+
+			dayPlan();
+
+		},
+
+		error: function(jqXHR, textStatus, errorThrown) {
+		alert(errorThrown);
+		}
+	});*/
 	
 //Color in the Week Day that equals Today's Date
 
@@ -119,11 +164,5 @@ $('#dropdownplans').delegate('.planlist', 'click', function(event) {
 	});
 
 });
-
-
-
-
-
-
 
 })

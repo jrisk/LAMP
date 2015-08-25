@@ -10,8 +10,14 @@ div.page-header>*>* {
 
 }
 
+.thtest {
+	margin-top: 0px;
+	padding-top: 0px;
+	font-size: 6px;
+}
+
 .calendar-table {
-	max-height: 300px;
+	max-height: 400px;
 	overflow: auto;
 }
 

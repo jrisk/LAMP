@@ -56,10 +56,10 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         <div class='col-sm-2 ender' id='enterend" . $i . "'>" . $key['End'] .
         "</div>
         <div class='col-sm-1'>
-            <button class='btn btn-primary btn-md' type='button' id='editact'>Edit</button>
+            <button class='btn btn-primary btn-md' type='button' id='editact2'>Edit</button>
         </div>
         <div class='col-sm-1'>
-            <button class='btn btn-danger btn-md' type='button' id='delact'>Delete</button>
+            <button class='btn btn-danger btn-md' type='button' id='delact2'>Delete</button>
         </div>
         <div hidden id='enterID'>" . $key['ID'] .
         "</div>

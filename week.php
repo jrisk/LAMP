@@ -30,29 +30,69 @@ if (!(isset($_SESSION['myusername']))) {
     <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
 </div>
 
+<div class="container">
+<div class="row">
+
+<div class="col-xs-2">
+
+<div class="btn-group btn-group-lg" role="group">
+
 <div class="dropdown" id="dropdownplans">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownplan" 
+  <button class="btn btn-lg btn-info dropdown-toggle" type="button" id="dropdownplan" 
   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Filter By
+    Lesson Plans
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownplan" id="planlistload">
   </ul>
 </div>
 
+</div>
+
+</div>
+
+<div class="col-xs-8">
+
+<div class="btn-group btn-group-lg" role="group">
+
+<button class="btn btn-info" id="today-button">Today</button>
+
+<button class="btn btn-info" id="week-button">Week</button>
+
+<button class="btn btn-info" id="month-button">Month</button>
+
+</div>
+
+</div>
+
+<div class="col-xs-2">
+
+<a href="viewplan.php"><button class="btn btn-lg btn-warning" id="backtoedit">Back to Plan Edit</button></a>
+
+</div>
+
+</div> <!-- end top buttons row -->
+
+</div> <!-- end top container row -->
+
 <div class="text-center" id="plan-namehold">
+</div>
+
+<div class="text-center" id="namehold">
+    </div>
+
+<div class="text-center" id="today">
 </div>
 
 <!-- Table, 7 day week -->
 
-<div class="calendar-table">
+<div class="container" id="day-table">
 
-<div class="table-responsive">
 <table class="table table-bordered">
     <tr class="active">
-        <td class="col-xs-1" id="Time-head">
-
-        </td>
+        <th id="Time-head">
+        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+        </th>
         <td class="col-xs-2" id="Monday-head">
             Monday
         </td>
@@ -68,26 +108,19 @@ if (!(isset($_SESSION['myusername']))) {
         <td class="col-xs-2"id="Friday-head">
             Friday
         </td>
-        <td class="col-xs-2" id="Saturday-head">
+        <td class="col-xs-1" id="Saturday-head">
             Saturday
         </td>
-        <td class="col-xs-2"id="Sunday-head">
+        <td class="col-xs-1"id="Sunday-head">
             Sunday
         </td>
     </tr>
+</table>
+</div>
 
-<tr class='danger' id='12-am'>
-    <th>
-    12 AM
-    </th>
-        <td id="Mon-00-am"></td>
-        <td id="Tues-00-am"></td>
-        <td id="Weds-00-am"></td>
-        <td id="Thurs-00-am"></td>
-        <td id="Fri-00-am"></td>
-        <td id="Sat-00-am"></td>
-        <td id="Sun-00-am"></td>
-    </tr>
+<div class="container" id="time-table">
+<div class="calendar-table">
+<table class="table table-bordered">
 
 <tr class='danger'>
     <th>
@@ -372,7 +405,7 @@ if (!(isset($_SESSION['myusername']))) {
     </tr>
 
 <tr class='danger'>
-    <th>
+    <th class="thtest">
     11 PM
     </th>
         <td id="Mon-23"></td>
@@ -384,14 +417,154 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-23"></td>
     </tr>
 
-</div>
+<tr class='danger'>
+    <th>
+    12 AM
+    </th>
+        <td class="col-xs-2" id="Mon-00-am"></td>
+        <td class="col-xs-2" id="Tues-00-am"></td>
+        <td class="col-xs-2" id="Weds-00-am"></td>
+        <td class="col-xs-2" id="Thurs-00-am"></td>
+        <td class="col-xs-2" id="Fri-00-am"></td>
+        <td class="col-xs-1" id="Sat-00-am"></td>
+        <td class="col-xs-1" id="Sun-00-am"></td>
+    </tr>
 
 
 </table>
-
+</div>
 </div>
 
-</div> <!-- end calendar table class div -->
+<div class="container-fluid" id="day-times">
+    <table class="table">
+
+    <tr class="info">
+        <th rowspan="3">1AM</th>
+        <td id="today-1am">more info here</td>
+        <tr><td>ahhhh</td></tr>
+        <tr><td>AHHHHH</td></tr>
+    </tr>
+
+    <tr class="info">
+        <th>2AM</th>
+        <td id="today-2am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>3AM</th>
+        <td id="today-3am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>4AM</th>
+        <td id="today-4am">eyoo</td>
+    </tr>
+
+    <tr class="info">
+        <th>5AM</th>
+        <td id="today-5am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>6AM</th>
+        <td id="today-6am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>7AM</th>
+        <td id="today-7am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>8AM</th>
+        <td id="today-8am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>9AM</th>
+        <td id="today-9am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>10AM</th>
+        <td id="today-10am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>11AM</th>
+        <td id="today-11am"></td>
+    </tr>
+
+    <tr class="info">
+        <th>12PM</th>
+        <td id="today-12pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>1PM</th>
+        <td id="today-1pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>2PM</th>
+        <td id="today-2pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>3PM</th>
+        <td id="today-3pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>4PM</th>
+        <td id="today-4pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>5PM</th>
+        <td id="today-5pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>6PM</th>
+        <td id="today-6pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>7PM</th>
+        <td id="today-7pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>8PM</th>
+        <td id="today-8pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>9PM</th>
+        <td id="today-9pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>10PM</th>
+        <td id="today-10pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>11PM</th>
+        <td id="today-11pm"></td>
+    </tr>
+
+    <tr class="info">
+        <th>12AM</th>
+        <td id="today-12am"></td>
+    </tr>
+
+    </table>
+
+
+
+<!-- end calendar table class div -->
 
 <div id='planinfo'></div>
 
