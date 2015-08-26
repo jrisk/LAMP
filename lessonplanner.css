@@ -10,15 +10,27 @@ div.page-header>*>* {
 
 }
 
+#overlay-div {
+	background: green;
+}
+
 .thtest {
 	margin-top: 0px;
 	padding-top: 0px;
 	font-size: 6px;
 }
 
+.overlayer {
+	background: green;
+}
+
 .calendar-table {
 	max-height: 400px;
 	overflow: auto;
+} /*- throws off the overlaying div for now */
+
+.inner-help-div {
+	position: relative;
 }
 
 #enteractivity {

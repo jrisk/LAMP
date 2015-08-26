@@ -8,7 +8,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./extrajs.js"></script>
-<script src="./calendar.js"></script>
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -20,14 +19,14 @@
 <?php
 session_start();
 
-if (!(isset($_SESSION['myusername']))) {
+if (!(isset($_SESSION["myusername"]))) {
   header("location:main.php");
 }
 
 ?>
 
 <div class="page-header">
-    <div class="text-center"><b><?=$_SESSION['myusername']?>'s Planner</b></div>
+    <div class="text-center"><b><?=$_SESSION["myusername"]?>"s Planner</b></div>
 </div>
 
 <div class="container">
@@ -120,9 +119,10 @@ if (!(isset($_SESSION['myusername']))) {
 
 <div class="container" id="time-table">
 <div class="calendar-table">
-<table class="table table-bordered">
+<div class="inner-help-div">
+<table class="table table-bordered" id="week-table">
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     1 AM
     </th>
@@ -134,7 +134,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sat-01"></td>
         <td id="Sun-01"></td>
     </tr>
-<tr class='danger'>
+<tr class="danger">
     <th>
     2 AM
     </th>
@@ -147,7 +147,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-02"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     3 AM
     </th>
@@ -159,7 +159,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sat-03"></td>
         <td id="Sun-03"></td>
     </tr>
-<tr class='danger'>
+<tr class="danger">
     <th>
     4 AM
     </th>
@@ -172,7 +172,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-04"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     5 AM
     </th>
@@ -184,7 +184,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sat-05"></td>
         <td id="Sun-05"></td>
     </tr>
-<tr class='danger'>
+<tr class="danger">
     <th>
     6 AM
     </th>
@@ -197,7 +197,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-06"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     7 AM
     </th>
@@ -209,7 +209,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sat-07"></td>
         <td id="Sun-07"></td>
     </tr>
-<tr class='danger'>
+<tr class="danger">
     <th>
     8 AM
     </th>
@@ -222,7 +222,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-08"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     9 AM
     </th>
@@ -235,7 +235,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-09"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     10 AM
     </th>
@@ -248,7 +248,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-10"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     11 AM
     </th>
@@ -261,7 +261,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-11"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     12 PM
     </th>
@@ -274,7 +274,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-12"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     1 PM
     </th>
@@ -287,7 +287,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-13"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     2 PM
     </th>
@@ -300,7 +300,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-14"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     3 PM
     </th>
@@ -313,7 +313,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-15"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     4 PM
     </th>
@@ -326,7 +326,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-16"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     5 PM
     </th>
@@ -339,7 +339,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-17"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     6 PM
     </th>
@@ -352,7 +352,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-18"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     7 PM
     </th>
@@ -365,7 +365,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-19"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     8 PM
     </th>
@@ -378,7 +378,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-20"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     9 PM
     </th>
@@ -391,7 +391,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-21"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     10 PM
     </th>
@@ -404,7 +404,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-22"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th class="thtest">
     11 PM
     </th>
@@ -417,7 +417,7 @@ if (!(isset($_SESSION['myusername']))) {
         <td id="Sun-23"></td>
     </tr>
 
-<tr class='danger'>
+<tr class="danger">
     <th>
     12 AM
     </th>
@@ -434,14 +434,14 @@ if (!(isset($_SESSION['myusername']))) {
 </table>
 </div>
 </div>
+</div>
 
 <div class="container-fluid" id="day-times">
     <table class="table">
 
     <tr class="info">
-        <th rowspan="3">1AM</th>
+        <th rowspan="2">1AM</th>
         <td id="today-1am">more info here</td>
-        <tr><td>ahhhh</td></tr>
         <tr><td>AHHHHH</td></tr>
     </tr>
 
@@ -451,7 +451,7 @@ if (!(isset($_SESSION['myusername']))) {
     </tr>
 
     <tr class="info">
-        <th>3AM</th>
+        <th id="today-3am-row">3AM</th>
         <td id="today-3am"></td>
     </tr>
 
@@ -566,7 +566,8 @@ if (!(isset($_SESSION['myusername']))) {
 
 <!-- end calendar table class div -->
 
-<div id='planinfo'></div>
+<div id="planinfo"></div>
 
+<script src="./calendar.js"></script>
 </body>
 </html>
