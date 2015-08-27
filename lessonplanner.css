@@ -29,6 +29,10 @@ div.page-header>*>* {
 	overflow: auto;
 } /*- throws off the overlaying div for now */
 
+.overlay.fixed {
+	position: fixed;
+}
+
 .inner-help-div {
 	position: relative;
 }

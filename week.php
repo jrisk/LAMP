@@ -8,11 +8,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./extrajs.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="./lessonplanner.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.css">
+<link rel="stylesheet" media="print" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.print.css">
+
 </head>
 <body>
 
@@ -90,7 +94,7 @@ if (!(isset($_SESSION["myusername"]))) {
 <table class="table table-bordered">
     <tr class="active">
         <th id="Time-head">
-        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-time" aria-hidden="true">&nbsp</span>
         </th>
         <td class="col-xs-2" id="Monday-head">
             Monday
@@ -421,13 +425,13 @@ if (!(isset($_SESSION["myusername"]))) {
     <th>
     12 AM
     </th>
-        <td class="col-xs-2" id="Mon-00-am"></td>
-        <td class="col-xs-2" id="Tues-00-am"></td>
-        <td class="col-xs-2" id="Weds-00-am"></td>
-        <td class="col-xs-2" id="Thurs-00-am"></td>
-        <td class="col-xs-2" id="Fri-00-am"></td>
-        <td class="col-xs-1" id="Sat-00-am"></td>
-        <td class="col-xs-1" id="Sun-00-am"></td>
+        <td class="col-xs-2" id="Mon-00"></td>
+        <td class="col-xs-2" id="Tues-00"></td>
+        <td class="col-xs-2" id="Weds-00"></td>
+        <td class="col-xs-2" id="Thurs-00"></td>
+        <td class="col-xs-2" id="Fri-00"></td>
+        <td class="col-xs-1" id="Sat-00"></td>
+        <td class="col-xs-1" id="Sun-00"></td>
     </tr>
 
 
@@ -439,134 +443,142 @@ if (!(isset($_SESSION["myusername"]))) {
 <div class="container-fluid" id="day-times">
     <table class="table">
 
+        <tbody>
+
     <tr class="info">
-        <th rowspan="2">1AM</th>
-        <td id="today-1am">more info here</td>
-        <tr><td>AHHHHH</td></tr>
+        <th style="width: 5%">1AM</th>
+        <td id="today-01">more info here</td>
     </tr>
 
     <tr class="info">
         <th>2AM</th>
-        <td id="today-2am"></td>
+        <td id="today-02"></td>
     </tr>
 
     <tr class="info">
-        <th id="today-3am-row">3AM</th>
-        <td id="today-3am"></td>
+        <th>3AM</th>
+        <td id="today-03"></td>
     </tr>
 
     <tr class="info">
         <th>4AM</th>
-        <td id="today-4am">eyoo</td>
+        <td id="today-04">eyoo</td>
     </tr>
 
     <tr class="info">
         <th>5AM</th>
-        <td id="today-5am"></td>
+        <td id="today-05"></td>
     </tr>
 
     <tr class="info">
         <th>6AM</th>
-        <td id="today-6am"></td>
+        <td id="today-06"></td>
     </tr>
 
     <tr class="info">
         <th>7AM</th>
-        <td id="today-7am"></td>
+        <td id="today-07"></td>
     </tr>
 
     <tr class="info">
         <th>8AM</th>
-        <td id="today-8am"></td>
+        <td id="today-08"></td>
     </tr>
 
     <tr class="info">
         <th>9AM</th>
-        <td id="today-9am"></td>
+        <td id="today-09"></td>
     </tr>
 
     <tr class="info">
         <th>10AM</th>
-        <td id="today-10am"></td>
+        <td id="today-10"></td>
     </tr>
 
     <tr class="info">
         <th>11AM</th>
-        <td id="today-11am"></td>
+        <td id="today-11"></td>
     </tr>
 
     <tr class="info">
         <th>12PM</th>
-        <td id="today-12pm"></td>
+        <td id="today-12"></td>
     </tr>
 
     <tr class="info">
         <th>1PM</th>
-        <td id="today-1pm"></td>
+        <td id="today-13"></td>
     </tr>
 
     <tr class="info">
         <th>2PM</th>
-        <td id="today-2pm"></td>
+        <td id="today-14"></td>
     </tr>
 
     <tr class="info">
         <th>3PM</th>
-        <td id="today-3pm"></td>
+        <td id="today-15"></td>
     </tr>
 
     <tr class="info">
         <th>4PM</th>
-        <td id="today-4pm"></td>
+        <td id="today-16"></td>
     </tr>
 
     <tr class="info">
         <th>5PM</th>
-        <td id="today-5pm"></td>
+        <td id="today-17"></td>
     </tr>
 
     <tr class="info">
         <th>6PM</th>
-        <td id="today-6pm"></td>
+        <td id="today-18"></td>
     </tr>
 
     <tr class="info">
         <th>7PM</th>
-        <td id="today-7pm"></td>
+        <td id="today-19"></td>
     </tr>
 
     <tr class="info">
         <th>8PM</th>
-        <td id="today-8pm"></td>
+        <td id="today-20"></td>
     </tr>
 
     <tr class="info">
         <th>9PM</th>
-        <td id="today-9pm"></td>
+        <td id="today-21"></td>
     </tr>
 
     <tr class="info">
         <th>10PM</th>
-        <td id="today-10pm"></td>
+        <td id="today-22"></td>
     </tr>
 
     <tr class="info">
         <th>11PM</th>
-        <td id="today-11pm"></td>
+        <td id="today-23"></td>
     </tr>
 
     <tr class="info">
         <th>12AM</th>
-        <td id="today-12am"></td>
+        <td id="today-24"></td>
     </tr>
 
+</tbody>
+
     </table>
+</div>
 
 
 
 <!-- end calendar table class div -->
 
 <div id="planinfo"></div>
+
+<div id="planinfosimple"></div>
+
+<div id="mycal"></div>
 
 <script src="./calendar.js"></script>
 </body>

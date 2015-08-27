@@ -1,5 +1,20 @@
 $(function () {
 
+$('#mycal').fullCalendar({
+	header: {
+    left:   'title',
+    center: '',
+    right:  'today prev,next'
+	},
+
+	buttonIcons: {
+    prev: 'left-single-arrow',
+    next: 'right-single-arrow',
+    prevYear: 'left-double-arrow',
+    nextYear: 'right-double-arrow'
+	}
+});
+
 function datetimefunc() {
 $('#datetimepickerplan2').datetimepicker({
 	format: 'dddd, MMMM Do',
@@ -19,10 +34,15 @@ $('#endtime2').datetimepicker({
 });
 
 };
-
-$('.calendar-table').scrollTop(300); //set initial position of scrolling table to 6am-ish
+$('.calendar-table').scrollTop(310); //set initial position of scrolling table to 6am-ish
 
 $('#plan-namehold').append('<h2>All Plans</h2>');
+
+$('#today').hide();
+
+$('#day-times').hide();
+
+$('#mycal').hide();
 
 $('#today-button').on('click tap', function(e) {
 
@@ -40,7 +60,11 @@ $('#today-button').on('click tap', function(e) {
 
 	$('#day-times').show();
 
+	$('#mycal').hide(); // month calendar
+
 	$('#today').html("<h2>" + today + "</h2><hr>");
+
+	specificAct(); // should only push into today if activites are in fact TODAY
 
 });
 
@@ -56,9 +80,85 @@ $('#week-button').on('click tap', function(e) {
 
 	$('#day-times').hide();
 
+	$('#mycal').hide();
+
+	$('.calendar-table').scrollTop(310);
+
 	dayPlan();
 
 });
+
+$('#month-button').on('click tap', function(e) {
+
+	$('#day-table').hide();
+
+	$('#time-table').hide();
+
+	$('#day-times').hide();
+
+	$('#mycal').show();
+
+	$('#planinfosimple').hide();
+
+});
+
+//Color in the Weekday corresponding to Today
+
+var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+for (i = 0; i <= weekDays.length - 1; i++) {
+						if (weekDays[i] == moment().format('dddd')) {
+							$('#' + weekDays[i] + '-head').css("color", "blue");
+							}
+						};
+
+//original single dayplan function is the filter for only 1 plan to be viewed ****
+
+function specificAct() {
+
+	/****** if activity is today add an if for TODAY activities only ****/
+
+	var weekDaysShort = { 'Monday': 'Mon', 'Tuesday': 'Tues', 'Wednesday': 'Weds'
+	, 'Thursday': 'Thurs', 'Friday': 'Fri', 'Saturday': 'Sat', 'Sunday': 'Sun'};
+	
+	var rawDate = $('#enterday').html();
+
+	var Dtime = moment(rawDate, 'YYYY-MM-DD');
+
+	var Day = moment(Dtime).format('dddd');
+
+	for (i = 0; i < weekDays.length; i++) {
+
+	if (Day == weekDays[i]) {
+
+		for (j = 0; j < $('.starter').length; j++) {
+
+		console.log($('.starter').length);
+
+		var firstStart = $('#enterstart' + j).html();
+
+		console.log(firstStart);
+
+		var firstStartShort = firstStart.slice(0,2); // work for specific hours, not minutes
+
+		var specAct = $('#enterstart' + j).siblings('#enteractivity').text();
+
+		var specEnd = $('#enterstart' + j).siblings('#enterend' + j).html(); //test
+			
+		var currentActID = $('#today-' + firstStartShort);
+
+		var currentActLEFT = $('#' + Day + '-' + 'head');
+
+		currentActID.append(specAct).css("color", "green");
+
+		}
+	}
+
+	$('#plan-namehold').html('<h2>' + $('#enterplan').html() + '</h2>');
+
+	}
+
+};
 
 /*$.ajax({
 		type: 'POST',
@@ -77,15 +177,6 @@ $('#week-button').on('click tap', function(e) {
 		}
 	});*/
 	
-//Color in the Week Day that equals Today's Date
-
-var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-for (i = 0; i <= weekDays.length - 1; i++) {
-						if (weekDays[i] == moment().format('dddd')) {
-							$('#' + weekDays[i] + '-head').css("color", "blue");
-							}
-						};
 
 function weekPlan() {
 
@@ -114,14 +205,24 @@ function weekPlan() {
 
 };
 
+// load all of the plans on pageload and call DayPlan to get the overlay divs
+$.get('metaplan.php', function(data) {
+
+	$('#planinfo').html(data);
+	$('#planinfo').hide();
+	dayPlan();
+});
+
 // for specific entry point in week calendar
 
 function dayPlan() {
 
 	var weekDaysShort = { 'Monday': 'Mon', 'Tuesday': 'Tues', 'Wednesday': 'Weds'
 	, 'Thursday': 'Thurs', 'Friday': 'Fri', 'Saturday': 'Sat', 'Sunday': 'Sun'};
+
+	for (p = 0; ($('.enterplan' + p).length); p++) { // multiple plans iterator
 	
-	var rawDate = $('#enterday').html();
+	var rawDate = $('.classday' + p).html();
 
 	var Dtime = moment(rawDate, 'YYYY-MM-DD');
 
@@ -129,35 +230,53 @@ function dayPlan() {
 
 	for (i = 0; i < weekDays.length; i++) {
 
+	var k = 0;	 //for multiple lesson plans on same day else if below
+
 	if (Day == weekDays[i]) {
 
-		$('.calendar-table').append('<div class="overlay" id="overlay-div' + i + '"></div>')
+		if ($('#overlay-div' + p + i).length && $('.enterplan' + p).length) {
+			console.log($('.enterplan' + p).length);
+		}
 
-		for (j = 0; j < $('.starter').length; j++) {
+		else if ($('#overlay-div' + p + i).length && !($('.enterplan' + p).length)) { // 2 plans 1 day
 
-		var firstStart = $('#enterstart' + j).html();
+		$('.inner-help-div').append('<div class="overlay" id="overlay-div' + p + i + k + '"></div>');
+		k++;
+
+		}
+
+		else {
+
+		$('.inner-help-div').append('<div class="overlay" id="overlay-div' + p + i + '"></div>')
+
+		}
+
+		for (j = 0; j <= $('.enterplan' + p).length - 1 && ($('.enterplan' + p).length); j++) { // have to iterate the first specific activity, attached as 0, in the array from php file
+
+		var firstStart = $('#enterstart' + p + '-' + j + '').html();
 
 		var firstStartShort = firstStart.slice(0,2);
 
-		var specAct = $('#enterstart' + j).siblings('#enteractivity').text();
+		var specAct = $('#enterstart' + p + '-' + j).siblings('#enteractivity' + p + '-' + j).text();
 
-		var specEnd = $('#enterstart' + j).siblings('#enterend' + j).html(); //test
+		var specEnd = $('#enterstart' + p + '-' + j).siblings('#enterend' + p + '-' + j).html(); //test
 			
 		var currentActID = $('#' + weekDaysShort[Day] + '-' + firstStartShort);
 
-		currentActID.append(specAct).css("color", "green");
+		var currentActHEAD = $('#' + Day + '-' + 'head');
+
+		//currentActID.append(specAct).css("color", "green"); throws off the overlay div
 
 			if (j == 0) {
 			var curPosTop = currentActID.position().top;
 			var curPosLeft = currentActID.position().left;
 			var curPosWidth = currentActID.width();
+			var curPosRight = currentActID.right;
 			}
 
 		}
 
 	var specEndTime = specEnd.slice(0,2); //only gets the first 2 digits, or the hour, not minutes
-
-	alert(specEnd);
 
 	var specEndTimeID = $('#' + weekDaysShort[Day] + '-' + specEndTime);
 
@@ -168,20 +287,22 @@ function dayPlan() {
 	}
 
 
-	$('#overlay-div' + i).css({
+	$('#overlay-div' + p + i).css({
 		position: 'absolute',
 		top: curPosTop,
 		left: curPosLeft,
+		right: curPosRight,
 		width: curPosWidth,
 		height: totalHeight,
 		background: "#66CCFF", 
 
 		//z-index: 1000
 	}); 
+	$('#overlay-div' + p + i).html('<b>' + $('.enterplan' + p).html() + '</b>');
 
 	}
 
-	$('#plan-namehold').html('<h2>' + $('#enterplan').html() + '</h2>');
+	} // multiple plans iterator
 
 };
 
@@ -191,17 +312,21 @@ var divArr = [];
 
 $('.calendar-table').on('scroll', function(e) {
 
+	for (p = 0, v = 0; p <= $('.enterplan' + v); p++, v++) {
 
-	for (i = 0; i <= $('.overlay').length; i++) {
+	for (i = 0; i <= weekDays.length - 1; i++) {
 
-	if ($('#overlay-div' + i).length) {
+	if ($('#overlay-div' + p + i).length) {
 
-		var tempDiv = $('#overlay-div' + i);
+		console.log("the over lay div" + i + "exists and has a length");
+		console.log("the divs top position is: " + $('#overlay-div' + i).position().top);
+		
+		var tempDiver = $('#overlay-div' +  p + i).offset().top;
+		var anObject = $('#overlay-div' + p + i);
 
-		var tempPos = TempDiv.offset().top;
-
-		overArr[i] = tempPos;
-		divArr[i] = tempDiv;
+		}
+	else {
+		console.log("that overlay div" + p + i + " doesnt exist");
 		}
 	}
 
@@ -212,23 +337,18 @@ $('.calendar-table').on('scroll', function(e) {
 	var scrollLeft = 0 - $(this).scrollLeft();
 
 	console.log(scrollTop);
-	console.log(tempPos);
 
-		console.log(tempDiv);
-
-	/*if (scrollTop <= LastScrollTop) {
-		for (j = 0; j <= divArr.length; j++) {
-			divArr[j].addClass('fixed');
-			divArr[j].offset({'top' : overArr[j] - scrollTop});
-
-		}
+	if (scrollTop <= LastScrollTop) {
+			anObject.addClass('fixed');
+			anObject.offset({'top' : tempDiver - scrollTop});
+		
 	}
 
 	else {
-		for (i = 0; i <= divArr.length; i++)  {
-		divArr[i].removeClass('fixed');
+		anObject.removeClass('fixed');
 		}
-	}*/
+	
+}
 
 });
 
@@ -243,9 +363,11 @@ $('#dropdownplans').delegate('.planlist', 'click', function(event) {
 		data: {specplan: aplan},
 		success: function(data) {
 
-			$('#planinfo').html(data);
+			$('#planinfosimple').html(data);
 
-			dayPlan();
+			specificAct();
+
+			$('#planinfosimple').hide();
 
 		},
 

@@ -117,6 +117,6 @@ $('#endtime3').data("DateTimePicker").minDate(e.date);
 </script>
 
 <div class="container" id="makedelegate">
-<button type="button" class="btn btn-primary btn-lg" id="updater2">Save</button>
+<button type="button" class="btn btn-primary btn-lg" id="updater2">Add to Plan</button>
 </div>
 </form>
