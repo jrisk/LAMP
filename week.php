@@ -28,55 +28,50 @@ if (!(isset($_SESSION["myusername"]))) {
 }
 
 ?>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
 
-<div class="page-header">
-    <div class="text-center"><b><?=$_SESSION["myusername"]?>"s Planner</b></div>
-</div>
+        <div class="col-xs-2">
 
-<div class="container">
-<div class="row">
+        <div class="dropdown" id="dropdownplans">
+            <button class="btn btn-lg btn-info dropdown-toggle" type="button" id="dropdownplan" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Lesson Plans
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownplan" id="planlistload">
+            </ul>
+        </div>
+    </div>
 
-<div class="col-xs-2">
+        <div class="col-xs-8">
 
-<div class="btn-group btn-group-lg" role="group">
+        <div class="btn-group btn-group-lg" role="group">
 
-<div class="dropdown" id="dropdownplans">
-  <button class="btn btn-lg btn-info dropdown-toggle" type="button" id="dropdownplan" 
-  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Lesson Plans
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownplan" id="planlistload">
-  </ul>
-</div>
+            <button class="btn btn-info" id="today-button">Today</button>
 
-</div>
+            <button class="btn btn-info" id="week-button">Week</button>
 
-</div>
+            <button class="btn btn-info" id="month-button">Month</button>
 
-<div class="col-xs-8">
+        </div>
 
-<div class="btn-group btn-group-lg" role="group">
+        </div>
 
-<button class="btn btn-info" id="today-button">Today</button>
+            <div class="col-xs-2">
 
-<button class="btn btn-info" id="week-button">Week</button>
+            <a href="viewplan.php"><button class="btn btn-lg btn-warning" id="backtoedit">Back to Plan Edit</button></a>
 
-<button class="btn btn-info" id="month-button">Month</button>
+        </div>
 
-</div>
+    </div>
+</div><!-- column row for buttons -->
+</div><!-- /.container-fluid -->
+</nav>
 
-</div>
-
-<div class="col-xs-2">
-
-<a href="viewplan.php"><button class="btn btn-lg btn-warning" id="backtoedit">Back to Plan Edit</button></a>
-
-</div>
-
-</div> <!-- end top buttons row -->
-
-</div> <!-- end top container row -->
+<hr>
+<br>
 
 <div class="text-center" id="plan-namehold">
 </div>

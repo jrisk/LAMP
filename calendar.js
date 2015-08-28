@@ -50,6 +50,8 @@ $('#today-button').on('click tap', function(e) {
 
 	var today = moment(theDate).format('dddd, MMMM Do');
 
+	$('#today').html("<h2>" + today + "</h2><hr>");
+
 	$('#today').show();
 
 	$('#day-table').hide();
@@ -61,10 +63,6 @@ $('#today-button').on('click tap', function(e) {
 	$('#day-times').show();
 
 	$('#mycal').hide(); // month calendar
-
-	$('#today').html("<h2>" + today + "</h2><hr>");
-
-	specificAct(); // should only push into today if activites are in fact TODAY
 
 });
 
@@ -83,8 +81,6 @@ $('#week-button').on('click tap', function(e) {
 	$('#mycal').hide();
 
 	$('.calendar-table').scrollTop(310);
-
-	dayPlan();
 
 });
 
@@ -108,7 +104,7 @@ var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturda
 
 for (i = 0; i <= weekDays.length - 1; i++) {
 						if (weekDays[i] == moment().format('dddd')) {
-							$('#' + weekDays[i] + '-head').css("color", "blue");
+							$('#' + weekDays[i] + '-head').css({color: "white", background: "blue"});
 							}
 						};
 
@@ -149,7 +145,11 @@ function specificAct() {
 
 		var currentActLEFT = $('#' + Day + '-' + 'head');
 
-		currentActID.append(specAct).css("color", "green");
+		var theDate2 = moment();
+
+			if (Day == moment(theDate2).format('dddd')) {
+				currentActID.html('<div class="well">' + specAct + '</div>').css("color", "green");
+			}
 
 		}
 	}
@@ -238,22 +238,22 @@ function dayPlan() {
 			console.log($('.enterplan' + p).length);
 		}
 
-		else if ($('#overlay-div' + p + i).length && !($('.enterplan' + p).length)) { // 2 plans 1 day
+		else if ($('#overlay-div' + p + i).length && !($('.enterplan' + p).length)) { // 2 plans 1 day, this could be trouble
 
-		$('.inner-help-div').append('<div class="overlay" id="overlay-div' + p + i + k + '"></div>');
+		$('.inner-help-div').append('<button class="btn btn-info"><div class="overlay" id="overlay-div' + p + i + k + '"></div></button>');
 		k++;
 
 		}
 
 		else {
 
-		$('.inner-help-div').append('<div class="overlay" id="overlay-div' + p + i + '"></div>')
+		$('.inner-help-div').append('<button class="btn btn-info overlay" id="overlay-div' + p + i + '"></div></button>')
 
 		}
 
 		for (j = 0; j <= $('.enterplan' + p).length - 1 && ($('.enterplan' + p).length); j++) { // have to iterate the first specific activity, attached as 0, in the array from php file
 
-		var firstStart = $('#enterstart' + p + '-' + j + '').html();
+		var firstStart = $('#enterstart' + p + '-' + j).html();
 
 		var firstStartShort = firstStart.slice(0,2);
 
@@ -263,6 +263,14 @@ function dayPlan() {
 			
 		var currentActID = $('#' + weekDaysShort[Day] + '-' + firstStartShort);
 
+		var todayActID = $('#today-' + firstStartShort);
+
+		var theDate2 = moment();
+
+			if (Day == moment(theDate2).format('dddd')) { // Add events for current day on the Today view
+				todayActID.html('<div class="well">' + specAct + '</div>').css("color", "green");
+				}
+
 		var currentActHEAD = $('#' + Day + '-' + 'head');
 
 		//currentActID.append(specAct).css("color", "green"); throws off the overlay div
@@ -270,7 +278,7 @@ function dayPlan() {
 			if (j == 0) {
 			var curPosTop = currentActID.position().top;
 			var curPosLeft = currentActID.position().left;
-			var curPosWidth = currentActID.width();
+			var curPosWidth = 17 + currentActID.width();
 			var curPosRight = currentActID.right;
 			}
 
@@ -294,11 +302,15 @@ function dayPlan() {
 		right: curPosRight,
 		width: curPosWidth,
 		height: totalHeight,
-		background: "#66CCFF", 
+		background: "#66CCFF",
+		overflow: "hidden"
 
 		//z-index: 1000
 	}); 
-	$('#overlay-div' + p + i).html('<b>' + $('.enterplan' + p).html() + '</b>');
+	$('#overlay-div' + p + i).html("<h3 style='text-align: center'><div class='label label-primary'>" +
+	"<div class='glyphicon glyphicon-paperclip'></div>" + $('.enterplan' + p).html() + '</div></h3><br>' +
+	"<h4 style='text-align: center'><div class='label label-warning'><div class='glyphicon glyphicon-education'>" +
+	"</div>" + $('.classclass' + p).html() + '</div></h4>');
 
 	}
 
@@ -376,6 +388,26 @@ $('#dropdownplans').delegate('.planlist', 'click', function(event) {
 		}
 	});
 
+});
+
+// add a time bar with current time
+
+var nowTime = moment();
+var minutesTime = moment(nowTime).format('HH:mm');
+var hours = minutesTime.slice(0,2);
+var minutes = minutesTime.slice(3,5);
+var minutesParse = parseInt(minutes);
+$('.inner-help-div').append('<div id="current-line"></div>');
+hoursID = $('#Mon-' + hours);
+var hoursPosTop = hoursID.position().top;
+var hoursPosLeft = hoursID.position().left;
+var hoursPosWidth = $('.inner-help-div').width();
+var hoursPosTopPix = hoursPosTop + minutesParse;
+$('#current-line').css({
+	top: hoursPosTopPix,
+	left: hoursPosLeft,
+	width: hoursPosWidth,
+	position: 'absolute',
 });
 
 function moveBigBlock() {

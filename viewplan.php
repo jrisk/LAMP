@@ -42,13 +42,13 @@ latest.js" type ="text/javascript"></script>
 
 <div id="err1"></div>
 
-<div id="dayinsert">Test</div>
+<div id="dayinsert"></div>
 
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
 <div class="dropdown" id="dropdownplans">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownplan" 
+  <button class="btn btn-lg btn-info dropdown-toggle" type="button" id="dropdownplan" 
   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Choose Plan
     <span class="caret"></span>
@@ -58,12 +58,12 @@ latest.js" type ="text/javascript"></script>
 </div>
 </div>
 <div class="col-sm-2">
-  <a href="week.php" id="calendarpage"><button class="btn btn-danger btn-md" type="button" id="calendarview">
+  <a href="week.php" id="calendarpage"><button class="btn btn-info btn-lg" type="button" id="calendarview">
     View Calendar
   </button></a>
 </div>
 <div class="col-sm-2">
-  <button class="btn btn-primary btn-md" type="button" id="makeplan">
+  <button class="btn btn-warning btn-lg" type="button" id="makeplan">
     Make New Plan
   </button>
 </div> <!-- end row -->

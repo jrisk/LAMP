@@ -6,46 +6,48 @@
 <?php
 include("pdo.php");
 
-		echo "<div class='container'>
+		echo 
+"<div class='container'>
 	<div class='row'>
-		<div class='col-sm-2'>
-<h2><div class='glyphicon glyphicon-paperclip'></div>Lesson</h2>
+		<div class='col-sm-3'>
+<h1><div class='label label-primary'><div class='glyphicon glyphicon-paperclip'></div> Lesson</div></h1>
 </div>
-<div class='col-sm-6'>
-<h2><input name='lesson-name' id='lessonname3' type='text' class='form-control' placeholder='Your Lesson Plan Name Here'></h2>
+<div class='col-sm-5'>
+<h1><input name='lesson-name' id='lessonname3' type='text' class='form-control' placeholder='Plan Name'></h1>
 </div>
+
 </div>
 </div>
 
 <div class='container'>
 	<div class='row'>
-		<div class='col-sm-2'>
-<h3><span class='glyphicon glyphicon-education'></span>Class</h3>
+		<div class='col-sm-3'>
+<h1><div class='label label-primary'><span class='glyphicon glyphicon-education'></span> Class</div></h2>
 </div>
-<div class='col-sm-6'>
-<h3><input name='user-group' type='text' class='form-control' placeholder='Class/Student Name Here'></h3>
+<div class='col-sm-4'>
+<h1><input name='user-group' type='text' class='form-control' placeholder='Class/Student Name'></h1>
 </div>
 </div>
 </div>
 
-<div class='container-fluid'>
-	<div class='row'>
-		<div class='col-sm-2'>
-<h3><span class='glyphicon glyphicon-calendar'></span>Date</h3>
+<div class='container'>
+    <div class='row'>
+<div class='col-sm-3'>
+<h1><div class='label label-primary'><span class='glyphicon glyphicon-calendar'></span> Date</div></h1>
 </div>
-<div class='col-sm-6'>
-            <h3><div class='form-group'>
+<div class='col-sm-3'>
+            <h1><div class='form-group'>
                 <div class='input-group date' id='datetimepickerplan3'>
                     <input type='text' id='dateplan3' name='date-plan' class='form-control'>
                     <span class='input-group-addon'>
                         <span class='glyphicon glyphicon-calendar'></span>
                     </span>
                 </div>
-        </div></h3>
-	</div>
-</div>
-</div>
+        </div></h1>
+    </div>
 <input type='hidden' id='datefix3' name='date-planfix' class='form-control'>
+</div>
+</div>
 
 
 <hr>

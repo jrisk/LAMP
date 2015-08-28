@@ -24,9 +24,13 @@ div.page-header>*>* {
 	background: green;
 }
 
+#current-line {
+	height: 2px;
+	background-color: black;
+	z-index: 1000;
+}
+
 .calendar-table {
-	max-height: 400px;
-	overflow: auto;
 } /*- throws off the overlaying div for now */
 
 .overlay.fixed {

@@ -114,11 +114,11 @@ for ($i=0; $i<=(count($big_array) - 1); $i++) {
         "</div>
         <div hidden class='enterplan" . $i . "'>" . $key["Plan"] .
         "</div>
-        <div hidden class='classclass'>" . $key['Class'] .
+        <div hidden class='classclass" . $i . "'>" . $key['Class'] .
         "</div>
         <div hidden class='classday" . $i . "'>" . $key['Adate'] .
         "</div>
-        <div hidden class='classend'>" . $key['End'] .
+        <div hidden class='classend" . $i . "'>" . $key['End'] .
         "</div>
         </div>
         </div>";

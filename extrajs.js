@@ -304,11 +304,11 @@ $('#dropdownplans').delegate('.planlist', 'click', function(event) {
 			dataType: 'html',
 			success: function(datam) {
 				$('#planentry').html(datam);
-				$('#sessionplan').html("<h2><span class='glyphicon glyphicon-paperclip'></span> " + $('#enterplan').html() + "</h2>");
-				$('#sessionplan').append("<h3>" +
-				"<span class='glyphicon glyphicon-education'></span> " + $('#enterclass').html() + "</h3>");
-				$('#sessionplan').append("<h3>" +
-				"<span class='glyphicon glyphicon-calendar'></span> " + $('#enterday').html() + "</h3>");
+				$('#sessionplan').html("<h1><div class='label label-primary'><div class='glyphicon glyphicon-paperclip'></div>" + $('#enterplan').html() + '</div></h2>');
+				$('#sessionplan').append("<h1>" +
+				"<div class='label label-primary'><span class='glyphicon glyphicon-education'></span>" + $('#enterclass').html() + '</div></h1>');
+				$('#sessionplan').append("<h1>" +
+				"<div class='label label-primary'><span class='glyphicon glyphicon-calendar'></span>" + $('#enterday').html() + '</div></h1>');
 				$('#activated').show();
 				$('#planentry').show();
 				$('#addoptions').show();
@@ -390,7 +390,6 @@ $('#editor').delegate( '#updater', 'click', function(e) {
  		data: editdata,
  		dataType: 'html',
  		success: function(data) {
- 			alert("Plan has been edited");
  			$.ajax({
 			type: 'POST',
 			url: 'totalview.php',
@@ -464,8 +463,6 @@ $('#addnewact').on('click', function(e) {
  	var plantitle = $('#addlesson').val();
 
  	var formdata = $('#planform input').serialize();
-
- 	alert(formdata);
 
  	$.ajax({
 		type: 'POST',
@@ -628,7 +625,6 @@ $('#planentry').delegate( '#delact', 'click', function(event) {
 		data: {deleteid: specificID},
 		dataType: 'html',
 		success: function(result) {
-			alert("Activity has been deleted");
 			$.ajax({
 			type: 'POST',
 			url: 'totalview.php',
