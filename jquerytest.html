@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Mobile Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
+
+<!--HOME PAGE -->
+
+<div data-role="page" id="home">
+	<div data-role="header">
+		<h1>Welcome this is a Header</h1>
+	</div>
+
+	<div data-role="content">
+		<p>Check out this data-role element with value equal to content</p>
+			<ul data-role="listview" data-inset="true" data-filter="true">
+				<li><a href="#">This is list item 1</a></li>
+				<li><a href="#">This is list item 2</a></li>
+				<li><a href="#stuff" data-transition="pop" data-icon="star">stuff</a></li>
+				<li><a href="viewplan.php">And heres my lesson planner</a></li>
+			</ul>
+		<br>
+		<b>Woah bold</b>
+		<h1><a href="#about">Visit the About Page</a></h1>
+	</div>
+
+	<div data-role="footer">
+		<h4>The "footer data-role in the "page" data-role jquery page</h4>
+	</div>
+</div>
+
+<!--End Home Page -->
+
+<!-- ABOUT PAGE -->
+
+<div data-role="page" id="about" data-rel="dialog">
+	<div data-role="header">
+		<h1>This is the About Page</h1>
+	</div>
+
+	<iframe src="http://google.com"></iframe>
+
+	<div data-role="content" id="body-content">
+		<a href="#home"><h2>Go back to the Home page</h2></a>
+	</div>
+
+	<div data-role="footer">
+		<h2>Footer</h2>
+	</div>
+</div>
+
+<!-- End About Page -->
+
+<!-- STUFF PAGE -->
+<div data-role="page" id="stuff">
+	<div data-role="header" data-theme="c">
+		<h1>Heres some stuff</h1>
+	</div>
+
+	<div data-role="content">
+		<label for="slider-0">input slider: </label>
+		<input type="range" name="slider" id="slider-0" value="50" min="0" max="100"></input>
+	</div>
+
+	<div data-role="footer">
+		<a href="#" data-role="button" data-icon="star" data-theme="c">Star BUTTON</a>
+	</div>
+</div>
+
+<!-- End Stuff Page -->
+
+</body>
+
+</html>

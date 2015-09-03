@@ -10,6 +10,30 @@ div.page-header>*>* {
 
 }
 
+#Class-Icon {
+	background-color: #FFD1B3;
+}
+
+#Plan-Icon {
+	background-color: #BFE9FF;
+}
+
+#Date-Icon {
+	background-color: #D0EE96;
+}
+
+#Activity-Icon {
+	background-color: #bfe9ff;
+}
+
+#Start-Icon {
+	background-color: #FFD1B3;
+}
+
+#End-Icon {
+	background-color: #D0EE96;
+}
+
 #overlay-div {
 	background: green;
 }

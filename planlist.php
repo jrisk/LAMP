@@ -23,7 +23,7 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
 	//save state of plan index for next check of similar plan names and inserting of activities
 	$saved = $plan[$i];
 	//reset activity array for new association with new plan key
-	$new_activity = [];
+	$new_activity = array();
 	//take the plan name and array position and check for other instances of plan name in result
 
 		for ($n=0; $n <= ((count($result)) - 1); $n++) {

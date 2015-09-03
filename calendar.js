@@ -1,6 +1,26 @@
 $(function () {
 
 $('#mycal').fullCalendar({
+
+	events: function(start, end, timezone, callback) {
+
+		$.ajax({
+			url: 'metaplan.php',
+			dataType: 'html',
+			success: function(data) {
+				$('#planinfo').html(data);
+				callback(eventFiller());
+				console.log('fullCalendar ajax call done');
+				$('#planinfo').hide();
+				$('#mycal').hide();
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+			console.log(errorThrown);
+			}
+
+		});
+	},
+
 	header: {
     left:   'title',
     center: '',
@@ -12,7 +32,20 @@ $('#mycal').fullCalendar({
     next: 'right-single-arrow',
     prevYear: 'left-double-arrow',
     nextYear: 'right-double-arrow'
-	}
+	},
+
+	editable: true,
+
+	allDay: true
+
+});
+
+// load all of the plans on pageload and call DayPlan to get the overlay divs
+$(window).load( function() { //wait to load the overlay divs until calendar is ready and hidden
+	$.get('metaplan.php', function(data) {
+	$('#planinfo').html(data);
+	dayPlan();
+})
 });
 
 function datetimefunc() {
@@ -23,14 +56,12 @@ $('#datetimepickerplan2').datetimepicker({
 
 $('#starttime2').datetimepicker({
 	format: 'HH:mm A',
-    allowInputToggle: true,
-    stepping: 5
+    allowInputToggle: true
 });
 
 $('#endtime2').datetimepicker({
 	format: 'HH:mm A',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
 });
 
 };
@@ -41,8 +72,9 @@ $('#plan-namehold').append('<h2>All Plans</h2>');
 $('#today').hide();
 
 $('#day-times').hide();
-
-$('#mycal').hide();
+$('#day-table').hide();
+dayPlan();
+//setTimeout(dayPlan, 5000);
 
 $('#today-button').on('click tap', function(e) {
 
@@ -93,6 +125,8 @@ $('#month-button').on('click tap', function(e) {
 	$('#day-times').hide();
 
 	$('#mycal').show();
+
+	//$('#mycal').fullCalendar('render');
 
 	$('#planinfosimple').hide();
 
@@ -205,15 +239,56 @@ function weekPlan() {
 
 };
 
-// load all of the plans on pageload and call DayPlan to get the overlay divs
-$.get('metaplan.php', function(data) {
+function eventFiller() {
+	var eventing = [];
 
-	$('#planinfo').html(data);
-	$('#planinfo').hide();
-	dayPlan();
-});
+	for (p = 0; ($('.enterplan' + p).length); p++) { // multiple plans iterator
+	
+	var rawDate = $('.classday' + p).html();
 
+	var Dtime = moment(rawDate, 'YYYY-MM-DD');
+
+	var realDate = moment(Dtime).format('YYYY-MM-DD');
+
+	var Day = moment(Dtime).format('dddd');
+
+	for (i = 0; i < weekDays.length; i++) {
+
+	var k = 0;	 //for multiple lesson plans on same day else if below
+
+	if (Day == weekDays[i]) {
+
+		for (j = 0; j <= $('.enterplan' + p).length - 1 && ($('.enterplan' + p).length); j++) { // have to iterate the first specific activity, attached as 0, in the array from php file
+
+		var firstStart = $('#enterstart' + p + '-' + j).html();
+
+		var startFullISO = realDate + 'T' + firstStart;
+
+		var specAct = $('#enterstart' + p + '-' + j).siblings('#enteractivity' + p + '-' + j).text();
+
+		var specEnd = $('#enterstart' + p + '-' + j).siblings('#enterend' + p + '-' + j).html();
+
+		var endFullISO = realDate + 'T' + specEnd;
+
+		console.log(startFullISO)
+
+			eventing.push({
+				title: specAct,
+				start: startFullISO,
+				end: endFullISO, // this will give lots of specific activties, could destroy the calendar
+				allDay: true
+			});
+	}
+
+}
 // for specific entry point in week calendar
+
+}
+
+}
+return eventing;
+};
+
 
 function dayPlan() {
 
@@ -410,27 +485,7 @@ $('#current-line').css({
 	position: 'absolute',
 });
 
-function moveBigBlock() {
 
-
-var mon03 = $('#today-3am-row').position();
-
-var monTop = mon03.top;
-
-var monLeft = mon03.left;
-
-var monWidth = $('#today-3am-row').css('width');
-
-var monHeight = $('#today-3am-row').css('height');
-
-$('#overlay-div').css({
-	position: 'absolute',
-	top: monTop,
-	left: monLeft
-});
-
-};
-
-//setInterval(moveBigBlock, 2000);
+//$('#mycal').hide();
 
 })

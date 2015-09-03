@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Mobile Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+
+<link href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+<link href="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.min.css" rel="stylesheet">
+
+<script src="http://code.jquery.com/jquery-2.1.1.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+<script src="http://cdn.jtsage.com/external/jquery.mousewheel.min.js" type="text/javascript"></script>
+
+<script src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.core.min.js" type="text/javascript"></script>
+<script src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.calbox.min.js" type="text/javascript"></script>
+<script src="http://cdn.jtsage.com/datebox/1.4.5/jqm-datebox-1.4.5.mode.flipbox.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<!--Home page -->
+<div data-role="page" id="home">
+
+	<div data-role="header">
+		New Lesson Plan
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height: 100px">BLOCK A</div>
+			<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height: 100px">BLOCK B</div>
+	</div> <!-- ui-grid-a -->
+</div>
+
+	<div data-role="content">
+		<input name="plan-name" id="text-basic" placeholder="Plan Name" type="text">
+		<input name="class-name" id="class-name" placeholder="Class or Student Name" type="text">
+		<input data-role="datebox" data-options='{"mode":"calbox", "useInline": false}' data-theme="b" type="text">
+	
+		<div class="ui-field-contain">
+			<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+			    <legend>Copy Plan to Other Days</legend>
+			    <input name="checkbox-h-5a" id="checkbox-h-5a" type="checkbox">
+			    <label for="checkbox-h-5a">Mon</label>
+			    
+			    <input name="checkbox-h-5b" id="checkbox-h-5b" type="checkbox">
+			  	<label for="checkbox-h-5b">Tues</label>
+			    
+			    <input name="checkbox-h-5c" id="checkbox-h-5c" type="checkbox">
+			    <label for="checkbox-h-5c">Wed</label>
+			    
+			    <input name="checkbox-h-5d" id="checkbox-h-5d" type="checkbox">
+			    <label for="checkbox-h-5d">Thurs</label>
+
+			    <input name="checkbox-h-5e" id="checkbox-h-5e" type="checkbox">
+			    <label for="checkbox-h-5e">Fri</label>
+
+			    <input name="checkbox-h-5f" id="checkbox-h-5f" type="checkbox">
+			    <label for="checkbox-h-5f">Sat</label>
+
+			    <input name="checkbox-h-5g" id="checkbox-h-5g" type="checkbox">
+			    <label for="checkbox-h-5g">Sun</label>
+			</fieldset>
+		</div>
+
+		<hr>
+
+		<input name="activity" id="activity-name" type="text">
+		<input name="start-time" id="start-time" data-role="datebox" data-theme="c" data-options='{"mode":"timeflipbox"}' data-theme="c" type="text">
+		<div class="ui-field-contain">
+		    <label for="submit-5">Send:</label>
+		    <button type="submit" id="submit-5" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
+		</div>
+	
+	</div>
+
+</div>
+
+<!-- END OF MAKE PLAN PAGE -->

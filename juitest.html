@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta name="viewport" style="initial-scale=1, minimum-scale=1">
+<head>Jquery UI Prac</head>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+#dragging {width: 100px; height: 100px; background-color: green; box-shadow: 0em 2em 0em padding: 2em}
+</style>
+</head>
+
+<body>
+
+<div id="dragging" class="ui-widget-content">Hello Drag me to the Drop box</div>
+<div id="dropping" class="ui-widget-header">Drop me here pls<p>O GOD</p></div>
+<div id="dialog" title="Basic dialog">
+  <p>This</p>
+</div>
+<script>
+$(function () {
+	$('#dragging').draggable();
+
+	$('#dropping').droppable({
+
+		drop: function(event, ui) {
+			$(this)
+			.addClass('ui-state-highlight')
+			.find('p')
+			.html('DROPPED!');
+		}
+	});
+
+    $( "#dialog" ).dialog();
+  
+});
+</script>
+
+</body>
+</html>

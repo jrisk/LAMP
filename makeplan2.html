@@ -1,0 +1,326 @@
+<html>
+<head>
+    <title>Lesson Plan V3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+<script src="./extrajs.js"></script>
+
+<!-- testing purposes <script src="./testing.js"></script> -->
+<script src="//www.modernizr.com/downloads/modernizr
+-latest.js" type ="text/javascript"></script>
+
+<link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="./lessonplanner.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Skoolia" src="">
+                </a>
+            </div>
+                <button type="button" class="btn btn-lg btn-primary">Plan Edit</button>
+            </div>
+
+        </div>
+    </nav>
+
+<!-- Insert Saved Plan Name, Class, and Days View-->
+<div class="container" id="plan-viewer">
+</div>
+<!-- End Dynamic Insert on Save -->
+
+<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
+
+<div class="container" id="container-outer-make">
+
+<!-- insert fore each for activity and stuff here -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Plan-Icon">
+                            <div class="glyphicon glyphicon-paperclip">
+                            </div>
+                </span>
+    <input name="lesson-name" id="lessonname3" type="text" class="form-control" placeholder="Plan Name">
+</div>
+</div>
+</div>
+
+<br>
+
+ <div class="row">
+        <div class="col-xs-12 col-sm-7">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Class-Icon">
+                    <span class="glyphicon glyphicon-education">
+                    </span>
+            </span>
+<input name="user-group" type="text" class="form-control" placeholder="Class/Student Name">
+</div>
+</div>
+</div>
+
+<br>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <div class="input-group input-group-lg date" id="datetimepickerplan3">
+                        <span class="input-group-addon" id="Date-Icon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    <input type="text" id="dateplan3" placeholder="Day" name="date-plan" class="form-control">
+                </div>
+<input type="hidden" id="datefix3" name="date-planfix" class="form-control">
+</div>
+</div>
+    <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
+        <label class="btn btn-default">
+            <input name="WeekDays1" id="mon" class="day-input" value="Monday" type="checkbox">Mon
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays2" id="tues" class="day-input" value="Tuesday" type="checkbox">Tues
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays3" id="wed" class="day-input" value="Wednesday" type="checkbox">Wed
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays4" id="thurs" class="day-input" value="Thursday" type="checkbox">Thurs
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays5" id="fri" class="day-input" value="Friday" type="checkbox">Fri
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays6" id="sat" class="day-input" value="Saturday" type="checkbox">Sat
+        </label>
+        <label class="btn btn-default">
+            <input name="WeekDays7" id="sun" class="day-input" value="Sunday" type="checkbox">Sun
+        </label>
+    </div>
+</div>
+
+</div> <!-- outer- topdiv container-->
+
+</form>
+
+<hr>
+
+<div class="container" id="button-add-save">
+    <div class="row">
+<div class="col-xs-12 col-md-12">
+<button type="button" class="btn btn-lg btn-primary" id="add-plan">Save</button>
+</div>
+</div>
+</div>
+
+<!--Input saved activity row here -->
+<div class="container" id="saved-activity">
+</div>
+
+<div class="container" id="label-row">
+    <div class="row">
+        <div class="col-sm-7 col-xs-12">
+            <h4><div class="label label-primary">Activity</div></h4>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <h4><div class="label label-warning">Start Time</div></h4>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <h4><div class="label label-success">End Time</div></h4>
+        </div>
+    </div>
+</div>
+
+
+<br>
+
+<div class="container" id="activity-container">
+    <!--mobile label in order -->
+    <div class="row" id= "activity-molab">
+        <div class="col-xs-12">
+            <h3><div class="label label-primary">Activity</div></h3>
+        </div>
+    </div>
+    <!-- activity label end -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-7">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Activity-Icon">
+                
+                    <span class="glyphicon glyphicon-pencil" id="pencil-icon">
+                            </span>
+                </span>
+            <input name="activity" type="text" class="form-control input-lg">
+            </div>
+        </div>
+
+        <!-- start 2nd row on mobile <div class="row" id="start-time-molab">-->
+        <div class="col-xs-12" id="start-time-molab">
+            <h3><div class="label label-warning">Start</div></h3>
+        </div>
+        <!-- end start label row mobile -->
+        
+        <div class="col-xs-12 col-sm-2">
+            <div class="form-group">
+                <div class="input-group date" id="starttime3">
+                    <span class="input-group-addon" id="Start-Icon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                    <input type="text" class="form-control input-lg" name="start-time" id="start3">
+                </div>
+            </div>
+        </div>
+
+        <!-- end time mobile label <div class="row" id="end-time-molab">-->
+        <div class="col-xs-12" id="end-time-molab">
+            <h3><div class="label label-success">End</div></h3>
+        </div>
+        <!--end end time molab -->
+
+        <div class="col-xs-12 col-sm-2">
+            <div class="form-group">
+                <div class="input-group date" id="endtime3">
+                    <span class="input-group-addon" id="End-Icon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <input type="text" class="form-control input-lg" name="end-time" id="end3">
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
+<button type="button" class="btn btn-primary btn-lg" id="save-act">Save</button>
+<button type="button" class="btn btn-primary btn-lg" id="add-act">Add Another Activity</button>
+</div>
+
+</div> <!-- end activity input row container -->
+
+<!-- Comment Container
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <textarea class="form-control" rows="2" id="comment-note3" name="comment-note"></textarea>
+        <input type="hidden" class=" form-control" id="commentnote3" name="commentnote">
+        <div class="form-group">
+        <input type="hidden" class="form-control" name="duration-time" id="durationtime3">
+    </div>
+</div>
+</div>
+</div> END Comment Container-->
+
+<script>
+$(function () {
+
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+function widthDecide() {
+
+if (width <= 728) {
+    $('#label-row').hide();
+}
+
+else {
+        $('#activity-molab').hide();
+        $('#start-time-molab').hide();
+        $('#end-time-molab').hide();
+    }
+};
+
+function widthDecideOnShow() {
+
+if (width >= 728) {
+    $('#label-row').show();
+}
+
+else {
+        $('#activity-molab').show();
+        $('#start-time-molab').show();
+        $('#end-time-molab').show();
+    }
+};
+
+widthDecide();
+
+$('#label-row').hide();
+$('#activity-container').hide(); //start with this hidden unless they want to add stuff now
+
+$('#add-plan').on('click', function() {
+
+    savePlan();
+    $('#container-outer-make').hide();
+    $('#activity-container').show();
+    $('#button-add-save').hide();
+    widthDecideOnShow();
+
+});
+function checkboxChange() {
+
+$('#checkbox-holder').on('change', '.day-input', function() {
+
+    if (this.checked) {
+ 
+    $(this).parent().css('background-color', '#d0ee96');
+    
+    }
+
+    else {
+
+        $(this).parent().css('background-color', '#fff');
+    }
+});
+
+};
+
+checkboxChange();
+
+function savePlan() {
+    $('#planclassday input[type=checkbox]').each(function(idx, elem) {
+        var this_check = $(this).prop('checked');
+        var this_day = $(this).val();
+        alert(idx + " = index, ischecked? =" + this_check + " elem: " + this_day);
+    });
+};
+
+function datetimefunc3() {
+$('#datetimepickerplan3').datetimepicker({
+    format: 'dddd, MMMM Do',
+    allowInputToggle: true
+    
+});
+
+$('#starttime3').datetimepicker({
+    format: 'HH:mm A',
+    allowInputToggle: true,
+    useCurrent: false,
+    focusOnShow: false
+});
+
+$('#endtime3').datetimepicker({
+    format: 'HH:mm A',
+    allowInputToggle: true,
+    useCurrent: false,
+    focusOnShow: false
+});
+
+};
+
+datetimefunc3();
+
+});
+
+</script>
+</body>
+</html>

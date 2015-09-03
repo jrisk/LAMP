@@ -3,43 +3,40 @@ $(function () {
 function datetimefunc3() {
 $('#datetimepickerplan3').datetimepicker({
 	format: 'dddd, MMMM Do',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
+	
 });
 
 $('#starttime3').datetimepicker({
 	format: 'HH:mm A',
     allowInputToggle: true,
-    useCurrent: false,
-    stepping: 5
+    useCurrent: false
 });
 
 $('#endtime3').datetimepicker({
 	format: 'HH:mm A',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
 });
 
 };
+
+datetimefunc3();
 
 
 function datetimefunc() {
 $('#datetimepickerplan2').datetimepicker({
 	format: 'dddd, MMMM Do',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
 });
 
 $('#starttime2').datetimepicker({
 	format: 'HH:mm A',
-    allowInputToggle: true,
-    stepping: 5
+    allowInputToggle: true
 });
 
 $('#endtime2').datetimepicker({
 	format: 'HH:mm A',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
 });
 
 };
@@ -51,14 +48,12 @@ $('#datetimepickerplan').datetimepicker({
 
 $('#starttime').datetimepicker({
 	format: 'HH:mm A',
-    allowInputToggle: true,
-    stepping: 5
+    allowInputToggle: true
 });
 
 $('#endtime').datetimepicker({
 	format: 'HH:mm A',
-	allowInputToggle: true,
-	stepping: 5
+	allowInputToggle: true
 });
 
 //Color in the Week Day that equals Today's Date
@@ -97,7 +92,7 @@ var startHuman = function(enterstart) {
 
 	var startproto = moment(starting, 'HH:mm:ss');
 
-	var starthuman = moment(startproto).format('HH:mm A');
+	var starthuman = moment(startproto).format('hh:mm A');
 
 	return starthuman;
 };
@@ -110,13 +105,37 @@ var endHuman = function(enterend) {
 
 	var endproto = moment(ending, 'HH:mm:ss');
 
-	var endhuman = moment(endproto).format('HH:mm A');
+	var endhuman = moment(endproto).format('hh:mm A');
 
 	return endhuman;
 };
 
+// start and end time Human-readable (2:30PM instead of 14:30PM) function for view
+
+function readableStartEnd() {
+	var startlen = $('.starter').length;
+	var startarray = [];
+
+	for (i=0; i <= startlen; i++) {
+	var startparam = $('#enterstart' + i);
+	var startread = startHuman(startparam);
+	startparam.html(startread);
+	};
+
+	var endlen = $('.ender').length;
+	var endarray = [];
+
+	for (i=0; i <= endlen; i++) {
+	var endparam = $('#enterend' + i);
+	var endread = startHuman(endparam);
+	endparam.html(endread);
+	};
+};
+
+
 //get date picker format into database DATE format
 
+//makeplan.php version
 var dayDuration3 = function() {
 	var dayinput = $('#dateplan3').val();
 
@@ -127,6 +146,8 @@ var dayDuration3 = function() {
 	return daybaseval;
 };
 
+
+//editor.php version
 var dayDuration = function() {
 	var dayinput = $('#dateplan').val();
 
@@ -314,24 +335,7 @@ $('#dropdownplans').delegate('.planlist', 'click', function(event) {
 				$('#addoptions').show();
 				$('#editor').hide();
 				$('#maker').hide();
-				// put this in a function !!!!!!!!!!!!!
-				var startlen = $('.starter').length;
-				var startarray = [];
-				for (i=0; i <= startlen; i++) {
-				var startparam = $('#enterstart' + i);
-				var startread = startHuman(startparam);
-					startparam.html(startread);
-					};
-
-				var endlen = $('.ender').length;
-				var endarray = [];
-	
-				for (i=0; i <= endlen; i++) {
-				var endparam = $('#enterend' + i);
-				var endread = startHuman(endparam);
-				endparam.html(endread);
-				};
-
+				readableStartEnd();
 
 				/*if (Modernizr.history) {
 				window.history.pushState(null, "", "totalview.php");
@@ -401,24 +405,7 @@ $('#editor').delegate( '#updater', 'click', function(e) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#editor').hide();
-				// PUT THIS IN A FUNCTION !!!!!!!!!!!!!!!!!!!!!
-				var startlen = $('.starter').length;
-				var startarray = [];
-	
-				for (i=0; i <= startlen; i++) {
-				var startparam = $('#enterstart' + i);
-				var startread = startHuman(startparam);
-				startparam.html(startread);
-				};
-
-				var endlen = $('.ender').length;
-				var endarray = [];
-	
-				for (i=0; i <= endlen; i++) {
-				var endparam = $('#enterend' + i);
-				var endread = startHuman(endparam);
-				endparam.html(endread);
-				};
+				readableStartEnd();
 
 				$('#planlistload').load('planlist.php');
 			},
@@ -487,21 +474,7 @@ $('#addnewact').on('click', function(e) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#editor').hide();
-				var startlen = $('.starter').length;
-				var startarray = [];
-				for (i=0; i <= startlen; i++) {
-				var startparam = $('#enterstart' + i);
-				var startread = startHuman(startparam);
-					startparam.html(startread);
-					};
-				var endlen = $('.ender').length;
-				var endarray = [];
-	
-				for (i=0; i <= endlen; i++) {
-				var endparam = $('#enterend' + i);
-				var endread = startHuman(endparam);
-				endparam.html(endread);
-				};
+				readableStartEnd();
 
 				$('#planform')[0].reset();
 			},
@@ -584,21 +557,8 @@ $('#maker').delegate('#updater2', 'click', function(e) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#maker').hide();
-				var startlen = $('.starter').length;
-				var startarray = [];
-				for (i=0; i <= startlen; i++) {
-				var startparam = $('#enterstart' + i);
-				var startread = startHuman(startparam);
-					startparam.html(startread);
-					};
-				var endlen = $('.ender').length;
-				var endarray = [];
-	
-				for (i=0; i <= endlen; i++) {
-				var endparam = $('#enterend' + i);
-				var endread = startHuman(endparam);
-				endparam.html(endread);
-				};
+				readableStartEnd();
+
 				$('#planlistload').load('planlist.php');
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -636,6 +596,7 @@ $('#planentry').delegate( '#delact', 'click', function(event) {
 				$('#planentry').show();
 				$('#addoptions').show();
 				$('#maker').hide();
+				readableStartEnd();
 
 			},
 

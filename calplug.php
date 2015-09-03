@@ -7,8 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-<script src="./extrajs.js"></script>
-<script src="./calendar.js"></script>
+<script src="./cal.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
@@ -20,16 +19,7 @@
 </head>
 <body>
 
-<?php
-session_start();
-
-if (!(isset($_SESSION["myusername"]))) {
-  header("location:main.php");
-}
-
-?>
-
-<div id="mycal"></div>
+<div id="fullcal"></div>
 
 </body>
 </html>
