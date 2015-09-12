@@ -27,7 +27,7 @@
                     <img alt="Skoolia" src="">
                 </a>
             </div>
-                <button type="button" class="btn btn-lg btn-primary">Plan Edit</button>
+               <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
             </div>
 
         </div>
@@ -65,7 +65,7 @@
                     <span class="glyphicon glyphicon-education">
                     </span>
             </span>
-<input name="user-group" type="text" class="form-control" placeholder="Class/Student Name">
+<input name="user-group" type="text" id="classname3" class="form-control" placeholder="Class/Student Name">
 </div>
 </div>
 </div>
@@ -112,7 +112,7 @@
 
 </div> <!-- outer- topdiv container-->
 
-</form>
+<!-- only saves lesson, class, day. </form> -->
 
 <hr>
 
@@ -125,8 +125,7 @@
 </div>
 
 <!--Input saved activity row here -->
-<div class="container" id="saved-activity">
-</div>
+<div id="actentry"></div> <!-- got activity row after posting to newformaction -> totalview -->
 
 <div class="container" id="label-row">
     <div class="row">
@@ -141,7 +140,6 @@
         </div>
     </div>
 </div>
-
 
 <br>
 
@@ -202,11 +200,17 @@
 </div>
 
 <div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
-<button type="button" class="btn btn-primary btn-lg" id="save-act">Save</button>
-<button type="button" class="btn btn-primary btn-lg" id="add-act">Add Another Activity</button>
+    
+<a href="planpanel.php"><button type="button" class="btn btn-primary btn-lg" id="save-act">
+    Save Plan</button></a>
+
+<button type="button" class="btn btn-primary btn-lg" id="add-act">
+    Add Another Activity</button>
 </div>
 
 </div> <!-- end activity input row container -->
+
+</div> <!-- end form planclassday scope -->
 
 <!-- Comment Container
 <div class="container">
@@ -252,6 +256,25 @@ else {
     }
 };
 
+function widthDecideOnShowCopy() { //delegate/on because of inserted php elements
+
+if (width >= 728) {
+    $('.label-row-insert').show();
+    $('.activity-insert').hide();
+    $('.start-insert').hide();
+    $('.end-insert').hide();
+}
+
+else {
+        $('.label-row-insert').hide();
+        $('.activity-insert').show();
+        $('.start-insert').show();
+        $('.end-insert').show();
+        $('.delact').hide();
+        
+    }
+};
+
 widthDecide();
 
 $('#label-row').hide();
@@ -264,6 +287,20 @@ $('#add-plan').on('click', function() {
     $('#activity-container').show();
     $('#button-add-save').hide();
     widthDecideOnShow();
+
+    //lessonname3 classname3 dateplan3
+
+    $('#plan-viewer').html("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-paperclip'></span>"  + $('#lessonname3').val() + 
+    "</h3><div class='well well-sm' id='well-plan'></div></div>").hide().fadeIn(1000);
+    $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-education'></span>" + $('#classname3').val() + 
+    "</h3><div class='well well-sm' id='well-class'></div></div>")
+    .fadeIn(1000);
+    $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-calendar'></span>" + $('#dateplan3').val() +
+    "</h3><div class='well well-sm' id='well-date'></div></div>")
+    .fadeIn(1000);
+
+    //$("<h2><span class='glyphicon glyphicon-paperclip'></span>" + $('#lessonname3').val() + "</h2>")
+    //.appendTo('#plan-viewer').hide().fadeIn(1000);
 
 });
 function checkboxChange() {
@@ -290,7 +327,7 @@ function savePlan() {
     $('#planclassday input[type=checkbox]').each(function(idx, elem) {
         var this_check = $(this).prop('checked');
         var this_day = $(this).val();
-        alert(idx + " = index, ischecked? =" + this_check + " elem: " + this_day);
+        console.log(idx + " = index, ischecked? =" + this_check + " elem: " + this_day);
     });
 };
 
@@ -319,7 +356,163 @@ $('#endtime3').datetimepicker({
 
 datetimefunc3();
 
+//taken from extra.js editor function for chaning date into mysql readable database date yyyy-mm-dd
+
+var databaseDate = function(element) {
+    var dayinput = element.val();
+
+    var daybase = moment(dayinput, 'dddd, MMMM Do');
+
+    var daybaseval = moment(daybase).format('YYYY-MM-DD');
+
+    return daybaseval;
+};
+
+$('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
+
+$('#datefix3').val(databaseDate($('#dateplan3')));
+
+var formdata = $('#planclassday input').serialize();
+
+console.log(formdata);
+
+var plantitle = $('#lessonname3').val();
+
+$.ajax({
+    type: 'POST',
+    datatype: 'json',
+    data: formdata,
+    url: 'newformaction.php',
+    success: function(data) {
+        console.log("posted successfully");
+        // call another ajax request to GET php file to update activities row
+        $.ajax({
+            type: 'POST',
+            url: 'newtotalview.php',
+            data: {planning: plantitle},
+            dataType: 'html',
+            success: function(datam) {
+                $('#actentry').html(datam); //why is this being duplicated? -cuz of start time dupe
+                widthDecideOnShowCopy();
+                endToStartChange();
+                readableStartEnd();
+            },
+
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    },
+
+    error: function(errorThrown) {
+        console.log(errorThrown);
+    }
+
 });
+
+});
+
+// make start time of next activity the end time of the last activity 
+
+function endToStartChange() {
+
+    var lastend = $('#activity-container-copy .end-time-insert').last().html();
+
+    console.log(lastend);
+
+    var startform = moment(lastend, 'HH:mm:ss');
+
+    var changetime = moment(startform).format('HH:mm A');
+
+    $('#start3').val(changetime);
+
+    $('#end3').val(changetime);
+
+};
+
+// TURN THE START TIME INTO READABLE AM/PM IN VIEW MODE
+
+var startHuman = function(enterstart) {
+
+    var starting = $(enterstart).html();
+
+    var startproto = moment(starting, 'HH:mm:ss');
+
+    var starthuman = moment(startproto).format('hh:mm A');
+
+    return starthuman;
+};
+
+// TURN THE END TIME IN READABLE AM/PM MODE
+
+var endHuman = function(enterend) {
+
+    var ending = $(enterend).html();
+
+    var endproto = moment(ending, 'HH:mm:ss');
+
+    var endhuman = moment(endproto).format('hh:mm A');
+
+    return endhuman;
+};
+
+//change time into more readable view (2:30pm instead of 14:30:00)
+
+function readableStartEnd() {
+    $('.start-time-insert').each(function() {
+        var startRead = startHuman($(this));
+        $(this).html(startRead);
+    });
+
+    $('.end-time-insert').each(function() {
+        var endRead = startHuman($(this));
+        $(this).html(endRead);
+    });
+};
+
+$('#actentry').on('click tap', '.delact', function(e) {
+
+    var actID = $(this).parent().siblings('.activityID').text();
+
+    var plantitle = $('#lessonname3').val();
+
+    console.log(actID);
+    console.log($(this).parent().siblings());
+
+    $.ajax({
+        type: 'POST',
+        url: 'delactivity.php',
+        data: {deleteID: actID},
+        dataType: 'html',
+        success: function(data) {
+            $.ajax({
+                type: 'POST',
+                url: 'newtotalview.php',
+                data: {planning: plantitle},
+                dataType: 'html',
+                success: function(datas) {
+                    $('#actentry').html(datas);
+                    widthDecideOnShowCopy();
+                    console.log("we are in the success part of the new total view...");
+                    endToStartChange();
+                    readableStartEnd();
+                },
+                error: function(errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+
+    });
+
+});
+
+//delplan and save brings you back to main screen of plans, save state and show activities too?
+
+})
 
 </script>
 </body>

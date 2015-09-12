@@ -10,6 +10,43 @@ div.page-header>*>* {
 
 }
 
+#well-plan {
+	background-color: #C6E2FF;
+}
+
+#well-class {
+	background-color: #FFD1B3;
+}
+
+#well-date {
+	background-color: #D0EE96;
+}
+
+.well-acts {
+
+background-color: #C6E2FF;
+
+}
+
+.well-starts {
+	background-color: #FFD1B3;
+}
+
+.well-ends {
+	background-color: #D0EE96;
+}
+
+.well-sm {
+	padding: 0;
+	padding-left: 2px;
+	font-size: 2em;
+}
+
+.well-options {
+	background-color: #d9534f;
+	color: white;
+}
+
 #Class-Icon {
 	background-color: #FFD1B3;
 }

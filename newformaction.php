@@ -15,7 +15,7 @@ $_SESSION['currentplan'] = $_POST['lesson-name'];
 
 // Post variables
 
-$id = "NULL"; // no ID right now, prevent login
+$id = NULL; // no ID right now, prevent login
 
 $plan = $_POST['lesson-name'];
 
@@ -35,13 +35,13 @@ $end_time = $_POST['end-time'];
 
 $end_time_db = substr($end_time, 0, -3);
 
-$comment_note = $_POST['commentnote'];
+$comment_note = NULL;
 
-$duration = $_POST['duration-time'];
+$duration = NULL;
 
 $entry_time = NULL;
 
-$owner = $_SESSION['user_ID'];
+$owner = 1;
 
 // pdo stuff
 
