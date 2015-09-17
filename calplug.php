@@ -17,6 +17,21 @@
 <link rel="stylesheet" media="print" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.print.css">
 
 </head>
+
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Skoolia" src="">
+                </a>
+            </div>
+               <a href="./makeplan2.html"><button type="button" class="btn btn-lg btn-primary">Edit Plans</button></a>
+            </div>
+
+        </div>
+    </nav>
+
+
 <body>
 
 <div id="fullcal"></div>

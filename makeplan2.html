@@ -201,7 +201,7 @@
 
 <div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
     
-<a href="planpanel.php"><button type="button" class="btn btn-primary btn-lg" id="save-act">
+<a href="calplug.php"><button type="button" class="btn btn-primary btn-lg" id="save-act">
     Save Plan</button></a>
 
 <button type="button" class="btn btn-primary btn-lg" id="add-act">
@@ -291,12 +291,12 @@ $('#add-plan').on('click', function() {
     //lessonname3 classname3 dateplan3
 
     $('#plan-viewer').html("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-paperclip'></span>"  + $('#lessonname3').val() + 
-    "</h3><div class='well well-sm' id='well-plan'></div></div>").hide().fadeIn(1000);
+    "</h3><div id='well-plan'></div></div>").hide().fadeIn(1000);
     $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-education'></span>" + $('#classname3').val() + 
-    "</h3><div class='well well-sm' id='well-class'></div></div>")
+    "</h3><div id='well-class'></div></div>")
     .fadeIn(1000);
     $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-calendar'></span>" + $('#dateplan3').val() +
-    "</h3><div class='well well-sm' id='well-date'></div></div>")
+    "</h3><div id='well-date'></div></div>")
     .fadeIn(1000);
 
     //$("<h2><span class='glyphicon glyphicon-paperclip'></span>" + $('#lessonname3').val() + "</h2>")
