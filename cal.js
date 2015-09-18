@@ -31,6 +31,20 @@ $('#fullcal').fullCalendar({
 
 	eventSources: [fcSources.allActivities, fcSources.wholePlan],
 
+	eventRender: function(event, element) {
+			console.log('The element is: ' + element.attr);
+
+			$(element).on('click tap', function() {
+				window.location = './editplan2.php';
+			});
+
+			$(element).hover(function(e) {
+				$(this).css({'background-color': 'green', 'cursor': 'pointer'});
+			}, function(o) {
+				$(this).css('background-color', 'blue');
+			});
+		},
+
 	viewRender: function(view) {
 
 			var lastView = view.name;

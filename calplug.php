@@ -25,11 +25,13 @@
                     <img alt="Skoolia" src="">
                 </a>
             </div>
-               <a href="./makeplan2.html"><button type="button" class="btn btn-lg btn-primary">Edit Plans</button></a>
+               <a href="./editplan2.php"><button type="button" class="btn btn-lg btn-primary">Edit Plans</button></a>
             </div>
 
         </div>
     </nav>
+
+<div id="test-div"></div>
 
 
 <body>

@@ -22,28 +22,41 @@
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img alt="Skoolia" src="">
+               <a href="./calplug.php">
+                    <button type="button" class="btn btn-lg btn-primary">Calendar</button>
                 </a>
+                    <button type="button" id="make-plan-btn" class="btn btn-lg btn-primary">New Plan</button>
+            <div class="navbar-right">
+            <h3>
+                    <button>
+                        <span id="print-button"class="glyphicon glyphicon-print"></span>
+                    </button>
+            </h3>
             </div>
-               <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
-                <button type="button" id="make-plan-btn" class="btn btn-lg btn-primary">New Plan</button>
-            </div>
-
         </div>
     </nav>
 
-<h3>
-<button class="button btn-lg">
-    <span id="print-button"class="glyphicon glyphicon-print"></span>
-</button>
-</h3>
+<button type="button" class="btn btn-lg" id="choose-plan">Choose Plane</button>
 
+<?php
 
+include('plans.php');
 
+?>
 
 <script>
+
+$('#choose-plan').on('click tap', function(e) {
+
+/*
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        data: {}
+    })
+*/
+
+});
 
 $(function () {
 

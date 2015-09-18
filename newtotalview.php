@@ -72,8 +72,8 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
     <div class='row' id='activity-molab-copy'>
     <div class='activity-insert'>
         <div class='col-xs-12'>
+         <button class='btn btn-danger btn-md delact-copy' type='button'>delete</button>
             <h3><div class='label label-primary'>Activity</div></h3>
-            <button class='btn btn-danger btn-md delact-copy delact' type='button'>delete</button>
         </div>
     </div>
     </div>
@@ -104,7 +104,7 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         "</div>
 
         <div class='col-sm-1'>
-            <button class='btn btn-danger btn-md delact' type='button' id='delactid'>X</button>
+            <button class='btn btn-danger btn-md delact delact-full' type='button' id='delactid'>X</button>
         </div>
 
     </div>
