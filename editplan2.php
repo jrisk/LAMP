@@ -28,15 +28,15 @@
                     <button type="button" id="make-plan-btn" class="btn btn-lg btn-primary">New Plan</button>
             <div class="navbar-right">
             <h3>
-                    <button>
-                        <span id="print-button"class="glyphicon glyphicon-print"></span>
+                    <button id="print-button">
+                        <span class="glyphicon glyphicon-print"></span>
                     </button>
             </h3>
             </div>
         </div>
     </nav>
 
-<button type="button" class="btn btn-lg" id="choose-plan">Choose Plane</button>
+<button type="button" class="btn btn-lg" id="choose-plan">Choose Plan</button>
 
 <?php
 
@@ -46,23 +46,12 @@ include('plans.php');
 
 <script>
 
-$('#choose-plan').on('click tap', function(e) {
-
-/*
-    $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        data: {}
-    })
-*/
-
-});
-
 $(function () {
 
-$('print-button').on('click tap', function(e) {
+$('#print-button').on('click tap', function(e) {
 
-
+    window.print();
+    
 });
 
 });

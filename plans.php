@@ -170,7 +170,7 @@ for ($i=0; $i<=(count($big_array_end) - 1); $i++) {
 for ($i = 0; $i < count($master_plan); $i++) {
 
 echo "<div class='container'><div class='row'><div class='col-sm-4 col-xs-12'>
-    <button class='btn btn-lg btn-primary' id='plan-specific-" . $i .
+    <button class='btn btn-lg btn-warning' id='plan-specific-" . $i .
     "'>" . $master_plan[$i]['title'] . "</button></div></div></div>";
     }
 
