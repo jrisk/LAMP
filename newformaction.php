@@ -15,7 +15,7 @@ $_SESSION['currentplan'] = $_POST['lesson-name'];
 
 // Post variables
 
-$id = NULL; // no ID right now, prevent login
+$id = NULL; // no ID right now, prevent login // cant be null on website
 
 $plan = $_POST['lesson-name'];
 
@@ -35,11 +35,11 @@ $end_time = $_POST['end-time'];
 
 $end_time_db = substr($end_time, 0, -3);
 
-$comment_note = NULL;
+$comment_note = NULL; // cant be null in website
 
-$duration = NULL;
+$duration = NULL; // cant be null on website
 
-$entry_time = NULL;
+$entry_time = NULL; // cant be null on website
 
 $owner = 1;
 

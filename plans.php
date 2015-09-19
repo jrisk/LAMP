@@ -169,9 +169,10 @@ for ($i=0; $i<=(count($big_array_end) - 1); $i++) {
 
 for ($i = 0; $i < count($master_plan); $i++) {
 
-echo "<div class='container'><div class='row'><div class='col-sm-4 col-xs-12'>
+echo "<div class='container'><div class='row'><div class='col-sm-4 col-xs-6'>
     <button class='btn btn-lg btn-warning' id='plan-specific-" . $i .
-    "'>" . $master_plan[$i]['title'] . "</button></div></div></div>";
+    "'>" . $master_plan[$i]['title'] . "</button></div><div class='col-sm-4 col-xs-6'>" . $master_plan[$i]['start'] .
+    "</div></div></div><hr>";
     }
 
 ?>

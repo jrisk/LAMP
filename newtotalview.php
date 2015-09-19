@@ -74,12 +74,15 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         <div class='col-xs-12'>
          <button class='btn btn-danger btn-md delact-copy' type='button'>delete</button>
             <h3><div class='label label-primary'>Activity</div></h3>
+            <div hidden class='mobileID'>" . $key['ID'] .
+        "</div>
         </div>
     </div>
     </div>
     <!-- activity label end -->
     <div class='row act-start-end-row'>
-        <div class='col-xs-12 col-sm-7'><div class='well well-sm activity-inserted'>" . $key['Activity'] .
+        <div class='col-xs-12 col-sm-7'>
+        <div class='well well-sm activity-inserted'>" . $key['Activity'] .
         "</div></div>
 
         <!-- start 2nd row on mobile <div class='row' id='start-time-molab-copy'>-->

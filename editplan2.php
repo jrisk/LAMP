@@ -25,7 +25,9 @@
                <a href="./calplug.php">
                     <button type="button" class="btn btn-lg btn-primary">Calendar</button>
                 </a>
+                <a href="./makeplan2.html">
                     <button type="button" id="make-plan-btn" class="btn btn-lg btn-primary">New Plan</button>
+                </a>
             <div class="navbar-right">
             <h3>
                     <button id="print-button">
@@ -35,8 +37,6 @@
             </div>
         </div>
     </nav>
-
-<button type="button" class="btn btn-lg" id="choose-plan">Choose Plan</button>
 
 <?php
 

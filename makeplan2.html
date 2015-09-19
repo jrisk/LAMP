@@ -470,14 +470,20 @@ function readableStartEnd() {
     });
 };
 
-$('#actentry').on('click tap', '.delact', function(e) {
+$('#actentry').on('click tap', '.delact, .delact-copy', function(e) {
 
     var actID = $(this).parent().siblings('.activityID').text();
+
+    console.log("current element: " + $(this).html());
+
+    if ($(this).html() == 'delete') {
+        var actID = $(this).siblings('.mobileID').text();
+    };
 
     var plantitle = $('#lessonname3').val();
 
     console.log(actID);
-    console.log($(this).parent().siblings());
+    console.log($(this).siblings('.mobileID').text());
 
     $.ajax({
         type: 'POST',
