@@ -31,8 +31,9 @@ $('#fullcal').fullCalendar({
 
 	eventSources: [fcSources.allActivities, fcSources.wholePlan],
 
-	eventRender: function(event, element) {
+	eventRender: function(event, element, view) {
 			console.log('The element is: ' + element.attr);
+			console.log('View object: ' + view.name);
 
 			$(element).on('click tap', function() {
 				window.location = './editplan2.php';

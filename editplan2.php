@@ -54,6 +54,25 @@ $('#print-button').on('click tap', function(e) {
     
 });
 
+// TURN THE TIME INTO READABLE
+
+var readTime = function() {
+
+    var timeproto = $('.start-time-plans').html();
+
+    console.log(timeproto);
+
+    var endproto = moment(timeproto);
+
+    console.log(endproto);
+
+    var endhuman = moment(endproto).format('hh:mm A');
+
+    $('.start-time-plans').html(endhuman);
+};
+
+readTime();
+
 });
 </script>
 </body>

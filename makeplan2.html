@@ -199,12 +199,11 @@
 </div>
 
 <div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
-    
-<a href="calplug.php"><button type="button" class="btn btn-primary btn-lg" id="save-act">
-    Save Plan</button></a>
+<div class="row">
 
 <button type="button" class="btn btn-primary btn-lg" id="add-act">
     Add Another Activity</button>
+</div>
 </div>
 
 </div> <!-- end activity input row container -->
@@ -477,7 +476,7 @@ $('#actentry').on('click tap', '.delact, .delact-copy', function(e) {
     console.log("current element: " + $(this).html());
 
     if ($(this).html() == 'delete') {
-        var actID = $(this).siblings('.mobileID').text();
+        var actID = $(this).siblings('.mobileID').text(); //delete button mobile
     };
 
     var plantitle = $('#lessonname3').val();

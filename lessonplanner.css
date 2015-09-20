@@ -10,6 +10,11 @@ div.page-header>*>* {
 
 }
 
+.plan-holder {
+	background-color: #C6E2FF;
+	box-shadow: 0 0.2em 0.4em #999;
+}
+
 #well-plan {
 	background-color: #C6E2FF;
 	height: .1em;
