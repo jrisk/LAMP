@@ -10,6 +10,17 @@ div.page-header>*>* {
 
 }
 
+.embed-styling-edit {
+	height: 9em;
+	width: 16em;
+}
+
+#embed-styling-dropzone {
+	height: 11em;
+	width: 18em;
+	border: .2em solid black;
+}
+
 .plan-holder {
 	background-color: #C6E2FF;
 	box-shadow: 0 0.2em 0.4em #999;

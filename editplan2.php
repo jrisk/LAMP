@@ -7,6 +7,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
 <script src="./extrajs.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
@@ -38,6 +39,34 @@
         </div>
     </nav>
 
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="..." alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">Embed Media</h4>
+  </div>
+</div>
+
+<div class="embed-styling-edit">
+    <div class="embed-responsive embed-responsive-16by9">
+         <iframe class="embed-responsive-item" src="//www.youtube.com/embed/Lo8dMqOQdz4"></iframe>
+    </div>
+</div>
+
+<div id="preview-template" style="display: none;"></div>
+
+<form
+      class="dropzone"
+      id="my-awesome-dropzone">
+
+<div id="embed-styling-dropzone" class="dropzone-previews">
+</div>
+
+</form>
+
 <?php
 
 include('plans.php');
@@ -54,24 +83,40 @@ $('#print-button').on('click tap', function(e) {
     
 });
 
+// INSTANTIATE THE DROPBOX
+
+
 // TURN THE TIME INTO READABLE
 
-var readTime = function() {
+var readTime = function(num) {
 
-    var timeproto = $('.start-time-plans').html();
-
-    console.log(timeproto);
+    var timeproto = $('#plan-time-specific-' + num).html();
 
     var endproto = moment(timeproto);
 
-    console.log(endproto);
-
     var endhuman = moment(endproto).format('hh:mm A');
 
-    $('.start-time-plans').html(endhuman);
+    $('#plan-time-specific-' + num).html(endhuman);
 };
 
-readTime();
+for (i = 0; i < ('.start-time-plans').length; i++) {
+readTime(i);
+};
+
+Dropzone.options.myAwesomeDropzone = {
+
+  url: '/prac.php',
+
+  paramName:'file',
+
+  maxFileSize: 2,
+
+  previewsContainer: '#embed-styling-dropzone',
+
+  previewTemplate: document.querySelector('preview-template').innerHTML
+
+
+}
 
 });
 </script>
