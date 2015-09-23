@@ -35,16 +35,26 @@ $('#fullcal').fullCalendar({
 			console.log('The element is: ' + element.attr);
 			console.log('View object: ' + view.name);
 
+			if (view.name == 'agendaWeek') {
+
 			$(element).on('click tap', function() {
-				window.location = './editplan2.php';
+				$.post('planfinder.php', { specific_plan:event.title } ).done( function(data) {
+					$('#activity-plan-insert').html(data);
+				});
+				$(this).attr({'href': '#pop-up-activity', 'data-toggle': 'modal', 'data-target': '#myModal'});
 			});
+
+			//data-toggle="modal" data-target="#myModal
 
 			$(element).hover(function(e) {
 				$(this).css({'background-color': 'green', 'cursor': 'pointer'});
 			}, function(o) {
 				$(this).css('background-color', 'blue');
 			});
-		},
+			
+			}	
+
+	},
 
 	viewRender: function(view) {
 

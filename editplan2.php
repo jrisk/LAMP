@@ -58,13 +58,12 @@
 
 <div id="preview-template" style="display: none;"></div>
 
-<form
-      class="dropzone"
-      id="my-awesome-dropzone">
 
-<div id="embed-styling-dropzone" class="dropzone-previews">
-</div>
-
+<form class="dropzone" id="my-awesome-dropzone">
+  <div class="fallback">
+    <input name="file" type="file" multiple />
+  </div>
+  <button id="upload-form">Upload</button>
 </form>
 
 <?php
@@ -72,6 +71,8 @@
 include('plans.php');
 
 ?>
+
+</body>
 
 <script>
 
@@ -103,22 +104,25 @@ for (i = 0; i < ('.start-time-plans').length; i++) {
 readTime(i);
 };
 
-Dropzone.options.myAwesomeDropzone = {
 
-  url: '/prac.php',
-
-  paramName:'file',
-
-  maxFileSize: 2,
-
-  previewsContainer: '#embed-styling-dropzone',
-
-  previewTemplate: document.querySelector('preview-template').innerHTML
-
-
-}
 
 });
+
+Dropzone.options.myAwesomeDropzone = {
+  url: 'prac.php',
+  paramName: "file", // The name that will be used to transfer the file
+  maxFilesize: 2, // MB
+  accept: function(file, done) {
+    if (file.name == "justinbieber.jpg") {
+      done("Naha, you don't.");
+    }
+    else { 
+      done(); 
+    }
+  }
+};
+
+
+
 </script>
-</body>
 </html>
