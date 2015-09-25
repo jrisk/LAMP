@@ -5,6 +5,8 @@ include("pdo.php");
 // get the total number of plans and iterate through each one in the subsequent loops
 // for total calendar view, getting all the plans on page load 
 
+$specific_plan;
+
 $specific_plan = $_POST['specific_plan'];
 
 $new_activity = array();
@@ -107,13 +109,17 @@ for ($i=0; $i<=(count($big_array) - 1); $i++) {
 
 }
 
+echo "<div class='Activity-Time'>
+        <div class='col-md-4 col-xs-6'>Activity</div>
+        <div class='col-md-8 col-xs-6'>Time</div>
+      </div>";
+
 for ($i = 0; $i < count($specific_array); $i++) {
 
-echo "<div class='container plan-holder'><div class='row'><div class='col-sm-4 col-xs-6'>
-    <div id='plan-specific-" . $i .
-    "'>" . $specific_array[$i]['title'] . "</div></div><div id='plan-time-specific-" . $i .
-    "' class='col-sm-4 col-xs-6 start-time-plans'>" . $specific_array[$i]['start'] .
-    "</div></div></div><hr>";
+echo "<div class='row plan-holder'><div class='col-md-4 col-xs-6' id='plan-specific-" . $i .
+    "'>" . $specific_array[$i]['title'] . "</div><div id='plan-time-specific-" . $i .
+    "' class='col-md-8 col-xs-6 start-time-plans'>" . $specific_array[$i]['start'] .
+    "</div></div><br>";
     }
 
 ?>

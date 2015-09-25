@@ -10,6 +10,10 @@ div.page-header>*>* {
 
 }
 
+#activity-plan-insert {
+	
+}
+
 .embed-styling-edit {
 	height: 9em;
 	width: 16em;
@@ -125,6 +129,10 @@ background-color: #C6E2FF;
 	color: #99FF66;
 }
 
+.Activity-Time {
+	color: black;
+}
+
 .durater {
 	color: #FFCC33;
 }
@@ -144,8 +152,6 @@ background-color: #C6E2FF;
 .well-blue {
 	background-color: #06f;
 	color: white;
-}
-
 }
 
 .btn-lg {

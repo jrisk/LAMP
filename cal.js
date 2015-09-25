@@ -17,6 +17,17 @@ var fcSources = {
 
 };
 
+var readTimePlans = function(num) {
+
+    var timeproto = $('#plan-time-specific-' + num).html();
+
+    var endproto = moment(timeproto);
+
+    var endhuman = moment(endproto).format('hh:mm A');
+
+    $('#plan-time-specific-' + num).html(endhuman);
+};
+
 var count = 0;
 	
 $('#fullcal').fullCalendar({
@@ -40,8 +51,12 @@ $('#fullcal').fullCalendar({
 			$(element).on('click tap', function() {
 				$.post('planfinder.php', { specific_plan:event.title } ).done( function(data) {
 					$('#activity-plan-insert').html(data);
+					for (i = 0; i < ('.start-time-plans').length; i++) {
+					readTimePlans(i);
+					};
 				});
 				$(this).attr({'href': '#pop-up-activity', 'data-toggle': 'modal', 'data-target': '#myModal'});
+				$('.modal-title').html(event.title);
 			});
 
 			//data-toggle="modal" data-target="#myModal

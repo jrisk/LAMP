@@ -52,7 +52,6 @@
 
 <div class="embed-styling-edit">
     <div class="embed-responsive embed-responsive-16by9">
-         <iframe class="embed-responsive-item" src="//www.youtube.com/embed/Lo8dMqOQdz4"></iframe>
     </div>
 </div>
 
