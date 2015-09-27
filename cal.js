@@ -38,6 +38,15 @@ $('#fullcal').fullCalendar({
 		right: 'today, prev next'
 	},
 
+	views: {
+		title: {
+			titleFormat:
+				{
+				week:  "d [MMM]{ '&#8211;' d MMM}"
+			}
+		}
+	},
+
 	defaultView: 'agendaWeek',
 
 	eventSources: [fcSources.allActivities, fcSources.wholePlan],

@@ -6,12 +6,7 @@ div.page-header {
 }
 div.page-header>*>* {
 	color: white;
-	margin-top: 0
-
-}
-
-#activity-plan-insert {
-	
+	margin-top: 0;
 }
 
 .embed-styling-edit {
@@ -154,10 +149,10 @@ background-color: #C6E2FF;
 	color: white;
 }
 
-.btn-lg {
+/* styling for button .btn-lg {
 	color: #06f;
 	font-family: "Montserrat Alternates", sans-serif
-}
+} */
 
 .otext {
 	color: #F90;

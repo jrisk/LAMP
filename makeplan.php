@@ -55,7 +55,7 @@ include("pdo.php");
 <div class='container'>
 	<div class='row'>
 		<div class='col-sm-4'>
-			<h4>Activity</h4>
+			<h4><div class='label label-success'>Activity</div></h4>
 		</div>
 		<div class='col-sm-2'>
 			<h4><div class='label label-warning'>Start Time</div></h4>

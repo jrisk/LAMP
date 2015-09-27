@@ -150,6 +150,7 @@ for ($i=0; $i<=(count($big_array_end) - 1); $i++) {
 
                	$last_time = $key["Adate"] . "T" . $key["End"];
                	$plan_end_id = $key["ID"];
+                $fulldate = $key["Adate"];
                
                	$start_time = $key["Adate"] . "T" . $big_array_start[$i][0];
                }
@@ -161,7 +162,8 @@ for ($i=0; $i<=(count($big_array_end) - 1); $i++) {
 			'title' => $plan[$i],
 			'start' => $start_time,
 			'end' => $last_time,
-			'id' => $plan_end_id
+			'id' => $plan_end_id,
+            'fulldate' => $fulldate
 			); 
 	}
 

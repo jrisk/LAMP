@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Week View</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
@@ -27,16 +27,12 @@
                 </a>
             </div>
                <a href="./editplan2.php"><button type="button" class="btn btn-lg btn-primary">Edit Plans</button></a>
+              <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
             </div>
 
         </div>
     </nav>
 
-<?php
-
-var_dump($_FILES['file']);
-
-?>
 <div id="test-div"></div>
 
 
@@ -77,16 +73,28 @@ var_dump($_FILES['file']);
 Dropzone.options.popAwesomeDropzone = {
   url: 'prac.php',
   paramName: "file", // The name that will be used to transfer the file
-  maxFilesize: 2, // MB
-  previewTemplate: 
-  accept: function(file, done) {
+  maxFilesize: 2 // MB
+   /*accept: function(file, done) {
     if (file.name == "justinbieber.jpg") {
-      done("Naha, you don't.");
+      console.log("test jb.jpg");
     }
     else { 
-      done(); 
+      $.ajax({
+        type: 'POST',
+        data: {file: uploadfile}
+        dataType: 'html',
+        url: 'upload.php',
+        success: function(data) {
+          console.log(data);
+        },
+
+        error: function(error) {
+          console.log(error);
+        }
+
+      });
     }
-  }
+  }*/
 
 }
 
