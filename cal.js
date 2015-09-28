@@ -3,7 +3,7 @@ $(function () {
 var fcSources = {
 
 	wholePlan: { 
-		url: '/feed.php',
+		url: './feed.php',
 		color: 'blue',
 		textColor: 'white',
 		error: function() { console.log("error"); }

@@ -106,7 +106,7 @@ readTime(i);
 });
 
 Dropzone.options.myAwesomeDropzone = {
-  url: 'prac.php',
+  url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2, // MB
   accept: function(file, done) {

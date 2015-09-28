@@ -71,31 +71,17 @@
 <script>
 
 Dropzone.options.popAwesomeDropzone = {
-  url: 'prac.php',
+  url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2 // MB
-   /*accept: function(file, done) {
+   accept: function(file, done) {
+    console.log(file.name);
     if (file.name == "justinbieber.jpg") {
       console.log("test jb.jpg");
     }
     else { 
-      $.ajax({
-        type: 'POST',
-        data: {file: uploadfile}
-        dataType: 'html',
-        url: 'upload.php',
-        success: function(data) {
-          console.log(data);
-        },
-
-        error: function(error) {
-          console.log(error);
-        }
-
-      });
     }
-  }*/
-
+  }
 }
 
 </script>
