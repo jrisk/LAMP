@@ -1,0 +1,21 @@
+{
+	
+	"version": "2.1",
+	"name": "Super Planner",
+	"description": "A Scheduling Program for Teachers and Students. Plan Lessons and Daily Activities",
+	"launch_path": "/spa/makeplan2.html",
+	"appcache_path": "/offline.appcache",
+	"icons": {
+		"16": "../../icon16.jpg",
+		"48": "../../icon48.png",
+		"128": "../../icon128.gif"
+	},
+	"developer": "Joe Risk",
+	"url": "http://www.riskvb.com/spa/makeplan2.html",	
+	
+	"default_locale": "en",
+
+	"chrome": { "navigation": true }
+
+}
+	

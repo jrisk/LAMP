@@ -1,0 +1,42 @@
+<script>
+
+var request = navigator.mozApps.checkInstalled('http://www.riskvb.com/spa/makeplan2.html');
+
+console.log(request);
+
+request.onsuccess = function() {
+
+	if (request.result) {
+		console.log("App is Installed");
+	}
+
+	else {
+		console.log("App not installed...");
+	}
+}
+
+var requestInstall = navigator.mozApps.install('http://www.riskvb.com/spa/manifest.html')
+// this invokes and loads manifest file at ./manifest.html
+
+requestInstall.onsuccess = function() {
+
+	if (requestInstall.result) {
+		console.log("App was installed");
+	}
+
+	else {
+		console.log("App not installed...")
+	}
+}
+
+request.onerror = function() {
+
+	if (requestInstall.result) {
+		console.log("error: " + this.error.name)
+	}
+
+	else (requestInstall.result) {
+		console.log("")
+	}
+}
+</script>

@@ -1,0 +1,20 @@
+CACHE MANIFEST
+
+# ver2.1
+
+/spa/makeplan2.html
+/spa/lessonplanner.css
+/spa/extrajs.js
+/spa/cal.js
+/spa/delact.php
+/spa/delplan.php
+/spa/newtotalview.php
+/spa/newformaction.php
+/spa/calplug.php
+/spa/editplan2.php
+/spa/feed.php
+/spa/bigfeed.php
+/spa/pdo.php
+/spa/credentials.php
+/spa/planfinder.php
+/spa/addact.php
