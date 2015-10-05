@@ -93,6 +93,7 @@ for ($i=0; $i<=(count($big_array) - 1); $i++) {
                     $master_array[] = array(
                         'id' => $key['ID'],
                         'title' => $key['Activity'],
+                        'date' => $key['Adate'],
                         'start' => $key['Adate'] . 'T' . $key['Start'],
                         'end' => $key['Adate'] . 'T' . $key['End'],
                         'class' => $key['Class'],
