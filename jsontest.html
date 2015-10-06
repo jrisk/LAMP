@@ -20,7 +20,8 @@
 </head>
 
 <body>
-	
+	<code id="json-nest"></code>
+	<hr><hr><br><br>
 	<p id="json-holder"></p>
 	<h1>Parsed and Sorted by Date:</h1>
 		<p id="json-new"></p>
@@ -31,6 +32,26 @@
 </body>
 <script>
 $(function () {
+
+	$.ajax({
+		type: 'GET',
+		url: 'plansort.php',
+		success: function(data) {
+
+			var JSONString = data;
+
+			//var rep = /\[/g;
+
+			//var newString = JSONString.replace(rep, "{").replace(/\]/g, "}");
+
+			//var prettyString = JSON.stringify(newString, undefined, 2);
+
+			$('#json-nest').html(JSON.stringify(JSON.parse(JSONString), null, 6));
+		},
+		error: function(errorThrown) {
+			$('#json-nest').html(errorThrown);
+		}
+	});
 
 	$.ajax({
 		type: 'GET',
@@ -57,11 +78,11 @@ $(function () {
 			//jquery way...
 
 			$.each(json2, function(i, obj) {
-				
-				var temp_act = obj.title;
 
-				$('#list-agenda').append('<li class="agenda-item" id="agenda-' + i + '">' + temp_act + '</li>');
-				
+				var temp_plan = obj.plan;
+
+				$('#list-agenda').append('<li class="agenda-item" id="agenda-' + i + '">' + temp_plan + '</li>');
+
 			});
 
 		},

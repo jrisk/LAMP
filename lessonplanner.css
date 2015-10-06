@@ -9,6 +9,13 @@ div.page-header>*>* {
 	margin-top: 0;
 }
 
+.agenda-item {
+	border: .2em solid black;
+	color: green;
+	list-style-type: none;
+
+}
+
 .embed-styling-edit {
 	height: 9em;
 	width: 16em;
