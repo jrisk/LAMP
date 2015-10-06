@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<code id="json-nest"></code>
+	<pre id="json-nest"></pre>
 	<hr><hr><br><br>
 	<p id="json-holder"></p>
 	<h1>Parsed and Sorted by Date:</h1>
@@ -38,15 +38,25 @@ $(function () {
 		url: 'plansort.php',
 		success: function(data) {
 
-			var JSONString = data;
+			var JSONString2 = JSON.parse(data);
+			
+			console.log(JSONString2);
+
+			var JSONString = JSON.stringify(JSONString2);
+
+			console.log(JSONString);
 
 			//var rep = /\[/g;
 
 			//var newString = JSONString.replace(rep, "{").replace(/\]/g, "}");
 
-			//var prettyString = JSON.stringify(newString, undefined, 2);
+			var parseString = JSON.parse(JSONString);
 
-			$('#json-nest').html(JSON.stringify(JSON.parse(JSONString), null, 6));
+			console.log(parseString);
+
+			var prettyString = JSON.stringify(parseString, undefined, 2);
+
+			$('#json-nest').html(prettyString);
 		},
 		error: function(errorThrown) {
 			$('#json-nest').html(errorThrown);
