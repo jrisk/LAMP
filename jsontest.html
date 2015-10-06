@@ -20,6 +20,7 @@
 </head>
 
 <body>
+	<h2 id="plans"></h2>
 	<pre id="json-nest"></pre>
 	<hr><hr><br><br>
 	<p id="json-holder"></p>
@@ -57,6 +58,18 @@ $(function () {
 			var prettyString = JSON.stringify(parseString, undefined, 2);
 
 			$('#json-nest').html(prettyString);
+
+			// very memory intensive looping here...considering refactoring,redoing
+
+			$.each(parseString, function(i, obj) {
+				$('#plans').append('<h3 class="planstuffhere">' + i);
+				
+				for (i = 0; i < obj.length; i++) {
+					$('#plans').append('<div class="well">' + obj[i].title +
+					'</div>');
+				}
+				$('#plans').append('</h3>');
+			});
 		},
 		error: function(errorThrown) {
 			$('#json-nest').html(errorThrown);
