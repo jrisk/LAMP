@@ -1,0 +1,50 @@
+<?php
+include("pdo.php");
+//Activities row in php, returns list of activities under a specific DATE
+
+// get the total number of DATES and iterate through each DAY OF THE WEEK in the subsequent loops
+// for total calendar view, getting all the DATES on page load 
+
+$new_activity = array();
+$date = array();
+$new_array = array();
+
+for ($i=0; $i <= ((count($result)) - 1); $i++) {
+    //check if plan has already been pushed into array
+    if (!(in_array(($result[$i]['Adate']), $date))) {
+    $date[$i] = $result[$i]['Adate'];
+
+    //save state of plan index for next check of similar plan names and inserting of activities
+    $saved = $date[$i];
+    //reset activity array for new association with new plan key
+    $new_activity = array();
+    //take the plan name and array position and check for other instances of plan name in result
+
+        for ($n=0; $n <= ((count($result)) - 1); $n++) {
+
+            //iterate through every instance of the saved DATE in the original result array
+
+            if ($result[$n]['Adate'] == $saved) {
+
+             $new_activity[] = array(
+                        'id' => $result[$n]['ID'],
+                        'title' => $result[$n]['Activity'],
+                        'date' => $result[$n]['Adate'],
+                        'start' => $result[$n]['Adate'] . 'T' . $result[$n]['Start'],
+                        'end' => $result[$n]['Adate'] . 'T' . $result[$n]['End'],
+                        'class' => $result[$n]['Class'],
+                        'plan' => $result[$n]['Plan'],
+                        );
+            //make the new associative array with the plan key and pair it with the activity array
+             $new_array[$saved] = $new_activity;
+            }
+        
+        }
+    }
+
+};
+
+//deleted the sort function for dates, can do sort in json javascript or usort once encoded in json
+echo json_encode($new_array); 
+
+?>

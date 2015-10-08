@@ -53,8 +53,18 @@
     </div>
 </div>
 
-<div id="preview-template" style="display: none;"></div>
+<div id="preview-template" style="display: none;">
+  <div class="dz-preview dz-file-preview">
+    <span data-dz-name></span>
+  <img data-dz-thumbnail />
+  <img src="" alt="remove file" data-dz-remove />
+</div>
+</div>
+<hr><hr>
 
+<div id="previews-container" class="dropzone-previews"></div>
+
+<hr><hr>
 
 <form class="dropzone" id="my-awesome-dropzone">
   <div class="fallback">
@@ -109,14 +119,12 @@ Dropzone.options.myAwesomeDropzone = {
   url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2, // MB
+  previewsContainer: '#previews-container',
+  previewTemplate: document.querySelector('#preview-template').innerHTML,
   accept: function(file, done) {
-    if (file.name == "justinbieber.jpg") {
-      done("Naha, you don't.");
+    console.log(file);
+    done();
     }
-    else { 
-      done(); 
-    }
-  }
 };
 
 
