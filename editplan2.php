@@ -53,11 +53,13 @@
     </div>
 </div>
 
+<div class="over-container">
 <div id="preview-template" style="display: none;">
   <div class="dz-preview dz-file-preview">
     <span data-dz-name></span>
   <img data-dz-thumbnail />
   <img src="" alt="remove file" data-dz-remove />
+</div>
 </div>
 </div>
 <hr><hr>
@@ -115,17 +117,27 @@ readTime(i);
 
 });
 
+var headerThis = 1234;
+
 Dropzone.options.myAwesomeDropzone = {
   url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2, // MB
   previewsContainer: '#previews-container',
   previewTemplate: document.querySelector('#preview-template').innerHTML,
+  clickable: true,
+  headers: { 'activityid': headerThis },
+  maxFiles: 3,
+  autoProcessQueue: false,
   accept: function(file, done) {
     console.log(file);
     done();
     }
 };
+
+$('#upload-form').on('click tap', function(e) {
+  Dropzone.processQueue();
+})
 
 
 

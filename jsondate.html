@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>JSON AGENDA VIEW BUILD 1.0</title>
+    <title>JSON AGENDA VIEW BUILD 2.0</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -36,12 +36,10 @@ $(function () {
 
 	$.ajax({
 		type: 'GET',
-		url: 'plansort.php',
+		url: 'datesort.php',
 		success: function(data) {
 
 			var JSONParse = JSON.parse(data);
-
-			//var JSONString = JSON.stringify(JSONParse);
 
 			//var prettyString = JSON.stringify(parseString, undefined, 2);
 
@@ -49,18 +47,10 @@ $(function () {
 
 			// very memory intensive looping here...considering refactoring,redoing
 
-			/*data.sort(function (a,b) {
-				if (a.date > b.date) {
-					return 1;
-					console.log(a); console.log(a.date);
-				}
-
-				if (a.date < b.date) {
-					return -1;
-				}
-
-				return 0;
-			}); */
+			/*JSONParse.sort(function (a,b) { // YOU CAN ONLY SORT AND ARRAY
+				// YOU CAN NOT SORT A JSON OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				return a.start - b.start;
+			});*/
 
 			console.log(JSONParse);
 
@@ -79,7 +69,7 @@ $(function () {
 				} */
 
 				$('#plans').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
-				$('#plans').append('<h3 id="plan-' + i + '" class="well well-sm planstuffhere">' + i +
+				$('#plans').append('<h3 id="plan-' + obj+ '" class="well well-sm planstuffhere">' + i +
 				'</h3>');
 
 				console.log(obj.length);
@@ -104,52 +94,6 @@ $(function () {
 			$('#json-nest').html(errorThrown);
 		}
 	});
-
-	$.ajax({
-		type: 'GET',
-		url: 'bigfeed.php',
-		success: function(data) {
-			
-			$('#json-holder').html(data);
-
-			var json2 = JSON.parse(data);
-
-			json2.sort(function (a,b) { 
-				if (a.start > b.start) {
-					return 1;
-					}
-				if (a.start < b.start) {
-					return -1;
-					}
-				return 0;
-			});
-
-			$('#json-new').html(JSON.stringify(json2));
-
-			//vanilla javascript would be better instead of each/create dom elements?
-			//jquery way...
-
-			$.each(json2, function(i, obj) {
-
-				var temp_plan = obj.plan;
-
-				$('#list-agenda').append('<li class="agenda-item" id="agenda-' + i + '">' + temp_plan + i + '</li>');
-
-			});
-
-		},
-
-
-		error: function(errorThrown) {
-		$('#json-holder').html(errorThrown);
-		}
-	});
-
-	function whatever() {
-		console.log("whatever");
-	};
-
-	setTimeout(whatever, 2000);
 
 })
 </script>

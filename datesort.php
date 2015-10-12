@@ -9,6 +9,8 @@ $new_activity = array();
 $date = array();
 $new_array = array();
 
+$big_array = array();
+
 for ($i=0; $i <= ((count($result)) - 1); $i++) {
     //check if plan has already been pushed into array
     if (!(in_array(($result[$i]['Adate']), $date))) {
@@ -38,13 +40,18 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
             //make the new associative array with the plan key and pair it with the activity array
              $new_array[$saved] = $new_activity;
             }
-        
         }
+
+        array_push($big_array, $new_array); // !!! put date sort in php serverside instead of jquery clientside?
     }
 
 };
 
 //deleted the sort function for dates, can do sort in json javascript or usort once encoded in json
-echo json_encode($new_array); 
+//print_r($big_array);
+// ksort the multiarray first here to get the dates in order before sending to jqueryscript
 
+ksort($new_array);
+
+echo json_encode($new_array);
 ?>

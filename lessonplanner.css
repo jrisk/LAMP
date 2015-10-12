@@ -15,16 +15,21 @@ div.page-header>*>* {
 	list-style-type: none;
 }
 
-#preview-container {
-	width: 500px;
+.over-container {
+	width: 400px;
 	height: 100px;
-	border: .2em solid black;
+	border: .4em solid blue;
 }
 
-#previews-container { /* container for dropzone thumbnails */
+#my-awesome-dropzone{
 	border: .2em solid black;
 	height: 100px;
-	width: 500px;
+	width: 200px;
+}
+#previews-container { /* container for dropzone thumbnails */
+	border: .2em solid green;
+	height: 100px;
+	width: 200px;
 }
 
 .planstuffhere {
