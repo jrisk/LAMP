@@ -37,12 +37,22 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
                         'class' => $result[$n]['Class'],
                         'plan' => $result[$n]['Plan'],
                         );
+
+             // sort the start-times in order of $array[$innerarray][$start]
+
+             //array_multisort($new_activity, SORT_DESC);
             //make the new associative array with the plan key and pair it with the activity array
-             $new_array[$saved] = $new_activity;
+
+             $new_array[$saved] = $new_activity; //unnecessary, new_activity is iterated and overwritten on each loop
             }
         }
 
-        array_push($big_array, $new_array); // !!! put date sort in php serverside instead of jquery clientside?
+        usort($new_activity, function($a, $b) {
+            // MUST CAST ISO 8601 TIME FORMAT WITH strtotime FUNCTION in PHP !!!
+                return strtotime($a['start']) - strtotime($b['start']);
+             });
+
+        $big_array[$saved] = $new_activity; // !!! put date sort in php serverside instead of jquery clientside?
     }
 
 };
@@ -51,7 +61,16 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
 //print_r($big_array);
 // ksort the multiarray first here to get the dates in order before sending to jqueryscript
 
-ksort($new_array);
+ksort($big_array); // sort key 
 
-echo json_encode($new_array);
+echo json_encode($big_array);
+
+/*foreach($new_array as $key => $row) {
+
+    for ($i = 0; $i < count($row); $i++) {
+    if ($new_array[$key][$]['start'] < $new_array[$key][$b]['start'] ? -1 : 1;
+
+    }
+}*/
+
 ?>
