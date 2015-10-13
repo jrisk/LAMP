@@ -22,13 +22,6 @@
 <body>
 	<h2 id="plans"></h2>
 	<pre id="json-nest"></pre>
-	<hr><hr><br><br>
-	<p id="json-holder"></p>
-	<h1>Parsed and Sorted by Date:</h1>
-		<p id="json-new"></p>
-	<h2 id="Agenda-Start">AGENDA</h2>
-	<ul id="list-agenda">
-	</ul>
 
 </body>
 <script>
@@ -69,16 +62,36 @@ $(function () {
 				} */
 
 				$('#plans').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
-				$('#plans').append('<h3 id="plan-' + obj+ '" class="well well-sm planstuffhere">' + i +
+				$('#plans').append('<h3 id="plan-' + obj[0].plan +
+				'" class="well well-sm planstuffhere">' + obj[0].plan +
 				'</h3>');
 
 				console.log(obj.length);
+
+				var temp;
+
+				obj[0].plan = temp;
 				
 				for (j = 0; j < obj.length; j++) {
+
+					if (obj[j].plan == temp) {
+
 					$('#plans').append('<div id="act-' + obj[j].id +
-					'" class="well well-sm activity-well">' + obj[j].title +
+					'" class="well well-sm activity-well">' + obj[j].title + "plan: " + obj[j].plan +
 					'</div>');
 					console.log(obj[j].title);
+
+					}
+
+					else {
+
+						temp = obj[j].plan;
+
+					$('#plans').append('<div id="act-' + obj[j].id +
+					'" class="well well-sm activity-well">' + obj[j].title + "plan: " + obj[j].plan +
+					'</div>');
+
+					}
 				}
 
 				iterplan++;

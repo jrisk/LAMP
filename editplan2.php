@@ -49,17 +49,13 @@
 </div>
 
 <div class="embed-styling-edit">
-    <div class="embed-responsive embed-responsive-16by9">
-    </div>
 </div>
 
-<div class="over-container">
 <div id="preview-template" style="display: none;">
   <div class="dz-preview dz-file-preview">
     <span data-dz-name></span>
-  <img data-dz-thumbnail />
-  <img src="" alt="remove file" data-dz-remove />
-</div>
+  <img class="dz-image-preview" data-dz-thumbnail />
+  <div data-dz-remove ></div>
 </div>
 </div>
 <hr><hr>
@@ -125,18 +121,30 @@ Dropzone.options.myAwesomeDropzone = {
   maxFilesize: 2, // MB
   previewsContainer: '#previews-container',
   previewTemplate: document.querySelector('#preview-template').innerHTML,
-  clickable: true,
+  clickable: '#previews-container',
   headers: { 'activityid': headerThis },
   maxFiles: 3,
-  autoProcessQueue: false,
+  autoProcessQueue: true,
   accept: function(file, done) {
     console.log(file);
     done();
+
+     var thisImage = file.name;
+
+     $('.embed-styling-edit').html('<img alt="did not work" src="uploads/' + thisImage + '" />');
+
+      console.log(thisImage);
+
     }
 };
 
 $('#upload-form').on('click tap', function(e) {
   Dropzone.processQueue();
+  var thisImage = $('.dz-image-preview').attr('src');
+
+    console.log(thisImage);
+
+    $('.embed-styling-edit').html('<img alt="did not work" src="' + thisImage + '" />');
 })
 
 

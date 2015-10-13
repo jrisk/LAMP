@@ -43,9 +43,18 @@ div.page-header>*>* {
 	cursor: pointer; cursor: hand;
 }
 
+#preview-template {
+	border: 0.2em solid red;
+}
+
 .embed-styling-edit {
-	height: 9em;
-	width: 16em;
+	height: 4em;
+	width: 4em;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
 }
 
 #embed-styling-dropzone {
