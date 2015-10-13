@@ -21,7 +21,7 @@
 
 <body>
 	<h2 id="plans"></h2>
-	<pre id="json-nest"></pre>
+	<div id="json-nest"></div>
 
 </body>
 <script>
@@ -66,18 +66,47 @@ $(function () {
 				'" class="well well-sm planstuffhere">' + obj[0].plan +
 				'</h3>');
 
+				//further seperate days into subplan-> activity combos
+
+				for (i = 0; i < obj.length; i++) {
+
+					var newtemp = obj[i].plan;
+
+					if (newtemp == oldtemp) { // if current plan equals the last plan
+						$('.' + stringpls).append('<h4 id="specificplan-' +
+						obj[i].title + '" class="specplanners">' + obj[i].title + '</h4>');
+
+					var oldtemp = obj[i].plan;
+
+					}
+
+					else { // it must be a new plan
+
+						var stringpls = "planning" + newtemp.replace(/\s/g, "-");
+						///always use the g flag to match ALL occurences, not just the first one
+
+						$('#json-nest').append('<h1 class="' + stringpls + '">' +
+							newtemp + '</h1><h3 id="specificplan-' +
+							obj[i].title + '" class="the-first-act-for-' + newtemp + '">' + obj[i].title + '</h3>');
+
+						var oldtemp = obj[i].plan;
+
+					}
+
+				}
+
 				console.log(obj.length);
-
-				var temp;
-
-				obj[0].plan = temp;
 				
 				for (j = 0; j < obj.length; j++) {
+
+					var temp;
+
+					temp = obj[j].plan;
 
 					if (obj[j].plan == temp) {
 
 					$('#plans').append('<div id="act-' + obj[j].id +
-					'" class="well well-sm activity-well">' + obj[j].title + "plan: " + obj[j].plan +
+					'" class="well well-sm activity-well">' + obj[j].title + 'the plan: ' + obj[j].plan +
 					'</div>');
 					console.log(obj[j].title);
 
