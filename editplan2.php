@@ -124,14 +124,16 @@ Dropzone.options.myAwesomeDropzone = {
   clickable: '#previews-container',
   headers: { 'activityid': headerThis },
   maxFiles: 3,
-  autoProcessQueue: true,
+  autoProcessQueue: false,
   accept: function(file, done) {
-    console.log(file);
-    done();
+    //done(); what does done() do?
 
-     var thisImage = file.name;
+      $('.dz-image-preview').attr('src').on('load', function() {
+        console.log($(this));
+      })
 
-     $('.embed-styling-edit').html('<img alt="did not work" src="uploads/' + thisImage + '" />');
+      $('.embed-styling-edit').html('<img alt="did not work at all" src="' + thisImage + '" />');
+      //console.log(data);
 
       console.log(thisImage);
 
@@ -144,7 +146,10 @@ $('#upload-form').on('click tap', function(e) {
 
     console.log(thisImage);
 
-    $('.embed-styling-edit').html('<img alt="did not work" src="' + thisImage + '" />');
+    $.get('/uploads/' + thisImage, function(data) {
+      $('.embed-styling-edit').html('<img alt="did not work at all" src="uploads/' + thisImage + '" />');
+
+    });
 })
 
 

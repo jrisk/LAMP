@@ -20,8 +20,10 @@
 </head>
 
 <body>
-	<h2 id="plans"></h2>
+	<div id="json-today">TODAY: </div>
+	<div id="json-past"></div>
 	<div id="json-nest"></div>
+	<h2 id="plans"></h2>
 
 </body>
 <script>
@@ -45,28 +47,41 @@ $(function () {
 				return a.start - b.start;
 			});*/
 
-			console.log(JSONParse);
+			var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-			var iterplan = 0; // iterate only the specific
+			console.log(JSONParse);
 
 			$.each(JSONParse, function(i, obj) {
 
-				/*for (i = 0; i < obj.length; i++) {
-					if (obj[i].date < obj[++i].date) {
-						return 1;
+				for (k = 0; k <= weekDays.length - 1; k++) {
+
+				var rawDate = i;
+
+				console.log('the i variable is: ' + i + 'or' + rawDate);
+
+				var Day = moment(rawDate).format('dddd');
+
+				var Today = moment().format('dddd');
+
+				var fullToday = moment().format('YYYY-MM-DD');
+		
+				if (Day == Today) {
+
+					console.log('the key is for today');
+					console.log('The Day of the rawDate is: ' + Day + '\nand Today\'s weekday is: ' + Today);
+					console.log('The Plans name is: ' + obj[0].plan)
 					}
 
-					if (obj[++i].date < obj[i].date {
-						return -1;
-					}
-				} */
+				}
 
-				$('#plans').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
+				$('#plans').append('<h2 id="plan-day planstuffhere">' + obj[0].date + '</h2>');
 				$('#plans').append('<h3 id="plan-' + obj[0].plan +
 				'" class="well well-sm planstuffhere">' + obj[0].plan +
 				'</h3>');
 
 				//further seperate days into subplan-> activity combos
+
+
 
 				for (i = 0; i < obj.length; i++) {
 
@@ -80,16 +95,54 @@ $(function () {
 
 					}
 
-					else { // it must be a new plan
+					else { // if no match, it must be a new plan since its given in order
+
+						if (Day == Today) {
 
 						var stringpls = "planning" + newtemp.replace(/\s/g, "-");
 						///always use the g flag to match ALL occurences, not just the first one
+
+						$('#json-today').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
+
+						$('#json-today').append('<h1 class="' + stringpls + '">' +
+							newtemp + '</h1><h3 id="specificplan-' +
+							obj[i].title + '" class="the-first-act-for-' + newtemp + '">' + obj[i].title + '</h3>');
+						var oldtemp = obj[i].plan;
+						//var todayplan = 1;
+
+						}	
+
+						else if (rawDate < fullToday) {
+
+							console.log((rawDate < fullToday));
+
+							var stringpls = "planning" + newtemp.replace(/\s/g, "-");
+							///always use the g flag to match ALL occurences, not just the first one
+
+						$('#json-past').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
+
+						$('#json-past').append('<h1 class="' + stringpls + '">' +
+							newtemp + '</h1><h3 id="specificplan-' +
+							obj[i].title + '" class="the-first-act-for-' + newtemp + '">' + obj[i].title + '</h3>');
+						var oldtemp = obj[i].plan;
+						
+
+						}
+
+						else {
+
+						var stringpls = "planning" + newtemp.replace(/\s/g, "-");
+						///always use the g flag to match ALL occurences, not just the first one
+
+						$('#json-nest').append('<div class="plan-day well well-sm planstuffhere">' + obj[0].date + '</h2>');
 
 						$('#json-nest').append('<h1 class="' + stringpls + '">' +
 							newtemp + '</h1><h3 id="specificplan-' +
 							obj[i].title + '" class="the-first-act-for-' + newtemp + '">' + obj[i].title + '</h3>');
 
 						var oldtemp = obj[i].plan;
+
+						}
 
 					}
 
@@ -122,16 +175,9 @@ $(function () {
 
 					}
 				}
-
-				iterplan++;
 			});
-
-			console.log(iterplan);
-
-			//$('.acts-group').hide();
-
-			//$
 		},
+
 		error: function(errorThrown) {
 			$('#json-nest').html(errorThrown);
 		}

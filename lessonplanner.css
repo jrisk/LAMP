@@ -9,6 +9,9 @@ div.page-header>*>* {
 	margin-top: 0;
 }
 
+#json-past {
+	display: none;
+}
 .agenda-item {
 	border: .2em solid black;
 	color: green;
