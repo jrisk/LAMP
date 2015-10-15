@@ -1,13 +1,34 @@
-@solid-blue: #06f
 
+/* these vars can be lazy loaded */
 
+@easy-blue: #06f;
+@soft-cyan: #C6E2FF;
+@soft-pink: #FFD1B3;
+@soft-green: #D0EE96;
+@skin-pink: #FFDEAD;
+@wine: #d9534f;
+@sky-blue: #BFE9FF;
+@light-green: #99FF66;
+@white-blue: #E0FFFF;
+@salmon: #FFA07A;
 
-div.page-header {
-	background-color: #06f;
-	font-family: "Montserrat Alternates",sans-serif;
-    box-shadow: 0 0.2em 0.4em gray;
-    margin-top: 0;
+div {
+
+	.page-header {
+
+		background-color: #06f;
+		font-family: "Montserrat Alternates",sans-serif;
+	    box-shadow: 0 0.2em 0.4em gray;
+	    margin-top: 0; 
+
+	    * {
+
+    		color: white;
+			margin-top: 0;
+    	}
+	}
 }
+
 div.page-header>*>* {
 	color: white;
 	margin-top: 0;
@@ -43,6 +64,12 @@ div.page-header>*>* {
 	font-family: "Karla",sans-serif;
 	border: .01em groove #999;
 	box-shadow: 0.2em 0em 0.2em #999;
+	
+	&:hover {
+	background-color: #C6E2FF;
+	cursor: pointer; cursor: hand;
+
+	}
 }
 
 .planstuffhere:hover {
@@ -71,37 +98,37 @@ img {
 }
 
 .plan-holder { /* light blue */
-	background-color: #C6E2FF;
+	background-color: @soft-cyan;
 	box-shadow: 0 0.2em 0.4em #999;
 }
 
 #well-plan {
-	background-color: #C6E2FF;
+	.well-acts;
 	height: .1em;
 }
 
 #well-class {
-	background-color: #FFD1B3;
+	.well-starts;
 	height: .1em;
 }
 
 #well-date {
-	background-color: #D0EE96;
+	.well-ends;
 	height: .1em;
 }
 
 .well-acts {
 
-background-color: #C6E2FF;
+background-color: @soft-cyan;
 
 }
 
 .well-starts {
-	background-color: #FFD1B3;
+	background-color: @soft-pink;
 }
 
 .well-ends {
-	background-color: #D0EE96;
+	background-color: @soft-green;
 }
 
 .well-sm {
@@ -111,32 +138,32 @@ background-color: #C6E2FF;
 }
 
 .well-options {
-	background-color: #d9534f;
+	background-color: @wine;
 	color: white;
 }
 
 #Class-Icon {
-	background-color: #FFD1B3;
+	.well-starts;
 }
 
 #Plan-Icon {
-	background-color: #BFE9FF;
+	background-color: @sky-blue;
 }
 
 #Date-Icon {
-	background-color: #D0EE96;
+	background-color: @soft-green;
 }
 
 #Activity-Icon {
-	background-color: #bfe9ff;
+	background-color: @sky-blue;
 }
 
 #Start-Icon {
-	background-color: #FFD1B3;
+	background-color: @soft-pink;
 }
 
 #End-Icon {
-	background-color: #D0EE96;
+	.well-ends;
 }
 
 #overlay-div {
@@ -162,8 +189,10 @@ background-color: #C6E2FF;
 .calendar-table {
 } /*- throws off the overlaying div for now */
 
-.overlay.fixed {
+.overlay {
+	.fixed {
 	position: fixed;
+	}
 }
 
 .inner-help-div {
@@ -171,7 +200,7 @@ background-color: #C6E2FF;
 }
 
 #enteractivity {
-	color: #99FF66;
+	color: @light-green;
 }
 
 .Activity-Time {
@@ -179,38 +208,22 @@ background-color: #C6E2FF;
 }
 
 .durater {
-	color: #FFCC33;
+	color: gold;
 }
 
 .well-watch {
-	background-color: #E0FFFF;
+	background-color: @white-blue;
 }
 
 .well-inside {
-	background-color: #FFDEAD;
+	background-color: @skin-pink;
 }
 
 .well-edit {
-	background-color: #FFA07A;
+	background-color: @salmon;
 }
 
 .well-blue {
-	background-color: #06f;
+	background-color: @easy-blue;
 	color: white;
 }
-
-/* styling for button .btn-lg {
-	color: #06f;
-	font-family: "Montserrat Alternates", sans-serif
-} */
-
-.otext {
-	color: #F90;
-}
-
-/*@media screen and (max-width: 500px) {
-	.well {
-	background-color: green;
-	font-size: 20pt;	
-	}
-}/*
