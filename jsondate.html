@@ -97,9 +97,11 @@ $(function () {
 
 					else { // if no match, it must be a new plan since its given in order
 
-						if (Day == Today) {
+						//make sure any activity goes under the correct sub-div
 
 						var stringpls = "planning" + newtemp.replace(/\s/g, "-");
+
+						if (Day == Today) {
 						///always use the g flag to match ALL occurences, not just the first one
 
 						$('#json-today').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
@@ -114,11 +116,6 @@ $(function () {
 
 						else if (rawDate < fullToday) {
 
-							console.log((rawDate < fullToday));
-
-							var stringpls = "planning" + newtemp.replace(/\s/g, "-");
-							///always use the g flag to match ALL occurences, not just the first one
-
 						$('#json-past').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
 
 						$('#json-past').append('<h1 class="' + stringpls + '">' +
@@ -130,9 +127,6 @@ $(function () {
 						}
 
 						else {
-
-						var stringpls = "planning" + newtemp.replace(/\s/g, "-");
-						///always use the g flag to match ALL occurences, not just the first one
 
 						$('#json-nest').append('<div class="plan-day well well-sm planstuffhere">' + obj[0].date + '</h2>');
 
