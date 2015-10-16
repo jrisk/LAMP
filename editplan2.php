@@ -51,14 +51,17 @@
 <div class="embed-styling-edit">
 </div>
 
-<div id="preview-template" style="display: none;">
-  <div class="dz-preview dz-file-preview">
-    <span data-dz-name></span>
-  <img class="dz-image-preview" data-dz-thumbnail />
-  <div data-dz-remove ></div>
-</div>
-</div>
 <hr><hr>
+
+<div id="preview-template" style="display: none;">
+<div class="dz-preview dz-file-preview">
+  <div class="dz-details">
+    <div class="dz-filename"><span data-dz-name></span></div>
+    <div class="dz-size" data-dz-size></div>
+    <img data-dz-thumbnail />
+  </div>
+</div>
+</div>
 
 <div id="previews-container" class="dropzone-previews"></div>
 
@@ -109,7 +112,42 @@ for (i = 0; i < ('.start-time-plans').length; i++) {
 readTime(i);
 };
 
+$('#upload-form').on('click tap', function(e) {
 
+    console.log(thisImage);
+
+    /*$.get('/uploads/' + thisImage, function(data) {
+      $('.embed-styling-edit').html('<img alt="did not work at all" src="' + thisImage + '" />');
+
+    });*/
+
+    Dropzone.processQueue();
+
+    e.preventDefault();
+});
+
+$('.plan-holder').attr('id', 'previews-container').addClass('dropzone dropzone-previews');
+
+$('.plan-holder').on('click', function(e) {
+
+  //.attr('id', 'my-awesome-specific-dropzone');
+  //Dropzone.options.this = {
+    // make it so the preview element goes into the targeted dropzone
+    // }
+    // or programmtically
+    // $('mydiv').dropzone({
+      // url: blah lah
+      //previewTemplate = specifically in this one now
+      //}
+   // })
+
+  console.log(this);
+
+  console.log(" i was clicked");
+
+  console.log(this.element);
+
+})
 
 });
 
@@ -124,33 +162,16 @@ Dropzone.options.myAwesomeDropzone = {
   clickable: '#previews-container',
   headers: { 'activityid': headerThis },
   maxFiles: 3,
-  autoProcessQueue: false,
+  autoProcessQueue: true,
   accept: function(file, done) {
-    //done(); what does done() do?
+    console.log(file);
 
-      $('.dz-image-preview').attr('src').on('load', function() {
-        console.log($(this));
-      })
+    console.log(this);
 
-      $('.embed-styling-edit').html('<img alt="did not work at all" src="' + thisImage + '" />');
-      //console.log(data);
-
-      console.log(thisImage);
-
-    }
-};
-
-$('#upload-form').on('click tap', function(e) {
-  Dropzone.processQueue();
-  var thisImage = $('.dz-image-preview').attr('src');
-
-    console.log(thisImage);
-
-    $.get('/uploads/' + thisImage, function(data) {
-      $('.embed-styling-edit').html('<img alt="did not work at all" src="uploads/' + thisImage + '" />');
-
-    });
-})
+    var block_preview = this.options.previewTemplate;
+      }
+      //console.log(thisImage);
+  };
 
 
 
