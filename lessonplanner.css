@@ -35,6 +35,11 @@ div.page-header>*>* {
 	width: 200px;
 }
 
+#preview-template {
+	height: 200px;
+	width: 200px;
+}
+
 .planstuffhere {
 	font-family: "Karla",sans-serif;
 	border: .01em groove #999;

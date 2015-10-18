@@ -53,16 +53,6 @@
 
 <hr><hr>
 
-<div id="preview-template" style="display: none;">
-<div class="dz-preview dz-file-preview">
-  <div class="dz-details">
-    <div class="dz-filename"><span data-dz-name></span></div>
-    <div class="dz-size" data-dz-size></div>
-    <img data-dz-thumbnail />
-  </div>
-</div>
-</div>
-
 <div id="previews-container" class="dropzone-previews"></div>
 
 <hr><hr>
@@ -126,7 +116,33 @@ $('#upload-form').on('click tap', function(e) {
     e.preventDefault();
 });
 
-$('.plan-holder').attr('id', 'previews-container').addClass('dropzone dropzone-previews');
+//$('.plan-holder').attr('id', 'previews-container').addClass('dropzone dropzone-previews');
+
+$('.plan-holder').dropzone({
+
+  url: 'upload.php',
+  paramName: "file", // The name that will be used to transfer the file
+  parallelUploads: 1,
+  maxFilesize: 2, // MB
+  previewsContainer: '#previews-container',
+  previewTemplate: '<div id="preview-template" style="display: none;">'
+    + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
+    + '<div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size>'
+    + '</div><img data-dz-thumbnail /></div></div></div>',
+  //clickable: this,
+  headers: { 'activityid': headerThis },
+  clickable: '#previews-container',
+  maxFiles: 3,
+  autoProcessQueue: true,
+  accept: function(file, done) {
+    console.log(file);
+
+    console.log($(this).html());
+
+    var block_preview = this.options.previewTemplate;
+      }
+
+});
 
 $('.plan-holder').on('click', function(e) {
 
@@ -153,12 +169,15 @@ $('.plan-holder').on('click', function(e) {
 
 var headerThis = 1234;
 
-Dropzone.options.myAwesomeDropzone = {
+/*Dropzone.options.myAwesomeDropzone = {
   url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2, // MB
   previewsContainer: '#previews-container',
-  previewTemplate: document.querySelector('#preview-template').innerHTML,
+  previewTemplate: '<div id="preview-template" style="display: none;">'
+    + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
+    + '<div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size>'
+    + '</div><img data-dz-thumbnail /></div></div></div>',
   clickable: '#previews-container',
   headers: { 'activityid': headerThis },
   maxFiles: 3,
@@ -171,7 +190,7 @@ Dropzone.options.myAwesomeDropzone = {
     var block_preview = this.options.previewTemplate;
       }
       //console.log(thisImage);
-  };
+  }; */
 
 
 

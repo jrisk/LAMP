@@ -55,7 +55,7 @@
         <!-- insert activity of specific plan and media upload option -->
   </div>
       <div class="modal-footer">
-              <form class="dropzone" id="pop-awesome-dropzone">
+              <form class="dropzone" action="upload.php" id="pop-awesome-dropzone">
               <div class="fallback">
                 <input name="file" type="file" multiple />
               </div>
@@ -70,19 +70,51 @@
 
 <script>
 
-Dropzone.options.popAwesomeDropzone = {
+$(function () {
+
+/*Dropzone.options.popAwesomeDropzone = {
   url: 'upload.php',
   paramName: "file", // The name that will be used to transfer the file
-  maxFilesize: 2 // MB
+  parallelUploads: 10,
+  maxFilesize: 2, // MB
+  autoProcessQueue: true,
+  init: function() {
+    var popAwesomeDropzone = this;
+    console.log(popAwesomeDropzone);
+    document.getElementById('upload-form').onclick = function(event) {
+    event.preventDefault();
+    popAwesomeDropzone.processQueue();
+    console.log("im being pressed");
+  };
+  },
    accept: function(file, done) {
     console.log(file.name);
     if (file.name == "justinbieber.jpg") {
       console.log("test jb.jpg");
     }
     else { 
+      console.log(file);
     }
   }
-}
+}; */
+
+$("pop-awesome-dropzone").dropzone({ 
+  url: "upload.php",
+  autoProcessQueue: false,
+  accept: function(done, file) {
+    console.log(file.name);
+  },
+  init: function() {
+    var popzone = this;
+    $('#upload-form').on('click tap', function(e) {
+    e.preventDefault();
+    console.log(this);
+    this.processQueue();
+  });
+  }
+ });
+
+})
 
 </script>
 </body>
