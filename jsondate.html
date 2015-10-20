@@ -21,6 +21,7 @@
 
 <body>
 	<div id="json-today">TODAY: </div>
+	<div id="json-repeat"></div>
 	<div id="json-past"></div>
 	<div id="json-nest"></div>
 	<h2 id="plans"></h2>
@@ -69,7 +70,7 @@ $(function () {
 
 					console.log('the key is for today');
 					console.log('The Day of the rawDate is: ' + Day + '\nand Today\'s weekday is: ' + Today);
-					console.log('The Plans name is: ' + obj[0].plan)
+					console.log('The Plans name is: ' + obj[0].plan);
 					}
 
 				}
@@ -103,6 +104,9 @@ $(function () {
 
 						if (Day == Today) {
 						///always use the g flag to match ALL occurences, not just the first one
+
+						$('#json-repeat').append('<h2>' + Today + '\'s Plans</h2>');
+						$('#json-repeat').append('<h3>The Plans name is: ' + obj[0].plan + '</h3>');
 
 						$('#json-today').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
 

@@ -100,44 +100,71 @@ $(function () {
   }
 }; */
 
+var called = 0;
+
+Dropzone.autoDiscover = false;
+
 $("#pop-awesome-dropzone").dropzone({ 
-  init: function() {
-    $('#upload-form').on('click tap', function(e) {
-    e.preventDefault();
-    console.log(this);
-    this.processQueue();
-  });
-  },
-  url: "./upload.php",
-  autoProcessQueue: false,
-  clickable: true,
+  url: 'upload.php',
+  parallelUploads: 5,
+  paramName: 'file',
+  autoProcessQueue: true,
+  clickable: '#previews-container',
   previewsContainer: '#previews-container',
   previewTemplate: '<div id="preview-template">'
-    + '<div class="dz-preview"><div class="dz-details">'
+    + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
     + '<div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size>'
     + '</div><img data-dz-thumbnail /></div></div></div>',
-  thumbnailWidth: 110,
-  thumbnailHeight: 120,
+  thumbnailWidth: 100,
+  thumbnailHeight: 100,
   resize: function(file) {
+
     var resizeInfo = {
       srcX: 0,
       srcY: 0,
-      trgX: 5,
-      trgY: 5,
+      trgX: 0,
+      trgY: 0,
       srcWidth: file.width,
       srcHeight: file.height,
       trgWidth: this.options.thumbnailWidth,
       trgHeight: this.options.thumbnailHeight
     };
 
+    console.log(resizeInfo);
+
+    console.log(called);
+
+    called += 100;
+
     return resizeInfo;
+
+  },
+  init: function() {
+
+    var dropper = this;
+    console.log(dropper);
+
+    this.on('addedfile', function() {
+      console.log("file added");
+      console.log(this);
+      console.log(dropper);
+      console.log(this.processQueue());
+    });
+
+    this.on('#upload-form', 'click tap', function(e) {
+    e.preventDefault();
+    console.log(dropper);
+    dropper.processQueue();
+    console.log("wtf");
+
+    });
   },
   accept: function(done, file) {
     console.log(file.name);
   }
- });
+});
 
-})
+});
 
 </script>
 </body>
