@@ -24,6 +24,10 @@ div.page-header>*>* {
 	border: .4em solid blue;
 }
 
+#pop-awesome-dropzone {
+	background-color: #C6E2FF;
+}
+
 #my-awesome-dropzone{
 	border: .2em solid black;
 	height: 100px;
@@ -32,12 +36,7 @@ div.page-header>*>* {
 #previews-container { /* container for dropzone thumbnails */
 	border: .2em solid green;
 	height: 100px;
-	width: 200px;
-}
-
-#preview-template {
-	height: 200px;
-	width: 200px;
+	width: 800px;
 }
 
 .planstuffhere {
@@ -53,6 +52,10 @@ div.page-header>*>* {
 
 #preview-template {
 	border: 0.2em solid red;
+	width: 100px;
+	height: 100px;
+	position: absolute,
+	right: 100px;
 }
 
 .embed-styling-edit {

@@ -55,12 +55,14 @@
         <!-- insert activity of specific plan and media upload option -->
   </div>
       <div class="modal-footer">
-              <form class="dropzone" action="upload.php" id="pop-awesome-dropzone">
+              <form class="dropzone" action="upload.php" enctype="multipart/form-data" id="pop-awesome-dropzone">
+              <button id="upload-form">Upload</button>
               <div class="fallback">
                 <input name="file" type="file" multiple />
               </div>
-              <button id="upload-form">Upload</button>
-              </form>
+
+              <div id="previews-container" class="dropzone-previews"></div>
+        </form>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -98,19 +100,40 @@ $(function () {
   }
 }; */
 
-$("pop-awesome-dropzone").dropzone({ 
-  url: "upload.php",
-  autoProcessQueue: false,
-  accept: function(done, file) {
-    console.log(file.name);
-  },
+$("#pop-awesome-dropzone").dropzone({ 
   init: function() {
-    var popzone = this;
     $('#upload-form').on('click tap', function(e) {
     e.preventDefault();
     console.log(this);
     this.processQueue();
   });
+  },
+  url: "./upload.php",
+  autoProcessQueue: false,
+  clickable: true,
+  previewsContainer: '#previews-container',
+  previewTemplate: '<div id="preview-template">'
+    + '<div class="dz-preview"><div class="dz-details">'
+    + '<div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size>'
+    + '</div><img data-dz-thumbnail /></div></div></div>',
+  thumbnailWidth: 110,
+  thumbnailHeight: 120,
+  resize: function(file) {
+    var resizeInfo = {
+      srcX: 0,
+      srcY: 0,
+      trgX: 5,
+      trgY: 5,
+      srcWidth: file.width,
+      srcHeight: file.height,
+      trgWidth: this.options.thumbnailWidth,
+      trgHeight: this.options.thumbnailHeight
+    };
+
+    return resizeInfo;
+  },
+  accept: function(done, file) {
+    console.log(file.name);
   }
  });
 
