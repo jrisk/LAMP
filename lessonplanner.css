@@ -39,6 +39,10 @@ div.page-header>*>* {
 	width: 800px;
 }
 
+.plan-big:hover {
+	cursor: pointer; cursor: hand;
+}
+
 .planstuffhere {
 	font-family: "Karla",sans-serif;
 	border: .01em groove #999;
