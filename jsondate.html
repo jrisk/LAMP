@@ -99,11 +99,14 @@ $(function () {
 
 						if (planDate == fullToday) {
 
-							$('#json-today').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
+							$('#json-today').append('<h2 id="plan-day">'
+							+ obj[0].date + '</h2>');
 
-							$('#json-today').append('<h1 id="' + stringpls + '" class="plan-big">' +
-							newtemp + '</h1><h3 id="specificplan-' +
-							titleParse + '" class="specplanners the-first-act-for-' + newtemp + '">'
+							$('#json-today').append('<h1 id="' + stringpls + '" class="plan-big well well-sm">' +
+							newtemp + '</h1>');
+
+							$('#' + stringpls).append('<h3 id="specificplan-'
+							+ obj[i].title + '" class="specplanners the-first-act">'
 							+ obj[i].title + '</h3>');
 
 							var oldtemp = obj[i].plan;
@@ -113,14 +116,14 @@ $(function () {
 
 						else if (planDate > fullToday) {
 
-						$('#json-future').append('<div class="plan-day well well-sm planstuffhere">'
+						$('#json-future').append('<div class="plan-day">'
 							+ obj[0].date + '</div>');
 
-						$('#json-future').append('<h1 id = "' + stringpls + '" class="plan-big">'
+						$('#json-future').append('<h1 id = "' + stringpls + '" class="plan-big well well-sm">'
 							+ newtemp + '</h1>')
 
 						$('#' + stringpls).append('<h3 id="specificplan-'
-							+ obj[i].title + '" class="specplanners the-first-act-for-' + newtemp + '">'
+							+ obj[i].title + '" class="specplanners the-first-act">'
 							+ obj[i].title + '</h3>');
 
 						var oldtemp = obj[i].plan;
@@ -134,9 +137,12 @@ $(function () {
 
 						$('#json-past').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
 
-						$('#json-past').append('<h1 id="' + stringpls + '" class="plan-big">'
-							+ newtemp + '</h1><h3 id="specificplan-' +
-							obj[i].title + '" class="the-first-act-for-' + newtemp + '">' + obj[i].title + '</h3>');
+						$('#json-past').append('<h1 id="' + stringpls + '" class="plan-big well well-sm">'
+							+ newtemp + '</h1>');
+
+						$('#' + stringpls).append('<h3 id="specificplan-'
+							+ obj[i].title + '" class="specplanners the-first-act">'
+							+ obj[i].title + '</h3>');
 							
 							var oldtemp = obj[i].plan;
 				
@@ -160,9 +166,9 @@ $(function () {
 
 			});
 
-			$('.plan-big *').hide();
+			$('.plan-big *').hide(); //hide the activities of each plan
 
-			$('.plan-big').on('click tap', function(e) {
+			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				e.preventDefault();
 				$(this).children().toggle("slow");
 			});

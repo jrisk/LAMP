@@ -55,7 +55,7 @@
         <!-- insert activity of specific plan and media upload option -->
   </div>
       <div class="modal-footer">
-              <form class="dropzone" action="upload.php" enctype="multipart/form-data" id="pop-awesome-dropzone">
+              <form class="dropzone" id="pop-awesome-dropzone">
               <button id="upload-form">Upload</button>
               <div class="fallback">
                 <input name="file" type="file" multiple />
@@ -105,10 +105,35 @@ var called = 0;
 Dropzone.autoDiscover = false;
 
 $("#pop-awesome-dropzone").dropzone({ 
+  init: function() {
+
+    var dropper = this;
+    console.log(dropper);
+
+    $('#upload-form').on('click tap', function(e) {
+      e.preventDefault();
+      console.log(dropper);
+      dropper.processQueue();
+    });
+
+    this.on('addedfile', function() {
+      console.log("file added");
+    });
+
+    this.on('success', function() {
+      $('#previews-container').html("uploaded successfully");
+    });
+
+    this.on('#upload-form', 'click tap', function(e) {
+      e.preventDefault();
+      this.processQueue();
+    });
+  },
   url: 'upload.php',
-  parallelUploads: 5,
-  paramName: 'file',
-  autoProcessQueue: true,
+  parallelUploads: 1,
+  //maxFiles: 1,
+  paramName: "file",
+  autoProcessQueue: false,
   clickable: '#previews-container',
   previewsContainer: '#previews-container',
   previewTemplate: '<div id="preview-template">'
@@ -130,37 +155,13 @@ $("#pop-awesome-dropzone").dropzone({
       trgHeight: this.options.thumbnailHeight
     };
 
-    console.log(resizeInfo);
-
-    console.log(called);
-
-    called += 100;
-
     return resizeInfo;
 
   },
-  init: function() {
-
-    var dropper = this;
-    console.log(dropper);
-
-    this.on('addedfile', function() {
-      console.log("file added");
-      console.log(this);
-      console.log(dropper);
-      console.log(this.processQueue());
-    });
-
-    this.on('#upload-form', 'click tap', function(e) {
-    e.preventDefault();
-    console.log(dropper);
-    dropper.processQueue();
-    console.log("wtf");
-
-    });
-  },
-  accept: function(done, file) {
+  accept: function(file, done) {
     console.log(file.name);
+    console.log(file);
+    done();
   }
 });
 
