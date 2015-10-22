@@ -33,14 +33,26 @@ type="text/javascript"></script> -->
 <script>
 $(function () {
 
+	function appendActs(elem, objec, stringpls, titleParse, newtemp) {
+
+	$(elem).append('<h2 id="plan-day">'
+		+ objec[0].date + '</h2>');
+
+		$(elem).append('<h1 id="' + stringpls + '" class="plan-big well well-sm">'
+		+ newtemp + '</h1>');
+
+		$('#' + stringpls).append('<h3 id="specificplan-'
+		+ objec[i].title + '" class="specplanners the-first-act">'
+		+ objec[i].title + '</h3>');
+
+	};
+
 	$.ajax({
 		type: 'GET',
 		url: 'datesort.php',
 		success: function(data) {
 
 			var JSONParse = JSON.parse(data);
-
-			console.log(JSONParse._proto_);
 
 			//var prettyString = JSON.stringify(parseString, undefined, 2);
 
@@ -68,8 +80,9 @@ $(function () {
 					var newtemp = obj[i].plan;
 
 					if (newtemp == oldtemp) { // if current plan equals the last plan
-						$('#' + stringpls).append('<h3 id="specificplan-' +
-						obj[i].title + '" class="specplanners">' + obj[i].title + '</h3>');
+						$('#' + stringpls).append('<h3 id="specificplan-'
+						+ obj[i].title + '" class="specplanners">'
+						+ obj[i].title + 'this = last plan</h3>');
 
 					var oldtemp = obj[i].plan;
 
@@ -99,34 +112,14 @@ $(function () {
 
 						if (planDate == fullToday) {
 
-							$('#json-today').append('<h2 id="plan-day">'
-							+ obj[0].date + '</h2>');
-
-							$('#json-today').append('<h1 id="' + stringpls + '" class="plan-big well well-sm">' +
-							newtemp + '</h1>');
-
-							$('#' + stringpls).append('<h3 id="specificplan-'
-							+ obj[i].title + '" class="specplanners the-first-act">'
-							+ obj[i].title + '</h3>');
-
-							var oldtemp = obj[i].plan;
+							appendActs('#json-today', obj, stringpls, titleParse, newtemp);
 						}
 
 						// If The Plan is "more than today's date" or in the future, continue on to next div after today
 
 						else if (planDate > fullToday) {
 
-						$('#json-future').append('<div class="plan-day">'
-							+ obj[0].date + '</div>');
-
-						$('#json-future').append('<h1 id = "' + stringpls + '" class="plan-big well well-sm">'
-							+ newtemp + '</h1>')
-
-						$('#' + stringpls).append('<h3 id="specificplan-'
-							+ obj[i].title + '" class="specplanners the-first-act">'
-							+ obj[i].title + '</h3>');
-
-						var oldtemp = obj[i].plan;
+							appendActs('#json-future', obj, stringpls, titleParse, newtemp);
 
 						}
 
@@ -135,16 +128,7 @@ $(function () {
 
 						else { // (planDate < fullToday)
 
-						$('#json-past').append('<h2 id="plan-day">' + obj[0].date + '</h2>');
-
-						$('#json-past').append('<h1 id="' + stringpls + '" class="plan-big well well-sm">'
-							+ newtemp + '</h1>');
-
-						$('#' + stringpls).append('<h3 id="specificplan-'
-							+ obj[i].title + '" class="specplanners the-first-act">'
-							+ obj[i].title + '</h3>');
-							
-							var oldtemp = obj[i].plan;
+							appendActs('#json-past', obj, stringpls, titleParse, newtemp);
 				
 						}
 
@@ -158,9 +142,11 @@ $(function () {
 						$('#json-repeat').append('<h2>' + Today + '\'s Plans</h2>');
 						$('#json-repeat').append('<h3>The Plans name is: ' + obj[0].plan + '</h3>');
 						
-						var oldtemp = obj[i].plan;
+						//var oldtemp = obj[i].plan;
 						//var todayplan = 1;
-						}	
+						}
+
+						var oldtemp = obj[i].plan;
 					}
 				}
 

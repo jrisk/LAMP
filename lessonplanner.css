@@ -10,7 +10,7 @@ div.page-header>*>* {
 }
 
 #json-past {
-	display: none;
+	/* display: none; */
 }
 .agenda-item {
 	border: .2em solid black;
@@ -33,12 +33,27 @@ div.page-header>*>* {
 	height: 100px;
 	width: 200px;
 }
+
+.dz-filename {
+	position: absolute;
+	background-color: red;
+	max-width: 100px;
+	width: 100px;
+}
 #previews-container { /* container for dropzone thumbnails */
 	border: .2em solid green;
 	height: 100px;
 	width: 800px;
 }
 
+#preview-template {
+	border: 0.2em solid red;
+	width: 100px;
+	height: 100px;
+	position: absolute,
+	right: 100px;
+	float: left;
+}
 .plan-big:hover {
 	cursor: pointer; cursor: hand;
 }
@@ -52,15 +67,6 @@ div.page-header>*>* {
 .planstuffhere:hover {
 	background-color: #C6E2FF;
 	cursor: pointer; cursor: hand;
-}
-
-#preview-template {
-	border: 0.2em solid red;
-	width: 100px;
-	height: 100px;
-	position: absolute,
-	right: 100px;
-	float: left;
 }
 
 .embed-styling-edit {

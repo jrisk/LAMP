@@ -8,7 +8,11 @@ if (!empty($_FILES)) {
      
     $tempFile = $_FILES['file']['tmp_name'];          //3     
 
-    var_dump(get_meta_tags($tempFile));        
+    $tempTest = $_FILES['file'];
+
+    var_dump($tempTest);
+
+    var_dump(get_meta_tags($tempTest));        
       
     $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
      

@@ -120,8 +120,8 @@ $("#pop-awesome-dropzone").dropzone({
       console.log("file added");
     });
 
-    this.on('success', function() {
-      $('#previews-container').html("uploaded successfully");
+    this.on('complete', function(file) {
+      dropper.removeFile(file);
     });
 
     this.on('#upload-form', 'click tap', function(e) {
@@ -130,16 +130,17 @@ $("#pop-awesome-dropzone").dropzone({
     });
   },
   url: 'upload.php',
-  parallelUploads: 1,
-  //maxFiles: 1,
+  parallelUploads: 5,
+  maxFiles: 5,
+  maxFilesize: 2, //MB
   paramName: "file",
   autoProcessQueue: false,
   clickable: '#previews-container',
   previewsContainer: '#previews-container',
   previewTemplate: '<div id="preview-template">'
     + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
-    + '<div class="dz-filename"><span data-dz-name></span></div><div class="dz-size" data-dz-size>'
-    + '</div><img data-dz-thumbnail /></div></div></div>',
+    + '<div class="dz-filename"><span data-dz-name></span></div>'
+    + '<img data-dz-thumbnail /></div></div></div>',
   thumbnailWidth: 100,
   thumbnailHeight: 100,
   resize: function(file) {
