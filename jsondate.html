@@ -50,13 +50,13 @@ $(function () {
 		//+ moment(objec[i].start).format('HH:mm a')
 		//+ '</div></div>');
 
-		$('#' + stringpls).append('<div class="row" id="' + objec[i].id + '">'
+		$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + objec[i].id + '">'
 		+ '<div class="small-type col-xs-4 col-sm-2">'
 		+ moment(objec[i].start).format('HH:mm a') + '-'
 		+ moment(objec[i].end).format('HH:mm a') + '</div><div id="specificplan-'
-		+ objec[i].title + '" class="specplanners the-first-act col-xs-8 col-sm-6">'
+		+ objec[i].title + '" class="specplanners the-first-act col-xs-8 col-sm-8">'
 		+ objec[i].title + '</div>'
-		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-4" </div>');
+		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-2" </div>');
 
 	};
 
@@ -96,14 +96,14 @@ $(function () {
 
 					if (newtemp == oldtemp) { // if current plan equals the last plan
 
-						$('#' + stringpls).append('<div class="row" id="' + obj[i].id + '">'
+						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
 						+ '<div class="small-type col-xs-6 col-sm-2">'
 						+ moment(obj[i].start).format('HH:mm a') + '-'
 						+ moment(obj[i].end).format('HH:mm a') + '</div>'
 						+ '<div id="specificplan-'
-						+ obj[i].title + '" class="specplanners col-xs-6 col-sm-6">'
+						+ obj[i].title + '" class="specplanners col-xs-6 col-sm-8">'
 						+ obj[i].title + '</div>'
-						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-4" </div>');
+						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-2" </div>');
 
 					var oldtemp = obj[i].plan;
 
@@ -185,11 +185,13 @@ $(function () {
 				$('#json-today').append('<div class="well-sm">No Plans or Files</div>');
 			}
 
+			// hide all plans except for the first of the day or current time-based plan
 			$('.plan-big').children().hide(); //hide the activities of each plan
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				e.preventDefault();
 				$(this).children().toggle("slow");
+				// show media object line box $(this).
 			});
 		},
 
