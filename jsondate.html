@@ -22,28 +22,41 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
-	<div id="json-today">TODAY'S DATE: </div>
-	<div id="json-future">Future Plans</div>
-	<div id="json-repeat"></div>
-	<div id="json-past"></div>
-	<div id="json-nest"></div>
+	<div class="container-fluid" id="json-today">TODAY'S DATE: </div>
+	<div class="container-fluid" id="json-future">Future Plans</div>
+	<div class="container-fluid" id="json-repeat"></div>
+	<div class="container-fluid" id="json-past">Past Plans</div>
+	<div class="container" id="json-nest"></div>
 	<h2 id="plans"></h2>
 
 </body>
 <script>
 $(function () {
 
+	//call this function when the new plan div is being made and the first row-cols and act is passed
+
 	function appendActs(elem, objec, stringpls, titleParse, newtemp) {
+
+		//trying to add bootstrap divs...still havent got it down
 
 	$(elem).append('<h2 id="plan-day">'
 		+ objec[0].date + '</h2>');
 
-		$(elem).append('<h1 id="' + stringpls + '" class="plan-big well well-sm">'
-		+ newtemp + '</h1>');
+		$(elem).append('<div class="container-fluid">'
+		+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
+		+ newtemp + '</div>');
+		//end the row since the id '# name + stringpls' will be appended with further columns
+		//+ '<div id="plan-start-in" class="col-xs-12 col-sm-4">starts at: '
+		//+ moment(objec[i].start).format('HH:mm a')
+		//+ '</div></div>');
 
-		$('#' + stringpls).append('<h3 id="specificplan-'
-		+ objec[i].title + '" class="specplanners the-first-act">'
-		+ objec[i].title + '</h3>');
+		$('#' + stringpls).append('<div class="row" id="' + objec[i].id + '">'
+		+ '<div class="small-type col-xs-4 col-sm-2">'
+		+ moment(objec[i].start).format('HH:mm a') + '-'
+		+ moment(objec[i].end).format('HH:mm a') + '</div><div id="specificplan-'
+		+ objec[i].title + '" class="specplanners the-first-act col-xs-8 col-sm-6">'
+		+ objec[i].title + '</div>'
+		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-4" </div>');
 
 	};
 
@@ -71,6 +84,8 @@ $(function () {
 
 			$('#json-today').append(moment().format('dddd') + ' ' + moment().format('YYYY-MM-DD'));
 
+			var todayPlan = 0;
+
 			$.each(JSONParse, function(ind, obj) {
 
 				//further seperate days into subplan-> activity combos
@@ -80,9 +95,15 @@ $(function () {
 					var newtemp = obj[i].plan;
 
 					if (newtemp == oldtemp) { // if current plan equals the last plan
-						$('#' + stringpls).append('<h3 id="specificplan-'
-						+ obj[i].title + '" class="specplanners">'
-						+ obj[i].title + 'this = last plan</h3>');
+
+						$('#' + stringpls).append('<div class="row" id="' + obj[i].id + '">'
+						+ '<div class="small-type col-xs-6 col-sm-2">'
+						+ moment(obj[i].start).format('HH:mm a') + '-'
+						+ moment(obj[i].end).format('HH:mm a') + '</div>'
+						+ '<div id="specificplan-'
+						+ obj[i].title + '" class="specplanners col-xs-6 col-sm-6">'
+						+ obj[i].title + '</div>'
+						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-4" </div>');
 
 					var oldtemp = obj[i].plan;
 
@@ -104,6 +125,12 @@ $(function () {
 
 						}
 
+						//end the row now that its a new plans
+
+						$('#' + stringpls).append('</div>');
+
+						// make new variables based on new plan and titles
+
 						var stringpls = 'planning' + newtemp.replace(/\s/g, '-');
 
 						var titleParse = 'title: ' + obj[i].title.replace(/\s/g, '-');
@@ -113,6 +140,8 @@ $(function () {
 						if (planDate == fullToday) {
 
 							appendActs('#json-today', obj, stringpls, titleParse, newtemp);
+
+							todayPlan = 1;
 						}
 
 						// If The Plan is "more than today's date" or in the future, continue on to next div after today
@@ -152,7 +181,11 @@ $(function () {
 
 			});
 
-			$('.plan-big *').hide(); //hide the activities of each plan
+			if (todayPlan == 0) {
+				$('#json-today').append('<div class="well-sm">No Plans or Files</div>');
+			}
+
+			$('.plan-big').children().hide(); //hide the activities of each plan
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				e.preventDefault();

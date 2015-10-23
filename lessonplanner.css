@@ -12,6 +12,16 @@ div.page-header>*>* {
 #json-past {
 	/* display: none; */
 }
+
+.small-type {
+	font-size: .6em;
+	display: inline;
+}
+
+.specplanners {
+	font-size: 1.4em;
+}
+
 .agenda-item {
 	border: .2em solid black;
 	color: green;
