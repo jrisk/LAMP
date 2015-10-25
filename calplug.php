@@ -118,6 +118,7 @@ $("#pop-awesome-dropzone").dropzone({
 
     this.on('addedfile', function() {
       console.log("file added");
+      //add a handler for if the file is a video or gif, put in right container for autoplay view
     });
 
     this.on('complete', function(file) {
@@ -134,13 +135,15 @@ $("#pop-awesome-dropzone").dropzone({
   maxFiles: 5,
   maxFilesize: 2, //MB
   paramName: "file",
+  acceptedFiles: "audio/*,video/*,image/*,.pdf,application/*,.avi,.wmv,.webm,.mp3", 
   autoProcessQueue: false,
   clickable: '#previews-container',
   previewsContainer: '#previews-container',
   previewTemplate: '<div id="preview-template">'
     + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
     + '<div class="dz-filename"><span data-dz-name></span></div>'
-    + '<img data-dz-thumbnail /></div></div></div>',
+    + '<img data-dz-thumbnail /></div>'
+    + '</div></div>',
   thumbnailWidth: 100,
   thumbnailHeight: 100,
   resize: function(file) {

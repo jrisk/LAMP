@@ -193,6 +193,13 @@ $(function () {
 				$(this).children().toggle("slow");
 				// show media object line box $(this).
 			});
+
+			$('.specplanners').on('click tap', function(e) {
+				e.preventDefault();
+				console.log(e);
+				console.log('specplanners activity class being called on click instead of over-div .plan-big');
+				e.stopPropagation();
+			});
 		},
 
 		error: function(errorThrown) {
