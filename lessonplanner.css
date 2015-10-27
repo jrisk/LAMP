@@ -64,6 +64,10 @@ div.page-header>*>* {
 	width: 800px;
 }
 
+video {
+	float: left;
+}
+
 #preview-template {
 	border: 0.2em solid red;
 	width: 100px;
