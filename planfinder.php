@@ -119,6 +119,7 @@ for ($i = 0; $i < count($specific_array); $i++) {
 echo "<div class='row plan-holder'><div class='col-md-4 col-xs-6' id='plan-specific-" . $i .
     "'>" . $specific_array[$i]['title'] . "</div><div id='plan-time-specific-" . $i .
     "' class='col-md-8 col-xs-6 start-time-plans'>" . $specific_array[$i]['start'] .
+    "</div><div class='activity-id' style='display: none'>" . $specific_array[$i]['id'] .
     "</div></div><br>";
     }
 

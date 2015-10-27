@@ -135,6 +135,8 @@ $("#pop-awesome-dropzone").dropzone({
 
       console.log($('.preview-class:eq(' + num + ')') + 'in addedfile function');
 
+      console.log('added file CALLED HERE ADDED FILE');
+
       //template.find('img').attr('src', e.target.result);
 
 
@@ -162,10 +164,51 @@ $("#pop-awesome-dropzone").dropzone({
 
     this.on('thumbnail', function(file) {
 
+      num--;
+
+      console.log('THUMBNAIL CALLED HERE');
+
+      fileType = file.type;
+
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+
+          var fileSource = e.target.result;
+
+          if (gifRegEx.test(fileType)) {
+
+              console.log('gif test passed');
+
+              var template = $('.preview-class:eq(' + num + ')');
+
+              console.log(template);
+              console.log(' and num is' + num + 'in gif test func');
+
+              template.find('img').attr('src', e.target.result);
+
+            }
+
+            else {
+              console.log('vid or regular pic posted');
+            }
+
+            num++;
+
+          }
+
+
+            reader.readAsDataURL(file);
+
+
+
     });
 
     this.on('complete', function(file) {
+        console.log(file);
       dropper.removeFile(file);
+
+      //if ()
     });
 
     this.on('#upload-form', 'click tap', function(e) {
@@ -179,6 +222,7 @@ $("#pop-awesome-dropzone").dropzone({
   maxFiles: 5,
   maxFilesize: 2, //MB
   paramName: "file",
+  headers: {'fileActivity': 'avariableofsomesort'},
   acceptedFiles: "audio/*,video/*,image/*,.pdf,application/*,.avi,.wmv,.webm,.mp3", 
   autoProcessQueue: false,
   thumbnailWidth: 100,
@@ -236,19 +280,6 @@ $("#pop-awesome-dropzone").dropzone({
                 e.stopPropagation();
 
               });
-
-            }
-
-            else if (gifRegEx.test(fileType)) {
-
-              console.log('gif test passed');
-
-              var template = $('.preview-class:eq(' + num + ')');
-
-              console.log(template);
-              console.log(' and num is' + num + 'in gif test func');
-
-              template.find('img').attr('src', e.target.result);
 
             }
             
