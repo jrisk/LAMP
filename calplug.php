@@ -8,8 +8,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./cal.js"></script>
+<script src="./dropzone.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
-<script src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -166,8 +166,6 @@ $("#pop-awesome-dropzone").dropzone({
 
       num--;
 
-      console.log('THUMBNAIL CALLED HERE');
-
       fileType = file.type;
 
       var reader = new FileReader();
@@ -221,6 +219,7 @@ $("#pop-awesome-dropzone").dropzone({
   parallelUploads: 5,
   maxFiles: 5,
   maxFilesize: 2, //MB
+  addRemoveLinks: true,
   paramName: "file",
   headers: {'fileActivity': 'avariableofsomesort'},
   acceptedFiles: "audio/*,video/*,image/*,.pdf,application/*,.avi,.wmv,.webm,.mp3", 
@@ -261,8 +260,11 @@ $("#pop-awesome-dropzone").dropzone({
 
               console.log('vid reg ex test passed');
 
-              $('#previews-container').append('<video width="96" height="96" controls>'
-              + '<source src="' + fileSource + '" type="' + fileType + '">is this working?</video>');
+              $('#previews-container').append('<div id="preview-template">'
+              + '<video width="96" height="96" controls>'
+              + '<source src="' + fileSource + '" type="' + fileType + '">is this working?</video>'
+              + '<a id="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
+
               console.log("i added a video i hope");
 
               var template1 = $('.preview-class:eq(' + num + ')');
@@ -280,6 +282,14 @@ $("#pop-awesome-dropzone").dropzone({
                 e.stopPropagation();
 
               });
+
+                $('#remove-shim').on('click tap', function(e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  $(this).parent().remove();
+
+                });
 
             }
             

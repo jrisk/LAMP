@@ -120,7 +120,7 @@ echo "<div class='row plan-holder'><div class='col-md-4 col-xs-6' id='plan-speci
     "'>" . $specific_array[$i]['title'] . "</div><div id='plan-time-specific-" . $i .
     "' class='col-md-8 col-xs-6 start-time-plans'>" . $specific_array[$i]['start'] .
     "</div><div class='activity-id' style='display: none'>" . $specific_array[$i]['id'] .
-    "</div></div><br>";
+    "</div><div class='plan-id' style='display: none'>" . $specific_array[$i]['plan'] . "</div></div><br>";
     }
 
 ?>
