@@ -76,6 +76,17 @@ video {
 	right: 100px;
 	float: left;
 }
+
+#video-template {
+	border: 0.2em solid red;
+	width: 100px;
+	height: 100px;
+	position: absolute,
+	right: 100px;
+	float: left;
+
+}
+
 .plan-big:hover {
 	cursor: pointer; cursor: hand;
 }

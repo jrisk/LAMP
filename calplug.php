@@ -109,6 +109,8 @@ var vidRegEx = /video/;
 
 var gifRegEx = /image\/gif/;
 
+var imgRegEx = /image\/(?!gif)/; // any string with '/image/' not followed by 'gif'
+
 Dropzone.autoDiscover = false;
 
 var num = 0;
@@ -131,50 +133,86 @@ $("#pop-awesome-dropzone").dropzone({
       dropper.processQueue();
     });
 
-    this.on('addedfile', function(file) {
-
-      console.log($('.preview-class:eq(' + num + ')') + 'in addedfile function');
-
-      console.log('added file CALLED HERE ADDED FILE');
-
-      //template.find('img').attr('src', e.target.result);
-
-
-        /* reader.onload = function(e) {
-
-          var fileSource = e.target.result;
-
-            console.log("this is a " + fileType + " video but IN THE ACCEPT FUNCTION");
-            $('#previews-container').append('<video width="96" height="96" controls>'
-            + '<source src="' + fileSource + '" type="' + fileType + '">is this working?</video>');
-             console.log("i added a video i hope");
-
-        }
-
-        else if (gifRegEx.test(fileType)) {
-              console.log(num + 'num is gif test');;
-              template.find('img').attr('src', e.target.result);
-              console.log("this is a gif");
-            }
-
-        else {
-              console.log('regular png,jpg,etc')
-            }*/
+    this.on('removedfile', function(file) {
+      num--;
     });
 
-    this.on('thumbnail', function(file) {
-
-      num--;
+    this.on('addedfile', function(file) {
 
       fileType = file.type;
 
-      var reader = new FileReader();
+          var reader = new FileReader();
 
-      reader.onload = function(e) {
+            reader.onload = function(e) {
 
-          var fileSource = e.target.result;
+              if (vidRegEx.test(fileType)) {
 
-          if (gifRegEx.test(fileType)) {
+              console.log('vid reg ex test passed');
+
+              $('#previews-container').append('<div id="video-template"><video width="96" height="96" controls>'
+              + '<source src="' + e.target.result + '" type="' + fileType + '">is this working?</video>'
+              + '<a class="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
+
+              console.log("i added a video i hope");
+
+              var template1 = $('.preview-class:eq(' + num + ')');
+
+              console.log(template1);
+              console.log(' and number ' + num);
+
+              //remove the empty preview class
+              template1.remove();
+
+              console.log('after num dec the num is: ' + num);
+
+                  $('video').on('click tap', function(e) {
+                    e.stopPropagation();
+
+                  });
+
+
+                  $('.remove-shim').on('click tap', function(e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  $(this).parent().remove();
+
+                  console.log(file);
+
+                  dropper.removeFile(file);
+
+                });
+
+            }
+
+            else if (imgRegEx.test(fileType)) {
+              console.log('its a non-gif image');
+              num++;
+            }
+
+            else {
+              console.log('move to hthumbnail now its prob a gif');
+            }
+
+          }
+
+           reader.readAsDataURL(file);
+
+          console.log("num is " + num + " in addedfile webm function last line");
+
+          });
+
+    this.on('thumbnail', function(file) {
+
+        console.log("this is a " + fileType + " video but IN THE THUMBNAIL FUNCTION");
+
+          var reader = new FileReader();
+
+            reader.onload = function(e) {
+
+              var fileSource = e.target.result;
+
+             if (gifRegEx.test(fileType)) {
 
               console.log('gif test passed');
 
@@ -185,22 +223,21 @@ $("#pop-awesome-dropzone").dropzone({
 
               template.find('img').attr('src', e.target.result);
 
+                num++;
+
             }
 
-            else {
-              console.log('vid or regular pic posted');
-            }
 
-            num++;
+            console.log('num is incremented now to: ' + num + ' after tests in reader loader');
 
           }
 
-
             reader.readAsDataURL(file);
 
+            console.log("num is " + num + "in thumbnail function last line of it lastlastlast");
 
 
-    });
+        });
 
     this.on('complete', function(file) {
         console.log(file);
@@ -245,7 +282,7 @@ $("#pop-awesome-dropzone").dropzone({
   accept: function(file, done) {
 
     //using 'this' doesnt return the dropzone object
-
+/*
     var fileType = file.type;
 
     console.log("this is a " + fileType + " video but IN THE ACCEPT FUNCTION");
@@ -260,8 +297,7 @@ $("#pop-awesome-dropzone").dropzone({
 
               console.log('vid reg ex test passed');
 
-              $('#previews-container').append('<div id="preview-template">'
-              + '<video width="96" height="96" controls>'
+              $('#previews-container').append('<div id="video-template"><video width="96" height="96" controls>'
               + '<source src="' + fileSource + '" type="' + fileType + '">is this working?</video>'
               + '<a id="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
 
@@ -283,7 +319,8 @@ $("#pop-awesome-dropzone").dropzone({
 
               });
 
-                $('#remove-shim').on('click tap', function(e) {
+
+                  $('#remove-shim').on('click tap', function(e) {
                   e.preventDefault();
                   e.stopPropagation();
 
@@ -306,7 +343,13 @@ $("#pop-awesome-dropzone").dropzone({
 
             done();
 
-            console.log("num is " + num + "after done function called at bottom");
+            console.log("num is " + num + "after done function called at bottom"); */
+
+            console.log("before done");
+
+            done();
+
+            console.log("after done");
   }
 
 });
