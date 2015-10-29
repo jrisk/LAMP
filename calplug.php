@@ -149,7 +149,7 @@ $("#pop-awesome-dropzone").dropzone({
 
               console.log('vid reg ex test passed');
 
-              $('#previews-container').append('<div id="video-template"><video width="96" height="96" controls>'
+              $('#previews-container').append('<div id="video-template"><video width="116" height="96" controls>'
               + '<source src="' + e.target.result + '" type="' + fileType + '">is this working?</video>'
               + '<a class="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
 

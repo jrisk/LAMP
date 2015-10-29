@@ -12,7 +12,10 @@
 <script src="./extrajs.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
+<!-- deprecated 
 <script src="//www.modernizr.com/downloads/modernizr-latest.js" type ="text/javascript"></script>
+have to build file yourself now
+-->
 
 <link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -87,6 +90,20 @@
 <input type="hidden" id="datefix3" name="date-planfix" class="form-control">
 </div>
 </div>
+
+    <div class="col-xs-6 col-sm-3" id="the-day">Copy to Every <b id="the-real-day"></b></div>
+    <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
+        <label class="btn btn-default">
+            <input name="EveryWeek" id="weekly" class="week-input" value="everyWeek" type="checkbox">
+            Yes
+        </label>
+       <label class="btn btn-default">
+        <input name="OneDay" id="one-off" class="week-input" value="notEveryWeek" type="checkbox">
+            No
+        </label>
+    </div>
+
+
 
 <!-- WEEKDAY COPIER/PICKER, ADD LATER 
     <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
@@ -296,8 +313,10 @@ widthDecide();
 
 $('#label-row').hide();
 $('#activity-container').hide(); //start with this hidden unless they want to add stuff now
+$('#checkbox-holder').hide(); //start checkbox hidden until receive day input from user
+$('#the-day').hide();
 
-$('#add-plan').on('click', function() {
+$('#add-plan').on('click tap', function() {
 
     savePlan();
     $('#container-outer-make').hide();
@@ -322,7 +341,19 @@ $('#add-plan').on('click', function() {
 });
 function checkboxChange() {
 
-$('#checkbox-holder').on('change', '.day-input', function() {
+$('#checkbox-holder').on('change', '.week-input', function() {
+
+    console.log(this);
+
+    var theObject = $(this);
+
+    if (theObject == $('#weekly')) {
+        console.log('this is the weekly option');
+    }
+
+    if (theObject == $('#one-off')) {
+        console.log('this is only for 1 date');
+    }
 
     if (this.checked) {
  
@@ -352,7 +383,6 @@ function datetimefunc3() {
 $('#datetimepickerplan3').datetimepicker({
     format: 'dddd, MMMM Do',
     allowInputToggle: true
-    
 });
 
 $('#starttime3').datetimepicker({
@@ -373,6 +403,27 @@ $('#endtime3').datetimepicker({
 
 datetimefunc3();
 
+//change event not firing on input item because the dtpicker not initialized until here??
+
+$('input[type=text]').change(function(e) {
+    console.log('test on change event for text-type input events');
+});
+
+$('#datetimepickerplan3').on('dp.change', function(e) {
+
+    console.log('change event fired on datetimepicker object');
+
+    $('#checkbox-holder, #the-day').show();
+
+    var dayinput = $('#dateplan3').val();
+
+    var daybase = moment(dayinput, 'dddd, MMMM Do');
+
+    var daybaseval = moment(daybase).format('dddd');
+
+    $('#the-real-day').html(daybaseval);
+
+    });
 //taken from extra.js editor function for chaning date into mysql readable database date yyyy-mm-dd
 
 var databaseDate = function(element) {
