@@ -93,12 +93,12 @@ have to build file yourself now
 
     <div class="col-xs-6 col-sm-3" id="the-day">Copy to Every <b id="the-real-day"></b></div>
     <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
-        <label class="btn btn-default">
-            <input name="EveryWeek" id="weekly" class="week-input" value="everyWeek" type="checkbox">
+        <label class="btn btn-default checkboxing">
+            <input name="EveryWeek" id="weekly" class="week-input" value="everyWeek" type="radio">
             Yes
         </label>
-       <label class="btn btn-default">
-        <input name="OneDay" id="one-off" class="week-input" value="notEveryWeek" type="checkbox">
+       <label class="btn btn-default checkboxing">
+        <input name="every-week" id="one-off" class="week-input" value="notEveryWeek" type="radio">
             No
         </label>
     </div>
@@ -324,6 +324,8 @@ $('#add-plan').on('click tap', function() {
     $('#button-add-save').hide();
     widthDecideOnShow();
 
+    console.log($('#planclassday input').serialize());
+
     //lessonname3 classname3 dateplan3
 
     $('#plan-viewer').html("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-paperclip'></span>"  + $('#lessonname3').val() + 
@@ -341,41 +343,69 @@ $('#add-plan').on('click tap', function() {
 });
 function checkboxChange() {
 
-$('#checkbox-holder').on('change', '.week-input', function() {
+/*$('#checkbox-holder').on('change', '.week-input', function(e) {
 
-    console.log(this);
+    console.log("this.checked is" + this.checked);
 
-    var theObject = $(this);
+    if (this.checked == true) {
 
-    if (theObject == $('#weekly')) {
-        console.log('this is the weekly option');
-    }
-
-    if (theObject == $('#one-off')) {
-        console.log('this is only for 1 date');
-    }
-
-    if (this.checked) {
- 
     $(this).parent().css('background-color', '#d0ee96');
+
+    $(this).parent().css('box-shadow', '0 3px 5px rgba(0, 0, 0, 0.125) inset');
+
+    $(this).val(this.checked);
+
+    $(this).parent().siblings().css('background-color', '#fff');
+
+    $(this).parent().siblings().css('box-shadow', '0 0 0');
+
+    $(this).parent().siblings()[0].checked = false;
+
+    $(this).parent().siblings().prop('checked', false);
+
+    console.log("is this button checked? " + this.checked);
+
+    console.log("is the other option checked?" + $(this).parent().siblings().prop('checked'));
+
+    }
+
+    else { //this.checked is false
+
+    $(this).parent().css('background-color', '#fff');
+
+    $(this).parent().css('box-shadow', '0 0 0');
+
+    $(this).parent().siblings()[0].checked = true;
+
+    $(this).parent().siblings().prop('checked', true);
+
+    $(this).parent().siblings().val(true);
+
+
+    $(this).parent().siblings().css('background-color', '#d0ee96');
+
+    $(this).parent().siblings().css('box-shadow', '0 3px 5px rgba(0, 0, 0, 0.125) inset');
     
-    }
+    console.log("is this button checked? " + this.checked);
 
-    else {
+    console.log("is the other option checked?" + $(this).parent().siblings().prop('checked'));
 
-        $(this).parent().css('background-color', '#fff');
     }
-});
+});*/
 
 };
 
-checkboxChange();
+//checkboxChange();
 
 function savePlan() {
-    $('#planclassday input[type=checkbox]').each(function(idx, elem) {
+    $('#planclassday input[type=radio]').each(function(idx, elem) {
         var this_check = $(this).prop('checked');
         var this_day = $(this).val();
         console.log(idx + " = index, ischecked? =" + this_check + " elem: " + this_day);
+
+        if (this_check == true) {
+            this_day = this_check;
+        }
     });
 };
 
@@ -445,6 +475,13 @@ var formdata = $('#planclassday input').serialize();
 console.log(formdata);
 
 var plantitle = $('#lessonname3').val();
+
+/*valRegEx = /\.|\-/;
+
+if (valRegEx.test(plantitle) {
+    console.log('the plan title can\'t have a period');
+    break;
+}*/ //test for periods and other symbols...they mess up the database/ php sort parsing
 
 $.ajax({
     type: 'POST',
