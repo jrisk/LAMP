@@ -1,4 +1,6 @@
 dependencies {
+
+	makeplan2.html,
 	
 	lessonplanner.css,
 
@@ -17,8 +19,6 @@ dependencies {
 	newformaction.php,
 
 	calplug.php,
-
-	makeplan2.html,
 
 	editplan2.php,
 
