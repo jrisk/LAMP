@@ -39,6 +39,8 @@ $comment_note = NULL; // cant be null in website
 
 $weekly = $_POST['every-week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
 
+$media = $_POST['media']; // url for media objects stored in activities
+
 $entry_time = NULL; // cant be null on website
 
 $owner = 1;
@@ -52,7 +54,7 @@ $db = new PDO($dsn, $user, $password);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $stmt = $db->prepare("INSERT INTO lessonplan VALUES (:id, :plan, :class, :activity, :adate, :start_time, :end_time,
-:comment_note, :every_week, :entry_time, :owner)");
+:comment_note, :every_week, :media, :entry_time, :owner)");
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
@@ -71,6 +73,8 @@ $stmt->bindParam(":end_time", $end_time_db, PDO::PARAM_INT);
 $stmt->bindParam(":comment_note", $comment_note, PDO::PARAM_STR);
 
 $stmt->bindParam(":every_week", $weekly, PDO::PARAM_STR);
+
+$stmt->bindParam(":media", $media, PDO::PARAM_STR);
 
 $stmt->bindParam(":entry_time", $entry_time, PDO::PARAM_INT);
 
