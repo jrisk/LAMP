@@ -41,7 +41,7 @@ array_push($sorted_array, $sorted);
 
 echo "<div class='container label-row-insert' id='label-row-copy'>
     <div class='row'>
-        <div class='col-sm-7 col-xs-12'>
+        <div class='col-sm-5 col-xs-12'>
             <h4><div class='well well-acts'>Activity</div></h4>
         </div>
         <div class='col-sm-2 col-xs-12'>
@@ -49,6 +49,9 @@ echo "<div class='container label-row-insert' id='label-row-copy'>
         </div>
         <div class='col-sm-2 col-xs-12'>
             <h4><div class='well well-ends'>End Time</div></h4>
+        </div>
+        <div class='col-sm-2 col-xs-12'>
+            <h4><div class='well well-media'>Media</div></h4>
         </div>
         <div class='col-sm-1 col-xs-12'>
             <h4><div class='well well-options'>Del</div></h4>
@@ -81,7 +84,7 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
     </div>
     <!-- activity label end -->
     <div class='row act-start-end-row'>
-        <div class='col-xs-12 col-sm-7'>
+        <div class='col-xs-12 col-sm-5'>
         <div class='well well-sm activity-inserted'>" . $key['Activity'] .
         "</div></div>
 
@@ -103,8 +106,11 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         <div class='col-xs-12 col-sm-2'><div class='well well-sm end-time-insert'>" . $key['End'] .
         "</div></div>
 
-        <div hidden class='activityID'>" . $key['ID'] .
+        <div hidden class='activityID'>" . $key['ID'] . 
         "</div>
+
+        <div class='col-xs-12 col-sm-2'><div class='well well-sm media-insert'>" . "media" .
+        "</div></div>
 
         <div class='col-sm-1'>
             <button class='btn btn-danger btn-md delact delact-full' type='button' id='delactid'>X</button>
