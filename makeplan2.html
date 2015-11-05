@@ -3,12 +3,12 @@
 <head>
     <title>Lesson Plan V3</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
-<script src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<script src="./dropzone.js"></script>
 <script src="./extrajs.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
@@ -221,7 +221,23 @@ have to build file yourself now
     </div>
 </div>
 
-</div>
+        <!-- start media molab label divs -->
+        <div class="col-xs-12" id="media-molab">
+            <h3><div class="label">Media</div></h3>
+        </div>
+        <!-- end media molab divs -->
+        <div class="col-xs-12 col-sm-2">
+
+            <!-- form within a form -- >
+            <div class="dropzone" id="new-dropzone">
+            <div class="dz-default dz-message" data-dz-message>Text you want in the drop area</div>
+        </div>
+
+        </div> 
+
+        <!-- end media object input div -->
+
+</div> <!-- end of big row for act, time -->
 
 <div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
 <div class="row">
@@ -266,6 +282,7 @@ else {
         $('#activity-molab').hide();
         $('#start-time-molab').hide();
         $('#end-time-molab').hide();
+        $('#media-molab').hide();
     }
 };
 
@@ -279,6 +296,7 @@ else {
         $('#activity-molab').show();
         $('#start-time-molab').show();
         $('#end-time-molab').show();
+        $('#media-molab').show();
     }
 };
 
@@ -616,8 +634,11 @@ $('#actentry').on('click tap', '.delact, .delact-copy', function(e) {
 
 //delplan and save brings you back to main screen of plans, save state and show activities too?
 
+
+
 })
 
 </script>
+<script src="./dropcode.js"></script>
 </body>
 </html>

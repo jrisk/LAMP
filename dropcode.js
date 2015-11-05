@@ -1,3 +1,5 @@
+$(function () {
+
 var called = 0;
 
 var vidRegEx = /video/;
@@ -8,9 +10,12 @@ var imgRegEx = /image\/(?!gif)/; // any string with '/image/' not followed by 'g
 
 Dropzone.autoDiscover = false;
 
+console.log("is this working?");
+
 var num = 0;
 
-$("#pop-awesome-dropzone").dropzone({
+$("div#new-dropzone").dropzone({
+  url: 'upload.php',
   clickable: '#previews-container',
   previewsContainer: '#previews-container',
   previewTemplate: '<div id="preview-template" class="preview-class">'
@@ -33,36 +38,24 @@ $("#pop-awesome-dropzone").dropzone({
     });
 
     this.on('addedfile', function(file) {
-
       fileType = file.type;
-
           var reader = new FileReader();
 
             reader.onload = function(e) {
 
               if (vidRegEx.test(fileType)) {
 
-              console.log('vid reg ex test passed');
-
               $('#previews-container').append('<div id="video-template"><video width="116" height="96" controls>'
               + '<source src="' + e.target.result + '" type="' + fileType + '">is this working?</video>'
               + '<a class="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
 
-              console.log("i added a video i hope");
-
               var template1 = $('.preview-class:eq(' + num + ')');
-
-              console.log(template1);
-              console.log(' and number ' + num);
 
               //remove the empty preview class
               template1.remove();
 
-              console.log('after num dec the num is: ' + num);
-
                   $('video').on('click tap', function(e) {
                     e.stopPropagation();
-
                   });
 
 
@@ -71,8 +64,6 @@ $("#pop-awesome-dropzone").dropzone({
                   e.stopPropagation();
 
                   $(this).parent().remove();
-
-                  console.log(file);
 
                   dropper.removeFile(file);
 
@@ -89,13 +80,11 @@ $("#pop-awesome-dropzone").dropzone({
               console.log('move to hthumbnail now its prob a gif');
             }
 
-          }
+          } //end of reader.onload function
 
            reader.readAsDataURL(file);
 
-          console.log("num is " + num + " in addedfile webm function last line");
-
-          });
+          }); // end of this.on('addedfile')
 
     this.on('thumbnail', function(file) {
 
@@ -113,25 +102,14 @@ $("#pop-awesome-dropzone").dropzone({
 
               var template = $('.preview-class:eq(' + num + ')');
 
-              console.log(template);
-              console.log(' and num is' + num + 'in gif test func');
-
               template.find('img').attr('src', e.target.result);
 
                 num++;
 
             }
 
-
-            console.log('num is incremented now to: ' + num + ' after tests in reader loader');
-
           }
-
             reader.readAsDataURL(file);
-
-            console.log("num is " + num + "in thumbnail function last line of it lastlastlast");
-
-
         });
 
     this.on('complete', function(file) {
@@ -145,7 +123,6 @@ $("#pop-awesome-dropzone").dropzone({
     });
 
   },
-  url: 'upload.php',
   parallelUploads: 5,
   maxFiles: 5,
   maxFilesize: 2, //MB
@@ -172,6 +149,7 @@ $("#pop-awesome-dropzone").dropzone({
     return resizeInfo;
 
   },
+
   accept: function(file, done) {
 
       console.log("before done");
@@ -180,5 +158,7 @@ $("#pop-awesome-dropzone").dropzone({
 
       console.log("after done");
   }
+
+});
 
 });
