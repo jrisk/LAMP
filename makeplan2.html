@@ -33,6 +33,7 @@ have to build file yourself now
             </div>
                <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
                <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
+               <a href="./jsondate.html" class="btn btn-lg btn-primary">Agenda</a>
             </div>
 
         </div>
@@ -169,7 +170,7 @@ have to build file yourself now
 
 <div class="container" id="activity-container">
     <!--mobile label in order -->
-    <div class="row" id= "activity-molab">
+    <div class="row" id="activity-molab">
         <div class="col-xs-12">
             <h3><div class="label label-primary">Activity</div></h3>
         </div>
@@ -230,11 +231,14 @@ have to build file yourself now
 
             <!-- form within a form -->
             <div class="dropzone" id="new-dropzone">
-            <button id="upload-form">Upload</button>
+            <!-- <button id="upload-form">Upload</button> -->
             <div class="fallback">
                 <input name="file" type="file" multiple />
             </div>
-<div id="previews-container" class="dropzone-previews"></div>
+
+
+<div id="drop-container" class="dropzone-previews">
+
 </div>
 
 </div>        <!-- end media object input div -->
@@ -246,7 +250,7 @@ have to build file yourself now
 
 <div class="col-sm-4 col-xs-12">
 <button type="button" class="btn btn-primary btn-lg" id="add-act">
-    Add Another Activity</button>
+    Add Activity</button>
 </div>
 
 </div> <!-- mini button row at bottom -->

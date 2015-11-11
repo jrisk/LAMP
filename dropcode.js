@@ -16,11 +16,11 @@ var num = 0;
 
 $("div#new-dropzone").dropzone({
   url: 'upload.php',
-  clickable: '#previews-container',
-  previewsContainer: '#previews-container',
-  previewTemplate: '<div id="preview-template" class="preview-class">'
+  clickable: '#drop-container',
+  previewsContainer: '#drop-container',
+  previewTemplate: '<div id="drop-template" class="preview-class">'
     + '<div class="dz-preview dz-file-preview"><div class="dz-details">'
-    + '<div class="dz-filename"><span data-dz-name></span></div>'
+    + '<div class="dz-filename"></div>'
     + '<img data-dz-thumbnail /></div>'
     + '</div></div>',
   init: function() {
@@ -45,7 +45,7 @@ $("div#new-dropzone").dropzone({
 
               if (vidRegEx.test(fileType)) {
 
-              $('#previews-container').append('<div id="video-template"><video width="116" height="96" controls>'
+              $('#drop-container').append('<div id="video-template"><video width="116" height="96" controls>'
               + '<source src="' + e.target.result + '" type="' + fileType + '">is this working?</video>'
               + '<a class="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
 
@@ -117,14 +117,14 @@ $("div#new-dropzone").dropzone({
       dropper.removeFile(file);
     });
 
-    this.on('#upload-form', 'click tap', function(e) {
+    this.on('#add-act', 'click tap', function(e) {
       e.preventDefault();
       this.processQueue();
     });
 
   },
-  parallelUploads: 5,
-  maxFiles: 5,
+  parallelUploads: 3,
+  maxFiles: 3,
   maxFilesize: 2, //MB
   addRemoveLinks: true,
   paramName: "file",

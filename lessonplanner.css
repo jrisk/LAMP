@@ -68,6 +68,20 @@ video {
 	float: left;
 }
 
+#drop-container {
+	border: .2em solid gray;
+	width: 20em;
+	height: 7em;
+}
+
+#drop-template {
+	width: 5em;
+	height: 2em;
+	position: absolute,
+	right: 2em;
+	float: left;
+}
+
 #preview-template {
 	border: 0.2em solid red;
 	width: 100px;
