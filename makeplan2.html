@@ -26,16 +26,9 @@ have to build file yourself now
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <img alt="Skoolia" src="">
-                </a>
-            </div>
                <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
                <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
                <a href="./jsondate.html" class="btn btn-lg btn-primary">Agenda</a>
-            </div>
-
         </div>
     </nav>
 
@@ -360,52 +353,6 @@ $('#add-plan').on('click tap', function() {
 function checkboxChange() {
 
 /*$('#checkbox-holder').on('change', '.week-input', function(e) {
-
-    console.log("this.checked is" + this.checked);
-
-    if (this.checked == true) {
-
-    $(this).parent().css('background-color', '#d0ee96');
-
-    $(this).parent().css('box-shadow', '0 3px 5px rgba(0, 0, 0, 0.125) inset');
-
-    $(this).val(this.checked);
-
-    $(this).parent().siblings().css('background-color', '#fff');
-
-    $(this).parent().siblings().css('box-shadow', '0 0 0');
-
-    $(this).parent().siblings()[0].checked = false;
-
-    $(this).parent().siblings().prop('checked', false);
-
-    console.log("is this button checked? " + this.checked);
-
-    console.log("is the other option checked?" + $(this).parent().siblings().prop('checked'));
-
-    }
-
-    else { //this.checked is false
-
-    $(this).parent().css('background-color', '#fff');
-
-    $(this).parent().css('box-shadow', '0 0 0');
-
-    $(this).parent().siblings()[0].checked = true;
-
-    $(this).parent().siblings().prop('checked', true);
-
-    $(this).parent().siblings().val(true);
-
-
-    $(this).parent().siblings().css('background-color', '#d0ee96');
-
-    $(this).parent().siblings().css('box-shadow', '0 3px 5px rgba(0, 0, 0, 0.125) inset');
-    
-    console.log("is this button checked? " + this.checked);
-
-    console.log("is the other option checked?" + $(this).parent().siblings().prop('checked'));
-
     }
 });*/
 
@@ -447,13 +394,19 @@ $('#endtime3').datetimepicker({
 
 };
 
-datetimefunc3();
+datetimefunc3(); //initialize the date and start/end time pickers
 
 //change event not firing on input item because the dtpicker not initialized until here??
 
 $('input[type=text]').change(function(e) {
     console.log('test on change event for text-type input events');
 });
+
+/*$('#endtime3').on('dp.change', function(e) {
+    $('#starttime3').data('DateTimePicker').minDate(e.date);
+});*/ //link together start and end time to prevent times before being possible
+
+//expose weekly repeat option on day selection
 
 $('#datetimepickerplan3').on('dp.change', function(e) {
 
