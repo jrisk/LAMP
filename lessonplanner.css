@@ -9,6 +9,26 @@ div.page-header>*>* {
 	margin-top: 0;
 }
 
+#today-look {
+	font-size: 3.5em;
+}
+
+#future-look {
+	font-size: 3.5em;
+}
+
+#json-today {
+	background-color: silver;
+	display: block;
+	box-shadow: 0 0.2em 0.3em #999;
+}
+
+#json-future {
+	background-color: #E0FFFF;
+	display: block;
+	box-shadow: 0.2em 0.5em 0.9em #999;
+}
+
 #json-past {
 	/* display: none; */
 }

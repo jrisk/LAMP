@@ -22,8 +22,8 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
-	<div class="container-fluid" id="json-today">TODAY'S DATE: </div>
-	<div class="container-fluid" id="json-future">Future Plans</div>
+	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
+	<div class="container-fluid" id="json-future"><p id="future-look">Future Plans</p></div>
 	<div class="container-fluid" id="json-repeat"></div>
 	<div class="container-fluid" id="json-past">Past Plans</div>
 	<div class="container" id="json-nest"></div>
@@ -39,8 +39,12 @@ $(function () {
 
 		//trying to add bootstrap divs...still havent got it down
 
-	$(elem).append('<h2 id="plan-day">'
+		if (elem != "#json-today") {
+
+		$(elem).append('<h2 id="plan-day">'
 		+ objec[0].date + '</h2>');
+
+		}
 
 		$(elem).append('<div class="container-fluid">'
 		+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
@@ -82,7 +86,9 @@ $(function () {
 
 			console.log(JSONParse);
 
-			$('#json-today').append(moment().format('dddd') + ' ' + moment().format('YYYY-MM-DD'));
+			//unnecessary to add date, user can see date on phone or is aware of today's date anyway
+
+			//$('#json-today').append(moment().format('dddd') + ' ' + moment().format('YYYY-MM-DD'));
 
 			var todayPlan = 0;
 
@@ -196,8 +202,6 @@ $(function () {
 
 			$('.specplanners').on('click tap', function(e) {
 				e.preventDefault();
-				console.log(e);
-				console.log('specplanners activity class being called on click instead of over-div .plan-big');
 				e.stopPropagation();
 			});
 		},
