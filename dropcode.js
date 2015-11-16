@@ -45,7 +45,7 @@ $("div#new-dropzone").dropzone({
 
               if (vidRegEx.test(fileType)) {
 
-              $('#drop-container').append('<div id="video-template"><video width="116" height="96" controls>'
+              $('#drop-container').append('<div id="video-template1"><video width="116" height="96" controls>'
               + '<source src="' + e.target.result + '" type="' + fileType + '">is this working?</video>'
               + '<a class="remove-shim" style="cursor: pointer; cursor: hand">Remove File</a></div>');
 

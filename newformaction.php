@@ -39,7 +39,7 @@ $comment_note = NULL; // cant be null in website
 
 $weekly = $_POST['every-week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
 
-$media = $_POST['media']; // url for media objects stored in activities
+$media = NULL; //$_POST['media']; // url for media objects stored in activities
 
 $entry_time = NULL; // cant be null on website
 

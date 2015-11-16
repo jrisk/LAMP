@@ -92,9 +92,9 @@ video {
 }
 
 #video-template {
-	border: 0.2em solid red;
-	width: 100px;
-	height: 100px;
+	border: 0.2em solid black;
+	width: 1em;
+	height: 1em;
 	position: absolute,
 	right: 100px;
 	float: left;
