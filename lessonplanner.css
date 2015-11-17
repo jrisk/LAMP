@@ -30,7 +30,16 @@ div.page-header>*>* {
 }
 
 #json-past {
-	/* display: none; */
+	background-color: #D0EE96;
+	display: block;
+	box-shadow: 0.2em 0.5em 0.2em #999;
+}
+
+#json-repeat {
+	background-color: #D9534F;
+	display: block;
+	box-shadow: 0.2em 0.5em 0.2em #999;
+
 }
 
 .small-type {
@@ -43,7 +52,7 @@ div.page-header>*>* {
 }
 
 .agenda-act-row {
-	box-shadow: 0 0.2em 0.4em #999
+	box-shadow: 0 0.2em 0.4em #999;
 }
 
 .agenda-act-row:hover {
