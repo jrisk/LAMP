@@ -357,6 +357,14 @@ $('#add-plan').on('click tap', function() {
             $('#plan-viewer').off();
         });
 
+        // put edit-plan in variable?
+
+        var strLength = $('#edit-plan').val().length * 2;
+
+        $('#edit-plan').focus();
+
+        $('#edit-plan')[0].setSelectionRange(strLength, strLength);
+
         });
     }
 
