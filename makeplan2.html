@@ -346,17 +346,30 @@ $('#add-plan').on('click tap', function() {
     "</h3><div id='well-date'></div></div>")
     .fadeIn(1000);
 
+    function clickEdit() {
+
     $('#plan-viewer').on('click tap', '#plan-editor', function(e) {
         $('#paperclip-holder').html("<span class='glyphicon glyphicon-paperclip'></span>"
-        + "<input id='edit-plan' type='text' placeholder='"
+        + "<input id='edit-plan' type='text' value='" + $('#lessonname3').val() + "' placeholder='"
         + $('#lessonname3').val() + "'>").hide().fadeIn(1000);
-        $('#edit-plan').focus();
+        // turn off click handler when changing focus
+        $('#edit-plan').focus(function(e) {
+            $('#plan-viewer').off();
         });
 
+        });
+    }
+
+    clickEdit();
+
     $('#plan-editor').on('focusout', function(e) {
+        $('#lessonname3').val($('#edit-plan').val());
+        console.log($('#lessonname3').val());
+
         $(this).html("<h3 id='paperclip-holder'>"
         + $('#edit-plan').val() + "</h3><div id='well-plan'></div>").hide().fadeIn(1000);
         console.log("did this fire");
+        clickEdit();
     });
 
 
