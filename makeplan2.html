@@ -337,7 +337,7 @@ $('#add-plan').on('click tap', function() {
 
     //lessonname3 classname3 dateplan3
 
-    $('#plan-viewer').html("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-paperclip'></span>"  + $('#lessonname3').val() + 
+    $('#plan-viewer').html("<div class='col-sm-4' id='plan-editor'><h3 id='paperclip-holder'>"  + $('#lessonname3').val() + 
     "</h3><div id='well-plan'></div></div>").hide().fadeIn(1000);
     $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-education'></span>" + $('#classname3').val() + 
     "</h3><div id='well-class'></div></div>")
@@ -346,10 +346,25 @@ $('#add-plan').on('click tap', function() {
     "</h3><div id='well-date'></div></div>")
     .fadeIn(1000);
 
+    $('#plan-viewer').on('click tap', '#plan-editor', function(e) {
+        $('#paperclip-holder').html("<span class='glyphicon glyphicon-paperclip'></span>"
+        + "<input id='edit-plan' type='text' placeholder='"
+        + $('#lessonname3').val() + "'>").hide().fadeIn(1000);
+        $('#edit-plan').focus();
+        });
+
+    $('#plan-editor').on('focusout', function(e) {
+        $(this).html("<h3 id='paperclip-holder'>"
+        + $('#edit-plan').val() + "</h3><div id='well-plan'></div>").hide().fadeIn(1000);
+        console.log("did this fire");
+    });
+
+
     //$("<h2><span class='glyphicon glyphicon-paperclip'></span>" + $('#lessonname3').val() + "</h2>")
     //.appendTo('#plan-viewer').hide().fadeIn(1000);
 
-});
+}); //end on(#add-plan) function
+
 function checkboxChange() {
 
 /*$('#checkbox-holder').on('change', '.week-input', function(e) {
