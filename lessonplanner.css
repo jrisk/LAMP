@@ -9,6 +9,14 @@ div.page-header>*>* {
 	margin-top: 0;
 }
 
+#edit-plan {
+	border: none;
+}
+
+#edit-class {
+	border: none;
+}
+
 #today-look {
 	font-size: 3.5em;
 }
