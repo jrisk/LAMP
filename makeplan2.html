@@ -346,6 +346,8 @@ $('#add-plan').on('click tap', function() {
     "</h3><div id='well-date'></div></div>")
     .fadeIn(1000);
 
+    //*******************CLICK EVENT HANDLERS TO EDIT PLAN, CLASS, DATE ONCE ALREADY TYPED****************
+
     //*******************TURN ALL OF THESE FUNCTIONS INTO A CLASS **************************
 
     function clickEditPlan() {
@@ -355,8 +357,9 @@ $('#add-plan').on('click tap', function() {
         + "<input id='edit-plan' type='text' value='" + $('#lessonname3').val() + "' placeholder='"
         + $('#lessonname3').val() + "'>").hide().fadeIn(1000);
         // turn off click handler when changing focus
-        $('#edit-plan').focus(function(e) {
+        $('#edit-plan').on('focusin', function(e) {
             $('#plan-viewer').off();
+            console.log('plan was focused in on');
         });
 
         // put edit-plan in variable?
@@ -375,7 +378,6 @@ $('#add-plan').on('click tap', function() {
     $('#plan-editor').on('focusout', function(e) {
 
         if ($('#edit-plan').val() == "") {
-            clickEditPlan();
             $('#edit-plan').attr("placeholder", "field cannot be blank");
             console.log("validate this...no plan name typed");
         }
@@ -388,6 +390,8 @@ $('#add-plan').on('click tap', function() {
         $(this).html("<h3 id='paperclip-holder'>"
         + $('#edit-plan').val() + "</h3><div id='well-plan'></div>").hide().fadeIn(1000);
         console.log("did this fire");
+
+        clickEditClass();
         clickEditPlan();
 
         }
@@ -401,8 +405,11 @@ $('#add-plan').on('click tap', function() {
         + "<input id='edit-class' type='text' value='" + $('#classname3').val() + "' placeholder='"
         + $('#classname3').val() + "'>").hide().fadeIn(1000);
         // turn off click handler when changing focus
-        $('#edit-class').focus(function(e) {
+        $('#edit-class').on('focusin', function(e2) {
             $('#plan-viewer').off();
+            console.log('class was focused in');
+            console.log(e);
+            console.log(e2);
         });
 
         // put edit-plan in variable?
@@ -413,6 +420,8 @@ $('#add-plan').on('click tap', function() {
 
         $('#edit-class')[0].setSelectionRange(strLength, strLength);
 
+
+
         });
     }
 
@@ -421,9 +430,9 @@ $('#add-plan').on('click tap', function() {
     $('#class-editor').on('focusout', function(e) {
 
         if ($('#edit-class').val() == "") {
-            clickEditClass();
-            $('#edit-class').attr("placeholder", "field cannot be blank");
+            $('#edit-class').attr("placeholder", " field cannot be blank");
             console.log("validate this...no class name typed");
+            
         }
 
         else {
@@ -433,10 +442,11 @@ $('#add-plan').on('click tap', function() {
 
         $(this).html("<h3 id='education-holder'>"
         + $('#edit-class').val() + "</h3><div id='well-class'></div>").hide().fadeIn(1000);
-        console.log("did this fire for class");
-        clickEditClass();
 
         }
+
+        clickEditClass();
+        clickEditPlan();
 
     });
 
