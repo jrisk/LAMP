@@ -342,7 +342,7 @@ $('#add-plan').on('click tap', function() {
     $('#plan-viewer').append("<div class='col-sm-4' id='class-editor'><h3 id='education-holder'>" + $('#classname3').val() + 
     "</h3><div id='well-class'></div></div>")
     .fadeIn(1000);
-    $('#plan-viewer').append("<div class='col-sm-4'><h3><span class='glyphicon glyphicon-calendar'></span>" + $('#dateplan3').val() +
+    $('#plan-viewer').append("<div class='col-sm-4' id='date-editor'><h3 id='calendar-holder'>" + $('#dateplan3').val() +
     "</h3><div id='well-date'></div></div>")
     .fadeIn(1000);
 
@@ -393,6 +393,7 @@ $('#add-plan').on('click tap', function() {
 
         clickEditClass();
         clickEditPlan();
+        clickEditDate();
 
         }
 
@@ -447,8 +448,62 @@ $('#add-plan').on('click tap', function() {
 
         clickEditClass();
         clickEditPlan();
+        clickEditDate();
 
     });
+
+    // ************************ START OF CLICK DATE EDIT FUNCTION *************************************
+
+    function clickEditDate() {
+
+    $('#plan-viewer').on('click tap', '#date-editor', function(e) {
+        $('#calendar-holder').html("<div class='form-group'><div class='input-group input-group-lg date' id='datetimepickeredit3'>"
+        + "<span class='glyphicon glyphicon-calendar'></span>"
+        + "<input id='edit-date' type='text' value='" + $('#dateplan3').val() + "' placeholder='"
+        + $('#dateplan3').val() + "'></div></div>").hide().fadeIn(1000);
+
+        // call datetimepicker now that it exists in the DOM
+        datetimefunc3();
+        /*$('#datetimepickeredit3').data("DateTimePicker").show(function(e) {
+            $('#plan-viewer').off();
+        });*/
+
+        // turn off click handler when changing focus
+        $('#edit-date').on('focusin', function(e2) {
+            $('#plan-viewer').off();
+            console.log('the date was focused in');
+            });
+        });
+    }
+
+    clickEditDate();
+
+    $('#date-editor').on('focusout', function(e) {
+
+        $('#dateplan3').val($('#edit-date').val());
+        console.log($('#dateplan3').val());
+
+        $(this).html("<h3 id='calendar-holder'>"
+        + $('#edit-date').val() + "</h3><div id='well-date'></div>").hide().fadeIn(1000);
+
+        clickEditClass();
+        clickEditPlan();
+        clickEditDate();
+
+    });
+
+    /*<div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <div class="input-group input-group-lg date" id="datetimepickerplan3">
+                        <span class="input-group-addon" id="Date-Icon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    <input type="text" id="dateplan3" placeholder="Day" name="date-plan" class="form-control">
+                </div>
+<input type="hidden" id="datefix3" name="date-planfix" class="form-control">
+</div>
+</div>*/
 
 
     //$("<h2><span class='glyphicon glyphicon-paperclip'></span>" + $('#lessonname3').val() + "</h2>")
@@ -482,6 +537,12 @@ function datetimefunc3() {
 $('#datetimepickerplan3').datetimepicker({
     format: 'dddd, MMMM Do',
     allowInputToggle: true
+});
+
+$('#datetimepickeredit3').datetimepicker({
+    format: 'dddd, MMMM Do',
+    allowInputToggle: true,
+    focusOnShow: false
 });
 
 $('#starttime3').datetimepicker({
