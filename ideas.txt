@@ -1,0 +1,7 @@
+// Data list with map of terrorist attacks from 2001/2003 - now
+//have map with big and small icons to show casualtie amounts 
+//
+
+// reddit repost detection bot
+
+// youtube plugin that automatically mutes an ad then goes back to specific unmuted noise level at end of ad

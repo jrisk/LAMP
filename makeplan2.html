@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
 <script src="./dropzone.js"></script>
-<script src="./extrajs.js"></script>
+<!-- first script try ><script src="./extrajs.js"></script> -->
 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <!-- deprecated 
@@ -50,7 +50,7 @@ have to build file yourself now
                             <div class="glyphicon glyphicon-paperclip">
                             </div>
                 </span>
-    <input name="lesson-name" id="lessonname3" type="text" class="form-control" placeholder="Plan Name">
+    <input name="lesson_name" id="lessonname3" type="text" class="form-control" placeholder="Plan Name">
 </div>
 </div>
 </div>
@@ -79,20 +79,20 @@ have to build file yourself now
                             <span class="glyphicon glyphicon-calendar">
                             </span>
                         </span>
-                    <input type="text" id="dateplan3" placeholder="Day" name="date-plan" class="form-control">
+                    <input type="text" id="dateplan3" placeholder="Day" name="date_plan" class="form-control">
                 </div>
-<input type="hidden" id="datefix3" name="date-planfix" class="form-control">
+<input type="hidden" id="datefix3" name="date_planfix" class="form-control">
 </div>
 </div>
 
     <div class="col-xs-6 col-sm-3" id="the-day">Repeat Every <b id="the-real-day"></b></div>
     <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
         <label class="btn btn-default checkboxing">
-            <input name="every-week" id="weekly" class="week-input" value="everyWeek" type="radio">
+            <input name="every_week" id="weekly" class="week-input" value="everyWeek" type="radio">
             Yes
         </label>
        <label class="btn btn-default checkboxing">
-        <input name="every-week" id="one-off" class="week-input" value="notEveryWeek" type="radio">
+        <input name="every_week" id="one-off" class="week-input" value="notEveryWeek" type="radio">
             No
         </label>
     </div>
@@ -193,7 +193,7 @@ have to build file yourself now
                     <span class="input-group-addon" id="Start-Icon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
-                    <input type="text" class="form-control input-lg" name="start-time" id="start3">
+                    <input type="text" class="form-control input-lg" name="start_time" id="start3">
                 </div>
             </div>
         </div>
@@ -210,7 +210,7 @@ have to build file yourself now
                     <span class="input-group-addon" id="End-Icon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
-            <input type="text" class="form-control input-lg" name="end-time" id="end3">
+            <input type="text" class="form-control input-lg" name="end_time" id="end3">
         </div>
     </div>
 </div>
@@ -354,7 +354,7 @@ $('#add-plan').on('click tap', function() {
 
     $('#plan-viewer').on('click tap', '#plan-editor', function(e) {
         $('#paperclip-holder').html("<span class='glyphicon glyphicon-paperclip'></span>"
-        + "<input id='edit-plan' type='text' value='" + $('#lessonname3').val() + "' placeholder='"
+        + "<input id='edit-plan' name='edit_plan' type='text' value='" + $('#lessonname3').val() + "' placeholder='"
         + $('#lessonname3').val() + "'>").hide().fadeIn(1000);
         // turn off click handler when changing focus
         $('#edit-plan').on('focusin', function(e) {
@@ -384,8 +384,13 @@ $('#add-plan').on('click tap', function() {
 
         else {
 
+        var oldPlan = $('#lessonname3').val();
+
         $('#lessonname3').val($('#edit-plan').val());
+
         console.log($('#lessonname3').val());
+
+        var editPlan = $('#edit-plan').val();
 
         $(this).html("<h3 id='paperclip-holder'>"
         + $('#edit-plan').val() + "</h3><div id='well-plan'></div>").hide().fadeIn(1000);
@@ -395,6 +400,23 @@ $('#add-plan').on('click tap', function() {
         clickEditPlan();
         clickEditDate();
 
+
+        $.ajax({
+            url: 'neweditform.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {new_plan: editPlan, old_plan: oldPlan,
+            old_class: 'NULL', new_class: 'NULL', old_date: 'NULL', new_date: 'NULL'},
+            success: function(data) {
+                console.log('posted edit of PLAN NAME');
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
+        console.log('end ajax call');
+
         }
 
     });
@@ -403,7 +425,7 @@ $('#add-plan').on('click tap', function() {
 
     $('#plan-viewer').on('click tap', '#class-editor', function(e) {
         $('#education-holder').html("<span class='glyphicon glyphicon-education'></span>"
-        + "<input id='edit-class' type='text' value='" + $('#classname3').val() + "' placeholder='"
+        + "<input id='edit-class' name='edit_class' type='text' value='" + $('#classname3').val() + "' placeholder='"
         + $('#classname3').val() + "'>").hide().fadeIn(1000);
         // turn off click handler when changing focus
         $('#edit-class').on('focusin', function(e2) {
@@ -430,7 +452,12 @@ $('#add-plan').on('click tap', function() {
 
     $('#class-editor').on('focusout', function(e) {
 
+        var oldPlan = $('#lessonname3').val();
+
+        var oldClass = $('#classname3').val();
+
         if ($('#edit-class').val() == "") {
+
             $('#edit-class').attr("placeholder", " field cannot be blank");
             console.log("validate this...no class name typed");
             
@@ -439,7 +466,10 @@ $('#add-plan').on('click tap', function() {
         else {
 
         $('#classname3').val($('#edit-class').val());
+
         console.log($('#classname3').val());
+
+        var editClass = $('#edit-class').val();
 
         $(this).html("<h3 id='education-holder'>"
         + $('#edit-class').val() + "</h3><div id='well-class'></div>").hide().fadeIn(1000);
@@ -450,6 +480,20 @@ $('#add-plan').on('click tap', function() {
         clickEditPlan();
         clickEditDate();
 
+         $.ajax({
+            url: 'neweditform.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {new_plan: oldPlan, old_plan: 'NULL', old_class: oldClass, new_class: editClass,
+            old_date: 'NULL', new_date: 'NULL'},
+            success: function(data) {
+                console.log('posted edit of Class');
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
     });
 
     // ************************ START OF CLICK DATE EDIT FUNCTION *************************************
@@ -459,7 +503,7 @@ $('#add-plan').on('click tap', function() {
     $('#plan-viewer').on('click tap', '#date-editor', function(e) {
         $('#calendar-holder').html("<div class='form-group'><div class='input-group input-group-lg date' id='datetimepickeredit3'>"
         + "<span class='glyphicon glyphicon-calendar'></span>"
-        + "<input id='edit-date' type='text' value='" + $('#dateplan3').val() + "' placeholder='"
+        + "<input id='edit-date' name='edit_date' type='text' value='" + $('#dateplan3').val() + "' placeholder='"
         + $('#dateplan3').val() + "'></div></div>").hide().fadeIn(1000);
 
         // call datetimepicker now that it exists in the DOM
@@ -480,8 +524,19 @@ $('#add-plan').on('click tap', function() {
 
     $('#date-editor').on('focusout', function(e) {
 
+        var oldPlan = $('#lessonname3').val();
+
+        var oldDate = databaseDate($('#dateplan3'));
+
+        console.log("the old date is:::" + oldDate);
+
         $('#dateplan3').val($('#edit-date').val());
+
         console.log($('#dateplan3').val());
+
+        var editDate = databaseDate($('#edit-date'));
+
+        console.log(editDate);
 
         $(this).html("<h3 id='calendar-holder'>"
         + $('#edit-date').val() + "</h3><div id='well-date'></div>").hide().fadeIn(1000);
@@ -489,6 +544,20 @@ $('#add-plan').on('click tap', function() {
         clickEditClass();
         clickEditPlan();
         clickEditDate();
+
+        $.ajax({
+            url: 'neweditform.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {new_plan: oldPlan, old_plan: 'NULL', old_class: 'NULL',
+            new_class: 'NULL', old_date: oldDate, new_date: editDate },
+            success: function(data) {
+                console.log('posted edit of date time');
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
 
     });
 
@@ -529,14 +598,14 @@ $('#datetimepickeredit3').datetimepicker({
 });
 
 $('#starttime3').datetimepicker({
-    format: 'HH:mm A',
+    format: 'h:mm a',
     allowInputToggle: true,
     useCurrent: false,
     focusOnShow: false
 });
 
 $('#endtime3').datetimepicker({
-    format: 'HH:mm A',
+    format: 'h:mm a',
     allowInputToggle: true,
     useCurrent: false,
     focusOnShow: false
@@ -636,6 +705,8 @@ $.ajax({
 });
 
 });
+// turn time into 24 hour database-readable if in pm time
+
 
 // make start time of next activity the end time of the last activity 
 
@@ -647,7 +718,7 @@ function endToStartChange() {
 
     var startform = moment(lastend, 'HH:mm:ss');
 
-    var changetime = moment(startform).format('HH:mm A');
+    var changetime = moment(startform).format('h:mm A');
 
     $('#start3').val(changetime);
 

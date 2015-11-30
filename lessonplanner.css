@@ -19,16 +19,55 @@ div.page-header>*>* {
 
 #today-look {
 	font-size: 3.5em;
+	background-color: white;
+	animation-name: exampletoday;
+	animation-duration: 4s;
+	-webkit-animation: exampletoday 5s infinite; /* Safari 4+ */
+    -moz-animation: exampletoday 5s infinite; /* Fx 5+ */
+    -o-animation: exampletoday 5s infinite; /* Opera 12+ */
+    animation: exampletoday 5s infinite;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
 }
+
 
 #future-look {
 	font-size: 3.5em;
 }
 
+@keyframes exampletoday {
+	0% {
+		background-color: white;
+	}
+	100% {
+		background-color: blue;
+	}
+}
+
+/*@-moz-keyframes exampletoday {
+	0% {
+		background-color: white;
+	}
+	100% {
+		background-color: blue;
+	}
+
+}
+
+@-webkit-keyframes exampletoday {
+	0% {
+		background-color: white;
+	}
+	100% {
+		background-color: blue;
+	}
+
+}*/
+
 #json-today {
 	background-color: silver;
 	display: block;
 	box-shadow: 0 0.2em 0.3em #999;
+	border-radius: 0.2em;
 }
 
 #json-future {

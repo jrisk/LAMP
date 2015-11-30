@@ -11,33 +11,33 @@ include("credentials.php");
 
 //parse_str($_POST["data"], $_POST);
 
-$_SESSION['currentplan'] = $_POST['lesson-name'];
+$_SESSION['currentplan'] = $_POST['lesson_name'];
 
 // Post variables
 
 $id = NULL; // no ID right now, prevent login // cant be null on website
 
-$plan = $_POST['lesson-name'];
+$plan = $_POST['lesson_name'];
 
-$class = $_POST['user-group'];
+$class = $_POST['user_group'];
 
 $activity = $_POST['activity'];
 
-$date = $_POST['date-planfix'];
+$date = $_POST['date_planfix'];
 
 // for specific day of week $day_db = strstr($day, ",", true);
 
-$start_time = $_POST['start-time'];
+$start_time = $_POST['start_time'];
 
 $start_time_db = substr($start_time, 0, -3);
 
-$end_time = $_POST['end-time'];
+$end_time = $_POST['end_time'];
 
 $end_time_db = substr($end_time, 0, -3);
 
 $comment_note = NULL; // cant be null in website
 
-$weekly = $_POST['every-week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
+$weekly = $_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
 
 $media = NULL; //$_POST['media']; // url for media objects stored in activities
 

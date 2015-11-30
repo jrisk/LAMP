@@ -8,8 +8,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
-<script src="./extrajs.js"></script>
-
+<!-- first script try ><script src="./extrajs.js"></script> -->
+ 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <script src="//www.modernizr.com/downloads/modernizr
 -latest.js" type ="text/javascript"></script>

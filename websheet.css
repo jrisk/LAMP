@@ -4,6 +4,7 @@ html {
 
 body {
 	margin: 0;
+	border-radius: 0.2em 0.2em;
 }
 
 .top-nav {
