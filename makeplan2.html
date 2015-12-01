@@ -598,14 +598,14 @@ $('#datetimepickeredit3').datetimepicker({
 });
 
 $('#starttime3').datetimepicker({
-    format: 'h:mm a',
+    format: 'h:mm A',
     allowInputToggle: true,
     useCurrent: false,
     focusOnShow: false
 });
 
 $('#endtime3').datetimepicker({
-    format: 'h:mm a',
+    format: 'h:mm A',
     allowInputToggle: true,
     useCurrent: false,
     focusOnShow: false
@@ -658,6 +658,8 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
 
 $('#datefix3').val(databaseDate($('#dateplan3')));
 
+timeDatabase();
+
 var formdata = $('#planclassday input').serialize();
 
 console.log(formdata);
@@ -670,6 +672,8 @@ if (valRegEx.test(plantitle) {
     console.log('the plan title can\'t have a period');
     break;
 }*/ //test for periods and other symbols...they mess up the database/ php sort parsing
+
+// POST FORM AJAX FUNCTIONS 
 
 $.ajax({
     type: 'POST',
@@ -706,6 +710,26 @@ $.ajax({
 
 });
 // turn time into 24 hour database-readable if in pm time
+
+function timeDatabase() {
+
+    var startElement = $('#start3').val();
+
+    var endElement = $('#end3').val();
+
+    var startertime = moment(startElement, 'h:mm A');
+
+    var endertime = moment(endElement, 'h:mm A');
+
+    var startChange = moment(startertime).format('HH:mm:ss');
+
+    var endChange = moment(endertime).format('HH:mm:ss');
+
+    $('#start3').val(startChange);
+
+    $('#end3').val(endChange);
+
+};
 
 
 // make start time of next activity the end time of the last activity 
