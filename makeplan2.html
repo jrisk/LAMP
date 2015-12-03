@@ -177,7 +177,7 @@ have to build file yourself now
                     <span class="glyphicon glyphicon-pencil" id="pencil-icon">
                             </span>
                 </span>
-            <input name="activity" type="text" class="form-control input-lg">
+            <input name="activity" id="activity" type="text" class="form-control input-lg">
             </div>
         </div>
 
@@ -428,6 +428,7 @@ $('#add-plan').on('click tap', function() {
         + "<input id='edit-class' name='edit_class' type='text' value='" + $('#classname3').val() + "' placeholder='"
         + $('#classname3').val() + "'>").hide().fadeIn(1000);
         // turn off click handler when changing focus
+        
         $('#edit-class').on('focusin', function(e2) {
             $('#plan-viewer').off();
             console.log('class was focused in');
@@ -479,6 +480,8 @@ $('#add-plan').on('click tap', function() {
         clickEditClass();
         clickEditPlan();
         clickEditDate();
+
+        // EDIT CLASS
 
          $.ajax({
             url: 'neweditform.php',
@@ -561,17 +564,105 @@ $('#add-plan').on('click tap', function() {
 
     });
 
-}); //end of (#add-plan) function
+});
 
-function checkboxChange() {
+// Cant call (this).on() while in the (this) function. thats why $('#actentry').on() wont work in function
 
-/*$('#checkbox-holder').on('change', '.week-input', function(e) {
+function clickEditAct() {
+
+    console.log('clickedit act being called');
+
+        console.log($(this).html());
+
+        var actVal = $(this).html();
+
+        $(this).html("<input class='activity-input' name='edit_activity' type='text' value='"
+        + actVal + "' placeholder='" + actVal + "'>").hide().fadeIn(1000);
+
+        var strLength = $(this).children().val().length * 2;
+
+        $(this).children()[0].setSelectionRange(strLength, strLength);
+
+        $(this).children().focus();
+
+        // focusin handler
+
+        $(this).on('focusin', function(e) {
+
+            console.log('focusin from focusin main on top');
+
+            console.log($(this).parent());
+
+            $('#actentry').off();
+
+        });
+
+        $(this).on('focusout', function(e) {
+
+            console.log('focusOUT called from top focusout');
+
+            var actValNew = $(this).children().val();
+
+            console.log("value is: " + actValNew);
+
+            console.log($(this).children());
+            console.log($(this));
+
+            if (typeof actValNew === 'undefined') {
+                console.log('but why?');
+                console.log($(this));
+                focusFix($(this));
+            }
+
+            else {
+
+            $(this).html(actValNew).hide().fadeIn(1000);
+
+            }
+
+            });
+
+        // once called the focusin handle is permanently listening on (this) function
+
+    };
+
+    function focusFix(element) {
+
+        $('#actentry').on('click tap', '.activity-inserted', clickEditAct);
+
+        console.log('FocusFix called OUTER');
+
+        console.log(element);
+
+        var actValNew = element.html();
+
+        element.html("<input class='activity-input' name='edit_activity' type='text' value='"
+        + actValNew + "' placeholder='" + actValNew + "'>").hide().fadeIn(1000);
     }
-});*/
 
-};
+    /*************************** ACTIVITY START END TIME FUNCTIONS ***************************************/
 
-//checkboxChange();
+
+        /*
+
+        $.ajax({
+            url: 'neweditform.php',
+            type: 'POST',
+            dataType: 'json',
+            data: {new_plan: editPlan, old_plan: oldPlan,
+            old_class: 'NULL', new_class: 'NULL', old_date: 'NULL', new_date: 'NULL'},
+            success: function(data) {
+                console.log('posted edit of PLAN NAME');
+            },
+            error: function(errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
+            */
+
+        
+
 
 function savePlan() {
     $('#planclassday input[type=radio]').each(function(idx, elem) {
@@ -654,17 +745,21 @@ var databaseDate = function(element) {
     return daybaseval;
 };
 
+//ADD ACTIVITY BUTTON FUNCTION
+
 $('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
 
-$('#datefix3').val(databaseDate($('#dateplan3')));
+    $('#actentry').on('click tap', '.activity-inserted', clickEditAct);
 
-timeDatabase();
+    $('#datefix3').val(databaseDate($('#dateplan3')));
 
-var formdata = $('#planclassday input').serialize();
+    timeDatabase();
 
-console.log(formdata);
+    var formdata = $('#planclassday input').serialize();
 
-var plantitle = $('#lessonname3').val();
+    console.log(formdata);
+
+    var plantitle = $('#lessonname3').val();
 
 /*valRegEx = /\.|\-/;
 
@@ -693,6 +788,8 @@ $.ajax({
                 widthDecideOnShowCopy();
                 endToStartChange();
                 readableStartEnd();
+
+                // run function that reDOMs activity-inserted inputs
                 $('#label-row').hide();
             },
 

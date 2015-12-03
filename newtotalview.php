@@ -84,8 +84,8 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
     </div>
     <!-- activity label end -->
     <div class='row act-start-end-row'>
-        <div class='col-xs-12 col-sm-5'>
-        <div class='well well-sm activity-inserted'>" . $key['Activity'] .
+        <div class='col-xs-12 col-sm-5 activity-col'>
+        <div id='act" . $key['ID'] . "' class='well well-sm activity-inserted'>" . $key['Activity'] .
         "</div></div>
 
         <!-- start 2nd row on mobile <div class='row' id='start-time-molab-copy'>-->
