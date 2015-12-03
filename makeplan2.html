@@ -568,6 +568,8 @@ $('#add-plan').on('click tap', function() {
 
 // Cant call (this).on() while in the (this) function. thats why $('#actentry').on() wont work in function
 
+$('#actentry').on('click tap', '.activity-inserted', clickEditAct);
+
 function clickEditAct() {
 
     console.log('clickedit act being called');
@@ -577,7 +579,20 @@ function clickEditAct() {
         var actVal = $(this).html();
 
         $(this).html("<input class='activity-input' name='edit_activity' type='text' value='"
-        + actVal + "' placeholder='" + actVal + "'>").hide().fadeIn(1000);
+        + actVal + "' placeholder='" + actVal + "'>").hide().fadeIn(1000, function(e) {
+            //while fadeout effect is going, make sure they cant click on other inputs while ongoing
+            console.log(e);
+        });
+
+        // focusin handler
+
+        $('#actentry').on('focusin', '.activity-input', function(e) {
+
+            $('#actentry').off();
+
+            console.log('focusin from focusin main on top');
+
+        });
 
         var strLength = $(this).children().val().length * 2;
 
@@ -585,40 +600,19 @@ function clickEditAct() {
 
         $(this).children().focus();
 
-        // focusin handler
+        //focusout handler
 
-        $(this).on('focusin', function(e) {
-
-            console.log('focusin from focusin main on top');
-
-            console.log($(this).parent());
-
-            $('#actentry').off();
-
-        });
-
-        $(this).on('focusout', function(e) {
+        $('#actentry').on('focusout', '.activity-input', function(e) {
 
             console.log('focusOUT called from top focusout');
 
-            var actValNew = $(this).children().val();
+            var actValNew = $(this).val();
 
             console.log("value is: " + actValNew);
 
-            console.log($(this).children());
-            console.log($(this));
+            $(this).parent().html(actValNew).hide().fadeIn(1000);
 
-            if (typeof actValNew === 'undefined') {
-                console.log('but why?');
-                console.log($(this));
-                focusFix($(this));
-            }
-
-            else {
-
-            $(this).html(actValNew).hide().fadeIn(1000);
-
-            }
+            focusFix();
 
             });
 
@@ -626,18 +620,16 @@ function clickEditAct() {
 
     };
 
+    //focus OUT fix to reset clicktap clickEditACt
+
     function focusFix(element) {
+
+        console.log('focusFix called');
 
         $('#actentry').on('click tap', '.activity-inserted', clickEditAct);
 
-        console.log('FocusFix called OUTER');
+        $('#actentry').on('click tap', '.delact, .delact-copy', deleteAct);
 
-        console.log(element);
-
-        var actValNew = element.html();
-
-        element.html("<input class='activity-input' name='edit_activity' type='text' value='"
-        + actValNew + "' placeholder='" + actValNew + "'>").hide().fadeIn(1000);
     }
 
     /*************************** ACTIVITY START END TIME FUNCTIONS ***************************************/
@@ -748,8 +740,6 @@ var databaseDate = function(element) {
 //ADD ACTIVITY BUTTON FUNCTION
 
 $('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
-
-    $('#actentry').on('click tap', '.activity-inserted', clickEditAct);
 
     $('#datefix3').val(databaseDate($('#dateplan3')));
 
@@ -887,7 +877,9 @@ function readableStartEnd() {
     });
 };
 
-$('#actentry').on('click tap', '.delact, .delact-copy', function(e) {
+$('#actentry').on('click tap', '.delact, .delact-copy', deleteAct);
+
+function deleteAct() {
 
     var actID = $(this).parent().siblings('.activityID').text();
 
@@ -931,7 +923,7 @@ $('#actentry').on('click tap', '.delact, .delact-copy', function(e) {
 
     });
 
-});
+};
 
 //delplan and save brings you back to main screen of plans, save state and show activities too?
 
