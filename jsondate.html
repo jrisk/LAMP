@@ -69,6 +69,8 @@ $(function () {
 		url: 'datesort.php',
 		success: function(data) {
 
+			/** ';;;' as an activity completely screwed this page, DO REGEX AND VALIDATION!!!! */
+
 			var JSONParse = JSON.parse(data);
 
 			//var prettyString = JSON.stringify(parseString, undefined, 2);

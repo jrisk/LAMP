@@ -612,6 +612,9 @@ function clickEditAct() {
 
             $(this).parent().html(actValNew).hide().fadeIn(1000);
 
+            //call this function to reset the handlers so specific edits can be clicked again
+            //without inteferring with past clicks
+
             focusFix();
 
             });
@@ -630,8 +633,104 @@ function clickEditAct() {
 
         $('#actentry').on('click tap', '.delact, .delact-copy', deleteAct);
 
+        $('#actentry').on('click tap', '.start-time-insert', clickEditStart);
+
+        $('#actentry').on('click tap', '.end-time-insert', clickEditEnd);
+
     }
 
+$('#actentry').on('click tap', '.start-time-insert', clickEditStart);
+
+function clickEditStart() {
+
+    console.log('Start Time Click Edit function');
+
+        console.log($(this).html());
+
+        var startVal = $(this).html();
+
+        //keeps copying the input html into new html
+
+        //starttimeedit3 id, input name start_time_edit and id startedit3
+
+        $(this).html("<div class='input-group date' id='starttimeedit3'>"
+                + "<input type='text' value='" + startVal + "' class='form-control input-lg start-edit-input'"
+                + "placeholder='" + startVal + "' name='start_time_edit' id='startedit3'>"
+                + "</div>");
+
+        datetimefunc3();
+
+        $('#startedit3').focus();
+
+        $('#actentry').on('focusin', '.start-edit-input', function(e) {
+            console.log('start time focus in');
+        });
+
+        $('#actentry').on('focusout', '#starttimeedit3', function(e) {
+
+            console.log('focus out on start time called');
+
+            var startValNew = $(this).children().val();
+
+            console.log("value is: " + startValNew);
+            console.log($(this).parent());
+
+            $(this).parent().html(startValNew).hide().fadeIn(1000);
+
+            //this keeps getting called each time its clicked and focused out
+            //something is kept and added to on each click that isnt being reset
+
+            //focusFix();
+
+        });
+};
+
+$('#actentry').on('click tap', '.end-time-insert', clickEditEnd);
+
+function clickEditEnd() {
+
+    console.log('End Time Click Edit');
+
+        console.log($(this).html());
+
+        var endVal = $(this).html();
+
+        //keeps copying the input html into new html
+
+        //starttimeedit3 id, input name start_time_edit and id startedit3
+
+        $(this).html("<div class='input-group date' id='endtimeedit3'>"
+                + "<input type='text' value='" + endVal + "' class='form-control input-lg end-edit-input'"
+                + "placeholder='" + endVal + "' name='end_time_edit' id='endedit3'>"
+                + "</div>");
+
+        datetimefunc3();
+
+        $('#endedit3').focus();
+
+        $('#actentry').on('focusin', '.end-edit-input', function(e) {
+            console.log('start time focus in');
+        });
+
+        $('#actentry').on('focusout', '#endtimeedit3', function(e) {
+
+            console.log('focus out on start time called');
+
+            var endValNew = $(this).children().val();
+
+            console.log("value of end time is: " + endValNew);
+            console.log($(this).parent());
+
+            $(this).parent().html(endValNew).hide().fadeIn(1000);
+
+            //this keeps getting called each time its clicked and focused out
+            //something is kept and added to on each click that isnt being reset
+
+            //focusFix();
+
+        });
+
+}
     /*************************** ACTIVITY START END TIME FUNCTIONS ***************************************/
 
 
@@ -687,6 +786,13 @@ $('#starttime3').datetimepicker({
     focusOnShow: false
 });
 
+$('#starttimeedit3').datetimepicker({
+    format: 'h:mm A',
+    allowInputToggle: true,
+    useCurrent: false,
+    focusOnShow: true
+});
+
 $('#endtime3').datetimepicker({
     format: 'h:mm A',
     allowInputToggle: true,
@@ -694,9 +800,35 @@ $('#endtime3').datetimepicker({
     focusOnShow: false
 });
 
+$('#endtimeedit3').datetimepicker({
+    format: 'h:mm A',
+    allowInputToggle: true,
+    useCurrent: false,
+    focusOnShow: true
+});
+
 };
 
 datetimefunc3(); //initialize the date and start/end time pickers
+
+/******************************** LINKED START END TIME FUNCTIONS *********************/
+
+$('#endtime3').on('dp.change', function(e) {
+    $('#starttime3').data('DateTimePicker').maxDate(e.date);
+});
+
+$('#starttime3').on('dp.change', function(e) {
+    $('#endtime3').data('DateTimePicker').minDate(e.date);
+}); //link together start and end time to prevent times before being possible
+
+$('#endtimeedit3').on('dp.change', function(e) {
+    $('#starttimeedit3').data('DateTimePicker').maxDate(e.date);
+});
+
+$('#starttimeedit3').on('dp.change', function(e) {
+    $('#endtimeedit3').data('DateTimePicker').minDate(e.date);
+});
+//*************************linked start-end time functions ******************/
 
 //change event not firing on input item because the dtpicker not initialized until here??
 
@@ -704,9 +836,7 @@ $('input[type=text]').change(function(e) {
     console.log('test on change event for text-type input events');
 });
 
-/*$('#endtime3').on('dp.change', function(e) {
-    $('#starttime3').data('DateTimePicker').minDate(e.date);
-});*/ //link together start and end time to prevent times before being possible
+
 
 //expose weekly repeat option on day selection
 
