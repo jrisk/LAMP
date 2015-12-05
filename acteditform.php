@@ -11,7 +11,7 @@ include("credentials.php");
 
 //parse_str($_POST["data"], $_POST);
 
-$_SESSION['currentplan'] = $_POST['old_plan'];
+//$_SESSION['currentplan'] = $_POST['old_plan'];
 
 // Post variables
 
@@ -80,6 +80,6 @@ else {
 
 //start catch
 
-echo "Plan and Activity have been saved";
+echo "Activity have been edited successfully";
 
 ?>

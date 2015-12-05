@@ -59,7 +59,34 @@ var wow = document.getElementById('wow');
 
 wow.innerHTML = "<b>Hello</b>";
 
-thediv.innerHTML = '<b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo urna non metus tristique, sed pulvinar massa malesuada. Nulla ut aliquet eros. Suspendisse elit ligula, suscipit quis interdum nec, rhoncus vel nibh. Cras sed dui id nibh maximus posuere eu eu orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque libero nunc, tincidunt ac commodo eu, vestibulum id sem. Nunc mattis blandit blandit. Quisque nulla risus, venenatis at ligula vitae, ullamcorper sodales mi. Fusce suscipit, lorem vitae rutrum vulputate, nisl lectus vehicula felis, in egestas arcu nunc nec quam. Quisque consequat odio eu leo cursus, et ornare orci convallis. Ut in sagittis quam. Donec dapibus mauris lacus, at placerat libero tempor at. Sed rhoncus sapien ut tellus vulputate aliquam. Nam hendrerit lacus vel sapien sollicitudin, ac pretium eros luctus. Sed varius sed erat eget porttitor. Donec eu dui vel enim suscipit pulvinar nec non orci. In imperdiet porta cursus. Vestibulum vestibulum dapibus nulla quis venenatis. Nullam feugiat facilisis gravida. Cras aliquet varius urna, ut finibus tortor maximus sed. Donec commodo, enim vel tempor malesuada, sem dui varius nisl, ac pulvinar nunc justo nec metus. Cras posuere tincidunt risus nec mollis. Vestibulum tincidunt felis id ante finibus, quis tempus orci porta. Vivamus lorem lorem, finibus in venenatis dapibus, malesuada nec tellus. Curabitur id diam egestas, suscipit nibh et, fermentum libero. Vivamus velit neque, sodales eget metus cursus, maxMorbi eu magna dolor. Nunc at congue quam. Phasellus pharetra bibendum ex, vitae dapibus ligula consequat vitae. Aenean lorem odio, ultrices a lobortis a, consequat sed nisi. Nunc dignissim magna non cursus rutrum. In viverra enim sem, eu bibendum augue vestibulum vitae. Nulla cursus vitae velit in rutrum. Curabitur mi leo, posuere pretium nisi ac, tincidunt blandit arcu. Sed egestas nulla a nisi fringilla gravida. Suspendisse potenti. Phasellus at gravida tellus. Fusce at tristique erat. Sed varius varius fermentum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ultrices facilisis maximus. Donec lacinia sagittis rhoncus. Sed tempus lectus massa. Maecenas dapibus venenatis ante, at mattis augue. Nulla facilisis leo fermentum, ultrices libero in, suscipit velit. Cras fringilla odio leo, nec luctus lacus rhoncus a. Quisque cursus gravida eros, et dignissim nisl porta eget. Integer efficitur non purus quis venenatis. Nam dui purus, semper eget leo ac, euismod semper arcu. Nam condimentum at dui ut pretium. Vivamus felis nunc, maximus eget neque nec, dignissim luctus justo. In hac habitasse platea dictumst. Cras auctor, ipsum nec pellentesque bibendum, ante purus venenatis lectus, eget egestas neque lectus ut ipsum. Nam euismod ultricies ligula sed ultricies. Curabitur nec mauris eu quam laoreet convallis. Proin facilisis felis enim, at varius orci tincidunt at. Phasellus ac volutpat odio, at sollicitudin odio. Aliquam efficitur magna est, quis tincidunt tortor finibus ut. Ut venenatis efficitur ipsum non congue. Vestibulum iaculis fermentum iaculis.</b>';
+thediv.innerHTML = '<h2>YOO</h2>';
+
+var xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'graph.facebook.com/');
+
+CAACEdEose0cBACoXeUZB0cZAem8BG5wOKxZCBURZB89AqmcxlTgZA2gJK6oKEgIGs8BeRkYWEYn2YyLw4PLJVCLrm6D6ZBvfsFGPryMpcCqMpoZCfV71yV3AH9nxToNZAjre1uWDSDfykZB0Vw0ibFSwoUrZAZBijSQ3DBr5XCCrhkVe3j7WzAZAIaUgZCD408S0pRZApTwfeuu3ETraBGkZB76EfSz
+
+xhr.send('null');
+
+xhr.onreadystatechange = function() {
+    var DONE = 4;
+    var OK = 200;
+
+    if (xhr.readyState == DONE) {
+
+        if (xhr.status == 200) {
+
+            console.log(xhr.responseText);
+
+        }
+
+        else {
+            console.log('Error: ' + xhr.status);
+        }
+
+    }
+}
 
 console.log("i fired");
 };

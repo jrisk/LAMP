@@ -22,6 +22,7 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
+	<div class="btn btn-lg" id="refresh">REFRESH</div>
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future"><p id="future-look">Future Plans</p></div>
 	<div class="container-fluid" id="json-repeat"></div>
@@ -63,6 +64,8 @@ $(function () {
 		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-2" </div>');
 
 	};
+
+	function getData() {
 
 	$.ajax({
 		type: 'GET',
@@ -212,6 +215,14 @@ $(function () {
 			$('#json-nest').html(errorThrown);
 		}
 	});
+
+	}
+
+getData();
+
+$('#refresh').on('click tap', function(e) {
+	//dont getData breaks stuff
+})
 
 })
 </script>

@@ -17,6 +17,10 @@ div.page-header>*>* {
 	border: none;
 }
 
+.activity-col {
+	overflow: hidden;
+}
+
 #today-look {
 	font-size: 3.5em;
 	background-color: white;

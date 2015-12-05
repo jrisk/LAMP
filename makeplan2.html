@@ -177,7 +177,7 @@ have to build file yourself now
                     <span class="glyphicon glyphicon-pencil" id="pencil-icon">
                             </span>
                 </span>
-            <input name="activity" id="activity" type="text" class="form-control input-lg">
+            <input name="activity" id="activity" type="text" maxlength="60" class="form-control input-lg">
             </div>
         </div>
 
@@ -576,9 +576,13 @@ function clickEditAct() {
 
         console.log($(this).html());
 
+        var actID = $(this).parent().siblings('.activityID').html();
+
+        console.log(actID);
+
         var actVal = $(this).html();
 
-        $(this).html("<input class='activity-input' name='edit_activity' type='text' value='"
+        $(this).html("<input class='activity-input' name='edit_activity' maxlength='60' type='text' value='"
         + actVal + "' placeholder='" + actVal + "'>").hide().fadeIn(1000, function(e) {
             //while fadeout effect is going, make sure they cant click on other inputs while ongoing
             console.log(e);
@@ -610,10 +614,25 @@ function clickEditAct() {
 
             console.log("value is: " + actValNew);
 
-            $(this).parent().html(actValNew).hide().fadeIn(1000);
+            $(this).parent().html(actValNew).css('overflow', 'hidden').hide().fadeIn(1000);
 
             //call this function to reset the handlers so specific edits can be clicked again
             //without inteferring with past clicks
+
+            $.ajax({
+                type: 'POST',
+                url: 'acteditform.php',
+                dataType: 'json', //json or html, php parses it somehow
+                data: {activity: actValNew, old_activity: actVal, id: actID,
+                start_time: 'NULL', old_start: 'NULL', end_time: 'NULL', old_end: 'NULL'},
+                success: function(data) {
+                    console.log('success changed');
+                },
+                error: function(errorThrown) {
+                console.log(errorThrown);
+                }
+
+            });
 
             focusFix();
 
@@ -649,7 +668,17 @@ function clickEditStart() {
 
         var startVal = $(this).html();
 
+        //have to change to full 00:00 for database
+
+        var startValDB = moment(startVal, 'h:mm A');
+
+        var startValOldDB = moment(startValDB).format('HH:mm:ss');
+
         //keeps copying the input html into new html
+
+        var actID = $(this).parent().siblings('.activityID').html();
+
+        console.log(actID);
 
         //starttimeedit3 id, input name start_time_edit and id startedit3
 
@@ -672,6 +701,12 @@ function clickEditStart() {
 
             var startValNew = $(this).children().val();
 
+            //have to change to full 00:00 for database
+
+            var startValNewDB = moment(startValNew, 'h:mm A');
+
+            var startValNewDB = moment(startValNewDB).format('HH:mm:ss');
+
             console.log("value is: " + startValNew);
             console.log($(this).parent());
 
@@ -681,6 +716,21 @@ function clickEditStart() {
             //something is kept and added to on each click that isnt being reset
 
             //focusFix();
+
+            $.ajax({
+                type: 'POST',
+                url: 'acteditform.php',
+                dataType: 'json', //json or html, php parses it somehow
+                data: {activity: 'NULL', old_activity: 'NULL', id: actID,
+                start_time: startValNewDB, old_start: startValOldDB, end_time: 'NULL', old_end: 'NULL'},
+                success: function(data) {
+                    console.log('success changed');
+                },
+                error: function(errorThrown) {
+                console.log(errorThrown);
+                }
+
+        });
 
         });
 };
@@ -693,7 +743,17 @@ function clickEditEnd() {
 
         console.log($(this).html());
 
+        var actID = $(this).parent().siblings('.activityID').html();
+
+        console.log(actID);
+
         var endVal = $(this).html();
+
+        //have to change to full 00:00 for database
+
+        var endValDB = moment(endVal, 'h:mm A');
+
+        var endValOldDB = moment(endValDB).format('HH:mm:ss');
 
         //keeps copying the input html into new html
 
@@ -718,10 +778,31 @@ function clickEditEnd() {
 
             var endValNew = $(this).children().val();
 
+            //have to change to full 00:00 for database
+
+            var endValNewDB = moment(endValNew, 'h:mm A');
+
+            var endValNewDB = moment(endValNewDB).format('HH:mm:ss');
+
             console.log("value of end time is: " + endValNew);
             console.log($(this).parent());
 
             $(this).parent().html(endValNew).hide().fadeIn(1000);
+
+            $.ajax({
+                type: 'POST',
+                url: 'acteditform.php',
+                dataType: 'json', //json or html, php parses it somehow
+                data: {activity: 'NULL', old_activity: 'NULL', id: actID,
+                start_time: 'NULL', old_start: 'NULL', end_time: endValNewDB, old_end: endValOldDB},
+                success: function(data) {
+                    console.log('success changed');
+                },
+                error: function(errorThrown) {
+                console.log(errorThrown);
+                }
+
+        });
 
             //this keeps getting called each time its clicked and focused out
             //something is kept and added to on each click that isnt being reset
@@ -855,7 +936,7 @@ $('#datetimepickerplan3').on('dp.change', function(e) {
     $('#the-real-day').html(daybaseval);
 
     });
-//taken from extra.js editor function for chaning date into mysql readable database date yyyy-mm-dd
+//taken from extra.js editor function for changing date into mysql readable database date yyyy-mm-dd
 
 var databaseDate = function(element) {
     var dayinput = element.val();
@@ -908,6 +989,10 @@ $.ajax({
                 widthDecideOnShowCopy();
                 endToStartChange();
                 readableStartEnd();
+
+                //small hack to keep spaceless text from overflowing div
+
+                $('.activity-inserted').css('overflow', 'hidden');
 
                 // run function that reDOMs activity-inserted inputs
                 $('#label-row').hide();
