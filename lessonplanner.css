@@ -22,7 +22,7 @@ div.page-header>*>* {
 }
 
 #today-look {
-	font-size: 3.5em;
+	font-size: 1.5em;
 	background-color: white;
 	animation-name: exampletoday;
 	animation-duration: 4s;
@@ -72,6 +72,8 @@ div.page-header>*>* {
 	display: block;
 	box-shadow: 0 0.2em 0.3em #999;
 	border-radius: 0.2em;
+	overflow: hidden;
+	position: relative;
 }
 
 #json-future {
@@ -179,6 +181,10 @@ video {
 	right: 100px;
 	float: left;
 
+}
+
+.plan-big {
+	position: relative;
 }
 
 .plan-big:hover {

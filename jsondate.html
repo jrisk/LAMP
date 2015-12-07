@@ -22,7 +22,7 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
-	<div class="btn btn-lg" id="refresh">REFRESH</div>
+	<nav class="nav">Hello</nav>
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future"><p id="future-look">Future Plans</p></div>
 	<div class="container-fluid" id="json-repeat"></div>
@@ -57,11 +57,14 @@ $(function () {
 
 		$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + objec[i].id + '">'
 		+ '<div class="small-type col-xs-4 col-sm-2">'
-		+ moment(objec[i].start).format('HH:mm a') + '-'
-		+ moment(objec[i].end).format('HH:mm a') + '</div><div id="specificplan-'
+		+ moment(objec[i].start).format('h:mm a') + '-'
+		+ moment(objec[i].end).format('h:mm a') + '</div><div id="specificplan-'
 		+ objec[i].title + '" class="specplanners the-first-act col-xs-8 col-sm-8">'
 		+ objec[i].title + '</div>'
 		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-2" </div>');
+
+		//$('.plan-big').slideToggle('slow');
+		//animate plans to bring them offscreen to on from left
 
 	};
 
@@ -76,16 +79,7 @@ $(function () {
 
 			var JSONParse = JSON.parse(data);
 
-			//var prettyString = JSON.stringify(parseString, undefined, 2);
-
-			//$('#json-nest').html(prettyString);
-
-			// very memory intensive looping here...considering refactoring,redoing
-
-			/*JSONParse.sort(function (a,b) { // YOU CAN ONLY SORT AND ARRAY
-				// YOU CAN NOT SORT A JSON OBJECT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				return a.start - b.start;
-			});*/
+			// you can only sort an array, not a json object (no key based sort)
 
 			var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -109,8 +103,8 @@ $(function () {
 
 						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
 						+ '<div class="small-type col-xs-6 col-sm-2">'
-						+ moment(obj[i].start).format('HH:mm a') + '-'
-						+ moment(obj[i].end).format('HH:mm a') + '</div>'
+						+ moment(obj[i].start).format('h:mm a') + '-'
+						+ moment(obj[i].end).format('h:mm a') + '</div>'
 						+ '<div id="specificplan-'
 						+ obj[i].title + '" class="specplanners col-xs-6 col-sm-8">'
 						+ obj[i].title + '</div>'
@@ -197,11 +191,11 @@ $(function () {
 			}
 
 			// hide all plans except for the first of the day or current time-based plan
-			$('.plan-big').children().hide(); //hide the activities of each plan
+			// hide the activities of each plan
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				e.preventDefault();
-				$(this).children().toggle("slow");
+				$(this).children().toggle('slow');
 				// show media object line box $(this).
 			});
 
@@ -209,6 +203,12 @@ $(function () {
 				e.preventDefault();
 				e.stopPropagation();
 			});
+
+			$('.plan-big').children().hide();
+			$('.plan-big').css('left', '-100%');
+			$('.plan-big').animate({left: '0%'}, 800).children().toggle('slow');
+			$('body').animate({ scrollTop: $('#json-future').offset().top }, 2000);
+			//$('.plan-big').children().delay(2000).toggle('slow');
 		},
 
 		error: function(errorThrown) {
