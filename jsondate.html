@@ -168,7 +168,8 @@ $(function () {
 						$('#' + obj[i].id).parent().addClass('currentPlan');
 						$('#' + obj[i].id).addClass('currentAct');
 						//$('.plan-big').children().toggle('slow');
-						$('body').animate({ scrollTop: $('.currentAct').offset().top }, 1000);
+						console.log($('.navbar').height());
+						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
 						$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
 
