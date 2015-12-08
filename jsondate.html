@@ -3,7 +3,6 @@
     <title>JSON AGENDA VIEW BUILD 2.0</title>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
@@ -21,7 +20,13 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
-	<nav class="nav">Hello</nav>
+	<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+               <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
+               <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
+        </div>
+    </nav>
+
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future"><p id="future-look">Future Plans</p></div>
 	<div class="container-fluid" id="json-repeat"></div>
