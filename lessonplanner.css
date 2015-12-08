@@ -1,3 +1,7 @@
+html {
+	font-size: 0.5em;
+}
+
 div.page-header {
 	background-color: #06f;
 	font-family: "Montserrat Alternates",sans-serif;
@@ -95,17 +99,24 @@ div.page-header>*>* {
 
 }
 
+#plan-title {
+	font-size: 1.1em;
+	text-align: center;
+	font-family: "Karla", sans-serif;
+}
+
 .small-type {
 	font-size: .6em;
 	display: inline;
 }
 
 .specplanners {
-	font-size: 1.4em;
+	font-size: 0.9em;
 }
 
 .agenda-act-row {
 	box-shadow: 0 0.2em 0.4em #999;
+	padding: 0;
 }
 
 .agenda-act-row:hover {
@@ -185,6 +196,7 @@ video {
 
 .plan-big {
 	position: relative;
+	font-size: .8em;
 }
 
 .plan-big:hover {
@@ -254,7 +266,7 @@ background-color: #C6E2FF;
 
 .well-sm {
 	padding: 0;
-	padding-left: 2px;
+	padding-left: .2em;
 	font-size: 2em;
 }
 
