@@ -621,6 +621,8 @@ dateTimeFun(); //initialize the date and start/end time pickers
 
 function dateTimeChange() {
 
+var midnight = moment('11:59 PM', 'h:mm A');
+
 $('#endtime3').on('dp.change', function(e) {
     $('#starttime3').data('DateTimePicker').maxDate(e.date);
 });
@@ -635,15 +637,11 @@ $('#endtimeedit3').on('dp.change', function(e) {
 
 $('#starttimeedit3').on('dp.change', function(e) {
     $('#endtimeedit3').data('DateTimePicker').minDate(e.date);
+    //$('#endtimeedit3').data('DateTimePicker').maxDate(midnight)
 });
 
-var midnight = moment('12:00 AM', 'HH:mm A');
-console.log(midnight);
-var midnight = moment(midnight).format('H:mm A');
-console.log(midnight);
-
 $('#endtime3').data('DateTimePicker').maxDate(midnight); //e.date to 12:00AM to prevent day to next day prob
-$('#endtimeedit3').data('DateTimePicker').maxDate(midnight); //e.dat to midnight max
+
 }
 
 dateTimeChange();

@@ -120,6 +120,10 @@ $(function () {
 
 			var tempArray = []; //to test for plans that have been called but are in other parts of the obj
 
+			var posArray = []; // another test array for positive values of nearest activity
+
+			var tempObj = {};
+
 			console.log(currentTime);
 
 			var todayPlan = 0;
@@ -160,6 +164,12 @@ $(function () {
 
 					var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
 
+					var timerVarCheck = moment((moment(UTCend)).diff(moment((currentTime))), 'milliseconds');
+
+					var timerDiff = moment(timerVarCheck).format('milliseconds');
+
+					tempArray.push(timerVarCheck._i);
+
 					console.log('timerVar = ' + timerVar + 'UTCstart = ' + UTCstart + 'UTCend = ' + UTCend + 'currentTime = ' + currentTime);
 
 					//make current plan equal to var newtemp
@@ -168,6 +178,8 @@ $(function () {
 					//fix the problem of plans being reset as new if they are found in array twice
 					var stringpls = 'planning' + newtemp.replace(/\s/g, '-');
 
+					//use length of plan stringpls id check to see if plan already exists before
+					//going to else and creating a whole new plan div
 					if (newtemp == oldtemp || $('#' + stringpls).length) { // if current plan equals the last plan
 
 						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
@@ -207,7 +219,7 @@ $(function () {
 							}
 							else {
 								console.log('switch to next activity or nearest plan');
-								//code for doing that
+								//getData();
 
 							}
 
@@ -223,10 +235,6 @@ $(function () {
 
 					else { // if no match, it must be a new plan since its given in order
 						//except its not given in plan order, only in time order
-
-						tempArray.push(newtemp);
-
-						console.log(tempArray);
 
 						//make sure any activity goes under the correct sub-div
 
@@ -324,10 +332,29 @@ $(function () {
 			//$('body').animate({ scrollTop: $('.currentPlan').children('.currentAct').offset().top }, 2000);
 			//goToCur();
 			console.log('what is this currentplan and currentact existence test for');
+
+			for (j = 0; j < tempArray.length - 1; j++) {
+
+						var minVal = 0;
+
+						var curMil = tempArray[j];
+
+						if (curMil >= minVal) {
+							posArray.push(curMil);
+						}
+					}
+
+					posArray.sort(function (a,b) { return a-b });
+
+					console.log(posArray);
+
+
 			}
 
 			else {
 				console.log('nuthin right now');
+
+
 				//go to nearest activity if its tomorrow or whenever
 				//keep div on top that says no activities today, offset to bottom of screen the nearest act
 			}
