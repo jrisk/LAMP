@@ -164,11 +164,13 @@ $(function () {
 
 					var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
 
-					var timerVarCheck = moment((moment(UTCend)).diff(moment((currentTime))), 'milliseconds');
+					var timerVarCheck = moment((moment(UTCstart)).diff(moment((currentTime))), 'milliseconds');
 
 					var timerDiff = moment(timerVarCheck).format('milliseconds');
 
 					tempArray.push(timerVarCheck._i);
+
+					tempObj[obj[i].title] = timerVarCheck._i;
 
 					console.log('timerVar = ' + timerVar + 'UTCstart = ' + UTCstart + 'UTCend = ' + UTCend + 'currentTime = ' + currentTime);
 
@@ -331,7 +333,14 @@ $(function () {
 			if ($('.currentPlan').html() && $('.currentAct').html()) {
 			//$('body').animate({ scrollTop: $('.currentPlan').children('.currentAct').offset().top }, 2000);
 			//goToCur();
-			console.log('what is this currentplan and currentact existence test for');
+			console.log('what is this currentplan and currentact existence test for')
+
+			/*}
+
+			else {*/
+				console.log('nuthin right now');
+
+				//somewhat unnecessary sort function for nearest activity if no current one
 
 			for (j = 0; j < tempArray.length - 1; j++) {
 
@@ -339,7 +348,7 @@ $(function () {
 
 						var curMil = tempArray[j];
 
-						if (curMil >= minVal) {
+						if (curMil > minVal) {
 							posArray.push(curMil);
 						}
 					}
@@ -348,11 +357,34 @@ $(function () {
 
 					console.log(posArray);
 
+					console.log(tempObj);
 
-			}
+					Object.prototype.getKey = function(value) {
 
-			else {
-				console.log('nuthin right now');
+  						for (var key in this) {
+    						if (this[key] == value) {
+      							return key;
+    								}
+  								}
+  							return null;
+							};
+
+					console.log(posArray[0]);
+
+					var answer = tempObj.getKey(posArray[0]);
+
+					console.log(answer);
+
+					var nextAct = $('#specificplan-' + answer);
+
+					console.log(nextAct);
+
+					var todayBar = 20; //make this the height of the jsontoday bar that says "nothign today"
+
+					//$('body').animate({ scrollTop: $('#specificplan-' + answer).offset().top - $('.navbar').height() - todayBar }, 1000);
+						//$('.plan-contain').children().hide();
+						//$('#specificplan-' + answer).fadeIn();
+						//$('#specificplan-' + answer).css('background-color', '#D9534F');
 
 
 				//go to nearest activity if its tomorrow or whenever
