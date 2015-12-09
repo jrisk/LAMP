@@ -52,6 +52,12 @@ $(function () {
 
 		}
 
+		/*if ($('#' + stringpls).length) {
+			console.log('gotcha, this plan already exists, gotta fix my code');
+		}
+
+		else {*/
+
 		$(elem).append('<div class="container-fluid plan-contain">'
 		+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 		+ '<p id="plan-title">' + newtemp + '</p></div>');
@@ -71,6 +77,7 @@ $(function () {
 
 		//$('.plan-big').slideToggle('slow');
 		//animate plans to bring them offscreen to on from left
+		//}	
 
 	};
 
@@ -158,7 +165,10 @@ $(function () {
 					//make current plan equal to var newtemp
 					var newtemp = obj[i].plan;
 
-					if (newtemp == oldtemp) { // if current plan equals the last plan
+					//fix the problem of plans being reset as new if they are found in array twice
+					var stringpls = 'planning' + newtemp.replace(/\s/g, '-');
+
+					if (newtemp == oldtemp || $('#' + stringpls).length) { // if current plan equals the last plan
 
 						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
 						+ '<div class="small-type col-xs-10 col-sm-10" id="' + UTCend + '">'
@@ -214,7 +224,7 @@ $(function () {
 					else { // if no match, it must be a new plan since its given in order
 						//except its not given in plan order, only in time order
 
-						tempArray.push(oldtemp);
+						tempArray.push(newtemp);
 
 						console.log(tempArray);
 
@@ -249,6 +259,7 @@ $(function () {
 						if (planDate == fullToday) {
 
 							console.log('planDate == fulltoday test entered');
+							console.log(tempArray.indexOf(newtemp))
 
 							appendActs('#json-today', obj, stringpls, titleParse, newtemp);
 
@@ -263,8 +274,8 @@ $(function () {
 
 						}
 
-						//If Today's Date is is more than the plan's date, the plan is in the past, and goes into the graveyard/purgatory
-						//depending on if the plan has been made to be repeated every weekday that its on, or to other days
+						//If Today's Date is is more than the plan's date, the plan is in the past
+						//depending on if the plan has been made to be repeated every weekday
 
 						else { // (planDate < fullToday)
 
@@ -272,22 +283,14 @@ $(function () {
 				
 						}
 
-						// If the Date isnt the same as Today but the Weekdays are, put in the weekday 'repeat' basket
-
-						if (Day == Today) {
-						///always use the g flag to match ALL occurences, not just the first one
-
-						//need stringpls here
+						/*if (Day == Today) {
 
 						$('#json-repeat').append('<h2>' + Today + '\'s Plans</h2>');
 						$('#json-repeat').append('<h3>The Plans name is: ' + obj[0].plan + '</h3>');
-						
-						//var oldtemp = obj[i].plan;
-						//var todayplan = 1;
-						}
-
-						var oldtemp = obj[i].plan;
+						}*/
 					}
+
+					var oldtemp = obj[i].plan;
 				}
 
 			});
@@ -314,8 +317,8 @@ $(function () {
 			//$('.plan-big').children().hide();
 			$('.plan-big').css('left', '-100%');
 			$('.plan-big').animate({left: '0%'}, 800);
-			$('#json-future').hide();
-			$('#json-past').hide();
+			//$('#json-future').hide();
+			//$('#json-past').hide();
 
 			if ($('.currentPlan').html() && $('.currentAct').html()) {
 			//$('body').animate({ scrollTop: $('.currentPlan').children('.currentAct').offset().top }, 2000);

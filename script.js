@@ -265,7 +265,7 @@ $('#add-plan').on('click tap', function() {
         + $('#dateplan3').val() + "'></div></div>").hide().fadeIn(1000);
 
         // call datetimepicker now that it exists in the DOM
-        datetimefunc3();
+        dateTimeFun();
         /*$('#datetimepickeredit3').data("DateTimePicker").show(function(e) {
             $('#plan-viewer').off();
         });*/
@@ -377,11 +377,11 @@ function clickEditAct() {
             $.ajax({
                 type: 'POST',
                 url: 'acteditform.php',
-                dataType: 'json', //json or html, php parses it somehow
+                dataType: 'html', //json or html, php parses it somehow
                 data: {activity: actValNew, old_activity: actVal, id: actID,
                 start_time: 'NULL', old_start: 'NULL', end_time: 'NULL', old_end: 'NULL'},
                 success: function(data) {
-                    console.log('success changed');
+                    console.log('activity changed');
                 },
                 error: function(errorThrown) {
                 console.log(errorThrown);
@@ -442,7 +442,7 @@ function clickEditStart() {
                 + "placeholder='" + startVal + "' name='start_time_edit' id='startedit3'>"
                 + "</div>");
 
-        datetimefunc3();
+        dateTimeFun();
 
         $('#startedit3').focus();
 
@@ -475,11 +475,11 @@ function clickEditStart() {
             $.ajax({
                 type: 'POST',
                 url: 'acteditform.php',
-                dataType: 'json', //json or html, php parses it somehow
+                dataType: 'html', //json or html, php parses it somehow
                 data: {activity: 'NULL', old_activity: 'NULL', id: actID,
                 start_time: startValNewDB, old_start: startValOldDB, end_time: 'NULL', old_end: 'NULL'},
                 success: function(data) {
-                    console.log('success changed');
+                    console.log('success changed, didnt work because dataType should not be json');
                 },
                 error: function(errorThrown) {
                 console.log(errorThrown);
@@ -519,7 +519,7 @@ function clickEditEnd() {
                 + "placeholder='" + endVal + "' name='end_time_edit' id='endedit3'>"
                 + "</div>");
 
-        datetimefunc3();
+        dateTimeFun();
 
         $('#endedit3').focus();
 
@@ -547,11 +547,12 @@ function clickEditEnd() {
             $.ajax({
                 type: 'POST',
                 url: 'acteditform.php',
-                dataType: 'json', //json or html, php parses it somehow
+                dataType: 'html', //json or html, php parses it somehow
                 data: {activity: 'NULL', old_activity: 'NULL', id: actID,
                 start_time: 'NULL', old_start: 'NULL', end_time: endValNewDB, old_end: endValOldDB},
                 success: function(data) {
                     console.log('success changed');
+                    endToStartChange();
                 },
                 error: function(errorThrown) {
                 console.log(errorThrown);
@@ -572,7 +573,7 @@ function clickEditEnd() {
 
 /************************************** START TIME FUNCTIONS ***************************************/
 
-function datetimefunc3() {
+function dateTimeFun() {
 $('#datetimepickerplan3').datetimepicker({
     format: 'dddd, MMMM Do',
     allowInputToggle: true
@@ -614,9 +615,11 @@ $('#endtimeedit3').datetimepicker({
 
 };
 
-datetimefunc3(); //initialize the date and start/end time pickers
+dateTimeFun(); //initialize the date and start/end time pickers
 
 /******************************** LINKED START END TIME FUNCTIONS *********************/
+
+function dateTimeChange() {
 
 $('#endtime3').on('dp.change', function(e) {
     $('#starttime3').data('DateTimePicker').maxDate(e.date);
@@ -633,6 +636,17 @@ $('#endtimeedit3').on('dp.change', function(e) {
 $('#starttimeedit3').on('dp.change', function(e) {
     $('#endtimeedit3').data('DateTimePicker').minDate(e.date);
 });
+
+var midnight = moment('12:00 AM', 'HH:mm A');
+console.log(midnight);
+var midnight = moment(midnight).format('H:mm A');
+console.log(midnight);
+
+$('#endtime3').data('DateTimePicker').maxDate(midnight); //e.date to 12:00AM to prevent day to next day prob
+$('#endtimeedit3').data('DateTimePicker').maxDate(midnight); //e.dat to midnight max
+}
+
+dateTimeChange();
 //*************************linked start-end time functions END ******************/
 
 //change event not firing on input item because the dtpicker not initialized until here??
@@ -707,6 +721,7 @@ function endToStartChange() {
     var changetime = moment(startform).format('h:mm A');
 
     $('#start3').val(changetime);
+    $('#starttime3').data('DateTimePicker').minDate(changetime);
 
     $('#end3').val(changetime);
 
