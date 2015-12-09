@@ -110,6 +110,17 @@ div.page-header>*>* {
 	display: inline;
 }
 
+.smaller-type {
+	font-size: .5em;
+	display: inline;
+}
+
+.checkbox_complete {
+	font-size: .8em;
+	display: inline;
+	position: absolute;
+}
+
 .specplanners {
 	font-size: 0.9em;
 }

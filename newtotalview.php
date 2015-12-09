@@ -6,25 +6,31 @@ $_SESSION["currentplan"] = $_POST["planning"];
 
 $dplan = $_SESSION["currentplan"];
 
-//sort the returning rows in order or start time !!!
+//sort the returning rows in order of start time !!!
 
 $sorted_array = array();
 
 $date_array = array();
 
+// make an array of starting dates from each plan
+
         foreach ($result as $key) {
             if ($key['Plan'] == $dplan) {
+                //make each start time a 6 digit number (18:04:00 -> 180400) to parse
                 $fix = str_replace(":", "", $key["Start"]);
         
                 array_push($date_array, $fix);
 
-                sort($date_array);
+                //put these numbers in order from earliest (000000) to latest 
+                //(latest is 235959 in theory, 235900 in practice as seconds unused
+                //240000 is autoparsed in database to 000000 as a DATETIME type object
+                sort($date_array); 
         }
     }
 
 for ($i=0; $i<=(count($date_array) - 1); $i++) {
 
-
+//parse these sorted numbers back into time objects (230000 -> 23:00:00)
 $sorted = substr_replace($date_array[$i], ":", 2, 0);
 $sorted = substr_replace($sorted, ":", 5, 0);
 
@@ -41,7 +47,7 @@ array_push($sorted_array, $sorted);
 
 echo "<div class='container label-row-insert' id='label-row-copy'>
     <div class='row'>
-        <div class='col-sm-5 col-xs-12'>
+        <div class='col-sm-7 col-xs-12'>
             <h4><div class='well well-acts'>Activity</div></h4>
         </div>
         <div class='col-sm-2 col-xs-12'>
@@ -49,17 +55,17 @@ echo "<div class='container label-row-insert' id='label-row-copy'>
         </div>
         <div class='col-sm-2 col-xs-12'>
             <h4><div class='well well-ends'>End Time</div></h4>
-        </div>
-        <div class='col-sm-2 col-xs-12'>
-            <h4><div class='well well-media'>Media</div></h4>
-        </div>
-        <div class='col-sm-1 col-xs-12'>
+        </div>" .
+        /*<div class='col-sm-2 col-xs-12'> //media container for pdfs, videos, pics postponed
+            <h4><div class='well well-media'>Media</div></h4> 
+        </div>*/
+        "<div class='col-sm-1 col-xs-12'>
             <h4><div class='well well-options'>Del</div></h4>
         </div>
     </div>
 </div>";
 
-
+//now with our array of times in order, map them to their corresponding plan and activity and insert in DOM
 for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
 
         foreach($result as $key) {
@@ -84,7 +90,7 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
     </div>
     <!-- activity label end -->
     <div class='row act-start-end-row'>
-        <div class='col-xs-12 col-sm-5 activity-col'>
+        <div class='col-xs-12 col-sm-7 activity-col'>
         <div id='act" . $key['ID'] . "' class='well well-sm activity-inserted'>" . $key['Activity'] .
         "</div></div>
 
@@ -107,12 +113,12 @@ for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
         "</div></div>
 
         <div hidden class='activityID'>" . $key['ID'] . 
-        "</div>
+        "</div>" .
 
-        <div class='col-xs-12 col-sm-2'><div class='well well-sm media-insert'>" . "media" .
-        "</div></div>
+        /*<div class='col-xs-12 col-sm-2'><div class='well well-sm media-insert'>" . "media" .
+        "</div></div>*/
 
-        <div class='col-sm-1'>
+        "<div class='col-sm-1 col-xs-12'>
             <button class='btn btn-danger btn-md delact delact-full' type='button' id='delactid'>X</button>
         </div>
 

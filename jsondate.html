@@ -52,7 +52,7 @@ $(function () {
 
 		}
 
-		$(elem).append('<div class="container-fluid">'
+		$(elem).append('<div class="container-fluid plan-contain">'
 		+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 		+ '<p id="plan-title">' + newtemp + '</p></div>');
 		//not clising the plan-big div until the very end makes it collapse easier it seems
@@ -111,6 +111,8 @@ $(function () {
 
 			var currentTime = moment().format(); // or new Date();
 
+			var tempArray = []; //to test for plans that have been called but are in other parts of the obj
+
 			console.log(currentTime);
 
 			var todayPlan = 0;
@@ -125,9 +127,15 @@ $(function () {
 
 				//further seperate days into subplan-> activity combos
 
+				//have to refactor this. if a plan is somewhere else it resets as a new appendActs function
+				//test to see if plan has already been used, then append it to the correct plan div
+
 				for (i = 0; i < obj.length; i++) {
 
+					console.log(obj.length);
+
 					//time get function to compare current time to each time value given in loop
+					//compare currenttime to start time
 
 					var tempStart = moment(obj[i].start).format('HH:mm:ss');
 
@@ -143,54 +151,80 @@ $(function () {
 
 					var UTCend = moment(tempUTCend).format();
 
-					console.log('UTCstart = ' + UTCstart + 'UTCend = ' + UTCend + 'currentTime = ' + currentTime);
+					var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
 
-					//compare currenttime to start time
+					console.log('timerVar = ' + timerVar + 'UTCstart = ' + UTCstart + 'UTCend = ' + UTCend + 'currentTime = ' + currentTime);
 
+					//make current plan equal to var newtemp
 					var newtemp = obj[i].plan;
 
 					if (newtemp == oldtemp) { // if current plan equals the last plan
 
 						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
-						+ '<div class="small-type col-xs-12 col-sm-12" id="' + UTCend + '">'
-						+ moment(obj[i].start).format('h:mm a') + '-'
+						+ '<div class="small-type col-xs-10 col-sm-10" id="' + UTCend + '">'
+						+ moment(obj[i].start).format('h:mm a') + ' to '
 						+ moment(obj[i].end).format('h:mm a') + '</div>'
+						//div holder for the checkbox to manually complete and go to next event
+						+ '<div class="checkbox_complete col-xs-2 col-sm-2">XX</div>'
+						//div holder for timer next to scheduled time
+						+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
 						+ '<div id="specificplan-'
 						+ obj[i].title + '" class="specplanners col-xs-12 col-sm-12">'
 						+ obj[i].title + '</div>'
-						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-12" </div>');
-
-					var oldtemp = obj[i].plan;
+						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-12"> </div>');
 
 					//copy this to the starting activity of the other plans
 					// or better yet, refactor so there arn't seperate loops for the first act of a plan
 
-					if (UTCstart < currentTime && currentTime < UTCend) {
+					if (UTCstart < currentTime && currentTime < UTCend && flagCurrent != 1) {
+							console.log('current plan html if true here : ' + flagCurrent);
 						$('#' + obj[i].id).parent().addClass('currentPlan');
 						$('#' + obj[i].id).addClass('currentAct');
 						//$('.plan-big').children().toggle('slow');
-						console.log($('.navbar').height());
 						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
 						$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
-
-						console.log('console log above set interval says' + UTCstart);
+						$('.currentAct').children('.timer').html(timerVar + ' left');
 
 						setInterval(function() {
-							console.log('end time = ' + $('.currentAct').children('.small-type').prop('id'));
+								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
 
-							}, 5000);
-					}
+							if (currentTime < endTimeAct) {
+								console.log('still on this activity');
 
-					}
+								//code for timer
+								//getData();
+							}
+							else {
+								console.log('switch to next activity or nearest plan');
+								//code for doing that
+
+							}
+
+							}, 60000);
+
+						//didnt want to flag, but its to test for another current activity
+						//will make impossible to do in validation
+						var flagCurrent = 1;
+
+					} // end of if check
+
+					} //end of initial if statement for checking activity-plan pairs
 
 					else { // if no match, it must be a new plan since its given in order
+						//except its not given in plan order, only in time order
+
+						tempArray.push(oldtemp);
+
+						console.log(tempArray);
 
 						//make sure any activity goes under the correct sub-div
 
 						for (k = 0; k <= weekDays.length - 1; k++) {
 
 							var planDate = ind;
+
+							console.log('else entered: ' + ind);
 
 							var Day = moment(planDate).format('dddd');
 
@@ -213,6 +247,8 @@ $(function () {
 						//If Today's Date is the same as one of the plans, put it in the first div 'json-today'
 
 						if (planDate == fullToday) {
+
+							console.log('planDate == fulltoday test entered');
 
 							appendActs('#json-today', obj, stringpls, titleParse, newtemp);
 
@@ -279,19 +315,12 @@ $(function () {
 			$('.plan-big').css('left', '-100%');
 			$('.plan-big').animate({left: '0%'}, 800);
 			$('#json-future').hide();
-			//$('#json-past').hide();
+			$('#json-past').hide();
 
 			if ($('.currentPlan').html() && $('.currentAct').html()) {
-			console.log($('.currentPlan').html());
-			//$('.currentPlan').children().toggle('slow');
-			//$('.plan-big').children().toggle('slow');
-			//$('body').animate({ scrollTop: $('.currentPlan').offset().top }, 2000);
-			//$('body').animate({ scrollTop: $('.currentAct').offset().top }, 1000);
-			//$('.currentAct').hide().fadeIn(1000).css('background-color', '#C6E2FF');
-			console.log($('.currentPlan').offset().top);
-			console.log($('.currentAct').offset().top);
 			//$('body').animate({ scrollTop: $('.currentPlan').children('.currentAct').offset().top }, 2000);
 			//goToCur();
+			console.log('what is this currentplan and currentact existence test for');
 			}
 
 			else {

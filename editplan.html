@@ -1,0 +1,121 @@
+<!-- appcache deprecated in favor of SERVICE WORKERS <html manifest="offline.appcache"> -->
+<html>
+<head>
+    <title>Planner Edit</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+<!--<script src="./dropzone.js"></script>
+<script src="./script.js"></script> -->
+
+<!-- deprecated 
+<script src="//www.modernizr.com/downloads/modernizr-latest.js" type ="text/javascript"></script>
+have to build file yourself now
+-->
+
+<link href="http://fonts.googleapis.com/css?family=Montserrat+Alternates:700&subset=latin,latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="./lessonplanner.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+               <a href="./calplug.php"><button type="button" class="btn btn-lg btn-primary">Calendar</button></a>
+               <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
+               <a href="./jsondate.html" class="btn btn-lg btn-primary">Agenda</a>
+        </div>
+    </nav>
+
+<div id="actentry"></div> <!-- got activity row after posting to newformaction -> totalview -->
+
+<div class="container" id="label-row">
+    <div class="row">
+        <div class="col-sm-5 col-xs-12">
+            <h4><div class="label label-primary">Activity</div></h4>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <h4><div class="label label-warning">Start Time</div></h4>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <h4><div class="label label-success">End Time</div></h4>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container" id="activity-container">
+    <!--mobile label in order -->
+    <div class="row" id="activity-molab">
+        <div class="col-xs-12">
+            <h3><div class="label label-primary">Activity</div></h3>
+        </div>
+    </div>
+    <!-- activity label end -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-5">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Activity-Icon">
+                
+                    <span class="glyphicon glyphicon-pencil" id="pencil-icon">
+                            </span>
+                </span>
+            <input name="activity" id="activity" type="text" maxlength="60" class="form-control input-lg">
+            </div>
+        </div>
+
+        <!-- start 2nd row on mobile <div class="row" id="start-time-molab">-->
+        <div class="col-xs-12" id="start-time-molab">
+            <h3><div class="label label-warning">Start</div></h3>
+        </div>
+        <!-- end start label row mobile -->
+        
+        <div class="col-xs-12 col-sm-2">
+            <div class="form-group">
+                <div class="input-group date" id="starttime3">
+                    <span class="input-group-addon" id="Start-Icon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                    <input type="text" class="form-control input-lg" name="start_time" id="start3">
+                </div>
+            </div>
+        </div>
+
+        <!-- end time mobile label <div class="row" id="end-time-molab">-->
+        <div class="col-xs-12" id="end-time-molab">
+            <h3><div class="label label-success">End</div></h3>
+        </div>
+        <!--end end time molab -->
+
+        <div class="col-xs-12 col-sm-2">
+            <div class="form-group">
+                <div class="input-group date" id="endtime3">
+                    <span class="input-group-addon" id="End-Icon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <input type="text" class="form-control input-lg" name="end_time" id="end3">
+        </div>
+    </div>
+</div>
+
+</div> <!-- end of big row for act, time -->
+
+<div class="container" id="makedelegate"> <!--Buttons for adding more acts or save n go back-->
+<div class="row">
+
+<div class="col-sm-4 col-xs-12">
+<button type="button" class="btn btn-primary btn-lg" id="add-act">
+    Add Activity</button>
+</div>
+
+</div> <!-- mini button row at bottom -->
+</div> <!-- mini container holding row and bottom buttons -->
+
+</div> <!-- end activity input row container -->
+
+</body>
+</html>
