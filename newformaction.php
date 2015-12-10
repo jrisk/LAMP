@@ -29,6 +29,8 @@ $date = $_POST['date_planfix'];
 
 $start_time = $_POST['start_time'];
 
+// now in client side validation
+
 $start_time_db = substr($start_time, 0, -3);
 
 $end_time = $_POST['end_time'];
@@ -37,7 +39,7 @@ $end_time_db = substr($end_time, 0, -3);
 
 $comment_note = NULL; // cant be null in website
 
-$weekly = $_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
+$weekly = NULL; //$_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
 
 $media = NULL; //$_POST['media']; // url for media objects stored in activities
 

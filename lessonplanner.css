@@ -25,9 +25,17 @@ div.page-header>*>* {
 	overflow: hidden;
 }
 
+.non-nav {
+}
+
+.navbar {
+	border-bottom: .2em #999 solid;
+}
+
 #today-look {
 	font-size: 1.5em;
 	background-color: white;
+	text-align: center;
 	animation-name: exampletoday;
 	animation-duration: 4s;
 	-webkit-animation: exampletoday 5s infinite; /* Safari 4+ */
@@ -39,7 +47,8 @@ div.page-header>*>* {
 
 
 #future-look {
-	font-size: 3.5em;
+	font-size: 1.5em;
+	text-align: center;
 }
 
 @keyframes exampletoday {
@@ -73,6 +82,7 @@ div.page-header>*>* {
 
 #json-today {
 	background-color: silver;
+	text-align: center;
 	display: block;
 	box-shadow: 0 0.2em 0.3em #999;
 	border-radius: 0.2em;

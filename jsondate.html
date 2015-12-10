@@ -21,81 +21,33 @@ type="text/javascript"></script> -->
 
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container-fluid nav-container">
         		<a class="navbar-brand" href="#">Brand</a>
                <a href="./calplug.php"><button type="button" class="btn btn-md btn-primary">Calendar</button></a>
                <a href="./makeplan2.html" class="btn btn-md btn-primary">New Plan</a>
         </div>
     </nav>
 
+<div class="non-nav">
+
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
-	<div class="container-fluid" id="json-future"><p id="future-look">Future Plans</p></div>
+	<div class="container-fluid" id="json-future"><p id="future-look">Next Plan</p></div>
 	<div class="container-fluid" id="json-repeat"></div>
 	<div class="container-fluid" id="json-past">Past Plans</div>
 	<div class="container" id="json-nest"></div>
 	<h2 id="plans"></h2>
+</div>
 
 </body>
 <script>
 $(function () {
 
-	//call this function when the new plan div is being made and the first row-cols and act is passed
+	$('body').css('padding-top',  $('.navbar').height());
 
-	function appendActs(elem, objec, stringpls, titleParse, newtemp) {
+	console.log($('.navbar').height());
 
-		//trying to add bootstrap divs...still havent got it down
 
-		if (elem != "#json-today") {
-
-		$(elem).append('<h2 id="plan-day">'
-		+ objec[0].date + '</h2>');
-
-		}
-
-		/*if ($('#' + stringpls).length) {
-			console.log('gotcha, this plan already exists, gotta fix my code');
-		}
-
-		else {*/
-
-		$(elem).append('<div class="container-fluid plan-contain">'
-		+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
-		+ '<p id="plan-title">' + newtemp + '</p></div>');
-		//not clising the plan-big div until the very end makes it collapse easier it seems
-		//end the row since the id '# name + stringpls' will be appended with further columns
-		//+ '<div id="plan-start-in" class="col-xs-12 col-sm-4">starts at: '
-		//+ moment(objec[i].start).format('HH:mm a')
-		//+ '</div></div>');
-
-		$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + objec[i].id + '">'
-		+ '<div class="small-type col-xs-12 col-sm-12">'
-		+ moment(objec[i].start).format('h:mm a') + '-'
-		+ moment(objec[i].end).format('h:mm a') + '</div><div id="specificplan-'
-		+ objec[i].title + '" class="specplanners the-first-act col-xs-12 col-sm-12">'
-		+ objec[i].title + '</div>'
-		+ '<div id="' + objec[i].id + '-media" class="media-objects col-xs-12 col-sm-12"> </div>');
-
-		//$('.plan-big').slideToggle('slow');
-		//animate plans to bring them offscreen to on from left
-		//}	
-
-	};
-
-	/*function checkAct(start, currently, end) {
-							if (start < currently && currently < end) {
-								console.log('all good');
-							}
-
-							else {
-								console.log('redo ajax fetch data for new current act');
-								getData();
-							}
-							console.log(start + currently + end);
-							console.log(start < currently);
-							console.log(currently < end);
-						}*/
-
-	function getData() {
+function getData() {
 
 	$.ajax({
 		type: 'GET',
@@ -106,15 +58,9 @@ $(function () {
 
 			var JSONParse = JSON.parse(data);
 
-			// you can only sort an array, not a json object (no key based sort)
-
 			var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 			console.log(JSONParse);
-
-			//unnecessary to add date, user can see date on phone or is aware of today's date anyway
-
-			//$('#json-today').append(moment().format('dddd') + ' ' + moment().format('YYYY-MM-DD'));
 
 			var currentTime = moment().format(); // or new Date();
 
@@ -125,6 +71,8 @@ $(function () {
 			var tempObj = {};
 
 			console.log(currentTime);
+
+			$('#today-look').html(moment(currentTime).format('dddd, MMMM Do'));
 
 			var todayPlan = 0;
 
@@ -254,7 +202,7 @@ $(function () {
 
 						}
 
-						//end the row now that its a new plans
+						//end the last plan row now that its a new plan
 
 						$('#' + stringpls).append('</div>');
 
@@ -265,48 +213,132 @@ $(function () {
 						var titleParse = 'title: ' + obj[i].title.replace(/\s/g, '-');
 
 						//If Today's Date is the same as one of the plans, put it in the first div 'json-today'
+						//test for which div to put each new plan
 
 						if (planDate == fullToday) {
-
-							console.log('planDate == fulltoday test entered');
-							console.log(tempArray.indexOf(newtemp))
-
-							appendActs('#json-today', obj, stringpls, titleParse, newtemp);
-
+							var elem = "#json-today";
 							todayPlan = 1;
 						}
-
-						// If The Plan is "more than today's date" or in the future, continue on to next div after today
-
 						else if (planDate > fullToday) {
-
-							appendActs('#json-future', obj, stringpls, titleParse, newtemp);
-
+							var elem = "#json-future";
+						}
+						else {
+							var elem = "#json-past";
 						}
 
-						//If Today's Date is is more than the plan's date, the plan is in the past
-						//depending on if the plan has been made to be repeated every weekday
+					$(elem).append('<div class="container-fluid plan-contain">'
+					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
+					+ '<p id="plan-title">' + newtemp + '</p></div>');
+					//not clising the plan-big div until the very end makes it collapse easier it seems
 
-						else { // (planDate < fullToday)
+					$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
+					+ '<div class="small-type col-xs-10 col-sm-10">'
+					+ moment(obj[i].start).format('h:mm a') + ' to '
+					+ moment(obj[i].end).format('h:mm a') + '</div>'
+					//div holder for the checkbox to manually complete and go to next event
+					+ '<div class="checkbox_complete col-xs-2 col-sm-2">XX</div>'
+						//div holder for timer next to scheduled time
+					+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
+					+ '<div id="specificplan-'
+					+ obj[i].title + '" class="specplanners the-first-act col-xs-12 col-sm-12">'
+					+ obj[i].title + '</div>'
+					+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-12"> </div>');
 
-							appendActs('#json-past', obj, stringpls, titleParse, newtemp);
-				
-						}
+					//$('.plan-big').slideToggle('slow');
+					//animate plans to bring them offscreen to on from left
+					//}
+					//copy this to the starting activity of the other plans
+								// or better yet, refactor so there arn't seperate loops for the first act of a plan
 
-						/*if (Day == Today) {
+					if (UTCstart < currentTime && currentTime < UTCend && flagCurrent != 1) {
+							console.log('current plan html if true here : ' + flagCurrent);
+						$('#' + obj[i].id).parent().addClass('currentPlan');
+						$('#' + obj[i].id).addClass('currentAct');
+						//$('.plan-big').children().toggle('slow');
+						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
+						$('.plan-big').not($('.currentPlan')).children().hide();
+						$('.currentAct').css('background-color', '#C6E2FF');
+						$('.currentAct').children('.timer').html(timerVar + ' left');
 
-						$('#json-repeat').append('<h2>' + Today + '\'s Plans</h2>');
-						$('#json-repeat').append('<h3>The Plans name is: ' + obj[0].plan + '</h3>');
-						}*/
-					}
+						setInterval(function() {
+								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
+
+							if (currentTime < endTimeAct) {
+								console.log('still on this activity');
+
+								//code for timer
+								//getData();
+							}
+							else {
+								console.log('switch to next activity or nearest plan');
+								//getData();
+
+							}
+
+							}, 60000);
+
+						//didnt want to flag, but its to test for another current activity
+						//will make impossible to do in validation
+						var flagCurrent = 1;
+
+					} // end of if check
 
 					var oldtemp = obj[i].plan;
 				}
 
+			}
+
 			});
 
 			if (todayPlan == 0) {
-				$('#json-today').append('<div class="well-sm">No Plans or Files</div>');
+				$('#json-today').append('<div class="well-sm">No Plans Today</div>'
+				+ '<div class="make-button">Make a Plan</div>').css('background-color', 'white');
+
+				var nextOne = $('#json-future').children('.plan-contain').first().find('.agenda-act-row');
+
+				console.log(nextOne);
+
+				//$('body').animate({ scrollTop: nextOne.offset().top - $('.navbar').height() }, 1000);
+				//$('.plan-big').not($('.currentPlan')).children().hide();
+				//nextOne.children('.the-first-act').before('<div class="timer-first smaller-type"></div>');
+				nextOne.css('background-color', '#C6E2FF');
+				nextOne.children('.timer').html('22 hours until start');
+
+			}
+
+			if (todayPlan == 1 && typeof flagCurrent == 'undefined') {
+
+				for (j = 0; j < tempArray.length - 1; j++) {
+
+						var minVal = 0;
+
+						var curMil = tempArray[j];
+
+						if (curMil > minVal) {
+							posArray.push(curMil);
+						}
+					}
+
+					posArray.sort(function (a,b) { return a-b });
+
+					console.log(posArray);
+
+					console.log(tempObj);
+
+					/* Object.prototype.getKey = function(value) {
+
+  						for (var key in this) {
+    						if (this[key] == value) {
+      							return key;
+    								}
+  								}
+  							return null;
+							};*/
+
+				//var nextAct = tempObj.getKey(posArray[0]);
+
+				//console.log(nextAct);
+
 			}
 
 			// hide all plans except for the first of the day or current time-based plan
@@ -319,6 +351,7 @@ $(function () {
 				// show media object line box $(this).
 			});
 
+			//prevent the whole plan-big div from toggling if a specific act is clicked on
 			$('.specplanners').on('click tap', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
@@ -329,20 +362,20 @@ $(function () {
 			$('.plan-big').animate({left: '0%'}, 800);
 			//$('#json-future').hide();
 			//$('#json-past').hide();
+		},
 
-			if ($('.currentPlan').html() && $('.currentAct').html()) {
-			//$('body').animate({ scrollTop: $('.currentPlan').children('.currentAct').offset().top }, 2000);
-			//goToCur();
-			console.log('what is this currentplan and currentact existence test for')
+		error: function(errorThrown) {
+			$('#json-nest').html(errorThrown);
+		}
+	});
 
-			/*}
+	}
 
-			else {*/
-				console.log('nuthin right now');
+getData();
 
 				//somewhat unnecessary sort function for nearest activity if no current one
 
-			for (j = 0; j < tempArray.length - 1; j++) {
+			/*for (j = 0; j < tempArray.length - 1; j++) {
 
 						var minVal = 0;
 
@@ -367,39 +400,7 @@ $(function () {
     								}
   								}
   							return null;
-							};
-
-					console.log(posArray[0]);
-
-					var answer = tempObj.getKey(posArray[0]);
-
-					console.log(answer);
-
-					var nextAct = $('#specificplan-' + answer);
-
-					console.log(nextAct);
-
-					var todayBar = 20; //make this the height of the jsontoday bar that says "nothign today"
-
-					//$('body').animate({ scrollTop: $('#specificplan-' + answer).offset().top - $('.navbar').height() - todayBar }, 1000);
-						//$('.plan-contain').children().hide();
-						//$('#specificplan-' + answer).fadeIn();
-						//$('#specificplan-' + answer).css('background-color', '#D9534F');
-
-
-				//go to nearest activity if its tomorrow or whenever
-				//keep div on top that says no activities today, offset to bottom of screen the nearest act
-			}
-		},
-
-		error: function(errorThrown) {
-			$('#json-nest').html(errorThrown);
-		}
-	});
-
-	}
-
-getData();
+							};*/
 
 })
 </script>

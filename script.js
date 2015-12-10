@@ -795,9 +795,9 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
 		        // call another ajax request to GET php file to update activities row
 		        $.ajax({
 		            type: 'POST',
+                    dataType: 'html',
 		            url: 'newtotalview.php',
 		            data: {planning: plantitle},
-		            dataType: 'html',
 		            success: function(datam) {
 		                $('#actentry').html(datam); //why is this being duplicated? -cuz of start time dupe
 		                widthDecideOnShowCopy();
