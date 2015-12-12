@@ -370,6 +370,10 @@ function getData() {
 				e.stopPropagation();
 			});
 
+			$('.checkbox_complete').on('click tap', function(e) {
+				e.stopPropagation();
+			});
+
 			//$('.plan-big').children().hide();
 			$('.plan-big').css('left', '-100%');
 			$('.plan-big').animate({left: '0%'}, 800);
