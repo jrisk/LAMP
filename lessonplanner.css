@@ -32,7 +32,7 @@ div.page-header>*>* {
 	border-bottom: .2em #999 solid;
 }
 
-#today-look {
+#today-look, #future-look {
 	font-size: 1.5em;
 	background-color: white;
 	text-align: center;
@@ -45,12 +45,6 @@ div.page-header>*>* {
     border-radius: 0.2em 0.2em 0.2em 0.2em;
 }
 
-
-#future-look {
-	font-size: 1.5em;
-	text-align: center;
-}
-
 @keyframes exampletoday {
 	0% {
 		background-color: white;
@@ -60,46 +54,12 @@ div.page-header>*>* {
 	}
 }
 
-/*@-moz-keyframes exampletoday {
-	0% {
-		background-color: white;
-	}
-	100% {
-		background-color: blue;
-	}
-
-}
-
-@-webkit-keyframes exampletoday {
-	0% {
-		background-color: white;
-	}
-	100% {
-		background-color: blue;
-	}
-
-}*/
-
-#json-today {
+#json-today, #json-future, #json-past {
 	background-color: silver;
 	text-align: center;
 	display: block;
 	box-shadow: 0 0.2em 0.3em #999;
 	border-radius: 0.2em;
-	overflow: hidden;
-	position: relative;
-}
-
-#json-future {
-	background-color: #E0FFFF;
-	display: block;
-	box-shadow: 0.2em 0.5em 0.9em #999;
-}
-
-#json-past {
-	background-color: #D0EE96;
-	display: block;
-	box-shadow: 0.2em 0.5em 0.2em #999;
 }
 
 #json-repeat {
@@ -130,13 +90,11 @@ div.page-header>*>* {
 	font-size: .8em;
 	display: inline-block;
 	position: absolute;
-	text-align: left;
 	padding: 0;
-	-ms-transform: scale(2); /* IE */
-  	-moz-transform: scale(2); /* FF */
-  	-webkit-transform: scale(2); /* Safari and Chrome */
-  	-o-transform: scale(2); /* Opera */
-  padding: 10px;
+	-ms-transform: scale(2.5); /* IE */
+  	-moz-transform: scale(2.5); /* FF */
+  	-webkit-transform: scale(2.5); /* Safari and Chrome */
+  	-o-transform: scale(2.5); /* Opera */
 }
 
 .specplanners {

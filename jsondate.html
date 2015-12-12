@@ -139,7 +139,7 @@ function getData() {
 						+ moment(obj[i].start).format('h:mm a') + ' to '
 						+ moment(obj[i].end).format('h:mm a') + '</div>'
 						//div holder for the checkbox to manually complete and go to next event
-						+ '<input type="checkbox" class="checkbox_complete col-xs-2 col-sm-2">X</input>'
+						+ '<input type="checkbox" class="checkbox_complete col-xs-2 col-sm-2">X'
 						//div holder for timer next to scheduled time
 						+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
 						+ '<div id="specificplan-'
@@ -250,7 +250,7 @@ function getData() {
 					+ moment(obj[i].start).format('h:mm a') + ' to '
 					+ moment(obj[i].end).format('h:mm a') + '</div>'
 					//div holder for the checkbox to manually complete and go to next event
-					+ '<input type="checkbox" class="checkbox_complete col-xs-2 col-sm-2">X</input>'
+					+ '<input type="checkbox" class="checkbox_complete col-xs-2 col-sm-2">X'
 						//div holder for timer next to scheduled time
 					+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
 					+ '<div id="specificplan-'
@@ -269,7 +269,7 @@ function getData() {
 						$('#' + obj[i].id).addClass('currentAct');
 						//$('.plan-big').children().toggle('slow');
 						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
-						$('.plan-big').not($('.currentPlan')).children().hide();
+						//$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
 						$('.currentAct').children('.timer').html(timerVar + ' left');
 
