@@ -2,6 +2,7 @@
 include("pdo.php");
 //Activities row in php, returns list of activities under a specific DATE
 
+
 // get the total number of DATES and iterate through each DAY OF THE WEEK in the subsequent loops
 // for total calendar view, getting all the DATES on page load 
 
@@ -35,7 +36,7 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
                         'start' => $result[$n]['Adate'] . 'T' . $result[$n]['Start'],
                         'end' => $result[$n]['Adate'] . 'T' . $result[$n]['End'],
                         'class' => $result[$n]['Class'],
-                        'plan' => $result[$n]['Plan'],
+                        'plan' => $result[$n]['Plan']
                         );
 
              // sort the start-times in order of $array[$innerarray][$start]
@@ -72,5 +73,6 @@ echo json_encode($big_array);
 
     }
 }*/
+
 
 ?>

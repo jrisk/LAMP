@@ -118,6 +118,7 @@ div.page-header>*>* {
 .small-type {
 	font-size: .6em;
 	display: inline;
+	text-align: left;
 }
 
 .smaller-type {
@@ -127,12 +128,15 @@ div.page-header>*>* {
 
 .checkbox_complete {
 	font-size: .8em;
-	display: inline;
+	display: inline-block;
 	position: absolute;
+	text-align: left;
+	padding: 0;
 }
 
 .specplanners {
 	font-size: 0.9em;
+	text-align: left;
 }
 
 .agenda-act-row {

@@ -125,14 +125,16 @@ function getData() {
 					//make current plan equal to var newtemp
 					var newtemp = obj[i].plan;
 
+					var titleParse = newtemp.replace(/\s/g, '-');
+
 					//fix the problem of plans being reset as new if they are found in array twice
-					var stringpls = 'planning' + newtemp.replace(/\s/g, '-');
+					var stringpls = 'planning' + newtemp.replace(/\s/g, '_');
 
 					//use length of plan stringpls id check to see if plan already exists before
 					//going to else and creating a whole new plan div
-					if (newtemp == oldtemp || $('#' + stringpls).length) { // if current plan equals the last plan
+					if (newtemp == oldtemp || $(document.getElementById(stringpls)).length) { // if current plan equals the last plan
 
-						$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
+						$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
 						+ '<div class="small-type col-xs-10 col-sm-10" id="' + UTCend + '">'
 						+ moment(obj[i].start).format('h:mm a') + ' to '
 						+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -141,18 +143,21 @@ function getData() {
 						//div holder for timer next to scheduled time
 						+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
 						+ '<div id="specificplan-'
-						+ obj[i].title + '" class="specplanners col-xs-12 col-sm-12">'
-						+ obj[i].title + '</div>'
-						+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-12"> </div>');
+						+ titleParse + '" class="specplanners col-xs-12 col-sm-12">'
+						+ obj[i].title + '</div>');
 
 					//copy this to the starting activity of the other plans
 					// or better yet, refactor so there arn't seperate loops for the first act of a plan
 
 					if (UTCstart < currentTime && currentTime < UTCend && flagCurrent != 1) {
 							console.log('current plan html if true here : ' + flagCurrent);
+							console.log(obj[i].id);
+							console.log($('#' + obj[i].id));
 						$('#' + obj[i].id).parent().addClass('currentPlan');
 						$('#' + obj[i].id).addClass('currentAct');
 						//$('.plan-big').children().toggle('slow');
+						console.log($('.currentAct'));
+						console.log($('.currentAct').offset());
 						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
 						$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
@@ -204,11 +209,15 @@ function getData() {
 
 						//end the last plan row now that its a new plan
 
-						$('#' + stringpls).append('</div>');
+						$(document.getElementById(stringpls)).append('</div>');
 
 						// make new variables based on new plan and titles
 
-						var stringpls = 'planning' + newtemp.replace(/\s/g, '-');
+						console.log(newtemp);
+
+						var stringpls = 'planning' + newtemp.replace(/\s/g, '_');
+
+						console.log('second stringpls check' + stringpls);
 
 						var titleParse = 'title: ' + obj[i].title.replace(/\s/g, '-');
 
@@ -226,12 +235,17 @@ function getData() {
 							var elem = "#json-past";
 						}
 
+					console.log(stringpls);
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 					+ '<p id="plan-title">' + newtemp + '</p></div>');
+
+					console.log($(document.getElementById(stringpls)));
+					console.log('does this exsts' + document.getElementById(stringpls));
 					//not clising the plan-big div until the very end makes it collapse easier it seems
 
-					$('#' + stringpls).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
+
+					$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
 					+ '<div class="small-type col-xs-10 col-sm-10">'
 					+ moment(obj[i].start).format('h:mm a') + ' to '
 					+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -241,8 +255,7 @@ function getData() {
 					+ '<div class="smaller-type timer col-xs-12 col-sm-12"></div>'
 					+ '<div id="specificplan-'
 					+ obj[i].title + '" class="specplanners the-first-act col-xs-12 col-sm-12">'
-					+ obj[i].title + '</div>'
-					+ '<div id="' + obj[i].id + '-media" class="media-objects col-xs-12 col-sm-12"> </div>');
+					+ obj[i].title + '</div>');
 
 					//$('.plan-big').slideToggle('slow');
 					//animate plans to bring them offscreen to on from left

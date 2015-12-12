@@ -628,7 +628,8 @@ $('#endtime3').on('dp.change', function(e) {
 });
 
 $('#starttime3').on('dp.change', function(e) {
-    $('#endtime3').data('DateTimePicker').minDate(e.date);
+    //$('#endtime3').data('DateTimePicker').minDate(e.date);
+    //too many chances for end time to be unusable 
 }); //link together start and end time to prevent times before being possible
 
 $('#endtimeedit3').on('dp.change', function(e) {
@@ -807,6 +808,8 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
 		                //small hack to keep spaceless text from overflowing div
 
 		                $('.activity-inserted').css('overflow', 'hidden');
+
+                        //reset activity input bar
 		                $('input[name=activity]').val('');
 		                
 
