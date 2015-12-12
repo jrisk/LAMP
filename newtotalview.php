@@ -2,7 +2,7 @@
 include("pdo.php");
 //Activities row in php, returns list of activities under a specific lesson plan name
 
-$_SESSION["currentplan"] = $_POST["planning"];
+$_SESSION["currentplan"] = htmlentities($_POST["planning"]);
 
 $dplan = $_SESSION["currentplan"];
 
@@ -27,7 +27,7 @@ $date_array = array();
                 sort($date_array); 
         }
     }
-
+    
 for ($i=0; $i<=(count($date_array) - 1); $i++) {
 
 //parse these sorted numbers back into time objects (230000 -> 23:00:00)

@@ -17,11 +17,11 @@ $_SESSION['currentplan'] = $_POST['lesson_name'];
 
 $id = NULL; // no ID right now, prevent login // cant be null on website
 
-$plan = strip_tags($_POST['lesson_name']);
+$plan = htmlentities($_POST['lesson_name']);
 
 $class = htmlentities($_POST['user_group']);
 
-$activity = strip_tags($_POST['activity']);
+$activity = htmlentities($_POST['activity']);
 
 $date = $_POST['date_planfix'];
 

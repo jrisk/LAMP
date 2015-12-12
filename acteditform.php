@@ -17,17 +17,17 @@ include("credentials.php");
 
 $id = $_POST['id'];
 
-$activity = $_POST['activity'];
+$activity = htmlentities($_POST['activity']);
 
-$oldActivity = $_POST['old_activity'];
+$oldActivity = htmlentities($_POST['old_activity']);
 
-$start_time = $_POST['start_time'];
+$start_time = htmlentities($_POST['start_time']);
 
-$oldStart = $_POST['old_start'];
+$oldStart = htmlentities($_POST['old_start']);
 
-$end_time = $_POST['end_time'];
+$end_time = htmlentities($_POST['end_time']);
 
-$oldEnd = $_POST['old_end'];
+$oldEnd = htmlentities($_POST['old_end']);
 
 
 

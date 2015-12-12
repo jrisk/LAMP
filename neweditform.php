@@ -15,17 +15,17 @@ $_SESSION['currentplan'] = $_POST['old_plan'];
 
 // Post variables
 
-$plan = $_POST['new_plan'];
+$plan = htmlentities($_POST['new_plan']);
 
-$oldPlan = $_POST['old_plan'];
+$oldPlan = htmlentities($_POST['old_plan']);
 
-$class = $_POST['new_class'];
+$class = htmlentities($_POST['new_class']);
 
-$oldClass = $_POST['old_class'];
+$oldClass = htmlentities($_POST['old_class']);
 
-$date = $_POST['new_date'];
+$date = htmlentities($_POST['new_date']);
 
-$oldDate = $_POST['old_date'];
+$oldDate = htmlentities($_POST['old_date']);
 
 //start of try normally, deleted try/catch
 
