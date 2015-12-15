@@ -26,7 +26,7 @@
                     <img alt="Skoolia" src="">
                 </a>
             </div>
-               <a href="./editplan2.php"><button type="button" class="btn btn-lg btn-primary">Edit Plans</button></a>
+               <a href="./agenda.html"><button type="button" class="btn btn-lg btn-primary">Agenda View</button></a>
               <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
             </div>
 

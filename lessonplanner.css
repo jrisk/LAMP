@@ -95,6 +95,7 @@ div.page-header>*>* {
   	-moz-transform: scale(2.5); /* FF */
   	-webkit-transform: scale(2.5); /* Safari and Chrome */
   	-o-transform: scale(2.5); /* Opera */
+  	outline: none;
 }
 
 .specplanners {
