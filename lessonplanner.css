@@ -60,6 +60,24 @@ div.page-header>*>* {
 	}
 }
 
+@keyframes exampleDay {
+	0% {
+		background-color: green;
+	}
+	25% {
+		background-color: blue;
+	}
+	50% {
+		background-color: orange;
+	}
+	75% {
+		background-color: pink;
+	}
+	100% {
+		background-color: #BFE9FF;
+	}
+}
+
 #json-today, #json-future, #json-past {
 	background-color: silver;
 	text-align: center;
@@ -102,6 +120,16 @@ div.page-header>*>* {
   	-webkit-transform: scale(2.5); /* Safari and Chrome */
   	-o-transform: scale(2.5); /* Opera */
   	outline: none;
+}
+
+.day-specify {
+	font-size: 1em;
+	animation-name: exampleDay;
+	animation-duration: 3s;
+	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
+    -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
+    -o-animation: exampleDay 5s infinite; /* Opera 12+ */
+    animation: exampleDay 5s infinite;
 }
 
 .specplanners {

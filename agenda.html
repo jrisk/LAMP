@@ -33,7 +33,9 @@ type="text/javascript"></script> -->
 <div class="non-nav">
 
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
-	<div class="container-fluid" id="json-future"><p id="future-look">Next Plan</p></div>
+	<div class="container-fluid" id="json-future">
+	<p id="future-look">Next Plan</p>
+	</div>
 	<div class="container-fluid" id="json-repeat"></div>
 	<div class="container-fluid" id="json-past">Past Plans</div>
 	<div class="container" id="json-nest"></div>
@@ -231,13 +233,32 @@ function getData() {
 							todayPlan = 1;
 						}
 						else if (planDate > fullToday) {
+
 							var elem = "#json-future";
+
+							var thisDate = obj[i].date;
+
+							$(elem).append('<p class="day-specify" id="' + thisDate + '">');
+
 						}
 						else {
 							var elem = "#json-past";
 						}
 
+					console.log(thisDate);
+
+
+						if ($(document.getElementById(thisDate)).length) {
+
+							console.log('this th edate' + thisDate);
+
+							$(document.getElementById(thisDate)).html(
+							moment(obj[i].date).format('dddd, MMMM Do'));
+
+							}
+
 					console.log(stringpls);
+
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 					+ '<p id="plan-title">' + newtemp + '</p></div>');
