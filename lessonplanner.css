@@ -1,5 +1,11 @@
 html {
-	font-size: 0.5em;
+	font-size: 1rem;
+}
+
+@media screen and (max-width:; 550px) {
+	html {
+		font-size: 0.5rem;
+	}
 }
 
 div.page-header {
@@ -104,6 +110,7 @@ div.page-header>*>* {
 }
 
 .agenda-act-row {
+	font-size: .8em;
 	box-shadow: 0 0.2em 0.4em #999;
 	padding: 0;
 }
