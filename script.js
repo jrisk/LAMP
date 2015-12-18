@@ -80,16 +80,15 @@ if (valRegEx.test(plantitle) */
 	
 // add plan save button, shows the activity columns after submitting the plan name, class name, and date
 
-$('#datetimepickerplan3').on('dp.show', function(e) {
-
+$('#datetimepickerplan3, #starttime3, #endtime3').on('dp.show', function(e) {
     var wig = $('.bootstrap-datetimepicker-widget');
-
     $('body').animate({ scrollTop: wig.offset().top - $('navbar').height() }, 1000);
 
-    var widget = $(this).data('DateTimePicker');
-
-    //console.log(widget.widgetPositioning({'vertical':'top'}));
+}).on('dp.hide', function(e) {
+    $(this).children('input').blur();
 });
+
+//editing datetimepickers still have no focus
 
 $('#add-plan').on('click tap', function() {
 
