@@ -39,7 +39,7 @@ $end_time_db = substr($end_time, 0, -3);
 
 $comment_note = NULL; // cant be null in website
 
-$weekly = NULL; //$_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
+$weekly = $_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
 
 $media = NULL; //$_POST['media']; // url for media objects stored in activities
 
@@ -47,7 +47,8 @@ $entry_time = NULL; // cant be null on website
 
 $owner = 1;
 
-// pdo stuff
+//start try/catch PDO
+//this is bad coding practice to put pdo in try/catch apparently
 
 try {
 
@@ -95,6 +96,6 @@ catch (PDOException $e) {
 	echo "Error retrieving data: " . $e->getMessage();
 }
 
-echo "Plan and Activity have been saved";
+echo "<b id='all_good'>Activity has been saved under plan " . $plan . "</b>";
 
 ?>

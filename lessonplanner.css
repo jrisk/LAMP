@@ -78,6 +78,18 @@ div.page-header>*>* {
 	}
 }
 
+.alert-contain {
+	margin: 0em 0em 0em 0em;
+	padding: 0em 0em 0em 0em;
+	border: 0em solid black;
+}
+
+#alerts {
+	text-align: center;
+	font-size: .5em;
+	padding: 0;
+}
+
 #json-today, #json-future, #json-past {
 	background-color: silver;
 	text-align: center;

@@ -62,16 +62,43 @@ widthDecide();
 
 
 function savePlan() {
-    $('#planclassday input[type=radio]').each(function(idx, elem) {
-        var this_check = $(this).prop('checked');
-        var this_day = $(this).val();
-        console.log(idx + " = index, ischecked? =" + this_check + " elem: " + this_day);
 
-        if (this_check == true) {
-            this_day = this_check;
+        if ($('input[name=every_week]:checked').val()) {
+            console.log($('input[name=every_week]:checked').val());
         }
-    });
+        else {
+            console.log('weekly is not chekd');
+        }
+
+    var plan_name = $('#lessonname3').val();
+
+    $.ajax({
+        type: 'POST',
+        url: 'planform.php',
+        data: {lesson_name : plan_name},
+        dataType: 'html',
+        success: function(data) {
+            $('#alerts').html(data);
+
+                if ($('#plan_good').length != 1) {
+                    $('#plan-editor').fadeOut().fadeIn();
+                    console.log('all is not good with this plan name');
+                }
+                else {
+                    actInsert();
+                }
+            }, //end success
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    }); //end ajax call
 };
+
+$('#add-plan').on('click tap', function() {
+
+    savePlan();
+
+}); //end test addplan listener
 
 /********************************* VALIDATION FUNCTIONS FOR ALL INPUTS *********************************/
 /*valRegEx = /\.|\-/;
@@ -90,9 +117,9 @@ $('#datetimepickerplan3, #starttime3, #endtime3').on('dp.show', function(e) {
 
 //editing datetimepickers still have no focus
 
-$('#add-plan').on('click tap', function() {
+//$('#add-plan').on('click tap', function() {
+function actInsert() {
 
-    savePlan();
     $('#container-outer-make').hide();
     $('#activity-container').show();
     $('#button-add-save').hide();
@@ -329,7 +356,7 @@ $('#add-plan').on('click tap', function() {
 
     });
 
-});
+}; // end actInsert function
 
 // Cant call (this).on() while in the (this) function. thats why $('#actentry').on() wont work in function
 
@@ -577,7 +604,7 @@ function clickEditEnd() {
 
         });
 
-};
+}; // end of ENTIRE ADD PLAN BUTTON
 
 /************************************** END OF EDIT FUNCTIONS **************************************/
 
@@ -780,6 +807,8 @@ function readableStartEnd() {
 
 /************************************** POST NEW PLAN TO DATABASE **********************************/
 
+$('#add-plan').html();
+
 $('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
 
     $('#datefix3').val(databaseDate($('#dateplan3')));
@@ -802,7 +831,6 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
 		    data: formdata,
 		    url: 'newformaction.php',
 		    success: function(data) {
-		        console.log("posted successfully");
 		        // call another ajax request to GET php file to update activities row
 		        $.ajax({
 		            type: 'POST',
