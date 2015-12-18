@@ -80,6 +80,17 @@ if (valRegEx.test(plantitle) */
 	
 // add plan save button, shows the activity columns after submitting the plan name, class name, and date
 
+$('#datetimepickerplan3').on('dp.show', function(e) {
+
+    var wig = $('.bootstrap-datetimepicker-widget');
+
+    $('body').animate({ scrollTop: wig.offset().top - $('navbar').height() }, 1000);
+
+    var widget = $(this).data('DateTimePicker');
+
+    //console.log(widget.widgetPositioning({'vertical':'top'}));
+});
+
 $('#add-plan').on('click tap', function() {
 
     savePlan();
