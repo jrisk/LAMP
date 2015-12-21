@@ -63,14 +63,9 @@ widthDecide();
 
 function savePlan() {
 
-        if ($('input[name=every_week]:checked').val()) {
-            console.log($('input[name=every_week]:checked').val());
-        }
-        else {
-            console.log('weekly is not chekd');
-        }
-
     var plan_name = $('#lessonname3').val();
+
+    var week_check = $('input[name=every_week]:checked').val()
 
     $.ajax({
         type: 'POST',
@@ -660,12 +655,19 @@ function dateTimeChange() {
 
 var midnight = moment('11:59 PM', 'h:mm A');
 
+var endFlag = 0;
+
 $('#endtime3').on('dp.change', function(e) {
     $('#starttime3').data('DateTimePicker').maxDate(e.date);
+    endFlag = 1;
 });
 
 $('#starttime3').on('dp.change', function(e) {
-    //$('#endtime3').data('DateTimePicker').minDate(e.date);
+    var fixStart = moment(e.date, 'h:mm A').format('h:mm A');
+    console.log('starttime change' + endFlag);
+    if (endFlag < 1) {
+    $('#end3').val(fixStart);
+    }
     //too many chances for end time to be unusable 
 }); //link together start and end time to prevent times before being possible
 
