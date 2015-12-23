@@ -1,3 +1,14 @@
+/*@easy-blue: #06f;
+@soft-cyan: #C6E2FF;
+@soft-pink: #FFD1B3;
+@soft-green: #D0EE96;
+@skin-pink: #FFDEAD;
+@wine: #D9534F;
+@sky-blue: #BFE9FF;
+@light-green: #99FF66;
+@white-blue: #E0FFFF;
+@salmon: #FFA07A;*/
+
 html {
 	font-size: 1rem;
 }
@@ -42,30 +53,21 @@ div.page-header>*>* {
 	font-size: 1.5em;
 	background-color: white;
 	text-align: center;
-	animation-name: exampletoday;
+	animation-name: exampleDay;
 	animation-duration: 4s;
-	-webkit-animation: exampletoday 5s infinite; /* Safari 4+ */
-    -moz-animation: exampletoday 5s infinite; /* Fx 5+ */
-    -o-animation: exampletoday 5s infinite; /* Opera 12+ */
-    animation: exampletoday 5s infinite;
+	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
+    -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
+    -o-animation: exampleDay 5s infinite; /* Opera 12+ */
+    animation: exampleDay 5s infinite;
     border-radius: 0.2em 0.2em 0.2em 0.2em;
-}
-
-@keyframes exampletoday {
-	0% {
-		background-color: white;
-	}
-	100% {
-		background-color: blue;
-	}
 }
 
 @keyframes exampleDay {
 	0% {
-		background-color: green;
+		background-color: #D0EE96;
 	}
 	25% {
-		background-color: blue;
+		background-color: #C6E2FF;
 	}
 	50% {
 		background-color: orange;
