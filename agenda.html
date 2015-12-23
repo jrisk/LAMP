@@ -120,8 +120,6 @@ function getData() {
 
 					tempObj[obj[i].title] = timerVarCheck._i;
 
-					console.log('timerVar = ' + timerVar + 'UTCstart = ' + UTCstart + 'UTCend = ' + UTCend + 'currentTime = ' + currentTime);
-
 					//make current plan equal to var newtemp
 					var newtemp = obj[i].plan;
 
@@ -241,8 +239,6 @@ function getData() {
 							var elem = "#json-past";
 						}
 
-					console.log(thisDate);
-
 
 						if ($(document.getElementById(thisDate)).length) {
 
@@ -253,16 +249,13 @@ function getData() {
 
 							}
 
-					console.log(stringpls);
-
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 					+ '<div class="plan-row"><span class="plan-title">' + newtemp + '</span>'
 					+ '<span class="task-total">' + 0 + '</span></div></div>"');
 
 					console.log($(document.getElementById(stringpls)));
-					console.log('does this exsts' + document.getElementById(stringpls));
-					//not clising the plan-big div until the very end makes it collapse easier it seems
+					//not closing the plan-big div until the very end makes it collapse easier it seems
 
 
 					$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
@@ -399,13 +392,17 @@ function getData() {
 
 				var holdNum = jobject.parent().parent().children('.agenda-act-row').length;
 
+				//encapsulated the plan name as a string
+
 				var plan = jobject.parent().parent().attr('id');
 
 				var inserter = '#' + plan + ' input:checked';
 
+				//insert the plan name and input selector for checkboxes and add up their total with 'length'
+
 				var checkedTotal = $(inserter).length;
 
-				console.log(checkedTotal);
+				//insert the total checked length / the inital total activites 
 				numberhold.html(checkedTotal + '/' + holdNum + ' completed');
 
 			}
