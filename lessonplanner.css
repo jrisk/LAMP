@@ -42,9 +42,6 @@ div.page-header>*>* {
 	overflow: hidden;
 }
 
-.non-nav {
-}
-
 .navbar {
 	border-bottom: .2em #999 solid;
 }
@@ -92,6 +89,19 @@ div.page-header>*>* {
 	padding: 0;
 }
 
+.plan-title {
+	font-size: 1.1em;
+	text-align: center;
+	font-family: "Karla", sans-serif;
+}
+
+.task-total {
+	font-size: .5em;
+	float: right;
+	display: block;
+	padding: 0;
+}
+
 #json-today, #json-future, #json-past {
 	background-color: silver;
 	text-align: center;
@@ -106,13 +116,6 @@ div.page-header>*>* {
 	box-shadow: 0.2em 0.5em 0.2em #999;
 
 }
-
-#plan-title {
-	font-size: 1.1em;
-	text-align: center;
-	font-family: "Karla", sans-serif;
-}
-
 .small-type {
 	font-size: .6em;
 	display: inline;

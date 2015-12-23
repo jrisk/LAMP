@@ -74,8 +74,6 @@ function getData() {
 
 			var tempObj = {};
 
-			console.log(currentTime);
-
 			$('#today-look').html(moment(currentTime).format('dddd, MMMM Do'));
 
 			var todayPlan = 0;
@@ -94,8 +92,6 @@ function getData() {
 				//test to see if plan has already been used, then append it to the correct plan div
 
 				for (i = 0; i < obj.length; i++) {
-
-					console.log(obj.length);
 
 					//time get function to compare current time to each time value given in loop
 					//compare currenttime to start time
@@ -261,7 +257,8 @@ function getData() {
 
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
-					+ '<p id="plan-title">' + newtemp + '</p></div>');
+					+ '<div class="plan-row"><span class="plan-title">' + newtemp + '</span>'
+					+ '<span class="task-total">' + 0 + '</span></div></div>"');
 
 					console.log($(document.getElementById(stringpls)));
 					console.log('does this exsts' + document.getElementById(stringpls));
@@ -320,9 +317,10 @@ function getData() {
 					} // end of if check
 
 					var oldtemp = obj[i].plan;
-				}
+				
+				} // end of for-call of selected obj, 2nd from initial each JSONParse call
 
-			}
+			} // end of each JSONParse call
 
 			});
 
@@ -382,8 +380,8 @@ function getData() {
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				e.preventDefault();
-				$(this).children().toggle('slow');
-				$(this).children('#plan-title').show('slow');
+				$(this).children().toggle('normal');
+				$(this).children('.plan-row').show('normal');
 				// show media object line box $(this).
 			});
 
@@ -393,10 +391,30 @@ function getData() {
 				e.stopPropagation();
 			});
 
+			function checkBoxer(jobject) {
+				//encapsulate the tasktotal object into a variable
+				var numberhold = jobject.parent().parent().children('.plan-row').children('.task-total');
+
+				//add up the total activities for task total '0/12, 1/12' viewer
+
+				var holdNum = jobject.parent().parent().children('.agenda-act-row').length;
+
+				var plan = jobject.parent().parent().attr('id');
+
+				var inserter = '#' + plan + ' input:checked';
+
+				var checkedTotal = $(inserter).length;
+
+				console.log(checkedTotal);
+				numberhold.html(checkedTotal + '/' + holdNum + ' completed');
+
+			}
+
 			$('.checkbox_complete').on('click tap', function(e) {
 				e.stopPropagation();
+				checkBoxer($(this));
 				if ($(this).prop('checked') == true) {
-					$(this).parent().toggle('slow');
+					$(this).parent().toggle('normal');
 				}
 			});
 
@@ -405,14 +423,15 @@ function getData() {
 			$('.plan-big').animate({left: '0%'}, 800);
 			//$('#json-future').hide();
 			//$('#json-past').hide();
-		},
+
+		}, // end of success callback
 
 		error: function(errorThrown) {
 			$('#json-nest').html(errorThrown);
 		}
 	});
 
-	}
+	} //end of getData function 
 
 getData();
 
