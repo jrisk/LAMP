@@ -30,7 +30,7 @@ type="text/javascript"></script> -->
         </div>
     </nav>
 
-<div class="non-nav">
+<div class="navfix"></div>
 
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future">
@@ -40,7 +40,6 @@ type="text/javascript"></script> -->
 	<div class="container-fluid" id="json-past">Past Plans</div>
 	<div class="container" id="json-nest"></div>
 	<h2 id="plans"></h2>
-</div>
 
 </body>
 <script>
@@ -232,6 +231,8 @@ function getData() {
 
 							var thisDate = obj[i].date;
 
+							//why does this post the date once and not duplicate it ?
+
 							$(elem).append('<p class="day-specify" id="' + thisDate + '">');
 
 						}
@@ -252,7 +253,7 @@ function getData() {
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
 					+ '<div class="plan-row"><span class="plan-title">' + newtemp + '</span>'
-					+ '<span class="task-total">' + 0 + '</span></div></div>"');
+					+ '<span class="task-total"></span></div></div>');
 
 					console.log($(document.getElementById(stringpls)));
 					//not closing the plan-big div until the very end makes it collapse easier it seems
@@ -321,15 +322,15 @@ function getData() {
 				$('#json-today').append('<div class="well-sm">No Plans Today</div>'
 				+ '<div class="make-button">Make a Plan</div>').css('background-color', 'white');
 
-				var nextOne = $('#json-future').children('.plan-contain').first().find('.agenda-act-row');
+				var nextOne = $('#json-future .plan-contain .agenda-act-row')[0];
 
 				console.log(nextOne);
 
 				//$('body').animate({ scrollTop: nextOne.offset().top - $('.navbar').height() }, 1000);
 				//$('.plan-big').not($('.currentPlan')).children().hide();
 				//nextOne.children('.the-first-act').before('<div class="timer-first smaller-type"></div>');
-				nextOne.css('background-color', '#C6E2FF');
-				nextOne.children('.timer').html('22 hours until start');
+				$(nextOne).css('background-color', '#C6E2FF');
+				$(nextOne).children('.timer').html('22 hours until start');
 
 			}
 
@@ -375,11 +376,15 @@ function getData() {
 				e.preventDefault();
 				$(this).children().toggle('normal');
 				$(this).children('.plan-row').show('normal');
+
+				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden')) {
+					//$(this).children().show('normal');
+				//}
 				// show media object line box $(this).
 			});
 
 			//prevent the whole plan-big div from toggling if a specific act is clicked on
-			$('.specplanners').on('click tap', function(e) {
+			$('.agenda-act-row').on('click tap', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 			});
@@ -408,11 +413,10 @@ function getData() {
 			}
 
 			$('.checkbox_complete').on('click tap', function(e) {
+				//e.preventDefault();
 				e.stopPropagation();
 				checkBoxer($(this));
-				if ($(this).prop('checked') == true) {
-					$(this).parent().toggle('normal');
-				}
+				$(this).parent().toggle('normal');
 			});
 
 			//$('.plan-big').children().hide();
@@ -420,6 +424,38 @@ function getData() {
 			$('.plan-big').animate({left: '0%'}, 800);
 			//$('#json-future').hide();
 			//$('#json-past').hide();
+
+			//make currentdate fixed to top on scrolldown
+			function positionObj(indexer, element) {
+				this.indexer = indexer;
+				this.element = element;
+			};
+
+			//HUEG function just to fix current scrolling plan's date to the top of the page
+
+			$(window).scroll(function(e) {
+				var positionRel = [];
+				var arr1 = []
+				$('.day-specify').each(function(i, elem) {
+					//the next fixed elem will be the least positive one
+					//the current fixed elem is the least negative one
+					positionRel[i] = $(elem).offset().top - $(window).scrollTop() - $('.navbar').height();
+					var positionTest = new positionObj(positionRel[i], elem.innerHTML);
+					arr1.push(positionTest);
+				});
+
+				for (i = 0; i < arr1.length; i++) {
+					if (arr1[i].indexer < 1 && typeof arr1[i+1] !== 'undefined' && arr1[i+1].indexer > 1) 
+					{
+						$('.navfix').html(arr1[i].element);
+					}
+				}
+				//console.log(positionTest);
+				/*if (positionRel <= 0) {
+					$('.navfix').html($('.day-specify').html());
+					var positionRel = 1;
+				};*/
+			});
 
 		}, // end of success callback
 
