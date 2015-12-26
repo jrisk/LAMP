@@ -30,7 +30,9 @@ type="text/javascript"></script> -->
         </div>
     </nav>
 
-<div class="navfix"></div>
+<div class="container-fluid">
+<p class="navfix well-sm col-xs-12 col-sm-12"></p>
+</div>
 
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future">
@@ -73,7 +75,7 @@ function getData() {
 
 			var tempObj = {};
 
-			$('#today-look').html(moment(currentTime).format('dddd, MMMM Do'));
+			$('#today-look').html(moment(currentTime).format('dddd, MMMM Do')).addClass('day-specify');
 
 			var todayPlan = 0;
 
@@ -204,6 +206,8 @@ function getData() {
 
 						}
 
+						console.log('outside for loop scope lets see' + planDate);
+
 						//end the last plan row now that its a new plan
 
 						$(document.getElementById(stringpls)).append('</div>');
@@ -221,32 +225,40 @@ function getData() {
 						//If Today's Date is the same as one of the plans, put it in the first div 'json-today'
 						//test for which div to put each new plan
 
+						var thisDate = obj[i].date;
+
 						if (planDate == fullToday) {
-							var elem = "#json-today";
+							var elem = "#today-look";
 							todayPlan = 1;
 						}
 						else if (planDate > fullToday) {
 
 							var elem = "#json-future";
 
-							var thisDate = obj[i].date;
-
 							//why does this post the date once and not duplicate it ?
+							//because of dupe IDs breaking the code, test for it first
+							if ($(document.getElementById(thisDate)).length) 
+							{
+								console.log('do something here or nah?');
+							}
+							else 
+							{
+								$(elem).append('<p class="day-specify" id="' + thisDate + '">');
 
-							$(elem).append('<p class="day-specify" id="' + thisDate + '">');
+								$(document.getElementById(thisDate)).html(
+								moment(obj[i].date).format('dddd, MMMM Do'));
+							}
 
 						}
 						else {
 							var elem = "#json-past";
+							console.log('past...or repeat to the future?');
 						}
 
 
 						if ($(document.getElementById(thisDate)).length) {
 
-							console.log('this th edate' + thisDate);
-
-							$(document.getElementById(thisDate)).html(
-							moment(obj[i].date).format('dddd, MMMM Do'));
+								console.log('outer, general check for thisDate plans');
 
 							}
 
@@ -432,8 +444,9 @@ function getData() {
 			};
 
 			//HUEG function just to fix current scrolling plan's date to the top of the page
-
-			$(window).scroll(function(e) {
+			//could be slow, is there a faster way to detect top element in array?
+			//on fast scrolls, this function sometimes doesnt run
+			function getDateFixed() {
 				var positionRel = [];
 				var arr1 = []
 				$('.day-specify').each(function(i, elem) {
@@ -441,20 +454,26 @@ function getData() {
 					//the current fixed elem is the least negative one
 					positionRel[i] = $(elem).offset().top - $(window).scrollTop() - $('.navbar').height();
 					var positionTest = new positionObj(positionRel[i], elem.innerHTML);
+					console.log(elem.innerHTML);
 					arr1.push(positionTest);
 				});
 
 				for (i = 0; i < arr1.length; i++) {
-					if (arr1[i].indexer < 1 && typeof arr1[i+1] !== 'undefined' && arr1[i+1].indexer > 1) 
+					if (arr1[i].indexer <= 0) 
 					{
-						$('.navfix').html(arr1[i].element);
+						if (typeof arr1[i+1] === 'undefined' || typeof arr1[i+1] !== 'undefined' && arr1[i+1].indexer >= 0)
+						{
+							console.log(arr1);
+							console.log(arr1[i].element);
+							$('.navfix').html(arr1[i].element);
+						}
 					}
 				}
-				//console.log(positionTest);
-				/*if (positionRel <= 0) {
-					$('.navfix').html($('.day-specify').html());
-					var positionRel = 1;
-				};*/
+
+			} // end getDateFixed function
+
+			$(window).scroll(function(e) {
+				getDateFixed();
 			});
 
 		}, // end of success callback

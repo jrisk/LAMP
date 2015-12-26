@@ -86,6 +86,15 @@ div.page-header>*>* {
 .navfix {
 	position: fixed;
 	z-index: 1000;
+	display: block;
+	text-align: center;
+	font-size: 1em;
+	animation-name: exampleDay;
+	animation-duration: 3s;
+	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
+    -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
+    -o-animation: exampleDay 5s infinite; /* Opera 12+ */
+    animation: exampleDay 5s infinite;
 
 }
 
