@@ -8,7 +8,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
-<script src="https://raw.githubusercontent.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <!-- newest update makes downloadable build files automatically
@@ -24,28 +23,45 @@ type="text/javascript"></script> -->
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid nav-container">
-        		<a class="navbar-brand" href="#">Brand</a>
-               <a href="./calplug.php"><button type="button" class="btn btn-md btn-primary">Calendar</button></a>
-               <a href="./makeplan2.html" class="btn btn-md btn-primary">New Plan</a>
+    		<button type="button" class="btn btn-lg" id="optionpress">
+    		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+    		</button>
+           	<button type="button" class="btn btn-lg" id="calpress">
+           <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+           </button>
+            <button type="button" class="btn btn-lg" id="addpress">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+           	</button>
         </div>
     </nav>
 
 <div class="container-fluid">
-<p class="navfix well-sm col-xs-12 col-sm-12"></p>
+	<div class="row">
+	<p class="navfix col-sm-12 col-xs-12"></p>
+</div>
 </div>
 
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future">
-	<p id="future-look">Next Plan</p>
 	</div>
 	<div class="container-fluid" id="json-repeat"></div>
-	<div class="container-fluid" id="json-past">Past Plans</div>
-	<div class="container" id="json-nest"></div>
+	<!--<div class="container-fluid" id="json-past">Past. Up to next week if plan repeated</div>
+	<div class="container" id="json-nest"></div>-->
 	<h2 id="plans"></h2>
 
 </body>
 <script>
 $(function () {
+
+$('#calpress').on('click tap', function(e) {
+
+	window.location.href = 'calplug.php';
+});
+
+$('#addpress').on('click tap', function(e) {
+
+	window.location.href = 'makeplan2.html';
+});
 
 	$('body').css('padding-top',  $('.navbar').height());
 
@@ -228,7 +244,7 @@ function getData() {
 						var thisDate = obj[i].date;
 
 						if (planDate == fullToday) {
-							var elem = "#today-look";
+							var elem = "#json-today";
 							todayPlan = 1;
 						}
 						else if (planDate > fullToday) {
@@ -454,17 +470,15 @@ function getData() {
 					//the current fixed elem is the least negative one
 					positionRel[i] = $(elem).offset().top - $(window).scrollTop() - $('.navbar').height();
 					var positionTest = new positionObj(positionRel[i], elem.innerHTML);
-					console.log(elem.innerHTML);
 					arr1.push(positionTest);
 				});
 
 				for (i = 0; i < arr1.length; i++) {
-					if (arr1[i].indexer <= 0) 
+					if (arr1[i].indexer <= 15) 
 					{
-						if (typeof arr1[i+1] === 'undefined' || typeof arr1[i+1] !== 'undefined' && arr1[i+1].indexer >= 0)
+						if (typeof arr1[i+1] === 'undefined' || arr1[i+1].indexer >= 15)
 						{
 							console.log(arr1);
-							console.log(arr1[i].element);
 							$('.navfix').html(arr1[i].element);
 						}
 					}
@@ -472,7 +486,7 @@ function getData() {
 
 			} // end getDateFixed function
 
-			$(window).scroll(function(e) {
+			$(window).scroll(function() {
 				getDateFixed();
 			});
 

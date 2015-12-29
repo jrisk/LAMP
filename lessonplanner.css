@@ -13,10 +13,28 @@ html {
 	font-size: 1rem;
 }
 
-@media screen and (max-width:; 550px) {
+@media screen and (max-width: 550px) {
 	html {
 		font-size: 0.5rem;
 	}
+}
+
+@media screen and (max-width: 550px) {
+	}
+}
+
+.wrapper {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+#optionpress {
+	float: left;
+} 
+
+#agendapress, #calpress, #addpress {
+	float: right;
 }
 
 div.page-header {
@@ -47,7 +65,7 @@ div.page-header>*>* {
 }
 
 #today-look, #future-look {
-	font-size: 1.5em;
+	font-size: 1.3em;
 	background-color: white;
 	text-align: center;
 	animation-name: exampleDay;
@@ -88,7 +106,9 @@ div.page-header>*>* {
 	z-index: 1000;
 	display: block;
 	text-align: center;
-	font-size: 1em;
+	font-size: 1.3em;
+	padding: 0;
+	margin: 0;
 	animation-name: exampleDay;
 	animation-duration: 3s;
 	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
@@ -156,12 +176,7 @@ div.page-header>*>* {
 
 .day-specify {
 	font-size: 1em;
-	animation-name: exampleDay;
-	animation-duration: 3s;
-	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
-    -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
-    -o-animation: exampleDay 5s infinite; /* Opera 12+ */
-    animation: exampleDay 5s infinite;
+
 }
 
 .specplanners {
@@ -324,6 +339,11 @@ background-color: #C6E2FF;
 	padding: 0;
 	padding-left: .2em;
 	font-size: 2em;
+}
+
+.well-sm-test {
+	padding: 0;
+	font-size: 1em;
 }
 
 .well-options {

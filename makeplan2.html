@@ -23,15 +23,24 @@ have to build file yourself now
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-               <a href="./calplug.php"><button type="button" class="btn btn-md btn-primary">Calendar</button></a>
-               <a href="./makeplan2.html" class="btn btn-md btn-primary">New Plan</a>
-               <a href="./agenda.html" class="btn btn-md btn-primary">Agenda</a>
+            <button type="button" class="btn btn-lg" id="calpress">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"><span>
+            </button>
+            <button type="button" class="btn btn-lg" id="agendapress">
+                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
+<!-- end of sticky nav -->
+
 <div class="alert-contain">
-<div class="well well-sm"><p id="alerts">This is the well for alerts and such</p></div>
+    <div class="well well-sm">
+        <p id="alerts">This is the well for alerts and such</p>
+    </div>
 </div>
+
+<!-- end of alerts -->
 
 <!-- Insert Saved Plan Name, Class, and Days View-->
 <div class="container" id="plan-viewer">
@@ -42,7 +51,7 @@ have to build file yourself now
 
 <div class="container" id="container-outer-make">
 
-<!-- insert fore each for activity and stuff here -->
+<!-- insert before each for activity and stuff here -->
 
     <div class="row">
         <div class="col-xs-12 col-sm-8">
@@ -55,6 +64,8 @@ have to build file yourself now
 </div>
 </div>
 </div>
+
+<!-- end Plan input row -->
 
 <br>
 
@@ -69,6 +80,8 @@ have to build file yourself now
 </div>
 </div>
 </div>
+
+<!-- end Class input row -->
 
 <br>
 
@@ -85,8 +98,22 @@ have to build file yourself now
 <input type="hidden" id="datefix3" name="date_planfix" class="form-control">
 </div>
 </div>
+</div>
 
-    <div class="col-xs-6 col-sm-3" id="the-day">Repeat Every <b id="the-real-day"></b></div>
+<!-- end of Date DayPicker Row -->
+
+<br>
+
+<div class="row" id="the-day">
+    <div class="col-xs-12 col-sm-12">
+        Repeat Every
+        <b id="the-real-day"></b>
+    </div>
+</div>
+
+<!-- end Repeat Day Question Row -->
+
+<div class="row">
     <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
         <label class="btn btn-default checkboxing">
             <input name="every_week" id="weekly" class="week-input" value="everyWeek" type="radio">
@@ -97,10 +124,12 @@ have to build file yourself now
             No
         </label>
     </div>
+</div>
 
+<br>
 
-
-<!-- WEEKDAY COPIER/PICKER, ADD LATER 
+<!-- WEEKDAY COPIER/PICKER, ADD LATER -->
+<div class="row">
     <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
         <label class="btn btn-default">
             <input name="WeekDays1" id="mon" class="day-input" value="Monday" type="checkbox">Mon
@@ -124,10 +153,6 @@ have to build file yourself now
             <input name="WeekDays7" id="sun" class="day-input" value="Sunday" type="checkbox">Sun
         </label>
     </div>
-
-    <-->
-    
-</div>
 
 </div>  <!--outer- topdiv container-->
 

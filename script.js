@@ -1,5 +1,17 @@
 $(function () {
 
+    /***************** button redirects ************************************/
+
+$('#calpress').on('click tap', function(e) {
+
+    window.location.href = 'calplug.php';
+});
+
+$('#agendapress').on('click tap', function(e) {
+
+    window.location.href = 'agenda.html';
+});
+
 /***************************** HIDE DIVS, MOBILE CONTAINER, CHECKBOX HOLDER, DAY CHOICE FOR REPEATING ***/
 
 $('#label-row').hide();
@@ -607,12 +619,12 @@ function clickEditEnd() {
 
 function dateTimeFun() {
 $('#datetimepickerplan3').datetimepicker({
-    format: 'dddd, MMMM Do',
+    format: 'dddd, MMMM Do YYYY',
     allowInputToggle: true
 });
 
 $('#datetimepickeredit3').datetimepicker({
-    format: 'dddd, MMMM Do',
+    format: 'dddd, MMMM Do YYYY',
     allowInputToggle: true,
     focusOnShow: false
 });
@@ -703,7 +715,7 @@ $('#datetimepickerplan3').on('dp.change', function(e) {
 
     var dayinput = $('#dateplan3').val();
 
-    var daybase = moment(dayinput, 'dddd, MMMM Do');
+    var daybase = moment(dayinput, 'dddd, MMMM Do YYYY');
 
     var daybaseval = moment(daybase).format('dddd');
 
@@ -716,7 +728,7 @@ $('#datetimepickerplan3').on('dp.change', function(e) {
 var databaseDate = function(element) {
     var dayinput = element.val();
 
-    var daybase = moment(dayinput, 'dddd, MMMM Do');
+    var daybase = moment(dayinput, 'dddd, MMMM Do YYYY');
 
     var daybaseval = moment(daybase).format('YYYY-MM-DD');
 
