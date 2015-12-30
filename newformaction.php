@@ -47,6 +47,14 @@ $entry_time = NULL; // cant be null on website
 
 $owner = 1;
 
+$monday = $_POST['Monday'];
+$tuesday = $_POST['Tuesday'];
+$wednesday = $_POST['Wednesday'];
+$thursday = $_POST['Thursday'];
+$friday = $_POST['Friday'];
+$saturday = $_POST['Saturday'];
+$sunday = $_POST['Sunday'];
+
 //start try/catch PDO
 //this is bad coding practice to put pdo in try/catch apparently
 
@@ -57,7 +65,8 @@ $db = new PDO($dsn, $user, $password);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $stmt = $db->prepare("INSERT INTO lessonplan VALUES (:id, :plan, :class, :activity, :adate, :start_time, :end_time,
-:comment_note, :every_week, :media, :entry_time, :owner)");
+:comment_note, :every_week, :media, :entry_time, :owner, :monday, :tuesday, :wednesday, :thursday, :friday,
+:saturday, :sunday)");
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
