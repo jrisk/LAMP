@@ -862,6 +862,28 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
 
     timeDatabase();
 
+    /*if porting to another back-end that isnt PHP, the same-name inputs (1 hidden, 1 checkbox) for 
+    the weekday modal rely on fact that if name=Monday input type=checkbox left unchecked, the default will be 
+    the hidden input in front of it, whereas if the checkbox is checked, the hidden input with the same name
+    name=Monday with the value=0 will be parameterized and sent to the server before the checkbox one
+    with value=1, BUT PHP ONLY READS THE LAST INPUT VALUE IF IT RECEIVES MORE THAN 1 INPUT WITH THE SAME NAME
+    so when checked, the 2nd checkbox is sent and is the only one that is read by the PHP server
+
+    if if same-name inputs are in array form like in ASP.net, or if only the first input with a certain name 
+    is read and any others disgarded, as in Java, use this function to ensure correct one is sent:
+
+    $('.day-wrap').each(function(ind, obj) {
+    if ($('.day-wrap')[ind].children('input')[1]) { //if each day-wrap element 
+        $(input[name*='day')[0].val() == 1 //make both values 1 and let server handle it
+        or
+        $(name Monday)[0].remove() //remove the input, will have to add it back tho
+        or
+        $(name Monday)[0].attr('name', ''); inputs without a name arnt sent
+    } NOT FINISHED
+    */
+
+    console.log($('input[name=Friday]'));
+
     var formdata = $('#planclassday input').serialize();
 
     console.log(formdata);

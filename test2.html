@@ -5,23 +5,45 @@
 	.wrapper {
 	overflow-x: scroll;
 	overflow-y: hidden;
-	-webkit-overflow-scrolling: touch;;
+	-webkit-overflow-scrolling: touch;
 	white-space: nowrap;
-	width: 100%;
+	width: device-width;
 	}
 	.internal {
 		display: inline;
+	}
+
+	.image-wrapper {
+		overflow: hidden;
+		width: 100%;
+	}
+
+	.panes {
+		width: 500%;
+		list-style: none;
+		position: relative;
 	}
 </style>
 </head>
 <body>
 	<div class="wrapper">
-		<h1 class="internal">one stuff</h1>
-		<h1 class="internal">one stuff</h1>
-		<h1 class="internal">one stuff</h1>
-		<h1 class="internal">one stuff</h1>
+		<h1 class="internal">one stuff5555555555555555555555555</h1>
+		<h1 class="internal">one stuff6666666666666666666666666</h1>
+		<h1 class="internal">one stuff77777777777777777777777777777</h1>
+		<h1 class="internal">one stuff88888888888888888888888888888888</h1>
 		<h1 class="internal">one stuff</h1>
 		<h1 class="internal">one stuff</h1>
 	</div>
+
+	<div class="image-wrapper">
+		<ul class="panes">
+			<li>
+				<h2>test1</h2>
+				<img src="pepster.jpg" alt="paypay" />
+			</li>
+			<li>test2</li>
+		</ul>
+	</div>
+
 	</body>
 	</html>
