@@ -110,7 +110,7 @@ function savePlan() {
 
     var plan_name = $('#lessonname3').val();
 
-    var week_check = $('input[name=every_week]:checked').val()
+    var week_check = $('input[name=every_week]:checked').val();
 
     $.ajax({
         type: 'POST',
@@ -873,13 +873,13 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
     is read and any others disgarded, as in Java, use this function to ensure correct one is sent:
 
     $('.day-wrap').each(function(ind, obj) {
-    if ($('.day-wrap')[ind].children('input')[1]) { //if each day-wrap element 
-        $(input[name*='day')[0].val() == 1 //make both values 1 and let server handle it
+    if ($('.day-wrap')[ind].children().prop('checked') == true) { //if checkbox checked, 2 same-name inputs sent
+        obj.children()[0].val() == 1 //make both values 1 and let server handle it
         or
-        $(name Monday)[0].remove() //remove the input, will have to add it back tho
+        obj.children()[0].remove() //remove the hidden input to ensure only 1 sent, will have to add it back
         or
-        $(name Monday)[0].attr('name', ''); inputs without a name arnt sent
-    } NOT FINISHED
+        obj.children()[0].attr('name', ''); inputs without a name arnt sent, same as above
+    } will have to reset the hidden inputs to 0 eventually for weekday checkbox selection changes
     */
 
     console.log($('input[name=Friday]'));
