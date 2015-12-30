@@ -83,6 +83,14 @@ $stmt->bindParam(":entry_time", $entry_time, PDO::PARAM_INT);
 
 $stmt->bindParam(":owner", $owner, PDO::PARAM_STR);
 
+$stmt->bindParam(":monday", $monday, PDO::PARAM_INT);
+$stmt->bindParam(":tuesday", $tuesday, PDO::PARAM_INT);
+$stmt->bindParam(":wednesday", $wednesday, PDO::PARAM_INT);
+$stmt->bindParam(":thursday", $thursday, PDO::PARAM_INT);
+$stmt->bindParam(":friday", $friday, PDO::PARAM_INT);
+$stmt->bindParam(":saturday", $saturday, PDO::PARAM_INT);
+$stmt->bindParam(":sunday", $sunday, PDO::PARAM_INT);
+
 //execute the prepared statement
 
 $stmt->execute();

@@ -76,7 +76,7 @@ have to build file yourself now
                     <span class="glyphicon glyphicon-education">
                     </span>
             </span>
-<input name="user_group" type="text" id="classname3" class="form-control" placeholder="Class/Student Name">
+<input name="user_group" type="text" id="classname3" class="form-control" autocapitaize="words" autocorrect="off" placeholder="Class/Student Name">
 </div>
 </div>
 </div>
@@ -113,8 +113,8 @@ have to build file yourself now
 
 <!-- end Repeat Day Question Row -->
 
-<div class="row">
-    <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
+<div class="row" id="checkbox-holder">
+    <div class="btn-group btn-group-lg col-xs-12 col-sm-6" data-toggle="buttons">
         <label class="btn btn-default checkboxing">
             <input name="every_week" id="weekly" class="week-input" value="everyWeek" type="radio">
             Yes
@@ -124,35 +124,52 @@ have to build file yourself now
             No
         </label>
     </div>
+    <button type="button" class="btn btn-md" id="clone-button" data-toggle="modal" data-target="#modal-weekday">
+        Clone Plan</button>
 </div>
 
 <br>
 
-<!-- WEEKDAY COPIER/PICKER, ADD LATER -->
-<div class="row">
-    <div class="btn-group btn-group-lg col-xs-12 col-sm-6" id="checkbox-holder" data-toggle="buttons">
-        <label class="btn btn-default">
-            <input name="WeekDays1" id="mon" class="day-input" value="Monday" type="checkbox">Mon
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays2" id="tues" class="day-input" value="Tuesday" type="checkbox">Tues
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays3" id="wed" class="day-input" value="Wednesday" type="checkbox">Wed
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays4" id="thurs" class="day-input" value="Thursday" type="checkbox">Thurs
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays5" id="fri" class="day-input" value="Friday" type="checkbox">Fri
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays6" id="sat" class="day-input" value="Saturday" type="checkbox">Sat
-        </label>
-        <label class="btn btn-default">
-            <input name="WeekDays7" id="sun" class="day-input" value="Sunday" type="checkbox">Sun
-        </label>
+<!-- WEEKDAY PICKER MODAL-->
+
+<!-- Modal start -->
+<div id="modal-weekday" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clone Plan to Day</h4>
+      </div>
+      <div class="modal-body" id="weekday-insert">
+            <div class="day-wrap">
+            <input name="Monday" id="mon" class="day-input" value="Monday" type="checkbox"> Monday
+        </div>
+            <div class="day-wrap">
+            <input name="Tuesday" id="tues" class="day-input" value="Tuesday" type="checkbox"> Tuesday
+        </div>
+            <div class="day-wrap">
+            <input name="Wednesday" id="wed" class="day-input" value="Wednesday" type="checkbox"> Wednesday
+        </div>
+            <div class="day-wrap">
+            <input name="Thursday" id="thurs" class="day-input" value="Thursday" type="checkbox"> Thursday
+        </div>
+            <div class="day-wrap">
+            <input name="Friday" id="fri" class="day-input" value="Friday" type="checkbox"> Friday
+        </div>
+            <div class="day-wrap">
+            <input name="Saturday" id="sat" class="day-input" value="Saturday" type="checkbox"> Saturday
+        </div>
+            <div class="day-wrap">
+            <input name="Sunday" id="sun" class="day-input" value="Sunday" type="checkbox"> Sunday
+        </div>
+        </div>
+    <div class="modal-footer">
+    Exit
     </div>
+</div> <!-- end content modal -->
+</div> <!-- end modal dialog -->
+</div> <!-- end modal -->
 
 </div>  <!--outer- topdiv container-->
 

@@ -12,6 +12,39 @@ $('#agendapress').on('click tap', function(e) {
     window.location.href = 'agenda.html';
 });
 
+$('.day-input').on('click tap', function(e) {
+    console.log('input pressed');
+    e.stopPropagation();
+})
+
+function clickWeek() {
+
+$('.day-wrap').on('click tap', function(e) {
+
+    var checkedBool = $(this).children()[0].checked;
+
+    console.log(checkedBool);
+
+    if (checkedBool == false) {
+
+    $(this).children().prop('checked', true);
+
+    }
+
+    else {
+        $(this).children().prop('checked', false);
+    }
+});
+
+};
+
+clickWeek();
+
+/*$('#clone-button').on('click tap', function(e) {
+    e.preventDefault();
+    $('#modal-weekday').attr({'data-toggle' : 'modal', 'data-target': '#modal-weekday'});
+});*/
+
 /***************************** HIDE DIVS, MOBILE CONTAINER, CHECKBOX HOLDER, DAY CHOICE FOR REPEATING ***/
 
 $('#label-row').hide();
