@@ -882,8 +882,6 @@ $('#add-act').on('click', function() { // click tap may double-post, preventdefa
     } will have to reset the hidden inputs to 0 eventually for weekday checkbox selection changes
     */
 
-    console.log($('input[name=Friday]'));
-
     var formdata = $('#planclassday input').serialize();
 
     console.log(formdata);
