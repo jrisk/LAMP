@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Tutorial</title>
+    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+
+    <script type="text/babel">
+
+    /*
+        <ul class="panes"> WindowPane
+            <li class="list-item"> WeekDay
+                <div class="list-content"> PlanWrap
+                    <h2>{this.props.day}</h2>
+                    <div>{this.state}</div>
+    */
+
+    var WindowPane = React.createClass({
+        render: function(st) {
+            return (
+            <ul className="windowPane">
+                <Weekday />
+            </ul>
+            )
+        }
+    })
+
+    var WeekDay = React.createClass({
+        render: function() {
+            return (
+            <div className="weekDay">
+            {this.props.text}
+            {this.props.content}
+            <PlanWrap />
+            </div>
+            )
+        }
+        //console.log(e);
+    });
+
+    var PlanWrap = React.createClass({
+        render: function(content) {
+            return (
+                <div className="planWrap">
+                    <div className="planContent">
+                    {content}
+                    </div>
+                </div>
+            )
+        }
+    })
+
+    ReactDOM.render(
+        <WeekDay text="hello weekday stuff" content="this is the parent content prop" />,
+        document.getElementById('weekView')
+        );
+
+    </script>
+</head>
+
+<body>
+
+    <div id="weekView"></div>
+
+</body>
+</html>

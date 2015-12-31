@@ -52,6 +52,11 @@ html {
 	float: right;
 }
 
+#weeklyoption {
+	text-align: center;
+	margin: 0 auto;
+}
+
 div.page-header {
 	background-color: #06f;
 	font-family: "Montserrat Alternates",sans-serif;
