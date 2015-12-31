@@ -4,12 +4,46 @@
     <meta charset="utf-8">
     <title>React Tutorial</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
-    <link rel="stylesheet" href="css/base.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+
+    <style>
+
+    #weekView {
+        width: 100%;
+        height: 100%;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: hidden;
+
+    }
+     
+     .windowPane {
+        width: 700%;
+        height: 100%;
+        list-style: none;
+        white-space: nowrap;
+        display: inline;
+        position: relative;
+     }
+
+     .weekDay {
+        display: inline-block;
+        white-space: nowrap;
+        width: 90%;
+     }
+
+     .planWrap {
+        text-align: center;
+        max-width: 90%;
+        max-height: 100%;
+     }
+
+
+
+    </style>
 
     <script type="text/babel">
 
@@ -21,43 +55,82 @@
                     <div>{this.state}</div>
     */
 
-    var WindowPane = React.createClass({
-        render: function(st) {
+    var data = { name: 'Key Value Pair' };
+
+    var PlanWrap = React.createClass({
+        getInitialState: function() {
+            return {text: '', comment: ''};
+        },
+        render: function() {
+            console.log(this.props.plan);
             return (
-            <ul className="windowPane">
-                <Weekday />
-            </ul>
+                <div className="planWrap">
+                {this.props.plan}
+                    <div className="planContent">
+                    </div>
+                </div>
             )
         }
-    })
+    });
 
     var WeekDay = React.createClass({
+        getInitialState: function() {
+            return {data: []};
+        },
         render: function() {
             return (
             <div className="weekDay">
-            {this.props.text}
-            {this.props.content}
-            <PlanWrap />
+            <h1>{this.props.day}</h1>
+            <PlanWrap plan="plans yooooooo" />
             </div>
             )
         }
         //console.log(e);
     });
 
-    var PlanWrap = React.createClass({
-        render: function(content) {
+    var WindowPane = React.createClass({
+        loadDaysFromServer: function() {
+            $.ajax({
+                url: this.props.url,
+                type: 'GET',
+                dataType: 'html',
+                success: function(data) {
+                    JSON.parse(data);
+                    //console.log(data);
+                    this.setState({data: data});
+                }.bind(this),
+                error: function(xhr, errorThrown) {
+                    console.log(xhr + errorThrown);
+                }.bind(this)
+            });
+        },
+        getInitialState: function() {
+            return {data: []}
+        },
+        componentDidMount: function() {
+            this.loadDaysFromServer();
+        },
+        render: function(st) {
             return (
-                <div className="planWrap">
-                    <div className="planContent">
-                    {content}
-                    </div>
-                </div>
+            <ul className="windowPane">
+            {this.props.text}
+            {this.props.content}
+            {this.state.data}
+            
+                <WeekDay day="Monday" />
+                <WeekDay day="Tuesday" />
+                <WeekDay day="Wednesday" />
+                <WeekDay day="Thursday" />
+                <WeekDay day="Friday" />
+                <WeekDay day="Saturday" />
+                <WeekDay day="Sunday" />
+            </ul>
             )
         }
     })
 
     ReactDOM.render(
-        <WeekDay text="hello weekday stuff" content="this is the parent content prop" />,
+        <WindowPane url="datesort.php" text="hello weekday stuff" content="this is the parent content prop" />,
         document.getElementById('weekView')
         );
 
