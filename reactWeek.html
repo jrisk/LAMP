@@ -55,19 +55,17 @@
                     <div>{this.state}</div>
     */
 
-    var data = { name: 'Key Value Pair' };
+   // var data = { name: 'Key Value Pair' };
 
     var PlanWrap = React.createClass({
         getInitialState: function() {
             return {text: '', comment: ''};
         },
         render: function() {
-            console.log(this.props.plan);
             return (
                 <div className="planWrap">
-                {this.props.plan}
-                    <div className="planContent">
-                    </div>
+                {this.props.text}
+                {this.props.start}
                 </div>
             )
         }
@@ -79,13 +77,11 @@
         },
         render: function() {
             return (
-            <div className="weekDay">
-            <h1>{this.props.day}</h1>
-            <PlanWrap plan="plans yooooooo" />
-            </div>
-            )
+            <li className="weekDay">
+            {this.props.end}
+            </li>
+            );
         }
-        //console.log(e);
     });
 
     var WindowPane = React.createClass({
@@ -95,8 +91,8 @@
                 type: 'GET',
                 dataType: 'html',
                 success: function(data) {
-                    JSON.parse(data);
-                    //console.log(data);
+                    var data = JSON.parse(data);
+
                     this.setState({data: data});
                 }.bind(this),
                 error: function(xhr, errorThrown) {
@@ -111,26 +107,44 @@
             this.loadDaysFromServer();
         },
         render: function(st) {
+
+            var thisPls = this.state.data;
+
+            var j = 0;
+
+            var mapDay = Object.keys(thisPls).forEach(function(key) {
+                console.log(thisPls);
+                console.log(key);
+                console.log(thisPls[key]);
+
+                for (j = 0; j <= thisPls[key].length - 1; j++)
+                {
+                    console.log(thisPls[key][j].end);
+                    return "<PlanWrap>{thisPls[key][j].start}</PlanWrap>";
+                }
+
+                /* how to return this render to the over-renderer */
+
+               return (
+                <WeekDay end={thisPls[key][0].title}></WeekDay>
+                )
+            });
+
+
+
+            console.log(mapDay);
+
             return (
+
             <ul className="windowPane">
-            {this.props.text}
-            {this.props.content}
-            {this.state.data}
-            
-                <WeekDay day="Monday" />
-                <WeekDay day="Tuesday" />
-                <WeekDay day="Wednesday" />
-                <WeekDay day="Thursday" />
-                <WeekDay day="Friday" />
-                <WeekDay day="Saturday" />
-                <WeekDay day="Sunday" />
+            {mapDay}
             </ul>
-            )
+            );
         }
-    })
+    });
 
     ReactDOM.render(
-        <WindowPane url="datesort.php" text="hello weekday stuff" content="this is the parent content prop" />,
+        <WindowPane url="datesort.php" text="hello weekday stuff" />,
         document.getElementById('weekView')
         );
 
