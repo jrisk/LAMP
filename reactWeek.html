@@ -64,8 +64,7 @@
         render: function() {
             return (
                 <div className="planWrap">
-                {this.props.text}
-                {this.props.start}
+                {this.props.children}
                 </div>
             )
         }
@@ -112,10 +111,18 @@
 
             var j = 0;
 
-            var mapDay = Object.keys(thisPls).forEach(function(key) {
-                console.log(thisPls);
-                console.log(key);
-                console.log(thisPls[key]);
+            function mapDay() {
+            var newArr = [];
+            for (var key in thisPls) {
+                for (j = 0; j <= thisPls[key].length - 1; j++) {
+                newArr.push(<PlanWrap>{thisPls[key][j].start}</PlanWrap>);
+                };
+            };
+            return newArr;
+            }
+
+            /*
+            var mapDay = Object.keys(thisPls).map(function(key) {
 
                 for (j = 0; j <= thisPls[key].length - 1; j++)
                 {
@@ -123,21 +130,19 @@
                     return "<PlanWrap>{thisPls[key][j].start}</PlanWrap>";
                 }
 
-                /* how to return this render to the over-renderer */
-
                return (
                 <WeekDay end={thisPls[key][0].title}></WeekDay>
                 )
-            });
+            });*/
 
 
 
-            console.log(mapDay);
+            console.log(mapDay());
 
             return (
 
             <ul className="windowPane">
-            {mapDay}
+            {mapDay()}
             </ul>
             );
         }
