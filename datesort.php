@@ -36,7 +36,14 @@ for ($i=0; $i <= ((count($result)) - 1); $i++) {
                         'start' => $result[$n]['Adate'] . 'T' . $result[$n]['Start'],
                         'end' => $result[$n]['Adate'] . 'T' . $result[$n]['End'],
                         'class' => $result[$n]['Class'],
-                        'plan' => $result[$n]['Plan']
+                        'plan' => $result[$n]['Plan'],
+                        'monday' => $result[$n]['Monday'],
+                        'tuesday' => $result[$n]['Tuesday'],
+                        'wednesday' => $result[$n]['Wednesday'],
+                        'thursday' => $result[$n]['Thursday'],
+                        'friday' => $result[$n]['Friday'],
+                        'saturday' => $result[$n]['Saturday'],
+                        'sunday' => $result[$n]['Sunday']
                         );
 
              // sort the start-times in order of $array[$innerarray][$start]

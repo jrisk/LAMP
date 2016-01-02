@@ -77,7 +77,8 @@
         render: function() {
             return (
             <li className="weekDay">
-            {this.props.end}
+            <h1>{this.props.day}</h1>
+            <PlanWrap>{this.props.children}</PlanWrap>
             </li>
             );
         }
@@ -109,16 +110,22 @@
 
             var thisPls = this.state.data;
 
+            var i = 0;
+
             var j = 0;
 
             function mapDay() {
             var newArr = [];
+            var dayArr = [];
             for (var key in thisPls) {
-                for (j = 0; j <= thisPls[key].length - 1; j++) {
-                newArr.push(<PlanWrap>{thisPls[key][j].start}</PlanWrap>);
-                };
-            };
-            return newArr;
+
+                for (i = 0; i <= thisPls[key].length - 1; i++) 
+                {
+                var dayPlan = <PlanWrap>{thisPls[key][i].title}</PlanWrap>;
+                }
+            newArr.push(<WeekDay day={key}>{dayPlan}</WeekDay>);
+                }
+                return newArr
             }
 
             /*
@@ -137,7 +144,7 @@
 
 
 
-            console.log(mapDay());
+            console.log(thisPls);
 
             return (
 
@@ -149,7 +156,7 @@
     });
 
     ReactDOM.render(
-        <WindowPane url="datesort.php" text="hello weekday stuff" />,
+        <WindowPane url="daysort.php" text="hello weekday stuff" />,
         document.getElementById('weekView')
         );
 
