@@ -50,6 +50,7 @@ html {
 
 #agendapress, #calpress, #addpress {
 	float: right;
+	display: inline-block;
 }
 
 #weeklyoption {
@@ -82,6 +83,11 @@ div.page-header>*>* {
 
 .navbar {
 	border-bottom: .2em #999 solid;
+	background-color: #E0FFFF
+}
+
+.navbar > * > * {
+	background-color: #E0FFFF;
 }
 
 #today-look, #future-look {

@@ -4,19 +4,19 @@
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="./agenda/jquery.js"></script> <!--2.1.4-->
+<script src="./agenda/moment.js"></script> <!--2.10.3-->
+<script src="./agenda/bootstrap.js"></script> <!--3.3.4-->
+<script src="./agenda/datetimepicker.js"></script> <!--4.14.30-->
 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <!-- newest update makes downloadable build files automatically
 <script src="https://modernizr.com/downloads/modernizr-latest.js" 
 type="text/javascript"></script> -->
 
-<link href="https://fonts.googleapis.com/css?family=Alegreya:400,700|Karla|Montserrat+Alternates:700" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" type="text/css" href="./agenda/fonts.css"> <!--Karla, Montserrat Alternates, Allegraye-->
+<link rel="stylesheet" href="./agenda/bootstrap.css"> <!--3.3.4-->
+<link rel="stylesheet" href="./agenda/bsdatetime.css"> <!--4.7.14-->
 <link rel="stylesheet" href="./lessonplanner.css">
 </head>
 
@@ -26,7 +26,6 @@ type="text/javascript"></script> -->
     		<button type="button" class="btn btn-lg" id="optionpress">
     		<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
     		</button>
-    		<button type="button" class="btn btn-lg" id="weeklyoption">Side View</button>
            	<button type="button" class="btn btn-lg" id="calpress">
            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
            </button>
@@ -66,9 +65,15 @@ $('#addpress').on('click tap', function(e) {
 	window.location.href = 'makeplan2.html';
 });
 
+$('body').on('resize', function(e) {
+
 	$('body').css('padding-top',  $('.navbar').height());
 
 	console.log($('.navbar').height());
+
+});
+
+$('body').css('padding-top',  $('.navbar').height());
 
 
 function getData() {
