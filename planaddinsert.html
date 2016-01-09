@@ -1,0 +1,86 @@
+<!-- Modal start -->
+<div id="modal-include" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clone Plan to Day</h4>
+      </div>
+
+      <div class="modal-body" id="weekday-insert">
+
+<div class="alert-contain">
+    <div class="well well-sm">
+        <p id="alerts">This is the well for alerts and such</p>
+    </div>
+</div>
+
+<!-- end of alerts -->
+
+<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
+
+<div class="container" id="container-outer-make">
+
+<!-- insert before each for activity and stuff here -->
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Plan-Icon">
+                            <div class="glyphicon glyphicon-paperclip">
+                            </div>
+                </span>
+    <input name="lesson_name" id="lessonname3" type="text" class="form-control" placeholder="Plan Name">
+</div>
+</div>
+</div>
+
+<!-- end Plan input row -->
+
+<br>
+
+ <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Class-Icon">
+                    <span class="glyphicon glyphicon-education">
+                    </span>
+            </span>
+<input name="user_group" type="text" id="classname3" class="form-control" autocapitaize="words" autocorrect="off" placeholder="Class/Student Name">
+</div>
+</div>
+</div>
+
+<!-- end Class input row -->
+
+<br>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <div class="input-group input-group-lg date" id="datetimepickerplan3">
+                        <span class="input-group-addon" id="Date-Icon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    <input type="text" id="dateplan3" placeholder="Day" name="date_plan" class="form-control">
+                </div>
+<input type="hidden" id="datefix3" name="date_planfix" class="form-control">
+</div>
+</div>
+</div>
+
+</div> <!-- container outer div -->
+
+</form>
+
+</div> <!-- end modal body -->
+
+<div class="modal-footer">
+    Exit
+</div>
+
+</div> <!-- end content modal -->
+</div> <!-- end modal dialog -->
+</div> <!-- end modal -->

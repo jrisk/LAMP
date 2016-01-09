@@ -1,3 +1,9 @@
+//css inline style for simple stuff
+//css for animations, not jquery
+//jquery can be a load-hog when looping through the dom
+//append to the ID itself with vanilla js instead of to the jquery object of the element
+
+
 $(function () {
 
 $('#calpress').on('click tap', function(e) {
@@ -102,7 +108,8 @@ function getData() {
 					//going to else and creating a whole new plan div
 					if (newtemp == oldtemp || $(document.getElementById(stringpls)).length) { // if current plan equals the last plan
 
-						$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
+						$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="'
+						+ obj[i].id + '" data-toggle="actoptions" aria-haspopup="true" aria-expanded="false">'
 						+ '<div class="small-type col-xs-10 col-sm-10" id="' + UTCend + '">'
 						+ moment(obj[i].start).format('h:mm a') + ' to '
 						+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -240,7 +247,8 @@ function getData() {
 					//not closing the plan-big div until the very end makes it collapse easier it seems
 
 
-					$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="' + obj[i].id + '">'
+					$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="'
+					+ obj[i].id + '" data-toggle="actoptions" aria-haspopup="true" aria-expanded="false">'
 					+ '<div class="small-type col-xs-10 col-sm-10">'
 					+ moment(obj[i].start).format('h:mm a') + ' to '
 					+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -366,7 +374,6 @@ function getData() {
 
 			//prevent the whole plan-big div from toggling if a specific act is clicked on
 			$('.agenda-act-row').on('click tap', function(e) {
-				e.preventDefault();
 				e.stopPropagation();
 			});
 

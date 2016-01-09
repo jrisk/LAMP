@@ -184,22 +184,10 @@
     });
 
     ReactDOM.render(
-        <WindowPane url="daysort.php" text="hello weekday stuff" />,
+        <WindowPane url="dayinfo.json" text="hello weekday stuff" />,
         document.getElementById('weekView')
         );
 
-    </script>
-
-    <script>
-    var websock = new WebSocket("ws://localhost:3000/socketserver");
-
-    websock.onopen = function (event) {
-        websock.send("HELLO I AM SEND THIS VIA WEBSOCKET TO PORT3000");
-    };
-
-    websock.onmessage = function(event) {
-        console.log('hello back');
-    }
     </script>
 
 </head>

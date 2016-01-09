@@ -150,6 +150,38 @@ div.page-header>*>* {
 	padding: 0;
 }
 
+.dropdown {
+	float: right;
+}
+
+.circleplus {
+	position: fixed;
+	border-radius: 50%;
+	width: 3em;
+	height: 3em;
+	background-color: #FFA07A;
+	float: left;
+	right: 0;
+	bottom: 1em;
+	padding-right: 1em;
+	margin-right: 1em;
+}
+
+.plusadd {
+	position: relative;
+	text-align: center;
+	-ms-transform: scale(2); /* IE */
+  	-moz-transform: scale(2); /* FF */
+  	-webkit-transform: scale(2); /* Safari and Chrome */
+  	-o-transform: scale(2); /* Opera */
+	padding-top: .55em;
+	padding-left: .55em;
+}
+
+.plan-row {
+	border-bottom: 0.1em solid #999;
+}
+
 .plan-title {
 	font-size: 1.1em;
 	text-align: center;
@@ -164,7 +196,7 @@ div.page-header>*>* {
 }
 
 #json-today, #json-future, #json-past {
-	background-color: silver;
+	background-color: white;
 	text-align: center;
 	display: block;
 	box-shadow: 0 0.2em 0.3em #999;
@@ -214,6 +246,7 @@ div.page-header>*>* {
 	font-size: .8em;
 	box-shadow: 0 0.2em 0.4em #999;
 	padding: 0;
+	margin: 0.2em
 }
 
 .agenda-act-row:hover {
@@ -294,6 +327,8 @@ video {
 .plan-big {
 	position: relative;
 	font-size: .8em;
+	background-color: white;
+	border: 5px solid red;
 }
 
 .plan-big:hover {
@@ -365,6 +400,7 @@ background-color: #C6E2FF;
 	padding: 0;
 	padding-left: .2em;
 	font-size: 2em;
+	border: 0;
 }
 
 .well-sm-test {

@@ -27,7 +27,7 @@
                 </a>
             </div>
                <a href="./agenda.html"><button type="button" class="btn btn-lg btn-primary">Agenda View</button></a>
-              <a href="./makeplan2.html" class="btn btn-lg btn-primary">New Plan</a>
+              <a href="./makeplan2.html"><button type="button" class="btn btn-lg btn-primary">New Plan</button></a>
             </div>
 
         </div>
