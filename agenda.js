@@ -375,6 +375,11 @@ function getData() {
 			//prevent the whole plan-big div from toggling if a specific act is clicked on
 			$('.agenda-act-row').on('click tap', function(e) {
 				e.stopPropagation();
+				/*<div class="actoptions"><ul class="dropdown-menu">'
+				    + '<li><a href="#">Edit Activity</a></li>'
+				    + '<li><a href="#">Clone Activity</a></li>'
+				    + '<li role="separator" class="divider"></li>'
+				    + '<li><a href="#">Delete Activity</a></li></ul></div>'*/
 			});
 
 			function checkBoxer(jobject) {
