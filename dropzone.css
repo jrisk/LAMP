@@ -1,0 +1,64 @@
+.over-container {
+	width: 400px;
+	height: 100px;
+	border: .4em solid blue;
+}
+
+#pop-awesome-dropzone {
+	background-color: #C6E2FF;
+}
+
+#my-awesome-dropzone{
+	border: .2em solid black;
+	height: 100px;
+	width: 200px;
+}
+
+.dz-filename {
+	position: absolute;
+	background-color: red;
+	max-width: 100px;
+	width: 100px;
+}
+#previews-container { /* container for dropzone thumbnails */
+	border: .2em solid green;
+	height: 100px;
+	width: 800px;
+}
+
+video {
+	float: left;
+}
+
+#drop-container {
+	border: .2em solid gray;
+	width: 20em;
+	height: 7em;
+}
+
+#drop-template {
+	width: 5em;
+	height: 2em;
+	position: absolute,
+	right: 2em;
+	float: left;
+}
+
+#preview-template {
+	border: 0.2em solid red;
+	width: 100px;
+	height: 100px;
+	position: absolute,
+	right: 100px;
+	float: left;
+}
+
+#video-template {
+	border: 0.2em solid black;
+	width: 1em;
+	height: 1em;
+	position: absolute,
+	right: 100px;
+	float: left;
+
+}

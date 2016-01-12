@@ -240,8 +240,8 @@ function getData() {
 
 					$(elem).append('<div class="container-fluid plan-contain">'
 					+ '<div id="' + stringpls + '" class="plan-big well well-sm">'
-					+ '<div class="plan-row"><span class="plan-title">' + newtemp + '</span>'
-					+ '<span class="task-total"></span></div></div>');
+					+ '<div class="plan-row"><div class="task-total"></div>'
+					+ '<span class="plan-title">' + newtemp + '</span></div></div>');
 
 					console.log($(document.getElementById(stringpls)));
 					//not closing the plan-big div until the very end makes it collapse easier it seems
@@ -362,9 +362,9 @@ function getData() {
 			// hide the activities of each plan
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
-				e.preventDefault();
-				$(this).children().toggle('normal');
-				$(this).children('.plan-row').show('normal');
+				//e.preventDefault();
+				$(this).children().toggle('fast');
+				$(this).children('.plan-row').show('fast');
 
 				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden')) {
 					//$(this).children().show('normal');
@@ -374,12 +374,16 @@ function getData() {
 
 			//prevent the whole plan-big div from toggling if a specific act is clicked on
 			$('.agenda-act-row').on('click tap', function(e) {
-				e.stopPropagation();
-				/*<div class="actoptions"><ul class="dropdown-menu">'
-				    + '<li><a href="#">Edit Activity</a></li>'
-				    + '<li><a href="#">Clone Activity</a></li>'
-				    + '<li role="separator" class="divider"></li>'
-				    + '<li><a href="#">Delete Activity</a></li></ul></div>'*/
+				e.stopPropagation('.plan-big');
+				var thisElem = document.getElementById($(this).attr('id'));
+				console.log(thisElem);
+
+				$('.bottom-slide').slideToggle('slow', function(e) {
+					//$('body').scrollTop($(document).height() - 120);
+				});
+				var scrollBottom = $(window).scrollTop() + $(window).height();
+
+
 			});
 
 			function checkBoxer(jobject) {

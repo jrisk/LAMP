@@ -23,6 +23,8 @@ type="text/javascript"></script> -->
 </head>
 
 <body>
+
+<!-- TOP NAVBAR -->
 	<nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid nav-container">
     		<button type="button" class="btn btn-lg" id="optionpress">
@@ -30,7 +32,8 @@ type="text/javascript"></script> -->
     		</button>
            	 <div class="dropdown">
           		<button type="button" class="btn btn-lg droptoggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="addtoggle">
-            		Button place
+            		<span class="glyphicon glyphicon-resize-horizontal"></span>
+                    <span class="glyphicon glyphicon-resize-vertical"></span>
             	</button>
         		<ul class="dropdown-menu">
 	            <li><a href="#">Add Plan</a></li>
@@ -43,13 +46,29 @@ type="text/javascript"></script> -->
     </div>
     </nav>
 
+<!-- END TOP NAVBAR -->
+
+<!-- START HORIZONTAL WEEK WRAPPER -->
+
 <div id="weekWrap"></div>
+
+<!-- END HORIZONTAL WEEK WRAPPER -->
+
+<!-- START DATE TOP FIXED NAV -->
 
 <div class="container-fluid">
 	<div class="row">
 	<p class="navfix col-sm-12 col-xs-12"></p>
 </div>
 </div>
+
+<!-- END DATE TOP FIXED NAV -->
+
+ <!-- START CONTAINERS -->
+
+ <!-- activites and bottom slide option over container -->
+
+<div class="over-container">
 
 	<div class="container-fluid" id="json-today"><p id="today-look">Today</p></div>
 	<div class="container-fluid" id="json-future">
@@ -150,6 +169,19 @@ type="text/javascript"></script> -->
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
+
+<div class="bottom-slide">
+    <div class="actoptions">
+        <ul class="dropdown-menu-test">'
+            <li><a href="#">Edit Activity</a></li>
+            <li><a href="#">Clone Activity</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Delete Activity</a></li>
+        </ul>
+    </div>
+</div>
+
+</div> <!-- end of over-container -->
 
 
 </body>
