@@ -148,6 +148,7 @@ html {
 }
 
 .circleplus {
+	z-index: 101;
 	position: fixed;
 	border-radius: 50%;
 	width: 3em;
@@ -161,7 +162,7 @@ html {
 }
 
 .bottom-slide {
-	z-index: 1000;
+	z-index: 100;
 	position: absolute;
 	width: 100%;
 	bottom: 0;

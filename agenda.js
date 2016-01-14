@@ -378,10 +378,13 @@ function getData() {
 				var thisElem = document.getElementById($(this).attr('id'));
 				console.log(thisElem);
 
+				var scrollBottom = $(window).height() - $(window).scrollTop();
+				console.log($(window).height());
+				console.log($(document).height());
+
 				$('.bottom-slide').slideToggle('slow', function(e) {
-					//$('body').scrollTop($(document).height() - 120);
+					//
 				});
-				var scrollBottom = $(window).scrollTop() + $(window).height();
 
 
 			});
