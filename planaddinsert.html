@@ -30,12 +30,31 @@ type="text/javascript"></script> -->
     box-shadow: 0 0 0 black;
 }
 
+.modal-dialog {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.modal-content {
+    height: 100%;
+    border-radius: 0;
+}
+
 </style>
 
 <script>
 $(function () {
 
-    $('#plan-row, #class-row').hide();
+    $('#plan-row, #class-row, .cancelsave').hide();
+
+    $('#modal-include').on('shown.bs.modal', function(e) {
+        $('.cancelsave').show();
+    });
+
+    $('#modal-include').on('hidden.bs.modal', function(e) {
+        $('.cancelsave').hide();
+    });
 
     $('input').on('focusin', function(e) {
         $('.input-group-addon').not($(this).siblings()).css('opacity', '0.3');
@@ -46,11 +65,11 @@ $(function () {
     });
 
     $('#addplantoggle').on('click', function(e) {
-        $('#plan-row').show();
+        $('#plan-row').slideToggle();
     });
 
     $('#addclasstoggle').on('click', function(e) {
-        $('#class-row').show();
+        $('#class-row').slideToggle();
     });
 
 })
@@ -59,6 +78,13 @@ $(function () {
 
 </head>
 <body>
+
+<div class="cancelsave" data-dismiss="modal" data-target="#modal-include">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">Cancel</div>
+        <div class="col-xs-6 col-sm-6 col-md-6">Save</div>
+    </div>
+</div>
 
 <div class="toggler" data-toggle="modal" data-target="#modal-include">Toggle Modal</div>
 <!-- Modal start -->
@@ -148,10 +174,13 @@ $(function () {
 </div>
 
 <div class="row" id="addplantoggle">
-    <div class="Add-Icon">
+    <div class="col-xs-12 col-sm-12">
+    <span class="Add-Icon">
         <div class="glyphicon glyphicon-plus"></div>
+    </span>
         <span="questionadd">Add to Existing Plan or New Plan</span>
-        <p id="optional">(optional)</p>
+        <span id="optional">(optional)</span>
+</div>
 </div>
 
 
@@ -172,11 +201,16 @@ $(function () {
 <br>
 
 <div class="row" id="addclasstoggle">
-    <div class="Add-Icon">
+    <div class="col-xs-12 col-sm-12">
+    <span class="Add-Icon">
         <div class="glyphicon glyphicon-plus"></div>
+    </span>
         <span="questionadd">Add to Existing Class or New Class</span>
-        <p id="optional">(optional)</p>
+        <span id="optional">(optional)</span>
 </div>
+</div>
+
+<br>
 
  <div class="row" id="class-row">
         <div class="col-xs-12 col-sm-12">
@@ -199,10 +233,6 @@ $(function () {
 </form>
 
 </div> <!-- end modal body -->
-
-<div data-dismiss="modal" class="modal-footer">
-    Exit
-</div>
 
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
