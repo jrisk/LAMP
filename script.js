@@ -134,7 +134,7 @@ function savePlan() {
     }); //end ajax call
 };
 
-$('#add-plan').on('click tap', function() {
+$('#add-plan, #addplan').on('click tap', function() {
 
     savePlan();
 
@@ -856,6 +856,7 @@ function readableStartEnd() {
 
 $('#add-plan').html();
 
+// original makeplan id name $('#add-act')
 $('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
 
     $('#datefix3').val(databaseDate($('#dateplan3')));

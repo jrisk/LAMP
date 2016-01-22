@@ -383,7 +383,7 @@ function getData() {
 				console.log($(document).height());
 
 				$('.bottom-slide').slideToggle('slow', function(e) {
-					//
+					console.log('on slide toggle');
 				});
 
 
