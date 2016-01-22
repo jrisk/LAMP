@@ -35,14 +35,22 @@ type="text/javascript"></script> -->
 <script>
 $(function () {
 
-    //$('#Plan-Icon').hide();
+    $('#plan-row, #class-row').hide();
 
     $('input').on('focusin', function(e) {
-        $('.input-group-addon').not($(this).siblings()).css('opacity', '0.2');
+        $('.input-group-addon').not($(this).siblings()).css('opacity', '0.3');
     });
 
     $('input').on('focusout', function(e) {
         $('.input-group-addon').css('opacity', '1.0')
+    });
+
+    $('#addplantoggle').on('click', function(e) {
+        $('#plan-row').show();
+    });
+
+    $('#addclasstoggle').on('click', function(e) {
+        $('#class-row').show();
     });
 
 })
@@ -79,7 +87,75 @@ $(function () {
 
 <!-- insert before each for activity and stuff here -->
 
+<!-- start time end time row -->
+<!-- initial activity insert row fix this -->
+<div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="input-group input-group-lg input-group-lg-edit">
+                <span class="input-group-addon" id="Activity-Icon">
+                    <span class="glyphicon glyphicon-pencil" id="pencil-icon">
+                            </span>
+                </span>
+            <input name="activity" id="activity" placeholder="Title" type="text" maxlength="80" class="form-control input-lg">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+<div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+                <div class="input-group date" id="starttime3">
+                    <span class="input-group-addon" id="Start-Icon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                    <input type="text" class="form-control input-lg" name="start_time" id="start3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+                <div class="input-group date" id="endtime3">
+                    <span class="input-group-addon" id="End-Icon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <input type="text" class="form-control input-lg" name="end_time" id="end3">
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- end start/end time -->
+<!-- end activity row initial insert -->
+
     <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+                <div class="input-group input-group-lg date" id="datetimepickerplan3">
+                        <span class="input-group-addon" id="Date-Icon">
+                            <span class="glyphicon glyphicon-calendar">
+                            </span>
+                        </span>
+                    <input type="text" id="dateplan3" placeholder="Day" name="date_plan" class="form-control">
+                </div>
+<input type="hidden" id="datefix3" name="date_planfix" class="form-control">
+</div>
+</div>
+</div>
+
+<div class="row" id="addplantoggle">
+    <div class="Add-Icon">
+        <div class="glyphicon glyphicon-plus"></div>
+        <span="questionadd">Add to Existing Plan or New Plan</span>
+        <p id="optional">(optional)</p>
+</div>
+
+
+<div class="row" id="plan-row">
         <div class="col-xs-12 col-sm-12">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="Plan-Icon">
@@ -95,7 +171,14 @@ $(function () {
 
 <br>
 
- <div class="row">
+<div class="row" id="addclasstoggle">
+    <div class="Add-Icon">
+        <div class="glyphicon glyphicon-plus"></div>
+        <span="questionadd">Add to Existing Class or New Class</span>
+        <p id="optional">(optional)</p>
+</div>
+
+ <div class="row" id="class-row">
         <div class="col-xs-12 col-sm-12">
             <div class="input-group input-group-lg">
                 <span class="input-group-addon" id="Class-Icon">
@@ -110,59 +193,6 @@ $(function () {
 <!-- end Class input row -->
 
 <br>
-
-<!-- start time end time row -->
-<!-- initial activity insert row fix this -->
-<div class="row">
-        <div class="col-xs-12 col-sm-12">
-            <div class="input-group input-group-lg input-group-lg-edit">
-                <span class="input-group-addon" id="Activity-Icon">
-                    <span class="glyphicon glyphicon-pencil" id="pencil-icon">
-                            </span>
-                </span>
-            <input name="activity" id="activity" type="text" maxlength="80" class="form-control input-lg">
-            </div>
-        </div>
-        
-        <div class="col-xs-12 col-sm-12">
-            <div class="form-group">
-                <div class="input-group date" id="starttime3">
-                    <span class="input-group-addon" id="Start-Icon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
-                    <input type="text" class="form-control input-lg" name="start_time" id="start3">
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12">
-            <div class="form-group">
-                <div class="input-group date" id="endtime3">
-                    <span class="input-group-addon" id="End-Icon">
-                <span class="glyphicon glyphicon-time"></span>
-            </span>
-            <input type="text" class="form-control input-lg" name="end_time" id="end3">
-        </div>
-    </div>
-</div>
-
-<!-- end start/end time -->
-<!-- end activity row initial insert -->
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <div class="form-group">
-                <div class="input-group input-group-lg date" id="datetimepickerplan3">
-                        <span class="input-group-addon" id="Date-Icon">
-                            <span class="glyphicon glyphicon-calendar">
-                            </span>
-                        </span>
-                    <input type="text" id="dateplan3" placeholder="Day" name="date_plan" class="form-control">
-                </div>
-<input type="hidden" id="datefix3" name="date_planfix" class="form-control">
-</div>
-</div>
-</div>
 
 </div> <!-- container outer div -->
 
