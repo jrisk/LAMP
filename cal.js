@@ -1,5 +1,8 @@
 $(function () {
 
+var gcallAPI = 'AIzaSyAEKheqfGPngThzUI9DoyUSxYneTlMWeII';
+var gcallID = 'joeyrsk@gmail.com';
+
 var fcSources = {
 
 	wholePlan: { 
@@ -13,7 +16,15 @@ var fcSources = {
 		url: './bigfeed.php',
 		error: function() { console.log("big feed not showing"); }
 
-	}
+	},
+
+	googleCalendarID: gcallID,
+
+    gcall: {
+    	url: gcallID,
+    	color: 'green',
+    	error: function() { console.log("error loading google calendar"); }
+    }
 
 };
 
@@ -29,8 +40,12 @@ var readTimePlans = function(num) {
 };
 
 var count = 0;
+
+//https://calendar.google.com/calendar/ical/joeyrsk%40gmail.com/public/basic.ics
 	
 $('#fullcal').fullCalendar({
+
+	googleCalendarApiKey: 'AIzaSyAEKheqfGPngThzUI9DoyUSxYneTlMWeII',
 		
 	header: {
 		left: 'title',
@@ -47,9 +62,11 @@ $('#fullcal').fullCalendar({
 		}
 	},
 
+	editable: true,
+
 	defaultView: 'agendaWeek',
 
-	eventSources: [fcSources.allActivities, fcSources.wholePlan],
+	eventSources: [fcSources.allActivities, fcSources.wholePlan, fcSources.gcall],
 
 	eventRender: function(event, element, view) {
 			console.log('The element is: ' + element.attr);
