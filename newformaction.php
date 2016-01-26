@@ -117,6 +117,4 @@ catch (PDOException $e) {
 	echo "Error retrieving data: " . $e->getMessage();
 }
 
-echo "<b id='all_good'>Activity has been saved under plan " . $plan . "</b>";
-
 ?>
