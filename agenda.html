@@ -9,8 +9,8 @@
 <script src="./agenda/moment.js"></script> <!--2.10.3-->
 <script src="./agenda/bootstrap.js"></script> <!--3.3.4-->
 <script src="./agenda/datetimepicker.js"></script> <!--4.14.30-->
-<script src="./agenda.js"></script>
-<script src="./script.js"></script>
+<script src="./modelview.js"></script>
+<script src="./controller.js"></script>
 
 <!-- testing purposes <script src="./testing.js"></script> -->
 <!-- newest update makes downloadable build files automatically
@@ -85,62 +85,84 @@ type="text/javascript"></script> -->
 	</div>
 
 <!-- Modal start -->
+<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
+
+<div class="cancelsave" data-dismiss="modal" data-target="#modal-include">
+</div>
+
+<div class="toggler" data-toggle="modal" data-target="#modal-include">Toggle Modal</div>
+<!-- Modal start -->
 <div id="modal-include" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">New Activity</h4>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 cancelbutton" id="exitplan" data-dismiss="modal">Cancel</button>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 savebutton" id="addplan" data-dismiss="modal">Save</button>
+        <h4 class="modal-title">
+            <hr>
+        </h4>
       </div>
 
       <div class="modal-body" id="weekday-insert">
 
 <div class="alert-contain">
     <div class="well well-sm">
-        <p id="alerts">Make plan</p>
+        <p id="alerts">This is the well for alerts and such</p>
     </div>
 </div>
 
 <!-- end of alerts -->
 
-<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
-
 <div class="container-fluid" id="container-outer-make">
 
 <!-- insert before each for activity and stuff here -->
 
-    <div class="row">
+<!-- start time end time row -->
+<!-- initial activity insert row fix this -->
+<div class="row">
         <div class="col-xs-12 col-sm-12">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="Plan-Icon">
-                            <div class="glyphicon glyphicon-paperclip">
-                            </div>
+            <div class="input-group input-group-lg input-group-lg-edit">
+                <span class="input-group-addon" id="Activity-Icon">
+                    <span class="glyphicon glyphicon-pencil" id="pencil-icon">
+                            </span>
                 </span>
-    <input name="lesson_name" id="lessonname3" type="text" class="form-control" placeholder="Title">
-</div>
-</div>
-</div>
+            <input name="activity" id="activity" placeholder="Title" type="text" maxlength="80" class="form-control input-lg">
+            </div>
+        </div>
+    </div>
 
-<!-- end Plan input row -->
+    <br>
 
-<br>
-
- <div class="row">
+<div class="row">
         <div class="col-xs-12 col-sm-12">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon" id="Class-Icon">
-                    <span class="glyphicon glyphicon-education">
+            <div class="form-group">
+                <div class="input-group date" id="starttime3">
+                    <span class="input-group-addon" id="Start-Icon">
+                        <span class="glyphicon glyphicon-time"></span>
                     </span>
+                    <input type="text" class="form-control input-lg" placeholder="Start" name="start_time" id="start3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+                <div class="input-group date" id="endtime3">
+                    <span class="input-group-addon" id="End-Icon">
+                <span class="glyphicon glyphicon-time"></span>
             </span>
-<input name="user_group" type="text" id="classname3" class="form-control" autocapitaize="words" autocorrect="off" placeholder="Class/Student Name">
-</div>
+            <input type="text" class="form-control input-lg" placeholder="End" name="end_time" id="end3">
+        </div>
+    </div>
 </div>
 </div>
 
-<!-- end Class input row -->
-
-<br>
+<!-- end start/end time -->
+<!-- end activity row initial insert -->
 
     <div class="row">
         <div class="col-xs-12 col-sm-12">
@@ -157,22 +179,124 @@ type="text/javascript"></script> -->
 </div>
 </div>
 
+<div class="row" id="addplantoggle">
+    <div class="col-xs-12 col-sm-12">
+    <span class="Add-Icon">
+        <div class="glyphicon glyphicon-plus"></div>
+    </span>
+        <span="questionadd">Add to Existing Plan or New Plan</span>
+        <span id="optional">(optional)</span>
+</div>
+</div>
+
+
+<div class="row" id="plan-row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Plan-Icon">
+                            <div class="glyphicon glyphicon-paperclip">
+                            </div>
+                </span>
+    <input name="lesson_name" id="lessonname3" type="text" class="form-control" placeholder="Plan Name">
+</div>
+</div>
+</div>
+
+<!-- end Plan input row -->
+
+<br>
+
+<div class="row" id="addclasstoggle">
+    <div class="col-xs-12 col-sm-12">
+    <span class="Add-Icon">
+        <div class="glyphicon glyphicon-plus"></div>
+    </span>
+        <span="questionadd">Add to Existing Class or New Class</span>
+        <span id="optional">(optional)</span>
+</div>
+</div>
+
+<br>
+
+ <div class="row" id="class-row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="Class-Icon">
+                    <span class="glyphicon glyphicon-education">
+                    </span>
+            </span>
+<input name="user_group" type="text" id="classname3" class="form-control" autocapitaize="words" autocorrect="off" placeholder="Class/Student Name">
+</div>
+</div>
+</div>
+
+<!-- end Class input row -->
+
+<br>
+
 </div> <!-- container outer div -->
 
-</form>
+<!-- no form ending tag test  -->
 
 </div> <!-- end modal body -->
-
-<div class="modal-footer">
-    <div class="row">
-        <div class="col-sm-12 col-xs-12 col-md-12" data-dismiss="modal">Exit</div>
-        <div class="col-sm-12 col-xs-12 col-md-12" id="addplan">Done</div>
-    </div>
-</div>
 
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
+
+ <button type="button" class="btn btn-md" id="clone-button" data-toggle="modal" data-target="#modal-weekday">
+        Clone Plan</button>
+
+<br>
+
+<!-- WEEKDAY PICKER MODAL-->
+
+<!-- Modal start -->
+<div id="modal-weekday" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clone Activity</h4>
+      </div>
+      <div class="modal-body" id="weekday-insert">
+            <div class="day-wrap">
+            <input name="Monday" id="monhide" class="day-hide" value="0" type="hidden">
+            <input name="Monday" id="mon" class="day-input" value="1" type="checkbox"> Monday
+        </div>
+            <div class="day-wrap">
+            <input name="Tuesday" id="tueshide" class="day-hide" value="0" type="hidden">
+            <input name="Tuesday" id="tues" class="day-input" value="1" type="checkbox"> Tuesday
+        </div>
+            <div class="day-wrap">
+            <input name="Wednesday" id="wedshide" class="day-hide" value="0" type="hidden">
+            <input name="Wednesday" id="wed" class="day-input" value="1" type="checkbox"> Wednesday
+        </div>
+            <div class="day-wrap">
+            <input name="Thursday" id="thurshide" class="day-hide" value="0" type="hidden">
+            <input name="Thursday" id="thurs" class="day-input" value="1" type="checkbox"> Thursday
+        </div>
+            <div class="day-wrap">
+            <input name="Friday" id="frihide" class="day-hide" value="0" type="hidden">
+            <input name="Friday" id="fri" class="day-input" value="1" type="checkbox"> Friday
+        </div>
+            <div class="day-wrap">
+            <input name="Saturday" id="sathide" class="day-hide" value="0" type="hidden">
+            <input name="Saturday" id="sat" class="day-input" value="1" type="checkbox"> Saturday
+        </div>
+            <div class="day-wrap">
+            <input name="Sunday" id="sunhide" class="day-hide" value="0" type="hidden">
+            <input name="Sunday" id="sun" class="day-input" value="1" type="checkbox"> Sunday
+        </div>
+        </div>
+    <div class="modal-footer">
+    <div class="exiter" data-dismiss="modal">Exit</div>
+    </div>
+</div> <!-- end content modal -->
+</div> <!-- end modal dialog -->
+</div> <!-- end modal -->
+
 
 <div class="bottom-slide">
     <div class="actoptions">

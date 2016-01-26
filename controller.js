@@ -15,7 +15,41 @@ $('#agendapress').on('click tap', function(e) {
 $('.day-input').on('click tap', function(e) {
     console.log('input pressed');
     e.stopPropagation();
-})
+});
+
+/******************* ADDED ACTIVITY MODAL INSERT HANDLERS **********************************/
+
+$('#plan-row, #class-row, .cancelsave').hide();
+
+    $('#modal-include').on('shown.bs.modal', function(e) {
+        $('.cancelsave').show();
+    });
+
+    $('#modal-include').on('hidden.bs.modal', function(e) {
+        $('.cancelsave').hide();
+    });
+
+    $('input').on('focusin', function(e) {
+        $('.input-group-addon').not($(this).siblings()).css('opacity', '0.3');
+    });
+
+    $('input').on('focusout', function(e) {
+        $('.input-group-addon').css('opacity', '1.0')
+    });
+
+    $('#addplantoggle').on('click', function(e) {
+        $('#plan-row').slideToggle();
+    });
+
+    $('#addclasstoggle').on('click', function(e) {
+        $('#class-row').slideToggle();
+    });
+
+    $('#cancelbutton').on('click', function(e) {
+        //
+    });
+
+/**************** ACTIVITY MODAL END HANDLERS ******************************/
 
 function clickWeek() {
 
@@ -133,12 +167,6 @@ function savePlan() {
         }
     }); //end ajax call
 };
-
-$('#add-plan, #addplan').on('click tap', function() {
-
-    //savePlan();
-
-}); //end test addplan listener
 
 /********************************* VALIDATION FUNCTIONS FOR ALL INPUTS *********************************/
 /*valRegEx = /\.|\-/;
@@ -907,6 +935,7 @@ $('#add-act, #addplan').on('click', function() { // click tap may double-post, p
                     //reset activity input bar
 	                $('input[name=activity]').val('');
                     $('input').val('');
+                    getData();
 		          },
 
 		    error: function(errorThrown) {

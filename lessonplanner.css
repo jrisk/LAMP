@@ -23,6 +23,35 @@ html {
 	}
 }
 
+/*************** ACTIVITY MODAL CSS ***********************/
+
+.input-group-lg, .input-lg, input, .form-control {
+    border-top: none;
+    border-right: none;
+    border-radius: 0;
+    box-shadow: 0 0 0 black;
+}
+
+.modal-dialog, #modal-include {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.cancelbutton, .savebutton {
+    font-size: 2.5em;
+    width: 50%;
+    height: 30%;
+    border-radius: 0;
+    box-shadow: 0.2em 0.2em 0.2em black;
+    background-color: orange;
+    border-top: none;
+    margin-top: 0;
+}
+
+/********************** END ACTIVITY MODAL CSS ***************************/
+
 .over-container {
 	position: relative;
 }
