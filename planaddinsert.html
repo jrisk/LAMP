@@ -30,15 +30,22 @@ type="text/javascript"></script> -->
     box-shadow: 0 0 0 black;
 }
 
-.modal-dialog {
+.modal-dialog, #modal-include {
     width: 100%;
     height: 100%;
     padding: 0;
+    margin: 0;
 }
 
-.modal-content {
-    height: 100%;
+.cancelbutton, .savebutton {
+    font-size: 2.5em;
+    width: 50%;
+    height: 30%;
     border-radius: 0;
+    box-shadow: 0.2em 0.2em 0.2em black;
+    background-color: orange;
+    border-top: none;
+    margin-top: 0;
 }
 
 </style>
@@ -72,6 +79,10 @@ $(function () {
         $('#class-row').slideToggle();
     });
 
+    $('#cancelbutton').on('click', function(e) {
+        //
+    });
+
 })
 
 </script>
@@ -79,11 +90,9 @@ $(function () {
 </head>
 <body>
 
+<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
+
 <div class="cancelsave" data-dismiss="modal" data-target="#modal-include">
-    <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">Cancel</div>
-        <div class="col-xs-6 col-sm-6 col-md-6">Save</div>
-    </div>
 </div>
 
 <div class="toggler" data-toggle="modal" data-target="#modal-include">Toggle Modal</div>
@@ -94,7 +103,11 @@ $(function () {
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Clone Plan to Day</h4>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 cancelbutton" id="exitplan" data-dismiss="modal">Cancel</button>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 savebutton" id="addplan" data-dismiss="modal">Save</button>
+        <h4 class="modal-title">
+            <hr>
+        </h4>
       </div>
 
       <div class="modal-body" id="weekday-insert">
@@ -106,8 +119,6 @@ $(function () {
 </div>
 
 <!-- end of alerts -->
-
-<form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
 
 <div class="container-fluid" id="container-outer-make">
 
@@ -136,7 +147,7 @@ $(function () {
                     <span class="input-group-addon" id="Start-Icon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
-                    <input type="text" class="form-control input-lg" name="start_time" id="start3">
+                    <input type="text" class="form-control input-lg" placeholder="Start" name="start_time" id="start3">
                 </div>
             </div>
         </div>
@@ -149,7 +160,7 @@ $(function () {
                     <span class="input-group-addon" id="End-Icon">
                 <span class="glyphicon glyphicon-time"></span>
             </span>
-            <input type="text" class="form-control input-lg" name="end_time" id="end3">
+            <input type="text" class="form-control input-lg" placeholder="End" name="end_time" id="end3">
         </div>
     </div>
 </div>
@@ -230,10 +241,63 @@ $(function () {
 
 </div> <!-- container outer div -->
 
-</form>
+<!-- no form ending tag test  -->
 
 </div> <!-- end modal body -->
 
+</div> <!-- end content modal -->
+</div> <!-- end modal dialog -->
+</div> <!-- end modal -->
+
+ <button type="button" class="btn btn-md" id="clone-button" data-toggle="modal" data-target="#modal-weekday">
+        Clone Plan</button>
+
+<br>
+
+<!-- WEEKDAY PICKER MODAL-->
+
+<!-- Modal start -->
+<div id="modal-weekday" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Clone Plan to Day</h4>
+      </div>
+      <div class="modal-body" id="weekday-insert">
+            <div class="day-wrap">
+            <input name="Monday" id="monhide" class="day-hide" value="0" type="hidden">
+            <input name="Monday" id="mon" class="day-input" value="1" type="checkbox"> Monday
+        </div>
+            <div class="day-wrap">
+            <input name="Tuesday" id="tueshide" class="day-hide" value="0" type="hidden">
+            <input name="Tuesday" id="tues" class="day-input" value="1" type="checkbox"> Tuesday
+        </div>
+            <div class="day-wrap">
+            <input name="Wednesday" id="wedshide" class="day-hide" value="0" type="hidden">
+            <input name="Wednesday" id="wed" class="day-input" value="1" type="checkbox"> Wednesday
+        </div>
+            <div class="day-wrap">
+            <input name="Thursday" id="thurshide" class="day-hide" value="0" type="hidden">
+            <input name="Thursday" id="thurs" class="day-input" value="1" type="checkbox"> Thursday
+        </div>
+            <div class="day-wrap">
+            <input name="Friday" id="frihide" class="day-hide" value="0" type="hidden">
+            <input name="Friday" id="fri" class="day-input" value="1" type="checkbox"> Friday
+        </div>
+            <div class="day-wrap">
+            <input name="Saturday" id="sathide" class="day-hide" value="0" type="hidden">
+            <input name="Saturday" id="sat" class="day-input" value="1" type="checkbox"> Saturday
+        </div>
+            <div class="day-wrap">
+            <input name="Sunday" id="sunhide" class="day-hide" value="0" type="hidden">
+            <input name="Sunday" id="sun" class="day-input" value="1" type="checkbox"> Sunday
+        </div>
+        </div>
+    <div class="modal-footer">
+    <div class="exiter" data-dismiss="modal">Exit</div>
+    </div>
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->

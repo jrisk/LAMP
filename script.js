@@ -857,7 +857,7 @@ function readableStartEnd() {
 $('#add-plan').html();
 
 // original makeplan id name $('#add-act')
-$('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
+$('#add-act, #addplan').on('click', function() { // click tap may double-post, preventdefault needed?
 
     $('#datefix3').val(databaseDate($('#dateplan3')));
 
