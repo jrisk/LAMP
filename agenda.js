@@ -379,15 +379,34 @@ function getData() {
 				console.log(thisElem);
 
 				var scrollBottom = $(window).height() - $(window).scrollTop();
-				console.log($(window).height());
-				console.log($(document).height());
 
 				$('.bottom-slide').slideToggle('slow', function(e) {
 					console.log('on slide toggle');
 				});
 
+				var thisact = thisElem.attr('id');
+				    	console.log(thisact);
 
-			});
+				    $('#delete-button').on('click', function(thisElem) {
+				    	//activity is after 'specplanners-'
+				    	var thisact = thisElem.attr('id');
+				    	console.log(thisact);
+
+				    	$.ajax({
+				    		url: 'delplan.php',
+				    		type: 'POST',
+				    		dataType: 'json',
+				    		data: {deleteid: thisact},
+				    		success: function(data) {
+				    			console.log(data);
+
+				    		},
+				    		error: function(throwErr) {
+				    			console.log(throwErr);
+				    		}
+				    	});
+				    });
+			}); //end of on plan click agenda-act-row handler
 
 			function checkBoxer(jobject) {
 				//encapsulate the tasktotal object into a variable

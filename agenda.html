@@ -258,7 +258,7 @@ type="text/javascript"></script> -->
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Clone Activity</h4>
+        <h4 class="modal-title">Clone to Which Days?</h4>
       </div>
       <div class="modal-body" id="weekday-insert">
             <div class="day-wrap">
@@ -301,13 +301,35 @@ type="text/javascript"></script> -->
 <div class="bottom-slide">
     <div class="actoptions">
         <ul class="dropdown-menu-test">'
-            <li><a href="#">Edit Activity</a></li>
-            <li><a href="#">Clone Activity</a></li>
+            <li><a href="#" id="edit-button">Edit Activity</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#modal-weekday">Clone Activity</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Delete Activity</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#modal-delete">Delete Activity</a></li>
         </ul>
     </div>
 </div>
+
+<!-- Modal DELETE QUESTION start -->
+<div id="modal-delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete this Activity?</h4>
+      </div>
+      <div class="modal-body" id="delete-act">
+        <div class="activity-info-delete">
+        <div class="modal-footer">
+         <button type="button" class="btn btn-md" id="delete-button" data-dismiss="modal">
+        Yes</button>
+        <button type="button" class="btn btn-md" id="donotdelete" data-dismiss="modal">
+        No</button>
+      </div>
+  </div>
+</div> <!-- end content modal -->
+</div> <!-- end modal dialog -->
+</div> <!-- end modal -->
 
 </div> <!-- end of over-container -->
 

@@ -392,6 +392,26 @@ function getData() {
 					console.log('on slide toggle');
 				});
 
+				var thisAct = $(this).attr('id');
+
+				    $('#delete-button').on('click tap', function(e) {
+
+				    	//KEEPS DOUBLE POSTING TO DELPLAN.PHP
+				    	$.ajax({
+				    		url: 'delplan.php',
+				    		type: 'POST',
+				    		dataType: 'json',
+				    		data: {deleteid: thisAct},
+				    		success: function(data) {
+				    			console.log(data);
+
+				    		},
+				    		error: function(throwErr) {
+				    			console.log(throwErr);
+				    		}
+				    	});
+				    });
+
 
 			});
 

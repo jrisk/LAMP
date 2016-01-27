@@ -37,17 +37,20 @@ html {
     height: 100%;
     padding: 0;
     margin: 0;
+    margin-bottom: 0;
 }
 
 .cancelbutton, .savebutton {
     font-size: 2.5em;
     width: 50%;
-    height: 30%;
+    height: 100%;
     border-radius: 0;
     box-shadow: 0.2em 0.2em 0.2em black;
-    background-color: orange;
+    background-color: #D0EE96;
     border-top: none;
     margin-top: 0;
+    padding-top: 0;
+    
 }
 
 /********************** END ACTIVITY MODAL CSS ***************************/
@@ -118,7 +121,7 @@ html {
 	text-align: center;
 	animation-name: exampleDay;
 	animation-duration: 4s;
-	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
+	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */ 
     -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
     -o-animation: exampleDay 5s infinite; /* Opera 12+ */
     animation: exampleDay 5s infinite;
@@ -136,10 +139,10 @@ html {
 		background-color: #BFE9FF;
 	}
 	75% {
-		background-color: pink;
+		background-color: #E0FFFF;
 	}
 	100% {
-		background-color: #D0EE96;
+		background-color: #FFDEAD;
 	}
 }
 
@@ -158,12 +161,11 @@ html {
 	padding: 0;
 	margin: 0;
 	animation-name: exampleDay;
-	animation-duration: 3s;
-	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */
+	animation-duration: 4s;
+	-webkit-animation: exampleDay 5s infinite; /* Safari 4+ */ 
     -moz-animation: exampleDay 5s infinite; /* Fx 5+ */
     -o-animation: exampleDay 5s infinite; /* Opera 12+ */
     animation: exampleDay 5s infinite;
-
 }
 
 #alerts {
