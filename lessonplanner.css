@@ -32,12 +32,11 @@ html {
     box-shadow: 0 0 0 black;
 }
 
-.modal-dialog, #modal-include {
+.modal-dialog, #modal-include, #modal-weekday {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
-    margin-bottom: 0;
 }
 
 .cancelbutton, .savebutton {
@@ -45,12 +44,11 @@ html {
     width: 50%;
     height: 100%;
     border-radius: 0;
-    box-shadow: 0.2em 0.2em 0.2em black;
+    box-shadow: 0.1em 0.1em 0.1em #999;
     background-color: #D0EE96;
     border-top: none;
     margin-top: 0;
     padding-top: 0;
-    
 }
 
 /********************** END ACTIVITY MODAL CSS ***************************/
@@ -190,13 +188,17 @@ html {
 	bottom: 1em;
 	padding-right: 1em;
 	margin-right: 1em;
+	box-shadow: 0.1em 0.2em 0.1em #999;
 }
 
-.bottom-slide {
+.circleplus:active {
+	box-shadow: none;
+}
+
+.actoptions {
 	z-index: 100;
 	position: absolute;
 	width: 100%;
-	bottom: 0;
 	background-color: pink;
 }
 

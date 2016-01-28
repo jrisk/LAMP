@@ -84,13 +84,9 @@ type="text/javascript"></script> -->
 		</div>
 	</div>
 
-<!-- Modal start -->
+<!-- ALL Modal starts so here the overall form start -->
 <form onsubmit="savePlan()" id="planclassday" method="post" action="formaction.php">
 
-<div class="cancelsave" data-dismiss="modal" data-target="#modal-include">
-</div>
-
-<div class="toggler" data-toggle="modal" data-target="#modal-include">Toggle Modal</div>
 <!-- Modal start -->
 <div id="modal-include" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -244,9 +240,6 @@ type="text/javascript"></script> -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
 
- <button type="button" class="btn btn-md" id="clone-button" data-toggle="modal" data-target="#modal-weekday">
-        Clone Plan</button>
-
 <br>
 
 <!-- WEEKDAY PICKER MODAL-->
@@ -258,7 +251,11 @@ type="text/javascript"></script> -->
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Clone to Which Days?</h4>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 cancelbutton" id="exitclone" data-dismiss="modal">Cancel</button>
+        <button type="button" class="col-xs-6 col-sm-6 col-md-6 savebutton" id="addclone" data-dismiss="modal">Save</button>
+        <h3 class="modal-title">
+            <hr>
+        </h3>
       </div>
       <div class="modal-body" id="weekday-insert">
             <div class="day-wrap">
@@ -297,18 +294,6 @@ type="text/javascript"></script> -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
 
-
-<div class="bottom-slide">
-    <div class="actoptions">
-        <ul class="dropdown-menu-test">'
-            <li><a href="#" id="edit-button">Edit Activity</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#modal-weekday">Clone Activity</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#" data-toggle="modal" data-target="#modal-delete">Delete Activity</a></li>
-        </ul>
-    </div>
-</div>
-
 <!-- Modal DELETE QUESTION start -->
 <div id="modal-delete" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -319,19 +304,27 @@ type="text/javascript"></script> -->
         <h4 class="modal-title">Delete this Activity?</h4>
       </div>
       <div class="modal-body" id="delete-act">
-        <div class="activity-info-delete">
+        </div>
         <div class="modal-footer">
          <button type="button" class="btn btn-md" id="delete-button" data-dismiss="modal">
         Yes</button>
         <button type="button" class="btn btn-md" id="donotdelete" data-dismiss="modal">
         No</button>
       </div>
-  </div>
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
 
 </div> <!-- end of over-container -->
+
+    <div class="actoptions">
+        <ul class="dropdown-menu-test">'
+            <li><a href="#" id="edit-button">Edit Activity</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#modal-weekday">Clone Activity</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" data-toggle="modal" data-target="#modal-delete">Delete Activity</a></li>
+        </ul>
+    </div>
 
 
 </body>

@@ -385,14 +385,27 @@ function getData() {
 				console.log(thisElem);
 
 				var scrollBottom = $(window).height() - $(window).scrollTop();
-				console.log($(window).height());
-				console.log($(document).height());
+				console.log('window height is ' + $(window).height());
+				console.log('document height is ' + $(document).height());
+				console.log('window.height - window.scrollTop is ' + scrollBottom);
+				var thisY = $(window).height() - thisElem.getBoundingClientRect().y;
+				console.log(' activity rectangle y is ' + thisElem.getBoundingClientRect().y);
 
-				$('.bottom-slide').slideToggle('slow', function(e) {
+				$('.actoptions').css('bottom', thisY);
+
+				$('.actoptions').slideToggle('slow', function(e) {
 					console.log('on slide toggle');
-				});
+				})
 
 				var thisAct = $(this).attr('id');
+				var thisTime = $(this).children('.small-type').text()
+				var thisActivity = $(this).children('.specplanners').text();
+				var thisDateDel = $(this).siblings().html();
+				console.log(thisTime + thisActivity);
+				var thisHTML = '<div class="well"><div>' + thisDateDel + '</div><br><div>' + thisTime + '</div><div>'
+				+ thisActivity + '</div></div>';
+
+				$('#delete-act').html(thisHTML);
 
 				    $('#delete-button').on('click tap', function(e) {
 

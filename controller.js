@@ -19,14 +19,14 @@ $('.day-input').on('click tap', function(e) {
 
 /******************* ADDED ACTIVITY MODAL INSERT HANDLERS **********************************/
 
-$('#plan-row, #class-row, .cancelsave').hide();
+$('#plan-row, #class-row, .actoptions').hide();
 
     $('#modal-include').on('shown.bs.modal', function(e) {
-        $('.cancelsave').show();
+        //$('.cancelsave').show();
     });
 
     $('#modal-include').on('hidden.bs.modal', function(e) {
-        $('.cancelsave').hide();
+        //$('.cancelsave').hide();
     });
 
     $('input').on('focusin', function(e) {
