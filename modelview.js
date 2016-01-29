@@ -115,7 +115,7 @@ function getData() {
 					if (newtemp == oldtemp || $(document.getElementById(stringpls)).length) { // if current plan equals the last plan
 
 						$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="'
-						+ obj[i].id + '" data-toggle="actoptions" aria-haspopup="true" aria-expanded="false">'
+						+ obj[i].id + '" aria-haspopup="true" aria-expanded="false">'
 						+ '<div class="small-type col-xs-10 col-sm-10" id="' + UTCend + '">'
 						+ moment(obj[i].start).format('h:mm a') + ' to '
 						+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -254,7 +254,7 @@ function getData() {
 
 
 					$(document.getElementById(stringpls)).append('<div class="row agenda-act-row well" id="'
-					+ obj[i].id + '" data-toggle="actoptions" aria-haspopup="true" aria-expanded="false">'
+					+ obj[i].id + '" aria-haspopup="true" aria-expanded="false">'
 					+ '<div class="small-type col-xs-10 col-sm-10">'
 					+ moment(obj[i].start).format('h:mm a') + ' to '
 					+ moment(obj[i].end).format('h:mm a') + '</div>'
@@ -368,9 +368,10 @@ function getData() {
 			// hide the activities of each plan
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
-				//e.preventDefault();
-				//$(this).children().toggle('fast');
-				//$(this).children('.plan-row').show('fast');
+				/*console.log('planbig on click entered');
+				
+				$(this).children().toggle('fast');
+				$(this).children('.plan-row').toggle('fast');*/
 
 				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden'))
 			});
@@ -448,32 +449,54 @@ function getData() {
 				getDateFixed();
 			});
 
-		}, // end of success callback
+			//have to put entire actoptions div in getData() manually because of insertAfter
+			if (!($('.actoptions').length)) {
 
-		error: function(errorThrown) {
-			$('#json-nest').html(errorThrown);
-		}
-	});
+			var actOptions = '<div class="actoptions"><ul class="dropdown-menu-test">'
+            + '<li class="option-text" id="edit-option">Edit</li>'
+            + '<li class="option-text" id="clone-option" data-toggle="modal" data-target="#modal-weekday">Clone</li>'
+            + '<li class="option-text" id="delete-option" data-toggle="modal" data-target="#modal-delete">Delete</li>'
+        	+ '</ul></div>';
 
-	} //end of getData function 
+        	$('.over-container').after(actOptions);
+        	$('.actoptions').hide();
 
-getData();
+        	};
 
-window.getData = getData;
 
-//have to call this handler after function has been defined, not in the handler and function itself
+			//have to call this handler after function has been defined, not in the handler and function itself
 
-$('body').on('click tap', '.agenda-act-row', function(e) {
+			$('.actoptions').on('click tap', function(e) {
+				console.log('propagates');
+			});
 
-                //e.stopPropagation('.plan-big');
+			$('.agenda-act-row').on('click', function(e) {
+
+                e.stopPropagation('.plan-big');
 
                 console.log('bubbling up from controller click');
 
-                $('.actoptions').insertAfter($(this));
+                if (($(this).next('.actoptions').length) == 0) {
+                	console.log($(this).next('.actoptions').length);
 
-                $('.actoptions').slideToggle('slow', function(e) {
-                    console.log('on slide toggle');
+                	$('.actoptions').hide();
+                	$('.actoptions').insertAfter($(this));
+
+                	$('.actoptions').slideToggle('slow', function(e) {
+                    console.log('now slid under new act');
                 });
+
+                }
+
+                else {
+                	console.log($(this).next('.actoptions').length);
+                	$('.actoptions').insertAfter($(this));
+
+                	$('.actoptions').slideToggle('slow', function(e) {
+                    console.log('else slide entered');
+                	});
+
+                }
 
                 var thisAct = $(this).attr('id');
                 var thisTime = $(this).children('.small-type').text()
@@ -502,6 +525,19 @@ $('body').on('click tap', '.agenda-act-row', function(e) {
 
 
             });
+
+		}, // end of success callback
+
+		error: function(errorThrown) {
+			$('#json-nest').html(errorThrown);
+		}
+	});
+
+	} //end of getData function 
+
+getData();
+
+window.getData = getData;
 
 
 				//somewhat unnecessary sort function for nearest activity if no current one

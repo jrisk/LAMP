@@ -78,6 +78,7 @@ type="text/javascript"></script> -->
 	<!--<div class="container-fluid" id="json-past">Past. Up to next week if plan repeated</div>
 	<div class="container" id="json-nest"></div>-->
 	<h2 id="plans"></h2>
+    
 	<div class="circleplus" data-toggle="modal" data-target="#modal-include">
 		<div class="plusadd">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -232,8 +233,6 @@ type="text/javascript"></script> -->
 
 </div> <!-- container outer div -->
 
-<!-- no form ending tag test  -->
-
 </div> <!-- end modal body -->
 
 </div> <!-- end content modal -->
@@ -242,7 +241,11 @@ type="text/javascript"></script> -->
 
 <br>
 
+</form> <!-- no form ending tag test  Only for add plan-->
+
 <!-- WEEKDAY PICKER MODAL-->
+
+<form id="weekform" method="post"> <!-- new form specifically for cloning acts to new days -->
 
 <!-- Modal start -->
 <div id="modal-weekday" class="modal fade" role="dialog">
@@ -285,7 +288,8 @@ type="text/javascript"></script> -->
             <div class="day-wrap">
             <input name="Sunday" id="sunhide" class="day-hide" value="0" type="hidden">
             <input name="Sunday" id="sun" class="day-input" value="1" type="checkbox"> Sunday
-        </div>
+            </div>
+            <div class="idact"><input name="idact" id="idact" type="hidden"></div>
         </div>
     <div class="modal-footer">
     <div class="exiter" data-dismiss="modal">Exit</div>
@@ -293,6 +297,8 @@ type="text/javascript"></script> -->
 </div> <!-- end content modal -->
 </div> <!-- end modal dialog -->
 </div> <!-- end modal -->
+
+</form>
 
 <!-- Modal DELETE QUESTION start -->
 <div id="modal-delete" class="modal fade" role="dialog">
