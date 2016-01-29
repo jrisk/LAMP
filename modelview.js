@@ -379,23 +379,25 @@ function getData() {
 			});
 
 			//prevent the whole plan-big div from toggling if a specific act is clicked on
+			var actHeight = $('.actoptions').height();
+
 			$('.agenda-act-row').on('click tap', function(e) {
 				e.stopPropagation('.plan-big');
 				var thisElem = document.getElementById($(this).attr('id'));
-				console.log(thisElem);
+
+				var thisHeight = $(this).height();
 
 				var scrollBottom = $(window).height() - $(window).scrollTop();
-				console.log('window height is ' + $(window).height());
-				console.log('document height is ' + $(document).height());
-				console.log('window.height - window.scrollTop is ' + scrollBottom);
-				var thisY = $(window).height() - thisElem.getBoundingClientRect().y;
-				console.log(' activity rectangle y is ' + thisElem.getBoundingClientRect().y);
+				var thisY = scrollBottom - thisElem.getBoundingClientRect().y;
+				var thisX = thisElem.getBoundingClientRect().x;
+				console.log('thisX is' + thisX);
 
 				$('.actoptions').css('bottom', thisY);
+				//$('.actoptions').css('left', 0);
 
 				$('.actoptions').slideToggle('slow', function(e) {
 					console.log('on slide toggle');
-				})
+				});
 
 				var thisAct = $(this).attr('id');
 				var thisTime = $(this).children('.small-type').text()

@@ -13,6 +13,9 @@ html {
 	font-size: 1rem;
 }
 
+body {
+}
+
 @media screen and (max-width: 550px) {
 	html {
 		font-size: 0.5rem;
@@ -197,9 +200,33 @@ html {
 
 .actoptions {
 	z-index: 100;
-	position: absolute;
+	position: relative;
+	display: block;
 	width: 100%;
-	background-color: pink;
+	background-color:rgba(255,0,0,0.5);
+}
+
+.dropdown-menu-test {
+	list-style-type: none;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	opacity: 1;
+}
+
+.dropdown-menu-test > li {
+	font-family: "Karla", Arial;
+	position: relative;
+	display: inline;
+	font-size: 1.3em;
+	font-color: black;
+	text-align: left;
+	opacity: 1;
+}
+
+.option-text {
+	border: 0.0.5em solid white;
+	display: inline;
 }
 
 .plusadd {
@@ -225,7 +252,7 @@ html {
 }
 
 .task-total {
-	font-size: .5em;
+	font-size: .6em;
 	float: right;
 	display: inline-block;
 	padding: 0;
