@@ -508,6 +508,8 @@ function getData() {
 
                 $('#delete-act').html(thisHTML);
 
+                /********* DELETE ACT FROM DATABASE ************/
+
                     $('#delete-button').on('click tap', function(e) {
 
                         //KEEPS DOUBLE POSTING TO DELPLAN.PHP
@@ -546,6 +548,22 @@ function getData() {
 				        complete: getData,
 				    });
 				});// end of add clone days handler
+
+				$('#editplan').on('click tap', function(e) { // need to create editplan button
+					$.ajax({
+						url: 'acteditform.php',
+						post: 'POST',
+						data: formdata,
+						dataType: 'json',
+						success: function(data) {
+							console.log('edited successfully');
+						},
+						error: function(throwErr) {
+							console.log(throwErr);
+						},
+						complete: getData,
+					}); // end of ajax call to act edit form
+				}); // end of editing database handler
             }); // end of agenda act row click handler
 		}, // end of xboxhueg success callback
 
