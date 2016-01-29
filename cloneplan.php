@@ -16,6 +16,32 @@ $friday = $_POST['Friday'];
 $saturday = $_POST['Saturday'];
 $sunday = $_POST['Sunday'];
 
+$id = $_POST['idact'];
 
+$conn = new PDO($dsn, $user, $password);
 
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$stmt = $conn->prepare("UPDATE lessonplan SET Monday = :monday
+	, Tuesday = :tuesday
+	, Wednesday = :wednesday
+	, Thursday = :thursday
+	, Friday = :friday
+	, Saturday = :saturday
+	, Sunday = :sunday WHERE ID = :id");
+
+$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+$stmt->bindParam(":monday", $monday, PDO::PARAM_INT);
+$stmt->bindParam(":tuesday", $tuesday, PDO::PARAM_INT);
+$stmt->bindParam(":wednesday", $wednesday, PDO::PARAM_INT);
+$stmt->bindParam(":thursday", $thursday, PDO::PARAM_INT);
+$stmt->bindParam(":friday", $friday, PDO::PARAM_INT);
+$stmt->bindParam(":saturday", $saturday, PDO::PARAM_INT);
+$stmt->bindParam(":sunday", $sunday, PDO::PARAM_INT);
+
+$stmt->execute();
+
+//no error handling
+// instead of try/catch ????
 ?>

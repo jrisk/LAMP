@@ -521,12 +521,33 @@ function getData() {
                                 console.log(throwErr);
                             }
                         });
-                    });
+                    }); // end of delete button click handler
 
+                    /****** ADD CLONE DAYS TO DATABASE *****/
 
-            });
+				$('#addclone').on('click tap', function(e) {
 
-		}, // end of success callback
+				    $('#idact').val(thisAct);
+
+				    var weekdata = $('#weekform input').serialize();
+
+				    $.ajax({
+				        url: 'cloneplan.php',
+				        type: 'POST',
+				        data: weekdata,
+				        dataType: 'json',
+				        success: function(data) {
+				            console.log(data);
+				            console.log('clone successful');
+				        },
+				        error: function(throwErr) {
+				            console.log(throwErr);
+				        },
+				        complete: getData,
+				    });
+				});// end of add clone days handler
+            }); // end of agenda act row click handler
+		}, // end of xboxhueg success callback
 
 		error: function(errorThrown) {
 			$('#json-nest').html(errorThrown);
