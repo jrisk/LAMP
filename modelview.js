@@ -493,7 +493,7 @@ $('body').on('click tap', '.agenda-act-row', function(e) {
                             type: 'POST',
                             dataType: 'json',
                             data: {deleteid: thisAct},
-                            success: getData,
+                            complete: getData,
                             error: function(throwErr) {
                                 console.log(throwErr);
                             }
