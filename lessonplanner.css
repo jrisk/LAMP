@@ -215,18 +215,19 @@ body {
 }
 
 .dropdown-menu-test > li {
-	font-family: "Karla", Arial;
-	position: relative;
 	display: inline;
-	font-size: 1.3em;
+	font-family: "Karla", Arial;
+	font-size: 0.5em;
 	font-color: black;
-	text-align: left;
-	opacity: 1;
 }
 
-.option-text {
-	border: 0.0.5em solid white;
+.dropdown-menu-test > li:first-child {
+	text-align: left;
 	display: inline;
+}
+
+.dropdown-menu-test > li:last-child {
+	text-align: right;
 }
 
 .plusadd {

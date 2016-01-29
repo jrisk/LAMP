@@ -993,5 +993,4 @@ function deleteAct() {
 
 //delplan and save brings you back to main screen of plans, save state and show activities too?
 
-
 })

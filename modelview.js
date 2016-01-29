@@ -369,65 +369,10 @@ function getData() {
 
 			$('.plan-big').on('click tap', function(e) { //show the activities on click
 				//e.preventDefault();
-				$(this).children().toggle('fast');
-				$(this).children('.plan-row').show('fast');
+				//$(this).children().toggle('fast');
+				//$(this).children('.plan-row').show('fast');
 
-				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden')) {
-					//$(this).children().show('normal');
-				//}
-				// show media object line box $(this).
-			});
-
-			//prevent the whole plan-big div from toggling if a specific act is clicked on
-			var actHeight = $('.actoptions').height();
-
-			$('.agenda-act-row').on('click tap', function(e) {
-				e.stopPropagation('.plan-big');
-				var thisElem = document.getElementById($(this).attr('id'));
-
-				var thisHeight = $(this).height();
-
-				var scrollBottom = $(window).height() - $(window).scrollTop();
-				var thisY = scrollBottom - thisElem.getBoundingClientRect().y;
-				var thisX = thisElem.getBoundingClientRect().x;
-				console.log('thisX is' + thisX);
-
-				$('.actoptions').css('bottom', thisY);
-				//$('.actoptions').css('left', 0);
-
-				$('.actoptions').slideToggle('slow', function(e) {
-					console.log('on slide toggle');
-				});
-
-				var thisAct = $(this).attr('id');
-				var thisTime = $(this).children('.small-type').text()
-				var thisActivity = $(this).children('.specplanners').text();
-				var thisDateDel = $(this).siblings().html();
-				console.log(thisTime + thisActivity);
-				var thisHTML = '<div class="well"><div>' + thisDateDel + '</div><br><div>' + thisTime + '</div><div>'
-				+ thisActivity + '</div></div>';
-
-				$('#delete-act').html(thisHTML);
-
-				    $('#delete-button').on('click tap', function(e) {
-
-				    	//KEEPS DOUBLE POSTING TO DELPLAN.PHP
-				    	$.ajax({
-				    		url: 'delplan.php',
-				    		type: 'POST',
-				    		dataType: 'json',
-				    		data: {deleteid: thisAct},
-				    		success: function(data) {
-				    			console.log(data);
-
-				    		},
-				    		error: function(throwErr) {
-				    			console.log(throwErr);
-				    		}
-				    	});
-				    });
-
-
+				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden'))
 			});
 
 			function checkBoxer(jobject) {
@@ -515,6 +460,49 @@ function getData() {
 getData();
 
 window.getData = getData;
+
+//have to call this handler after function has been defined, not in the handler and function itself
+
+$('body').on('click tap', '.agenda-act-row', function(e) {
+
+                //e.stopPropagation('.plan-big');
+
+                console.log('bubbling up from controller click');
+
+                $('.actoptions').insertAfter($(this));
+
+                $('.actoptions').slideToggle('slow', function(e) {
+                    console.log('on slide toggle');
+                });
+
+                var thisAct = $(this).attr('id');
+                var thisTime = $(this).children('.small-type').text()
+                var thisActivity = $(this).children('.specplanners').text();
+                var thisDateDel = $(this).siblings().html();
+                console.log(thisTime + thisActivity);
+                var thisHTML = '<div class="well"><div>' + thisDateDel + '</div><br><div>' + thisTime + '</div><div>'
+                + thisActivity + '</div></div>';
+
+                $('#delete-act').html(thisHTML);
+
+                    $('#delete-button').on('click tap', function(e) {
+
+                        //KEEPS DOUBLE POSTING TO DELPLAN.PHP
+                        $.ajax({
+                            url: 'delplan.php',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {deleteid: thisAct},
+                            success: getData,
+                            error: function(throwErr) {
+                                console.log(throwErr);
+                            }
+                        });
+                    });
+
+
+            });
+
 
 				//somewhat unnecessary sort function for nearest activity if no current one
 
