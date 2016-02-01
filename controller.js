@@ -885,7 +885,9 @@ function readableStartEnd() {
 $('#add-plan').html();
 
 // original makeplan id name $('#add-act')
-$('#add-act, #addplan').on('click', function() { // click tap may double-post, preventdefault needed?
+//should the addplan handler be in the model-view instead of this file?
+
+$('#add-act').on('click', function() { // click tap may double-post, preventdefault needed?
 
     $('#datefix3').val(databaseDate($('#dateplan3')));
 
@@ -992,5 +994,31 @@ function deleteAct() {
 };
 
 //delplan and save brings you back to main screen of plans, save state and show activities too?
+
+/************** ADD ACTIVITY COULD GO IN MODEL VIEW BUT NEED TIME DEPENDENCIES ************/
+
+     /********** ADD ACTIVITY FORM SEND TO DATABASE *****************/
+
+                $('#addplan').on('click tap', function(e) {
+                    $('#datefix3').val(databaseDate($('#dateplan3')));
+                    timeDatabase();
+                    var formdata = $('#planclassday input').serialize();
+                    console.log(formdata);
+
+                var plantitle = $('#lessonname3').val();
+                    $.ajax({
+                        url: 'addactform.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: formdata,
+                        success: function(data) {
+                            console.log(data);
+                        },
+                        complete: getData,
+                        error: function(throwErr) {
+                            console.log(throwErr);
+                        }
+                    });
+                }); /// end addplan click handler
 
 })

@@ -26,6 +26,27 @@ $('body').on('resize', function(e) {
 
 $('body').css('padding-top',  $('.navbar').height());
 
+function timeGet() { // unused as of yet
+
+	var currentTime = moment().format(); // or new Date();
+
+	var tempStart = moment(obj[i].start).format('HH:mm:ss');
+
+	var tempDay =  moment(obj[i].date).format('YYYY-MM-DD');
+
+	var tempUTCstart = tempDay + 'T' + tempStart;
+
+	var UTCstart = moment(tempUTCstart).format();
+
+	var tempEnd = moment(obj[i].end).format('HH:mm:ss');
+
+	var tempUTCend = tempDay + 'T' + tempEnd;
+
+	var UTCend = moment(tempUTCend).format();
+
+	var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
+
+}; // end of timeGetting function
 
 function getData() {
 
@@ -44,8 +65,6 @@ function getData() {
 			var JSONParse = JSON.parse(data);
 
 			var weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-			console.log(JSONParse);
 
 			var currentTime = moment().format(); // or new Date();
 
@@ -132,13 +151,10 @@ function getData() {
 
 					if (UTCstart < currentTime && currentTime < UTCend && flagCurrent != 1) {
 							console.log('current plan html if true here : ' + flagCurrent);
-							console.log(obj[i].id);
-							console.log($('#' + obj[i].id));
 						$('#' + obj[i].id).parent().addClass('currentPlan');
 						$('#' + obj[i].id).addClass('currentAct');
 						//$('.plan-big').children().toggle('slow');
 						console.log($('.currentAct'));
-						console.log($('.currentAct').offset());
 						$('body').animate({ scrollTop: $('.currentAct').offset().top - $('.navbar').height() }, 1000);
 						$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
@@ -155,7 +171,7 @@ function getData() {
 							}
 							else {
 								console.log('switch to next activity or nearest plan');
-								//getData();
+								console.log(timerVar);
 
 							}
 
@@ -178,8 +194,6 @@ function getData() {
 
 							var planDate = ind;
 
-							console.log('else entered: ' + ind);
-
 							var Day = moment(planDate).format('dddd');
 
 							var Today = moment().format('dddd');
@@ -187,8 +201,6 @@ function getData() {
 							var fullToday = moment().format('YYYY-MM-DD');
 
 						}
-
-						console.log('outside for loop scope lets see' + planDate);
 
 						//end the last plan row now that its a new plan
 
@@ -199,8 +211,6 @@ function getData() {
 						console.log(newtemp);
 
 						var stringpls = 'planning' + newtemp.replace(/\s/g, '_');
-
-						console.log('second stringpls check' + stringpls);
 
 						var titleParse = 'title: ' + obj[i].title.replace(/\s/g, '-');
 
@@ -234,7 +244,6 @@ function getData() {
 						}
 						else {
 							var elem = "#json-past";
-							console.log('past...or repeat to the future?');
 						}
 
 
@@ -293,6 +302,7 @@ function getData() {
 							}
 							else {
 								console.log('switch to next activity or nearest plan');
+								$('.currentAct').children('.timer').html(timerVar + ' left');
 								//getData();
 
 							}
@@ -343,10 +353,6 @@ function getData() {
 					}
 
 					posArray.sort(function (a,b) { return a-b });
-
-					console.log(posArray);
-
-					console.log(tempObj);
 
 					/* Object.prototype.getKey = function(value) {
 
@@ -437,7 +443,6 @@ function getData() {
 					{
 						if (typeof arr1[i+1] === 'undefined' || arr1[i+1].indexer >= 15)
 						{
-							console.log(arr1);
 							$('.navfix').html(arr1[i].element);
 						}
 					}
@@ -565,6 +570,7 @@ function getData() {
 					}); // end of ajax call to act edit form
 				}); // end of editing database handler
             }); // end of agenda act row click handler
+
 		}, // end of xboxhueg success callback
 
 		error: function(errorThrown) {
