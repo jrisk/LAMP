@@ -198,12 +198,13 @@ body {
 	box-shadow: none;
 }
 
+/********* Option Dropdown Box ***********/
+
 .actoptions {
 	z-index: 100;
-	position: relative;
-	display: block;
 	width: 100%;
-	background-color:rgba(255,0,0,0.5);
+	background-color:rgba(0,155,0,0.5);
+	display: block;
 }
 
 .dropdown-menu-test {
@@ -212,23 +213,35 @@ body {
 	border: 0;
 	padding: 0;
 	opacity: 1;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
 }
 
-.dropdown-menu-test > li {
-	display: inline;
+.option-text {
 	font-family: "Karla", Arial;
-	font-size: 0.5em;
+	font-size: 0.7em;
 	font-color: black;
+	-webkit-flex: auto;
+	flex: auto;
 }
 
-.dropdown-menu-test > li:first-child {
+#edit-option {
 	text-align: left;
-	display: inline;
+	float: left;
 }
 
-.dropdown-menu-test > li:last-child {
+#delete-option {
 	text-align: right;
+	float: right;
 }
+
+#clone-option {
+	text-align: middle;
+}
+
+/********* Option Dropdown Box END **********/
 
 .plusadd {
 	position: relative;

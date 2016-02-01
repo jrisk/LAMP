@@ -26,28 +26,6 @@ $('body').on('resize', function(e) {
 
 $('body').css('padding-top',  $('.navbar').height());
 
-function timeGet() { // unused as of yet
-
-	var currentTime = moment().format(); // or new Date();
-
-	var tempStart = moment(obj[i].start).format('HH:mm:ss');
-
-	var tempDay =  moment(obj[i].date).format('YYYY-MM-DD');
-
-	var tempUTCstart = tempDay + 'T' + tempStart;
-
-	var UTCstart = moment(tempUTCstart).format();
-
-	var tempEnd = moment(obj[i].end).format('HH:mm:ss');
-
-	var tempUTCend = tempDay + 'T' + tempEnd;
-
-	var UTCend = moment(tempUTCend).format();
-
-	var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
-
-}; // end of timeGetting function
-
 function getData() {
 
 	$.ajax({
@@ -78,6 +56,8 @@ function getData() {
 
 			var todayPlan = 0;
 
+			//this loop parses the entire array of plan objects from datesort
+
 			$.each(JSONParse, function(ind, obj) {
 
 				// time function for deciding which div fits the current time, or closest to it
@@ -90,6 +70,8 @@ function getData() {
 
 				//have to refactor this. if a plan is somewhere else it resets as a new appendActs function
 				//test to see if plan has already been used, then append it to the correct plan div
+
+				//this loops through each object in the user's array of plans from datesort
 
 				for (i = 0; i < obj.length; i++) {
 
@@ -120,9 +102,10 @@ function getData() {
 
 					tempObj[obj[i].title] = timerVarCheck._i;
 
-					//make current plan equal to var newtemp
-					// instead of organizing by plan, organize by date
+					//make current plan's date equal to var newtemp
+					/********** instead of organizing by plan, organize by date ************/
 					var newtemp = obj[i].date;
+					/********** instead of organizing by plan, organize by date ************/
 
 					var titleParse = newtemp.replace(/\s/g, '-');
 
@@ -170,7 +153,7 @@ function getData() {
 								//getData();
 							}
 							else {
-								console.log('switch to next activity or nearest plan');
+								console.log('switch to next activity or nearest plan this is the first loop');
 								console.log(timerVar);
 
 							}
@@ -290,24 +273,33 @@ function getData() {
 						//$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
 						$('.currentAct').children('.timer').html(timerVar + ' left');
+						$('.currentAct').children('.timer').attr({
+							'start': obj[i].start,
+							'end': obj[i].end,
+							'date': obj[i].date
+							});
 
 						setInterval(function() {
-								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
 
-							if (currentTime < endTimeAct) {
-								console.log('still on this activity');
+								var timerUpdate = timeGet();
+
+							if (currentTime < $('.currentAct').attr('end')) {
+								console.log('this setInterval');
+								console.log(currentTime);
 
 								//code for timer
 								//getData();
 							}
 							else {
 								console.log('switch to next activity or nearest plan');
-								$('.currentAct').children('.timer').html(timerVar + ' left');
+								$('.currentAct').children('.timer').html(timerUpdate + ' left');
+								console.log(timerVar);
+								console.log(timerUpdate);
 								//getData();
 
 							}
 
-							}, 60000);
+							}, 10000);
 
 						//didnt want to flag, but its to test for another current activity
 						//will make impossible to do in validation
@@ -583,6 +575,37 @@ function getData() {
 getData();
 
 window.getData = getData;
+
+function timeGet() { // unused as of yet
+
+	var endR = $('.currentAct').children('.timer').attr('end');
+
+	var start = $('.currentAct').children('.timer').attr('start');
+
+	var date = $('.currentAct').children('.timer').attr('date');
+
+	var currentTime = moment().format(); // or new Date();
+
+	var tempStart = moment(start).format('HH:mm:ss');
+
+	var tempDay =  moment(date).format('YYYY-MM-DD');
+
+	var tempUTCstart = tempDay + 'T' + tempStart;
+
+	var UTCstart = moment(tempUTCstart).format();
+
+	var tempEnd = moment(endR).format('HH:mm:ss');
+
+	var tempUTCend = tempDay + 'T' + tempEnd;
+
+	var UTCend = moment(tempUTCend).format();
+
+	var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
+
+	return timerVar;
+
+}; // end of timeGetting function
+
 
 
 				//somewhat unnecessary sort function for nearest activity if no current one
