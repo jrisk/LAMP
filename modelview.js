@@ -505,7 +505,7 @@ function getData() {
 			if (!($('.actoptions').length)) {
 
 			var actOptions = '<div class="actoptions"><ul class="dropdown-menu-test">'
-            + '<li class="option-text" id="edit-option">Edit</li>'
+            + '<li class="option-text" id="edit-option" data-toggle="modal" data-target="#modal-include">Edit</li>'
             + '<li class="option-text" id="clone-option" data-toggle="modal" data-target="#modal-weekday">Clone</li>'
             + '<li class="option-text" id="delete-option" data-toggle="modal" data-target="#modal-delete">Delete</li>'
         	+ '</ul></div>';
@@ -607,6 +607,9 @@ function getData() {
 				//have to retrieve info first from other html or database
 				//html might be easier
 
+				$('#datefix3').val(databaseDate($('#dateplan3')));
+                timeDatabase();
+
 				 var editform = $('#planclassday input, #weekform input').serialize();
 
 				 console.log(editform);
@@ -618,14 +621,115 @@ function getData() {
 						dataType: 'json',
 						success: function(data) {
 							console.log('edited successfully');
+							//$('#planclassday input').val() = '';
 						},
 						error: function(throwErr) {
 							console.log(throwErr);
 						},
-						complete: getData,
+						complete: function() {
+							getData();
+						}
 					}); // end of ajax call to act edit form
-				}); // end of editing database handler
-            }); // end of agenda act row click handler
+				}); // end of editplan database handler
+
+				var databaseDate = function(element) {
+					
+				    var dayinput = element.val();
+
+				    var daybase = moment(dayinput, 'dddd, MMMM Do YYYY');
+
+				    var daybaseval = moment(daybase).format('YYYY-MM-DD');
+
+				    return daybaseval;
+				};
+
+				var dateHuman = function(time) {
+					var original = time;
+					var original = moment(original, 'YYYY-MM-DD');
+					var humanDate = moment(original).format('dddd, MMMM Do YYYY');
+
+					return humanDate;
+				};
+
+				var timeHuman = function(time) {
+
+					var original = time;
+
+					var original = moment(original, moment.ISO_8601);
+
+					var humanTime = moment(original).format('hh:mm a');
+
+					return humanTime;
+				};
+
+				function timeDatabase() {
+
+				    var startElement = $('#start3').val();
+
+				    var endElement = $('#end3').val();
+
+				    var startertime = moment(startElement, 'h:mm A');
+
+				    var endertime = moment(endElement, 'h:mm A');
+
+				    var startChange = moment(startertime).format('HH:mm:ss');
+
+				    var endChange = moment(endertime).format('HH:mm:ss');
+
+				    $('#start3').val(startChange);
+
+				    $('#end3').val(endChange);
+
+				};
+
+
+
+				/***** edit option handler, must be in getData to get re-initialized ******/
+            $('#edit-option').on('click tap', function(e) {
+                console.log('edit button working??'); // when edit is pressed
+                //it should change button to send to different php file to fetch
+                //that clicked div's information from database
+                //replace the save button with an edit button that send to diff php file
+
+               var selectAct = $(this).parent().parent().prev();
+
+                if (!($('#editplan').length)) {
+                	console.log('#editplan doesnt exist entered');
+
+                    $('#addplan').hide();
+
+                    $('<button>').attr({
+                    'id': 'editplan',
+                    'class':'col-xs-6 col-md-6 col-sm-6 savebutton',
+                    'data-dismiss': 'modal',
+                    'type': 'button'
+                }).html('Save').insertAfter('#exitplan').hide().show();
+            }
+
+            else if ($('#editplan').is(':hidden')) {
+            	console.log('editplan is hidden');
+            	//$('#modal-include').modal('show');
+                $('#editplan').show();
+                $('#addplan').hide();
+            }
+
+            else {
+                //do nothing
+            }
+
+            //now populate the inputs with the activity props via their html data-* attributes
+
+            $('#planclassday input[name=activity]').val(selectAct.attr('data-title'));
+            $('#planclassday input[name=start_time]').val(timeHuman(selectAct.attr('data-start')));
+            $('#planclassday input[name=end_time]').val(timeHuman(selectAct.attr('data-end')));
+            $('#planclassday input[name=date_plan]').val(dateHuman(selectAct.attr('data-date')))
+            $('#planclassday input[name=lesson_name]').val(selectAct.attr('data-planinfo'));
+            $('#planclassday input[name=user_group]').val(selectAct.attr('data-classinfo'));
+            //get the weekdays too and the id from there since its already an input there
+            $('#weekform input[name=idact]').val(selectAct.attr('data-identify'));
+
+            }); //end edit option button handler
+        }); // end of agenda act row click handler
 
 		}, // end of xboxhueg success callback
 

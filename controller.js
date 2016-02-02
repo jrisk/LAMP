@@ -1053,7 +1053,8 @@ function deleteAct() {
                 }
             });
 
-            $('#edit-option').on('click tap', function(e) { // when edit is pressed
+            $('#edit-option').on('click tap', function(e) {
+                console.log('edit buttong not working??'); // when edit is pressed
                 //it should change button to send to different php file to fetch
                 //that clicked div's information from database
                 //replace the save button with an edit button that send to diff php file
