@@ -1089,6 +1089,8 @@ function deleteAct() {
             $('#planclassday input[name=date_plan]').val(dateHuman(selectAct.attr('data-date')))
             $('#planclassday input[name=lesson_name]').val(selectAct.attr('data-planinfo'));
             $('#planclassday input[name=user_group]').val(selectAct.attr('data-classinfo'));
+            //get the weekdays too and the id from there since its already an input there
+            $('#weekform input[name=idact]').val(selectAct.attr('data-identify'));
 
             }); //end edit option button handler
 

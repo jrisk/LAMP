@@ -7,7 +7,7 @@ include("credentials.php");
 //EDIT FORM
 
 
-$id = NULL; // no ID right now, prevent login // cant be null on website
+$id = $_POST['idact']; // no ID right now, prevent login // cant be null on website
 
 $plan = htmlentities($_POST['lesson_name']);
 
@@ -59,8 +59,10 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $db->prepare("UPDATE lessonplan SET Plan = :plan
 	, Class = :class
 	, Activity = :activity
+	, Start = :start_time
+	, End = :end_time
 	, Adate = :adate
-	, Comment = :comment
+	, Comment = :comment_note
 	, EveryWeek = :every_week
 	, Media = :media
 	, EntryTime = :entry_time

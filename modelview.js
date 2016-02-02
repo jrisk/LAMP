@@ -607,7 +607,7 @@ function getData() {
 				//have to retrieve info first from other html or database
 				//html might be easier
 
-				 var editform = $('#planclassday input').serialize();
+				 var editform = $('#planclassday input, #weekform input').serialize();
 
 				 console.log(editform);
 
