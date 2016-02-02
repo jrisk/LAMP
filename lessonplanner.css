@@ -204,36 +204,44 @@ body {
 	z-index: 100;
 	width: 100%;
 	background-color:rgba(0,155,0,0.5);
-	display: block;
+	display: inline;
 }
 
 .dropdown-menu-test {
 	list-style-type: none;
-	margin: 0;
-	border: 0;
-	padding: 0;
-	opacity: 1;
 	display: -webkit-flex;
 	display: flex;
 	-webkit-flex-direction: row;
 	flex-direction: row;
+	margin: 0;
+	border: 0;
+	padding: 0;
 }
 
 .option-text {
 	font-family: "Karla", Arial;
 	font-size: 0.7em;
 	font-color: black;
+	border: 0.1em solid #999;
 	-webkit-flex: auto;
 	flex: auto;
 }
 
+.option-text:hover {
+	background-color: rgba(155,155,155,0.5);
+}
+
+.option-text:active {
+	background-color: #E0FFFF;
+}
+
 #edit-option {
-	text-align: left;
+	text-align: middle;
 	float: left;
 }
 
 #delete-option {
-	text-align: right;
+	text-align: middle;
 	float: right;
 }
 

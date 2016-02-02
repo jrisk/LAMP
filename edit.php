@@ -7,36 +7,19 @@ include("credentials.php");
 $id = NULL; // no ID right now, prevent login // cant be null on website
 
 $activity = htmlentities($_POST['activity']);
-
 $oldActivity = htmlentities($_POST['old_activity']);
 
 $start_time = htmlentities($_POST['start_time']);
-
 $oldStart = htmlentities($_POST['old_start']);
 
 $end_time = htmlentities($_POST['end_time']);
-
 $oldEnd = htmlentities($_POST['old_end']);
 
 $plan = htmlentities($_POST['lesson_name']);
+$oldPlan = htmlentities($_POST['old_plan']);
 
 $class = htmlentities($_POST['user_group']);
-
-$activity = htmlentities($_POST['activity']);
-
-$date = $_POST['date_planfix'];
-
-// for specific day of week $day_db = strstr($day, ",", true);
-
-$start_time = $_POST['start_time'];
-
-// now in client side validation
-
-$start_time_db = substr($start_time, 0, -3);
-
-$end_time = $_POST['end_time'];
-
-$end_time_db = substr($end_time, 0, -3);
+$oldClass = htmlentities($_POST['old_class']);
 
 $comment_note = NULL; // cant be null in website
 
@@ -106,6 +89,8 @@ $stmt->execute();
 
 }
 
-	echo "error or something ?";
-}
+echo "error or something ?";
+
+
+?>
 

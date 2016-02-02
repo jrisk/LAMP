@@ -129,6 +129,25 @@ function getData() {
 						+ titleParse + '" class="specplanners col-xs-12 col-sm-12">'
 						+ obj[i].title + '</div>');
 
+						//add the data-* attributes to save the database stuff into html5
+
+						$(document.getElementById(obj[i].id)).attr({
+						'data-identify': obj[i].id,
+						'data-title': obj[i].title,
+						'data-planinfo': obj[i].plan,
+						'data-classinfo': obj[i].class,
+						'data-date': obj[i].date,
+						'data-start': obj[i].start,
+						'data-end': obj[i].end,
+						'data-monday': obj[i].monday,
+						'data-tuesday': obj[i].tuesday,
+						'data-wednesday': obj[i].wednesday,
+						'data-thursday': obj[i].thursday,
+						'data-friday': obj[i].friday,
+						'data-saturday': obj[i].saturday,
+						'data-sunday': obj[i].sunday
+					});
+
 					//copy this to the starting activity of the other plans
 					// or better yet, refactor so there arn't seperate loops for the first act of a plan
 
@@ -257,6 +276,42 @@ function getData() {
 					+ '<div id="specificplan-'
 					+ obj[i].title + '" class="specplanners the-first-act col-xs-12 col-sm-12">'
 					+ obj[i].title + '</div>');
+
+					//add database values to html5 data store data-* attributes
+
+					$(document.getElementById(obj[i].id)).attr({
+						'data-identify': obj[i].id,
+						'data-title': obj[i].title,
+						'data-planinfo': obj[i].plan,
+						'data-classinfo': obj[i].class,
+						'data-date': obj[i].date,
+						'data-start': obj[i].start,
+						'data-end': obj[i].end,
+						'data-monday': obj[i].monday,
+						'data-tuesday': obj[i].tuesday,
+						'data-wednesday': obj[i].wednesday,
+						'data-thursday': obj[i].thursday,
+						'data-friday': obj[i].friday,
+						'data-saturday': obj[i].saturday,
+						'data-sunday': obj[i].sunday
+					});
+
+					/*var dataStore = $(document.getElementById(obj[i].id)).data();
+
+						dataStore.identify = obj[i].id;
+						dataStore.title = obj[i].title;
+						dataStore.planinfo = obj[i].plan;
+						dataStore.classinfo = obj[i].class;
+						dataStore.date = obj[i].date;
+						dataStore.start = obj[i].start;
+						dataStore.end = obj[i].end;
+						dataStore.monday = obj[i].monday;
+						dataStore.tuesday = obj[i].tuesday;
+						dataStore.wednesday = obj[i].wednesday;
+						dataStore.thursday = obj[i].thursday;
+						dataStore.friday = obj[i].friday;
+						dataStore.saturday = obj[i].saturday;
+						dataStore.sunday = obj[i].sunday;*/
 
 					//$('.plan-big').slideToggle('slow');
 					//animate plans to bring them offscreen to on from left
@@ -463,10 +518,6 @@ function getData() {
 
 			//have to call this handler after function has been defined, not in the handler and function itself
 
-			$('.actoptions').on('click tap', function(e) {
-				console.log('propagates');
-			});
-
 			$('.agenda-act-row').on('click', function(e) {
 
                 e.stopPropagation('.plan-big');
@@ -494,6 +545,10 @@ function getData() {
                 	});
 
                 }
+
+                $('.actoptions').on('click tap', function(e) {
+				console.log('propagates');
+				});
 
                 var thisAct = $(this).attr('id');
                 var thisTime = $(this).children('.small-type').text()
@@ -546,11 +601,20 @@ function getData() {
 				    });
 				});// end of add clone days handler
 
-				$('#editplan').on('click tap', function(e) { // need to create editplan button
+				/********* EDIT PLAN SEND TO UPDATE DATABASE ************/
+				$('#modal-include').on('click tap', '#editplan', function(e) {
+
+				//have to retrieve info first from other html or database
+				//html might be easier
+
+				 var editform = $('#planclassday input').serialize();
+
+				 console.log(editform);
+
 					$.ajax({
-						url: 'acteditform.php',
+						url: 'edit.php',
 						post: 'POST',
-						data: formdata,
+						data: editform,
 						dataType: 'json',
 						success: function(data) {
 							console.log('edited successfully');

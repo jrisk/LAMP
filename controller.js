@@ -864,6 +864,17 @@ var endHuman = function(enterend) {
     return endhuman;
 };
 
+var timeHuman = function(time) {
+
+    var original = time;
+
+    var original = moment(original, moment.ISO_8601);
+
+    var humanTime = moment(original).format('hh:mm A');
+
+    return humanTime;
+}
+
 //change time into more readable view (2:30pm instead of 14:30:00)
 
 function readableStartEnd() {
@@ -1020,5 +1031,54 @@ function deleteAct() {
                         }
                     });
                 }); /// end addplan click handler
+
+                //add handler for addplus in case edit has been clicked to reset and show addplan
+
+            $('.circleplus').on('click tap', function(e) {
+                if ($('#addplan').is(':hidden')) {
+                    $('#addplan').show();
+                    $('#editplan').hide();
+                }
+
+                else {
+                    //do nothing
+                }
+            });
+
+            $('#edit-option').on('click tap', function(e) { // when edit is pressed
+                //it should change button to send to different php file to fetch
+                //that clicked div's information from database
+                //replace the save button with an edit button that send to diff php file
+
+               var selectAct = $(this).parent().parent().prev();
+
+                if (!($('#editplan').length)) {
+
+                    $('#addplan').hide();
+
+                    $('<button>').attr({
+                    'id': 'editplan',
+                    'class':'col-xs-6 col-md-6 col-sm-6 savebutton',
+                    'data-dismiss': 'modal',
+                    'type': 'button'
+                }).html('Save').insertAfter('#exitplan').hide().show();
+            }
+
+            else if ($('#editplan').is(':hidden')) {
+                $('#editplan').show();
+                $('#addplan').hide();
+            }
+
+            else {
+                //do nothing
+            }
+
+            //now populate the inputs with the activity props via their html data-* attributes
+
+            $('#planclassday input[name=activity]').val(selectAct.attr('data-title'));
+            $('#planclassday input[name=start_time]').val(timeHuman(selectAct.attr('data-start')));
+            $('#planclassday input[name=end_time]').val(timeHuman(selectAct.attr('data-end')));
+
+            }); //end edit option button handler
 
 })
