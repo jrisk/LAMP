@@ -65,6 +65,7 @@ echo '<div class="container label-row-insert" id="label-row-copy">
 
 /* this part returns only after result from array is returned */
 
+
 for ($i=0; $i<=(count($sorted_array) - 1); $i++) {
 
         foreach($result as $key) {
