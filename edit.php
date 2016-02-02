@@ -15,6 +15,9 @@ $oldStart = htmlentities($_POST['old_start']);
 $end_time = htmlentities($_POST['end_time']);
 $oldEnd = htmlentities($_POST['old_end']);
 
+$date = htmlentities($_POST['date_planfix'];);
+$oldEnd = htmlentities($_POST['old_']);
+
 $plan = htmlentities($_POST['lesson_name']);
 $oldPlan = htmlentities($_POST['old_plan']);
 
@@ -23,7 +26,7 @@ $oldClass = htmlentities($_POST['old_class']);
 
 $comment_note = NULL; // cant be null in website
 
-$weekly = $_POST['every_week']; // cant be null on website. changed to weekly yes/no to copy to future weeks
+$weekly = NULL // cant be null on website. changed to weekly yes/no to copy to future weeks
 
 $media = NULL; //$_POST['media']; // url for media objects stored in activities
 
@@ -70,6 +73,18 @@ if ($start_time != $oldStart) {
 $stmt = $db->prepare("UPDATE lessonplan SET Start=:start WHERE ID=:id");
 
 $stmt->bindParam(":start", $start_time, PDO::PARAM_STR);
+
+$stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+$stmt->execute();
+
+}
+
+if ($end_time != $oldEnd) {
+
+$stmt = $db->prepare("UPDATE lessonplan SET End=:end WHERE ID=:id");
+
+$stmt->bindParam(":end", $end_time, PDO::PARAM_STR);
 
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 

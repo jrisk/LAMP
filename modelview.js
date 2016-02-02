@@ -612,8 +612,8 @@ function getData() {
 				 console.log(editform);
 
 					$.ajax({
-						url: 'edit.php',
-						post: 'POST',
+						url: 'editactform.php',
+						type: 'POST',
 						data: editform,
 						dataType: 'json',
 						success: function(data) {

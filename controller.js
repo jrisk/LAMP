@@ -864,6 +864,14 @@ var endHuman = function(enterend) {
     return endhuman;
 };
 
+var dateHuman = function(time) {
+    var original = time;
+    var original = moment(original, 'YYYY-MM-DD');
+    var humanDate = moment(original).format('dddd, MMMM Do YYYY');
+
+    return humanDate;
+};
+
 var timeHuman = function(time) {
 
     var original = time;
@@ -873,7 +881,7 @@ var timeHuman = function(time) {
     var humanTime = moment(original).format('hh:mm A');
 
     return humanTime;
-}
+};
 
 //change time into more readable view (2:30pm instead of 14:30:00)
 
@@ -1078,6 +1086,9 @@ function deleteAct() {
             $('#planclassday input[name=activity]').val(selectAct.attr('data-title'));
             $('#planclassday input[name=start_time]').val(timeHuman(selectAct.attr('data-start')));
             $('#planclassday input[name=end_time]').val(timeHuman(selectAct.attr('data-end')));
+            $('#planclassday input[name=date_plan]').val(dateHuman(selectAct.attr('data-date')))
+            $('#planclassday input[name=lesson_name]').val(selectAct.attr('data-planinfo'));
+            $('#planclassday input[name=user_group]').val(selectAct.attr('data-classinfo'));
 
             }); //end edit option button handler
 
