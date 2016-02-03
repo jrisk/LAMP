@@ -604,36 +604,7 @@ function bigHandler() {
 				    });
 				});// end of add clone days handler
 
-				/********* EDIT PLAN SEND TO UPDATE DATABASE ************/
-				$('#modal-include').unbind('click tap').bind('click tap', '#editplan', function(e) {
-
-				//have to retrieve info first from other html or database
-				//html might be easier
-
-				$('#datefix3').val(databaseDate($('#dateplan3')));
-                timeDatabase();
-
-				 var editform = $('#planclassday input, #weekform input').serialize();
-
-				 console.log(editform);
-
-					$.ajax({
-						url: 'editactform.php',
-						type: 'POST',
-						data: editform,
-						dataType: 'json',
-						success: function(data) {
-							console.log('edited successfully');
-							//$('#planclassday input').val() = '';
-						},
-						error: function(throwErr) {
-							console.log(throwErr);
-						},
-						complete: function() {
-							getData();
-						}
-					}); // end of ajax call to act edit form
-				}); // end of editplan database handler
+				/**** TIME FUNCTION HELPERS FOR THE EDIT HANDLER TO POPULATE ******/
 
 				var databaseDate = function(element) {
 					
@@ -685,10 +656,10 @@ function bigHandler() {
 
 				};
 
-
+				/********** END TIME HELPED FUNCTIONS ******************/
 
 				/***** edit option handler, must be in getData to get re-initialized ******/
-            $('#edit-option').on('click tap', function(e) {
+            $('#edit-option').unbind('click tap').bind('click tap', function(e) {
                 console.log('edit button working??'); // when edit is pressed
                 //it should change button to send to different php file to fetch
                 //that clicked div's information from database
@@ -730,6 +701,37 @@ function bigHandler() {
             $('#planclassday input[name=user_group]').val(selectAct.attr('data-classinfo'));
             //get the weekdays too and the id from there since its already an input there
             $('#weekform input[name=idact]').val(selectAct.attr('data-identify'));
+
+            /********* EDIT PLAN SEND TO UPDATE DATABASE ************/
+				$('#editplan').unbind('click tap').bind('click tap', function(e) {
+
+				//have to retrieve info first from other html or database
+				//html might be easier
+
+				$('#datefix3').val(databaseDate($('#dateplan3')));
+                timeDatabase();
+
+				 var editform = $('#planclassday input, #weekform input').serialize();
+
+				 console.log(editform);
+
+					$.ajax({
+						url: 'editactform.php',
+						type: 'POST',
+						data: editform,
+						dataType: 'json',
+						success: function(data) {
+							console.log('edited successfully');
+							//$('#planclassday input').val() = '';
+						},
+						error: function(throwErr) {
+							console.log(throwErr);
+						},
+						complete: function() {
+							getData();
+						}
+					}); // end of ajax call to act edit form
+				}); // end of editplan database handler
 
             }); //end edit option button handler
         }); // end of agenda act row click handler
