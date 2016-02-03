@@ -161,24 +161,6 @@ function getData() {
 						$('.plan-big').not($('.currentPlan')).children().hide();
 						$('.currentAct').css('background-color', '#C6E2FF');
 						$('.currentAct').children('.timer').html(timerVar + ' left');
-
-						setInterval(function() {
-								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
-
-							if (currentTime < endTimeAct) {
-								console.log('still on this activity');
-
-								//code for timer
-								//getData();
-							}
-							else {
-								console.log('switch to next activity or nearest plan this is the first loop');
-								console.log(timerVar);
-
-							}
-
-							}, 60000);
-
 						//didnt want to flag, but its to test for another current activity
 						//will make impossible to do in validation
 						var flagCurrent = 1;
@@ -333,28 +315,6 @@ function getData() {
 							'end': obj[i].end,
 							'date': obj[i].date
 							});
-
-						setInterval(function() {
-
-								var timerUpdate = timeGet();
-
-							if (currentTime < $('.currentAct').attr('end')) {
-								console.log('this setInterval');
-								console.log(currentTime);
-
-								//code for timer
-								//getData();
-							}
-							else {
-								console.log('switch to next activity or nearest plan');
-								$('.currentAct').children('.timer').html(timerUpdate + ' left');
-								console.log(timerVar);
-								console.log(timerUpdate);
-								//getData();
-
-							}
-
-							}, 10000);
 
 						//didnt want to flag, but its to test for another current activity
 						//will make impossible to do in validation
@@ -570,10 +530,10 @@ function getData() {
                             type: 'POST',
                             dataType: 'json',
                             data: {deleteid: thisAct},
-                            complete: getData,
                             error: function(throwErr) {
                                 console.log(throwErr);
-                            }
+                            },
+                            complete: getData,
                         });
                     }); // end of delete button click handler
 
@@ -738,7 +698,7 @@ function getData() {
 		}
 	});
 
-	} //end of getData function 
+	}; //end of getData function 
 
 getData();
 
@@ -773,6 +733,50 @@ function timeGet() { // unused as of yet
 	return timerVar;
 
 }; // end of timeGetting function
+
+/***** setInterval should NOT be in getData 
+/***** when its refreshed creates copies of setInterval, Hell
+
+setInterval(function() {
+
+	var timerUpdate = timeGet();
+
+if (currentTime < $('.currentAct').attr('end')) {
+	console.log('this setInterval');
+	console.log(currentTime);
+
+	//code for timer
+	//getData();
+}
+else {
+	console.log('switch to next activity or nearest plan');
+	$('.currentAct').children('.timer').html(timerUpdate + ' left');
+	console.log(timerVar);
+	console.log(timerUpdate);
+	//getData();
+
+}
+
+}, 10000);
+
+/********* find another way to do the time polling for how much time is left
+setInterval(function() {
+								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
+
+							if (currentTime < endTimeAct) {
+								console.log('still on this activity');
+
+								//code for timer
+								//getData();
+							}
+							else {
+								console.log('switch to next activity or nearest plan this is the first loop');
+								console.log(timerVar);
+
+							}
+
+							}, 60000);
+
 
 
 
