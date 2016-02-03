@@ -474,11 +474,55 @@ function getData() {
         	$('.actoptions').hide();
 
         	};
+			
+		}, // end of xboxhueg success callback
 
+		error: function(errorThrown) {
+			$('#json-nest').html(errorThrown);
+		}
+	});
 
-			//have to call this handler after function has been defined, not in the handler and function itself
+	}; //end of getData function 
 
-			$('.agenda-act-row').on('click', function(e) {
+getData();
+
+bigHandler();
+
+window.getData = getData;
+
+function timeGet() { // unused as of yet
+
+	var endR = $('.currentAct').children('.timer').attr('end');
+
+	var start = $('.currentAct').children('.timer').attr('start');
+
+	var date = $('.currentAct').children('.timer').attr('date');
+
+	var currentTime = moment().format(); // or new Date();
+
+	var tempStart = moment(start).format('HH:mm:ss');
+
+	var tempDay =  moment(date).format('YYYY-MM-DD');
+
+	var tempUTCstart = tempDay + 'T' + tempStart;
+
+	var UTCstart = moment(tempUTCstart).format();
+
+	var tempEnd = moment(endR).format('HH:mm:ss');
+
+	var tempUTCend = tempDay + 'T' + tempEnd;
+
+	var UTCend = moment(tempUTCend).format();
+
+	var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
+
+	return timerVar;
+
+}; // end of timeGetting function
+
+function bigHandler() {
+
+	$('#json-today, #json-future').on('click', '.agenda-act-row', function(e) {
 
                 e.stopPropagation('.plan-big');
 
@@ -522,7 +566,7 @@ function getData() {
 
                 /********* DELETE ACT FROM DATABASE ************/
 
-                    $('#delete-button').on('click tap', function(e) {
+                    $('#delete-button').unbind('click tap').bind('click tap', function(e) {
 
                         //KEEPS DOUBLE POSTING TO DELPLAN.PHP
                         $.ajax({
@@ -539,7 +583,7 @@ function getData() {
 
                     /****** ADD CLONE DAYS TO DATABASE *****/
 
-				$('#addclone').on('click tap', function(e) {
+				$('#addclone').unbind('click tap').bind('click tap', function(e) {
 
 				    $('#idact').val(thisAct);
 
@@ -551,18 +595,17 @@ function getData() {
 				        data: weekdata,
 				        dataType: 'json',
 				        success: function(data) {
-				            console.log(data);
-				            console.log('clone successful');
+				        	console.log('clnang');
 				        },
 				        error: function(throwErr) {
 				            console.log(throwErr);
-				        },
-				        complete: getData,
+				        }
+				        //complete: getData,
 				    });
 				});// end of add clone days handler
 
 				/********* EDIT PLAN SEND TO UPDATE DATABASE ************/
-				$('#modal-include').on('click tap', '#editplan', function(e) {
+				$('#modal-include').unbind('click tap').bind('click tap', '#editplan', function(e) {
 
 				//have to retrieve info first from other html or database
 				//html might be easier
@@ -691,48 +734,7 @@ function getData() {
             }); //end edit option button handler
         }); // end of agenda act row click handler
 
-		}, // end of xboxhueg success callback
-
-		error: function(errorThrown) {
-			$('#json-nest').html(errorThrown);
-		}
-	});
-
-	}; //end of getData function 
-
-getData();
-
-window.getData = getData;
-
-function timeGet() { // unused as of yet
-
-	var endR = $('.currentAct').children('.timer').attr('end');
-
-	var start = $('.currentAct').children('.timer').attr('start');
-
-	var date = $('.currentAct').children('.timer').attr('date');
-
-	var currentTime = moment().format(); // or new Date();
-
-	var tempStart = moment(start).format('HH:mm:ss');
-
-	var tempDay =  moment(date).format('YYYY-MM-DD');
-
-	var tempUTCstart = tempDay + 'T' + tempStart;
-
-	var UTCstart = moment(tempUTCstart).format();
-
-	var tempEnd = moment(endR).format('HH:mm:ss');
-
-	var tempUTCend = tempDay + 'T' + tempEnd;
-
-	var UTCend = moment(tempUTCend).format();
-
-	var timerVar = moment.duration((moment(UTCend)).diff(moment((currentTime)))).humanize();
-
-	return timerVar;
-
-}; // end of timeGetting function
+}; //bigass handler function to prevent rebinding problems when refreshing ajax call
 
 /***** setInterval should NOT be in getData 
 /***** when its refreshed creates copies of setInterval, Hell
