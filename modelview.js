@@ -278,28 +278,7 @@ function getData() {
 						'data-sunday': obj[i].sunday
 					});
 
-					/*var dataStore = $(document.getElementById(obj[i].id)).data();
-
-						dataStore.identify = obj[i].id;
-						dataStore.title = obj[i].title;
-						dataStore.planinfo = obj[i].plan;
-						dataStore.classinfo = obj[i].class;
-						dataStore.date = obj[i].date;
-						dataStore.start = obj[i].start;
-						dataStore.end = obj[i].end;
-						dataStore.monday = obj[i].monday;
-						dataStore.tuesday = obj[i].tuesday;
-						dataStore.wednesday = obj[i].wednesday;
-						dataStore.thursday = obj[i].thursday;
-						dataStore.friday = obj[i].friday;
-						dataStore.saturday = obj[i].saturday;
-						dataStore.sunday = obj[i].sunday;*/
-
-					//$('.plan-big').slideToggle('slow');
-					//animate plans to bring them offscreen to on from left
-					//}
-					//copy this to the starting activity of the other plans
-								// or better yet, refactor so there arn't seperate loops for the first act of a plan
+			// NEED TO refactor so there arn't seperate loops for the first act of a plan
 
 					if (UTCstart < currentTime && currentTime < UTCend && flagCurrent != 1) {
 							console.log('current plan html if true here : ' + flagCurrent);
@@ -377,18 +356,6 @@ function getData() {
 
 			}
 
-			// hide all plans except for the first of the day or current time-based plan
-			// hide the activities of each plan
-
-			$('.plan-big').on('click tap', function(e) { //show the activities on click
-				/*console.log('planbig on click entered');
-				
-				$(this).children().toggle('fast');
-				$(this).children('.plan-row').toggle('fast');*/
-
-				console.log($(this).children().attr('checked', false));// && $(this).children().is(':hidden'))
-			});
-
 			function checkBoxer(jobject) {
 				//encapsulate the tasktotal object into a variable
 				var numberhold = jobject.parent().parent().children('.plan-row').children('.task-total');
@@ -412,6 +379,8 @@ function getData() {
 
 			}
 
+			//hide activity if checked
+
 			$('.checkbox_complete').on('click tap', function(e) {
 				//e.preventDefault();
 				e.stopPropagation();
@@ -419,7 +388,11 @@ function getData() {
 				$(this).parent().toggle('normal');
 			});
 
-			//$('.plan-big').children().hide();
+			$('.plan-row').on('click tap', function(e) {
+				e.stopPropagation();
+				$(this).siblings().not('.actoptions').show('fast');
+			});
+
 			$('.plan-big').css('left', '-100%');
 			$('.plan-big').animate({left: '0%'}, 800);
 			//$('#json-future').hide();
@@ -660,10 +633,7 @@ function bigHandler() {
 
 				/***** edit option handler, must be in getData to get re-initialized ******/
             $('#edit-option').unbind('click tap').bind('click tap', function(e) {
-                console.log('edit button working??'); // when edit is pressed
-                //it should change button to send to different php file to fetch
-                //that clicked div's information from database
-                //replace the save button with an edit button that send to diff php file
+                //replace the save button with an edit button to send to diff php files
 
                var selectAct = $(this).parent().parent().prev();
 
@@ -727,9 +697,7 @@ function bigHandler() {
 						error: function(throwErr) {
 							console.log(throwErr);
 						},
-						complete: function() {
-							getData();
-						}
+						complete: getData
 					}); // end of ajax call to act edit form
 				}); // end of editplan database handler
 
@@ -738,80 +706,7 @@ function bigHandler() {
 
 }; //bigass handler function to prevent rebinding problems when refreshing ajax call
 
-/***** setInterval should NOT be in getData 
-/***** when its refreshed creates copies of setInterval, Hell
-
-setInterval(function() {
-
-	var timerUpdate = timeGet();
-
-if (currentTime < $('.currentAct').attr('end')) {
-	console.log('this setInterval');
-	console.log(currentTime);
-
-	//code for timer
-	//getData();
-}
-else {
-	console.log('switch to next activity or nearest plan');
-	$('.currentAct').children('.timer').html(timerUpdate + ' left');
-	console.log(timerVar);
-	console.log(timerUpdate);
-	//getData();
-
-}
-
-}, 10000);
-
-/********* find another way to do the time polling for how much time is left
-setInterval(function() {
-								var endTimeAct = $('.currentAct').children('.smaller-type').prop('id');
-
-							if (currentTime < endTimeAct) {
-								console.log('still on this activity');
-
-								//code for timer
-								//getData();
-							}
-							else {
-								console.log('switch to next activity or nearest plan this is the first loop');
-								console.log(timerVar);
-
-							}
-
-							}, 60000);
-
-
-
-
-				//somewhat unnecessary sort function for nearest activity if no current one
-
-			/*for (j = 0; j < tempArray.length - 1; j++) {
-
-						var minVal = 0;
-
-						var curMil = tempArray[j];
-
-						if (curMil > minVal) {
-							posArray.push(curMil);
-						}
-					}
-
-					posArray.sort(function (a,b) { return a-b });
-
-					console.log(posArray);
-
-					console.log(tempObj);
-
-					Object.prototype.getKey = function(value) {
-
-  						for (var key in this) {
-    						if (this[key] == value) {
-      							return key;
-    								}
-  								}
-  							return null;
-							};*/
+/***** setInterval should NOT be in getData because of copies and looping problems ****/
 
 })
 
