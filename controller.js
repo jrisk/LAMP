@@ -21,10 +21,6 @@ $('.day-input').on('click tap', function(e) {
 
 $('#plan-row, #class-row, .actoptions').hide();
 
-    $('#modal-include').on('shown.bs.modal', function(e) {
-        //$('.cancelsave').show();
-    });
-
     $('#modal-include').on('hidden.bs.modal', function(e) {
         //$('.cancelsave').hide();
     });
@@ -1043,56 +1039,13 @@ function deleteAct() {
                 //add handler for addplus in case edit has been clicked to reset and show addplan
 
             $('.circleplus').on('click tap', function(e) {
+                //reset inputs to blank for new activity
+                $('.form-control').val('');
+                //change addplan button to edit and viceaversa
                 if ($('#addplan').is(':hidden')) {
                     $('#addplan').show();
                     $('#editplan').hide();
                 }
-
-                else {
-                    //do nothing
-                }
             });
-
-            $('#edit-option').on('click tap', function(e) {
-                console.log('edit buttong not working??'); // when edit is pressed
-                //it should change button to send to different php file to fetch
-                //that clicked div's information from database
-                //replace the save button with an edit button that send to diff php file
-
-               var selectAct = $(this).parent().parent().prev();
-
-                if (!($('#editplan').length)) {
-
-                    $('#addplan').hide();
-
-                    $('<button>').attr({
-                    'id': 'editplan',
-                    'class':'col-xs-6 col-md-6 col-sm-6 savebutton',
-                    'data-dismiss': 'modal',
-                    'type': 'button'
-                }).html('Save').insertAfter('#exitplan').hide().show();
-            }
-
-            else if ($('#editplan').is(':hidden')) {
-                $('#editplan').show();
-                $('#addplan').hide();
-            }
-
-            else {
-                //do nothing
-            }
-
-            //now populate the inputs with the activity props via their html data-* attributes
-
-            $('#planclassday input[name=activity]').val(selectAct.attr('data-title'));
-            $('#planclassday input[name=start_time]').val(timeHuman(selectAct.attr('data-start')));
-            $('#planclassday input[name=end_time]').val(timeHuman(selectAct.attr('data-end')));
-            $('#planclassday input[name=date_plan]').val(dateHuman(selectAct.attr('data-date')))
-            $('#planclassday input[name=lesson_name]').val(selectAct.attr('data-planinfo'));
-            $('#planclassday input[name=user_group]').val(selectAct.attr('data-classinfo'));
-            //get the weekdays too and the id from there since its already an input there
-            $('#weekform input[name=idact]').val(selectAct.attr('data-identify'));
-
-            }); //end edit option button handler
 
 })
