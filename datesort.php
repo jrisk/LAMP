@@ -12,6 +12,12 @@ $new_array = array();
 
 $big_array = array();
 
+/***
+
+this sort probably doesnt scale
+
+***/
+
 for ($i=0; $i <= ((count($result)) - 1); $i++) {
     //check if plan has already been pushed into array
     if (!(in_array(($result[$i]['Adate']), $date))) {
