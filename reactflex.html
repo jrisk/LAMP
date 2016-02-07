@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="device=device-width, initial-scale=1">
     <title>React Tutorial</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
@@ -72,27 +73,17 @@
     <script>
     //this would be easier in jquery
 
-    window.onload = function() {
+    function _Scroller() {
+        console.log('onScroller called');
+        // now a scroll for mobile and onkeypress
+    }
 
-    var TotalElem = document.getElementById('weekView');
+    function onScroller() {
 
-    console.log("weekview offsetWidth = " + TotalElem.offsetWidth);
-    console.log("weekview offsetHeight = " + TotalElem.offsetHeight);
-
-    var viewWidth = window.outerWidth;
-    console.log('outwidth = ' + viewWidth);
-
-    };
-
-    window.onscroll = function() {
-        console.log('hori = ' + window.pageXOffset);
         var hori = window.pageXOffset;
         var viewWidth = window.outerWidth;
 
         var weekBoxes = document.getElementsByClassName('weekDay');
-        console.log(weekBoxes);
-
-        var backTop = document.body.scrollTop;
 
         var mondayOffSet = weekBoxes[0].offsetLeft;
         var tuesdayOffSet = weekBoxes[1].offsetLeft;
@@ -102,16 +93,8 @@
         var saturdayOffSet = weekBoxes[5].offsetLeft;
         var sundayOffSet = weekBoxes[6].offsetLeft;
 
-        console.log('hori page offset = ' + hori);
-        console.log('mondayOffset = ' + mondayOffSet);
-        console.log('tuesday offset ' + tuesdayOffSet);
-        console.log('wednesday offset = ' + wednesdayOffSet);
-        console.log('thursdayoffset = ' + thursdayOffSet);
-        console.log('sundayoffset = ' + sundayOffSet);
-
         var halfView = (viewWidth * 0.5);
 
-             window.onmouseup = function() {
                 if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
                 weekBoxes[1].scrollIntoView();
                     }
@@ -134,25 +117,22 @@
                 weekBoxes[0].scrollIntoView();
                     }
                 }
-               /* if (hori < tuesdayOffSet * (0.5)) {
-                weekBoxes[1].scrollIntoView();
-                var flag = 1;
-                console.log(flag);
-                // need to make a condition for scrolling again
-                }*/
-            
 
-        //if ()
-        //for (i=0; i < weekBoxes.length; i++) {
-        //}
+    window.onload = function() {
 
-        /*if (hori > (mondayOffSet*.5)) {
-            document.scrollLeft = 1000;
-        }*/
+    var TotalElem = document.getElementById('weekView');
 
-        //var relX = hori/viewHeight;
-        //var relY = hori/viewWidth;
-    }
+    var viewWidth = window.outerWidth;
+
+    console.log('outwidth = ' + viewWidth);
+
+    document.addEventListener('onmouseup', onScroller, false);
+    document.addEventListener('scroll', onScroller, false);
+    document.addEventListener('touchmove', onScroller, false);
+    document.addEventListener('touchend', onScroller, false);
+    document.addEventListener('ontouchstart', onScroller, false);
+
+    };
 
     </script>
 
