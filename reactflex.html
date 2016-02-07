@@ -70,35 +70,88 @@
     </style>
 
     <script>
+    //this would be easier in jquery
 
     window.onload = function() {
 
     var TotalElem = document.getElementById('weekView');
 
-    console.log(TotalElem.offsetWidth);
-    console.log(TotalElem.offsetHeight);
-    console.log(TotalElem.getBoundingClientRect().width);
-    console.log(TotalElem.getBoundingClientRect().height);
+    console.log("weekview offsetWidth = " + TotalElem.offsetWidth);
+    console.log("weekview offsetHeight = " + TotalElem.offsetHeight);
 
-    var wintotalH = window.outerHeight;
-    var wintotalW = window.outerWidth;
-    console.log(wintotalH);
-    console.log(wintotalW);
+    var viewWidth = window.outerWidth;
+    console.log('outwidth = ' + viewWidth);
 
     };
 
     window.onscroll = function() {
-        console.log(window.pageXOffset);
+        console.log('hori = ' + window.pageXOffset);
         var hori = window.pageXOffset;
+        var viewWidth = window.outerWidth;
 
-        console.log(window.pageYOffset);
-        var vert = window.pageYOffset;
+        var weekBoxes = document.getElementsByClassName('weekDay');
+        console.log(weekBoxes);
 
-        /*var relX = hori/winwidth;
+        var backTop = document.body.scrollTop;
 
-        var percentX = relX/
+        var mondayOffSet = weekBoxes[0].offsetLeft;
+        var tuesdayOffSet = weekBoxes[1].offsetLeft;
+        var wednesdayOffSet = weekBoxes[2].offsetLeft;
+        var thursdayOffSet = weekBoxes[3].offsetLeft;
+        var fridayOffSet = weekBoxes[4].offsetLeft;
+        var saturdayOffSet = weekBoxes[5].offsetLeft;
+        var sundayOffSet = weekBoxes[6].offsetLeft;
 
-        if (hori > )*/
+        console.log('hori page offset = ' + hori);
+        console.log('mondayOffset = ' + mondayOffSet);
+        console.log('tuesday offset ' + tuesdayOffSet);
+        console.log('wednesday offset = ' + wednesdayOffSet);
+        console.log('thursdayoffset = ' + thursdayOffSet);
+        console.log('sundayoffset = ' + sundayOffSet);
+
+        var halfView = (viewWidth * 0.5);
+
+             window.onmouseup = function() {
+                if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
+                weekBoxes[1].scrollIntoView();
+                    }
+                else if (wednesdayOffSet - halfView < hori && hori < thursdayOffSet - halfView) {
+                weekBoxes[2].scrollIntoView();
+                    }
+                else if (thursdayOffSet - halfView < hori && hori < fridayOffSet - halfView) {
+                weekBoxes[3].scrollIntoView();
+                    }
+                else if (fridayOffSet - halfView < hori && hori < saturdayOffSet - halfView) {
+                weekBoxes[4].scrollIntoView();
+                    }
+                else if (saturdayOffSet - halfView < hori && hori < sundayOffSet - halfView) {
+                weekBoxes[5].scrollIntoView();
+                    }
+                else if (sundayOffSet - halfView < hori) {
+                weekBoxes[6].scrollIntoView();
+                    }
+                else if (hori < tuesdayOffSet - halfView) {
+                weekBoxes[0].scrollIntoView();
+                    }
+                }
+               /* if (hori < tuesdayOffSet * (0.5)) {
+                weekBoxes[1].scrollIntoView();
+                var flag = 1;
+                console.log(flag);
+                // need to make a condition for scrolling again
+                }*/
+            
+
+        //if ()
+        //for (i=0; i < weekBoxes.length; i++) {
+        //}
+
+        /*if (hori > (mondayOffSet*.5)) {
+            document.scrollLeft = 1000;
+        }*/
+
+        //var relX = hori/viewHeight;
+        //var relY = hori/viewWidth;
     }
 
     </script>
@@ -190,7 +243,7 @@
                 return dayArr;
             };
 
-            /*function mapDay() {
+            function mapDay() {
                 var finalArr = []
 
             for (var key in thisPls) {
@@ -198,26 +251,12 @@
                 var dayArr = [];
                 for (i = 0; i <= thisPls[key].length - 1; i++) 
                     {
-                        dayArr.push(<TimeWrap key={thisPls[key][i].start} start={thisPls[key][i].start}>{thisPls[key][i].title}</TimeWrap>);
+                        dayArr.push(<TimeWrap start={thisPls[key][i].start}>{thisPls[key][i].title}</TimeWrap>);
                     }
-                    finalArr.push(<PlanWrap key={thisPls[key][i]}>{dayArr}</PlanWrap>);
+                    finalArr.push(<WeekDay day={dayTag}><PlanWrap key={thisPls[key][i]}>{dayArr}</PlanWrap></WeekDay>);
                 }
                 return finalArr; // only returns 
-            }*/
-
-            function mapDay() {
-
-                var Arrr = [];
-
-                Object.keys(thisPls).map(function(key) {
-
-                Arrr.push(key.monday);
-
-                });
-
-                return Arrr;
-
-            };
+            }
 
                 /*for (j = 0; j <= thisPls[key].length - 1; j++)
                 {
@@ -245,35 +284,19 @@
             };
 
 
-            var v1 = performance.now()
-            mapper();
-            var v2 = performance.now()
-            console.log(v2-v1);
-
-            var var1 = performance.now();
-            mapDay();
-            var var2 = performance.now();
-            console.log(var2-var1);
-
-            var v1 = performance.now()
-            mapPls(thisdamn);
-            var v2 = performance.now();
-            console.log(v2-v1);
-
             return (
 
             <div className="windowPane">
+                {mapDay()}
             </div>
             );
         }
     });
 
     ReactDOM.render(
-        <WindowPane url="arrayobjects.json" text="hello weekday stuff" id="windowpane" />,
+        <WindowPane url="dayinfo.json" text="hello weekday stuff" />,
         document.getElementById('weekView')
         );
-
-    console.log(ReactDOM);
 
     </script>
 
