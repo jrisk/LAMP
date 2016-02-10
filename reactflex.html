@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="device=device-width, initial-scale=1">
+    <meta name="viewport" content="device=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>React Tutorial</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
@@ -81,6 +81,7 @@
     function onScroller() {
 
         var hori = window.pageXOffset;
+        var vert = window.pageYOffset;
         var viewWidth = window.outerWidth;
 
         var weekBoxes = document.getElementsByClassName('weekDay');
@@ -95,7 +96,32 @@
 
         var halfView = (viewWidth * 0.5);
 
+        if (vert < 5) {
+
                 if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
+                weekBoxes[1].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (wednesdayOffSet - halfView < hori && hori < thursdayOffSet - halfView) {
+                weekBoxes[2].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (thursdayOffSet - halfView < hori && hori < fridayOffSet - halfView) {
+                weekBoxes[3].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (fridayOffSet - halfView < hori && hori < saturdayOffSet - halfView) {
+                weekBoxes[4].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (saturdayOffSet - halfView < hori && hori < sundayOffSet - halfView) {
+                weekBoxes[5].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (sundayOffSet - halfView < hori) {
+                weekBoxes[6].scrollIntoView({behavior: "smooth"});
+                    }
+                else if (hori < tuesdayOffSet - halfView) {
+                weekBoxes[0].scrollIntoView({behavior: "smooth"});
+                    }
+                }
+        else {
+            if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
                 weekBoxes[1].scrollIntoView();
                     }
                 else if (wednesdayOffSet - halfView < hori && hori < thursdayOffSet - halfView) {
@@ -118,6 +144,9 @@
                     }
                 }
 
+                console.log("called, hori = " + hori);
+            }
+
     window.onload = function() {
 
     var TotalElem = document.getElementById('weekView');
@@ -126,11 +155,32 @@
 
     console.log('outwidth = ' + viewWidth);
 
-    document.addEventListener('onmouseup', onScroller, false);
-    document.addEventListener('scroll', onScroller, false);
-    document.addEventListener('touchmove', onScroller, false);
-    document.addEventListener('touchend', onScroller, false);
-    document.addEventListener('ontouchstart', onScroller, false);
+    document.addEventListener('scroll', function(event) {
+        console.log('got a scroll');
+        document.addEventListener('mouseup', onScroller, false);
+    }, false);
+
+    document.addEventListener('keypress', function(event) {
+        console.log('got a key press');
+        document.addEventListener('keyup', onScroller, false);
+    }, false);
+
+    /*document.addEventListener('mouseup', function(event) {
+        //event.preventDefault();
+        onScroller();
+    }. false);
+
+    document.addEventListener('mousedown', function(event
+    //document.addEventListener('scroll', onScroller, false);
+    //document.addEventListener('touchmove', onScroller, false);
+    document.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        onScroller();
+    }, false);
+    document.addEventListener('touchend', function(event) {
+        event.preventDefault();
+        onScroller();
+    }, false);*/
 
     };
 
