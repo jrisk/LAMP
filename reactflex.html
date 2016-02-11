@@ -66,12 +66,31 @@
         font-size: 2em
      } */
 
+    #testdiv {
+        z-index: 1000;
+    }
 
 
     </style>
 
     <script>
     //this would be easier in jquery
+
+    function testElem(test) {
+        if (window) {
+            test.innerHTML = "there is a window object";
+        }
+
+        if (document) {
+        test.innerHTML += "there is a document object";
+        }
+        if (window.pageXOffset) {
+            test.innerHTML += "the window x offset is = " + window.pageXOffset;
+        }
+        if (window.outerWidth) {
+            test.innerHTML += "<hr> and the window outerwidth is = " + window.outerWidth;
+        }
+    }
 
     function _Scroller() {
         console.log('onScroller called');
@@ -149,38 +168,50 @@
 
     window.onload = function() {
 
+        var test = document.getElementById("testdiv");
+
     var TotalElem = document.getElementById('weekView');
 
     var viewWidth = window.outerWidth;
 
+    var touchStart = 0;
+
+    var touchEnd = 0;
+
     console.log('outwidth = ' + viewWidth);
 
-    document.addEventListener('scroll', function(event) {
-        console.log('got a scroll');
-        document.addEventListener('mouseup', onScroller, false);
-    }, false);
+    var count = 0;
 
-    document.addEventListener('keypress', function(event) {
+    document.addEventListener('mouseup', function(event) {
+            test.innerHTML += '<br>mouseup event detected';
+            }, false);
+
+    document.addEventListener('keypress', function(event2) {
+        test.innerHTML += '<br>keypress event detected'
         console.log('got a key press');
-        document.addEventListener('keyup', onScroller, false);
     }, false);
 
-    /*document.addEventListener('mouseup', function(event) {
-        //event.preventDefault();
-        onScroller();
-    }. false);
+    document.addEventListener('keyup', function(event2) {
+            test.innerHTML += '<br>keyup detected';
+        }, false);
 
-    document.addEventListener('mousedown', function(event
-    //document.addEventListener('scroll', onScroller, false);
-    //document.addEventListener('touchmove', onScroller, false);
-    document.addEventListener('touchstart', function(event) {
-        event.preventDefault();
-        onScroller();
+    document.addEventListener('touchmove', function(event) {
+        test.innerHTML += '<br>touchmove detected';
+        console.log('got a key press');
     }, false);
-    document.addEventListener('touchend', function(event) {
-        event.preventDefault();
-        onScroller();
-    }, false);*/
+
+    document.addEventListener('touchcancel', function(event) {
+        test.innerHTML += '<br>touchcancel detected';
+    }, false)
+
+    document.addEventListener("touchstart", function(event) {
+    test.innerHTML += '<br>touchstart detected. touchstart events = ' + touchStart;
+    touchStart++
+    }, false);
+
+    document.addEventListener('touchend', onScroller, false);
+
+    testElem(test);
 
     };
 
@@ -333,7 +364,7 @@
 </head>
 
 <body>
-
+    <div id="testdiv">TEST</div>
     <div id="weekView"></div>
 
 </body>
