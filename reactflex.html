@@ -16,6 +16,7 @@
     body {
         height: 100%;
         overflow: hidden;
+        overflow-x: scroll;
     }
 
     @keyframes slider {
@@ -84,29 +85,24 @@
     //this would be easier in jquery
 
     function testElem(test) {
-        if (window) {
-            test.innerHTML = "there is a window object";
-        }
 
-        if (document) {
-        test.innerHTML += "there is a document object";
-        }
-        if (window.pageXOffset) {
+        console.log(typeof window.pageXOffset);
+
+        if (typeof window.pageXOffset == 'number') {
             test.innerHTML += "the window x offset is = " + window.pageXOffset;
         }
         if (window.outerWidth) {
-            test.innerHTML += "<hr> and the window outerwidth is = " + window.outerWidth;
+            test.innerHTML += "<hr>and the window outerwidth is = " + window.outerWidth;
+        }
+
+        if (test.scrollIntoView) {
+            test.innerHTML += '<hr>test.scrollIntoView works';
         }
 
         test.scrollTop = test.scrollHeight;
     }
 
-    function _Scroller() {
-        console.log('onScroller called');
-        // now a scroll for mobile and onkeypress
-    }
-
-    function onScroller() {
+    function onScroller(test) {
 
         var hori = window.pageXOffset;
         var vert = window.pageYOffset;
@@ -124,7 +120,7 @@
 
         var halfView = (viewWidth * 0.5);
 
-        if (typeof vert == 'undefined') {
+        if (0) {
 
                 if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
                 weekBoxes[1].scrollIntoView({behavior: "smooth"});
@@ -149,7 +145,9 @@
                     }
                 }
         else {
+
             if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
+                test.innerHTML += "<p>tuesday and wednesday</p>";
                 weekBoxes[1].scrollIntoView();
                     }
                 else if (wednesdayOffSet - halfView < hori && hori < thursdayOffSet - halfView) {
@@ -157,12 +155,14 @@
                     }
                 else if (thursdayOffSet - halfView < hori && hori < fridayOffSet - halfView) {
                 weekBoxes[3].scrollIntoView();
+                test.innerHTML += "<b>thursday and friday</b>";
                     }
                 else if (fridayOffSet - halfView < hori && hori < saturdayOffSet - halfView) {
                 weekBoxes[4].scrollIntoView();
                     }
                 else if (saturdayOffSet - halfView < hori && hori < sundayOffSet - halfView) {
                 weekBoxes[5].scrollIntoView();
+                test.innerHTML += "<code>saturday and sunday</code>";
                     }
                 else if (sundayOffSet - halfView < hori) {
                 weekBoxes[6].scrollIntoView();
@@ -171,8 +171,6 @@
                 weekBoxes[0].scrollIntoView();
                     }
                 }
-
-                console.log("called, hori = " + hori);
             }
 
     window.onload = function() {
@@ -183,43 +181,21 @@
 
     var viewWidth = window.outerWidth;
 
-    var touchStart = 0;
-
-    var touchEnd = 0;
-
-    console.log('outwidth = ' + viewWidth);
-
-    var count = 0;
-
-    document.addEventListener('mouseup', function(event) {
-            test.innerHTML += '<br>mouseup event detected';
+    /*document.addEventListener('mouseup', function(event) {
+            onScroller(test);
             }, false);
 
     document.addEventListener('keypress', function(event2) {
-        test.innerHTML += '<br>keypress event detected'
         console.log('got a key press');
     }, false);
 
     document.addEventListener('keyup', function(event2) {
-            test.innerHTML += '<br>keyup detected';
-            onScroller();
-        }, false);
+            onScroller(test);
+        }, false);*/
 
-    document.addEventListener('touchmove', function(event) {
-        test.innerHTML += '<br>touchmove detected';
-        console.log('got a key press');
+    document.addEventListener('touchend', function(event) {
+        onScroller(test);
     }, false);
-
-    document.addEventListener('touchcancel', function(event) {
-        test.innerHTML += '<br>touchcancel detected';
-    }, false)
-
-    document.addEventListener("touchstart", function(event) {
-    test.innerHTML += '<br>touchstart detected. touchstart events = ' + touchStart;
-    touchStart++
-    }, false);
-
-    document.addEventListener('touchend', onScroller, false);
 
     testElem(test);
 
@@ -239,20 +215,6 @@
 
    // var data = { name: 'Key Value Pair' };
 
-   var TimeWrap = React.createClass({
-        getInitialState: function() {
-            return {data: []};
-        },
-        render: function() {
-            return (
-                <div className="timeWrap">
-                <h4>{this.props.start}</h4>
-                <h2>{this.props.children}</h2>
-                </div>
-                )
-        }
-   });
-
     var PlanWrap = React.createClass({
         getInitialState: function() {
             return {text: '', comment: ''};
@@ -260,7 +222,8 @@
         render: function() {
             return (
                 <div className="planWrap">
-                {this.props.children}
+                <h1>{this.props.start}</h1>
+                <h3>{this.props.children}</h3>
                 </div>
             )
         }
@@ -322,9 +285,9 @@
                 var dayArr = [];
                 for (i = 0; i <= thisPls[key].length - 1; i++) 
                     {
-                        dayArr.push(<TimeWrap start={thisPls[key][i].start}>{thisPls[key][i].title}</TimeWrap>);
+                        dayArr.push(<PlanWrap start={thisPls[key][i].start}>{thisPls[key][i].title}</PlanWrap>);
                     }
-                    finalArr.push(<WeekDay day={dayTag}><PlanWrap key={thisPls[key][i]}>{dayArr}</PlanWrap></WeekDay>);
+                    finalArr.push(<WeekDay day={dayTag}>{dayArr}</WeekDay>);
                 }
                 return finalArr; // only returns 
             }
