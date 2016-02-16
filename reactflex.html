@@ -86,29 +86,19 @@
 
     function testElem(test) {
 
-        console.log(typeof window.pageXOffset);
-
-        if (typeof window.pageXOffset == 'number') {
-            test.innerHTML += "the window x offset is = " + window.pageXOffset;
-        }
-        if (window.outerWidth) {
-            test.innerHTML += "<hr>and the window outerwidth is = " + window.outerWidth;
-        }
-
-        if (test.scrollIntoView) {
-            test.innerHTML += '<hr>test.scrollIntoView works';
-        }
-
         test.scrollTop = test.scrollHeight;
     }
 
     function onScroller(test) {
+        /*********************
+        //scrollIntoView DOES NOT WORK in chrome for android
+                                ****************************/
 
         var hori = window.pageXOffset;
         var vert = window.pageYOffset;
         var viewWidth = window.outerWidth;
 
-        var weekBoxes = document.getElementsByClassName('weekDay');
+        var weekBoxes = document.getElementsByClassName("weekDay");
 
         var mondayOffSet = weekBoxes[0].offsetLeft;
         var tuesdayOffSet = weekBoxes[1].offsetLeft;
@@ -120,7 +110,7 @@
 
         var halfView = (viewWidth * 0.5);
 
-        if (0) {
+        if (1) {
 
                 if (tuesdayOffSet - halfView < hori && hori < wednesdayOffSet - halfView) {
                 weekBoxes[1].scrollIntoView({behavior: "smooth"});
@@ -176,26 +166,56 @@
     window.onload = function() {
 
         var test = document.getElementById("testdiv");
+        var testScroll = document.getElementById("scrollcount");
+        var testStart = document.getElementById("touchstartcount");
+        var testEnd = document.getElementById("touchendcount");
+        var testMove = document.getElementById("touchmovecount");
+
+        var count = count1 = count2 = count3 = 0;
 
     var TotalElem = document.getElementById('weekView');
 
     var viewWidth = window.outerWidth;
 
-    /*document.addEventListener('mouseup', function(event) {
+    document.addEventListener('mouseup', function(event) {
+        testEnd.innerHTML = 'mouse up ' + count3++;
             onScroller(test);
             }, false);
 
-    document.addEventListener('keypress', function(event2) {
-        console.log('got a key press');
+    document.addEventListener('keypress', function(event) {
+        testEnd.innerHTML = 'key press ' + count++;
     }, false);
 
-    document.addEventListener('keyup', function(event2) {
+    document.addEventListener('keyup', function(event) {
             onScroller(test);
-        }, false);*/
+        }, false);
 
     document.addEventListener('touchend', function(event) {
         onScroller(test);
+        testEnd.innerHTML = 'touch end = ' + count3++;
     }, false);
+
+    document.addEventListener('touchstart', function(event) {
+        testStart.innerHTML = 'touch start = ' + count++;
+    }, false);
+
+    document.addEventListener('touchmove', function(event) {
+        testMove.innerHTML = ' touch move = ' + count1++;
+    }, false);
+
+    document.addEventListener('scroll', function(event) {
+        testScroll.innerHTML = 'scroll = ' + count2++;
+    }, false);
+
+    try {
+    var eventNew = document.createEvent('TouchEvent');
+    eventNew.initTouchEvent('touchend2', true, true);
+    }
+
+    catch(e) {
+        console.log('no touch create event on mobile');
+    }
+
 
     testElem(test);
 
@@ -223,7 +243,7 @@
             return (
                 <div className="planWrap">
                 <h1>{this.props.start}</h1>
-                <h3>{this.props.children}</h3>
+                <h3>{this.props.title}</h3>
                 </div>
             )
         }
@@ -237,7 +257,7 @@
             return (
             <li className="weekDay">
             <h1 className="dayName">{this.props.day}</h1>
-            <div>{this.props.children}</div>
+            {this.props.children}
             </li>
             );
         }
@@ -257,25 +277,31 @@
                 }.bind(this)
             });
         },
+        secondAjaxTest: function() {
+            $.ajax({
+                url: this.props.url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    //var data = JSON.parse(data);
+                    this.setState({data: data});
+                }.bind(this),
+                error: function(xhr, errorThrown) {
+                    console.log(xhr + errorThrown);
+                }.bind(this)
+            });
+        },
         getInitialState: function() {
             return {data: []}
         },
         componentDidMount: function() {
-            this.loadDaysFromServer();
+            //this.loadDaysFromServer();
+            this.secondAjaxTest();
         },
         render: function(st) {
 
             var thisPls = this.state.data;
             var i;
-
-
-            function mapper() {
-                var dayArr = [];
-                for (var key in thisPls) {
-                    dayArr.push(key.monday);
-                }
-                return dayArr;
-            };
 
             function mapDay() {
                 var finalArr = []
@@ -285,42 +311,32 @@
                 var dayArr = [];
                 for (i = 0; i <= thisPls[key].length - 1; i++) 
                     {
-                        dayArr.push(<PlanWrap start={thisPls[key][i].start}>{thisPls[key][i].title}</PlanWrap>);
+                        dayArr.push(<PlanWrap key={thisPls[key][i].id} start={thisPls[key][i].start} title={thisPls[key][i].title}></PlanWrap>);
                     }
-                    finalArr.push(<WeekDay day={dayTag}>{dayArr}</WeekDay>);
+                    finalArr.push(<WeekDay key={Math.random()} day={dayTag}>{dayArr}</WeekDay>);
                 }
                 return finalArr; // only returns 
             }
 
-                /*for (j = 0; j <= thisPls[key].length - 1; j++)
-                {
-                    console.log(thisPls[key][j].end);
-                    return "<PlanWrap>{thisPls[key][j].start}</PlanWrap>";
-                }
+                function mapPls() {
 
-               return (
-                <WeekDay end={thisPls[key][0].title}></WeekDay>
-                )
-            };*/
+                    var arrTest = [];
+                    var akey;
+                    for (akey in thisPls) {
+                    arrTest.push(thisPls[akey])
+                    }
 
-            var thisdamn = this;
+                    arrTest.map(function(stuff, things) {
+                    console.log(stuff);
+                    console.log(things);
+                    });
+                };
 
-                function mapPls(thisdamn) {
-
-                    var Arrr = [];
-
-                    thisdamn.state.data.map(function(stuff) {
-                    Arrr.push(stuff.monday);
-                });
-
-                    return Arrr;
-
-            };
-
+                mapPls();
 
             return (
 
-            <div className="windowPane">
+            <div key="lel" className="windowPane">
                 {mapDay()}
             </div>
             );
@@ -337,7 +353,14 @@
 </head>
 
 <body>
-    <div id="testdiv">TEST</div>
+    <div id="testdiv">
+        <ul>
+        <li id="scrollcount"></li>
+        <li id="touchstartcount"></li>
+        <li id="touchendcount"></li>
+        <li id="touchmovecount"></li>
+        </ul>
+        </div>
     <div id="weekView"></div>
 
 </body>
